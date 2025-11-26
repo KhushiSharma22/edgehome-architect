@@ -22,16 +22,16 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center fade-in-up">
-        <h1 className="text-5xl md:text-7xl font-heading font-bold text-foreground mb-6 tracking-tight">
-          Luxury, Creative and<br />Comfortable Interiors
+        <h1 className="text-4xl md:text-6xl font-heading font-bold text-foreground mb-6 tracking-tight">
+          Professional Interior Design &<br />Construction Solutions
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 font-body">
-          KR Construction – Faridabad's Premium Interior Designers
+          KR Construction – Delhi's Premium Interior Designers
         </p>
 
-        <Button variant="luxury" size="lg" className="mb-16">
-          Book Your Consultation
+        <Button variant="luxury" size="lg" className="mb-16 font-semibold">
+          Get Free Consultation
         </Button>
 
         {/* Services Bar */}
@@ -39,8 +39,7 @@ const HeroSection = () => {
           {services.map((service, index) => (
             <div
               key={service.label}
-              className="bg-secondary/50 backdrop-blur-sm border border-primary/20 rounded-lg p-6 smooth-transition hover:border-primary/60 hover:bg-secondary/70 fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="bg-background/80 backdrop-blur-sm border border-border rounded-lg p-5 smooth-transition hover:border-primary/40 hover:shadow-md"
             >
               <service.icon className="w-8 h-8 text-primary mx-auto mb-3" />
               <p className="text-foreground text-sm font-body">{service.label}</p>
