@@ -25,22 +25,32 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section id="services" className="py-24 bg-secondary">
+    <section id="services" className="py-32 bg-gradient-to-b from-background to-[hsl(25,20%,10%)] texture-linen relative">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-heading font-bold text-center text-foreground mb-12">
-          Why Choose KR Construction
-        </h2>
+        {/* Enhanced Section Heading */}
+        <div className="text-center mb-16 fade-in-up">
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">
+            Why Choose KR Construction
+          </h2>
+          <div className="gold-divider"></div>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto relative">
+          {/* Vertical dividers between cards (desktop) */}
+          <div className="hidden lg:block absolute top-0 bottom-0 left-1/4 w-px bg-gradient-to-b from-transparent via-border to-transparent"></div>
+          <div className="hidden lg:block absolute top-0 bottom-0 left-2/4 w-px bg-gradient-to-b from-transparent via-border to-transparent"></div>
+          <div className="hidden lg:block absolute top-0 bottom-0 left-3/4 w-px bg-gradient-to-b from-transparent via-border to-transparent"></div>
+          
           {features.map((feature, index) => (
             <div
               key={feature.title}
-              className="bg-card border border-border rounded-lg p-6 smooth-transition hover:border-primary/40 hover:shadow-lg"
+              className="bg-card/50 backdrop-blur-sm border border-border rounded-xl p-8 hover-lift hover:border-primary/40 hover:bg-card/70 fade-in-up"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-                <feature.icon className="w-7 h-7 text-primary" />
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(197,165,107,0.1)]">
+                <feature.icon className="w-8 h-8 text-primary" />
               </div>
-              <h3 className="text-lg font-heading font-semibold text-foreground mb-3">
+              <h3 className="text-xl font-heading font-semibold text-foreground mb-4">
                 {feature.title}
               </h3>
               <p className="text-sm text-muted-foreground font-body leading-relaxed">
