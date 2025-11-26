@@ -30,7 +30,7 @@ const WhyChooseSection = () => {
         {/* Enhanced Section Heading */}
         <div className="text-center mb-16 fade-in-up">
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">
-            Why Choose KR Construction
+            Why Choose EdgeHomes
           </h2>
           <div className="gold-divider"></div>
         </div>

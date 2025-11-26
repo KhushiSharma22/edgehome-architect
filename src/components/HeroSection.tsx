@@ -36,7 +36,7 @@ const HeroSection = () => {
         </h1>
         
         <p className="text-lg md:text-xl text-muted-foreground mb-12 font-body max-w-2xl mx-auto">
-          KR Construction – Pitampura, Delhi's Trusted Design & Build Partner
+          EdgeHomes Architects and Construction – Pitampura, Delhi's Trusted Design & Build Partner
         </p>
 
         <Button 
