@@ -17,7 +17,7 @@ const IntroSection = () => {
           {/* Right - Description */}
           <div className="fade-in-up space-y-6" style={{ animationDelay: "0.2s" }}>
             <p className="text-lg text-background/80 font-body leading-relaxed">
-              KR Construction is a trusted name in Pitampura, Delhi for comprehensive interior design and construction services. 
+              EdgeHomes Architects and Construction is a trusted name in Pitampura, Delhi for comprehensive interior design and construction services. 
               With extensive experience and a commitment to quality, we deliver projects that meet the highest standards.
             </p>
             <p className="text-lg text-background/80 font-body leading-relaxed">

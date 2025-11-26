@@ -31,7 +31,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#home" className="text-2xl font-heading font-bold text-primary smooth-transition hover:opacity-80">
-            KR Construction
+            EdgeHomes
           </a>
 
           {/* Desktop Menu */}

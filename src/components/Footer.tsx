@@ -13,10 +13,10 @@ const Footer = () => {
           {/* About */}
           <div>
             <h3 className="text-2xl font-heading font-bold text-primary mb-4">
-              KR Construction
+              EdgeHomes
             </h3>
             <p className="text-muted-foreground/90 font-body text-sm leading-relaxed">
-              Pitampura, Delhi's trusted construction and interior design company, delivering quality projects with professionalism and expertise.
+              Pitampura, Delhi's trusted architects and construction company, delivering quality projects with professionalism and expertise.
             </p>
           </div>
 
@@ -68,8 +68,8 @@ const Footer = () => {
                 <span>+91 XXXXX XXXXX</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground/90 font-body text-sm">
-                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <span>info@krconstruction.com</span>
+                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                <span>info@edgehomes.com</span>
               </li>
             </ul>
           </div>
@@ -78,7 +78,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-primary/20 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-muted-foreground/80 font-body text-sm">
-            © 2024 KR Construction. All rights reserved.
+            © 2024 EdgeHomes Architects and Construction. All rights reserved.
           </p>
           
           {/* Social Icons with Gold Styling */}
