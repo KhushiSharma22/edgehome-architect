@@ -27,7 +27,7 @@ const HeroSection = () => {
         </h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 font-body">
-          Dzign Tales Studio – Faridabad's Premium Interior Designers
+          KR Construction – Faridabad's Premium Interior Designers
         </p>
 
         <Button variant="luxury" size="lg" className="mb-16">

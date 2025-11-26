@@ -8,7 +8,7 @@ const Footer = () => {
           {/* About */}
           <div>
             <h3 className="text-xl font-heading font-bold text-primary mb-4">
-              Dzign Tales Studio
+              KR Construction
             </h3>
             <p className="text-muted-foreground font-body text-sm leading-relaxed">
               Faridabad's premier interior design studio, crafting luxury spaces that inspire and delight.
@@ -73,7 +73,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground font-body text-sm">
-            © 2024 Dzign Tales Studio. All rights reserved.
+            © 2024 KR Construction. All rights reserved.
           </p>
           
           {/* Social Icons */}
