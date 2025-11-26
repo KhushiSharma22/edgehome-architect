@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 0 0% 10%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 40 45% 59%; /* Elegant gold #C5A46D */
+    --primary: 40 35% 60%; /* Matte Gold #C5A56B */
     --primary-foreground: 0 0% 5%;
 
     --secondary: 0 0% 10%; /* Dark grey #1A1A1A */
@@ -27,7 +27,7 @@ All colors MUST be HSL.
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 40 45% 59%; /* Gold accent */
+    --accent: 40 35% 60%; /* Gold accent */
     --accent-foreground: 0 0% 5%;
 
     --destructive: 0 84.2% 60.2%;
@@ -35,39 +35,40 @@ All colors MUST be HSL.
 
     --border: 0 0% 20%;
     --input: 0 0% 15%;
-    --ring: 40 45% 59%;
+    --ring: 40 35% 60%;
 
     --radius: 0.5rem;
     
-    /* Custom luxury design tokens */
-    --luxury-beige: 40 30% 95%; /* #F7F4EF */
-    --luxury-dark-overlay: 0 0% 5% / 0.6;
-    --luxury-gold-glow: 40 45% 59% / 0.3;
+    /* Enhanced luxury design tokens */
+    --luxury-beige: 40 30% 94%; /* #F7F4EF */
+    --luxury-warm-beige: 35 25% 92%; /* #EFE9DF */
+    --luxury-gold: 40 35% 60%; /* #C5A56B */
+    --luxury-brown: 25 15% 15%;
+    --luxury-coffee: 25 20% 10%;
+    
+    /* Glassmorphism */
+    --glass-bg: 0 0% 100% / 0.05;
+    --glass-border: 0 0% 100% / 0.1;
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-elegant: 0 8px 30px rgba(0, 0, 0, 0.2);
+    --shadow-gold-glow: 0 4px 20px rgba(197, 165, 107, 0.15);
     
     /* Typography */
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Inter', sans-serif;
     
     /* Animations */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-glow: box-shadow 0.3s ease;
-
-    --radius: 0.5rem;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -104,13 +105,13 @@ All colors MUST be HSL.
   .luxury-beige {
     background-color: hsl(var(--luxury-beige));
   }
+
+  .luxury-warm-beige {
+    background-color: hsl(var(--luxury-warm-beige));
+  }
   
   .text-luxury-beige {
     color: hsl(var(--luxury-beige));
-  }
-  
-  .gold-glow {
-    box-shadow: 0 0 20px hsl(var(--luxury-gold-glow));
   }
   
   .smooth-transition {
@@ -123,6 +124,44 @@ All colors MUST be HSL.
   
   .fade-in-up {
     animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* Glassmorphism */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Texture overlays */
+  .texture-linen {
+    position: relative;
+  }
+
+  .texture-linen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* Premium divider */
+  .gold-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--luxury-gold)), transparent);
+    margin: 0 auto;
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
   }
 }
 
