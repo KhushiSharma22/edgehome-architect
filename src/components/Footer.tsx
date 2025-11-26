@@ -11,7 +11,7 @@ const Footer = () => {
               KR Construction
             </h3>
             <p className="text-muted-foreground font-body text-sm leading-relaxed">
-              Faridabad's premier interior design studio, crafting luxury spaces that inspire and delight.
+              Delhi's trusted construction and interior design company, delivering quality projects with professionalism and expertise.
             </p>
           </div>
 
@@ -56,7 +56,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-muted-foreground font-body text-sm">
                 <MapPin className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                <span>Faridabad, Haryana, India</span>
+                <span>Delhi, India</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground font-body text-sm">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
