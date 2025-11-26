@@ -13,7 +13,7 @@ const IntroSection = () => {
           {/* Right - Description */}
           <div className="fade-in-up" style={{ animationDelay: "0.2s" }}>
             <p className="text-lg text-muted-foreground font-body leading-relaxed mb-6">
-              At Dzign Tales Studio, we believe that exceptional interior design is where luxury meets functionality. 
+              At KR Construction, we believe that exceptional interior design is where luxury meets functionality. 
               With years of expertise in creating bespoke spaces, we transform your vision into reality.
             </p>
             <p className="text-lg text-muted-foreground font-body leading-relaxed mb-6">
