@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { MapPin, Mail, Phone, Clock } from 'lucide-react';
-import heroImage from '@/assets/hero-luxury-interior.jpg';
+import contactHero from '@/assets/contact-hero.jpg';
+import contactProperty from '@/assets/contact-property.jpg';
 
 // ═══════════════════════════════════════════════════════════════
 // FORM COMPONENTS
@@ -30,10 +31,11 @@ const FormInput = ({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full px-5 py-4 bg-white/60 backdrop-blur-sm border border-[#0E0E0E]/10 
+      className="w-full px-5 py-4 bg-white/70 backdrop-blur-sm border border-[#0E0E0E]/8 
                  text-[#0E0E0E] text-sm font-body rounded-sm
                  focus:outline-none focus:border-[#C7A56A]/50 focus:ring-1 focus:ring-[#C7A56A]/20
-                 transition-all duration-300 placeholder:text-[#0E0E0E]/30"
+                 transition-all duration-300 placeholder:text-[#0E0E0E]/30
+                 hover:border-[#0E0E0E]/15"
     />
   </div>
 );
@@ -60,10 +62,11 @@ const FormTextarea = ({
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
       rows={5}
-      className="w-full px-5 py-4 bg-white/60 backdrop-blur-sm border border-[#0E0E0E]/10 
+      className="w-full px-5 py-4 bg-white/70 backdrop-blur-sm border border-[#0E0E0E]/8 
                  text-[#0E0E0E] text-sm font-body rounded-sm resize-none
                  focus:outline-none focus:border-[#C7A56A]/50 focus:ring-1 focus:ring-[#C7A56A]/20
-                 transition-all duration-300 placeholder:text-[#0E0E0E]/30"
+                 transition-all duration-300 placeholder:text-[#0E0E0E]/30
+                 hover:border-[#0E0E0E]/15"
     />
   </div>
 );
@@ -93,15 +96,15 @@ const FormSelect = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-4 bg-white/60 backdrop-blur-sm border border-[#0E0E0E]/10 
+        className="w-full px-5 py-4 bg-white/70 backdrop-blur-sm border border-[#0E0E0E]/8 
                    text-left text-sm font-body rounded-sm
                    focus:outline-none focus:border-[#C7A56A]/50 transition-all duration-300
-                   flex items-center justify-between"
+                   flex items-center justify-between hover:border-[#0E0E0E]/15"
       >
         <span className={value ? 'text-[#0E0E0E]' : 'text-[#0E0E0E]/30'}>
           {value || placeholder}
         </span>
-        <svg className={`w-4 h-4 text-[#0E0E0E]/40 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+        <svg className={`w-4 h-4 text-[#C7A56A]/70 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
              fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
@@ -109,7 +112,7 @@ const FormSelect = ({
       
       {isOpen && (
         <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-[#0E0E0E]/10 
-                        shadow-lg z-50 rounded-sm overflow-hidden">
+                        shadow-xl z-50 rounded-sm overflow-hidden">
           {options.map((option) => (
             <button
               key={option}
@@ -127,23 +130,28 @@ const FormSelect = ({
   );
 };
 
-// Contact info item
+// Enhanced Contact info item with better design
 const ContactItem = ({ 
   icon: Icon, 
   label, 
-  value 
+  value,
+  isLast = false
 }: { 
   icon: React.ElementType; 
   label: string; 
   value: string;
+  isLast?: boolean;
 }) => (
-  <div className="flex items-start gap-5">
-    <div className="w-14 h-14 rounded-sm bg-[#1A1A1A] flex items-center justify-center flex-shrink-0">
+  <div className={`group flex items-start gap-5 p-5 rounded-lg transition-all duration-300 
+                   hover:bg-white/50 ${!isLast ? 'border-b border-[#0E0E0E]/5' : ''}`}>
+    <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#1A1A1A] to-[#2A2A2A] 
+                    flex items-center justify-center flex-shrink-0 shadow-lg
+                    group-hover:shadow-xl group-hover:scale-105 transition-all duration-300">
       <Icon className="w-5 h-5 text-[#C7A56A]" strokeWidth={1.5} />
     </div>
-    <div>
-      <p className="text-[10px] font-mono tracking-[0.2em] text-[#C7A56A] uppercase mb-1">{label}</p>
-      <p className="text-[#0E0E0E]/80 font-body text-sm leading-relaxed">{value}</p>
+    <div className="pt-1">
+      <p className="text-[10px] font-mono tracking-[0.25em] text-[#C7A56A] uppercase mb-2">{label}</p>
+      <p className="text-[#0E0E0E]/75 font-body text-sm leading-relaxed">{value}</p>
     </div>
   </div>
 );
@@ -173,32 +181,33 @@ const Contact = () => {
         {/* ═══════════════════════════════════════════════════════════════
             HERO SECTION - Dark with Background Image
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative min-h-[70vh] flex items-center">
+        <section className="relative min-h-[75vh] flex items-center">
           {/* Background Image */}
           <div className="absolute inset-0">
             <img 
-              src={heroImage} 
-              alt="Luxury Architecture" 
+              src={contactHero} 
+              alt="Modern Luxury Architecture" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/95 via-[#0A0A0A]/70 to-[#0A0A0A]/40" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/50 to-transparent" />
           </div>
           
           {/* Content */}
-          <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 pt-32 pb-20">
+          <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 pt-32 pb-24">
             {/* Eyebrow */}
             <p className="text-[11px] font-mono tracking-[0.4em] text-[#C7A56A] uppercase mb-6">
               Get in Touch
             </p>
             
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-[1.15] mb-8">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-[1.1] mb-8">
               Let's Create<br />
               <span className="text-[#C7A56A] italic">Together</span>
             </h1>
             
             {/* Subtext */}
-            <p className="text-base md:text-lg text-white/60 font-body font-light max-w-xl leading-relaxed">
+            <p className="text-base md:text-lg text-white/55 font-body font-light max-w-xl leading-relaxed">
               Every exceptional project begins with a conversation. Tell us about your vision, 
               and let's explore the possibilities together.
             </p>
@@ -208,26 +217,26 @@ const Contact = () => {
         {/* ═══════════════════════════════════════════════════════════════
             FORM SECTION - Light Gradient Background
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative py-20 md:py-28 bg-gradient-to-b from-[#F8F6F3] via-[#FAF8F5] to-[#F5F2EE]">
-          {/* Subtle texture overlay */}
-          <div className="absolute inset-0 opacity-30" 
-               style={{ 
-                 backgroundImage: `radial-gradient(circle at 20% 50%, rgba(199,165,106,0.08) 0%, transparent 50%),
-                                   radial-gradient(circle at 80% 20%, rgba(199,165,106,0.05) 0%, transparent 40%)` 
-               }} 
-          />
+        <section className="relative py-24 md:py-32 bg-gradient-to-br from-[#FAF8F5] via-[#F7F4F0] to-[#F3EFEA]">
+          {/* Decorative elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-radial from-[#C7A56A]/5 to-transparent rounded-full blur-3xl" />
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-[#C7A56A]/3 to-transparent rounded-full blur-3xl" />
+          </div>
           
           <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+            <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
               
               {/* Left: Form */}
               <div>
-                <h2 className="text-2xl md:text-3xl font-heading font-light text-[#0E0E0E] mb-3">
-                  Request a Consultation
-                </h2>
-                <p className="text-sm text-[#0E0E0E]/50 font-body mb-10">
-                  Fill out the form below and our team will reach out within 24 hours.
-                </p>
+                <div className="mb-10">
+                  <h2 className="text-2xl md:text-3xl font-heading font-light text-[#0E0E0E] mb-3">
+                    Request a Consultation
+                  </h2>
+                  <p className="text-sm text-[#0E0E0E]/50 font-body">
+                    Fill out the form below and our team will reach out within 24 hours.
+                  </p>
+                </div>
                 
                 <form className="space-y-6">
                   {/* Row 1: Name + Email */}
@@ -287,23 +296,31 @@ const Contact = () => {
                   {/* Submit Button */}
                   <button 
                     type="submit"
-                    className="group inline-flex items-center gap-3 px-8 py-4 bg-[#C7A56A] text-[#0A0A0A] 
-                             font-body text-xs tracking-[0.15em] uppercase rounded-sm
-                             transition-all duration-300 hover:bg-[#B8956A] hover:shadow-lg"
+                    className="group inline-flex items-center gap-3 px-10 py-4 bg-[#C7A56A] text-[#0A0A0A] 
+                             font-body text-xs tracking-[0.2em] uppercase rounded-sm
+                             transition-all duration-300 hover:bg-[#B8956A] hover:shadow-xl
+                             hover:shadow-[#C7A56A]/20"
                   >
-                    <span>Submit Inquiry</span>
+                    <span className="font-medium">Submit Inquiry</span>
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
                   </button>
                 </form>
               </div>
               
-              {/* Right: Contact Information */}
+              {/* Right: Contact Information - Enhanced Design */}
               <div>
-                <h2 className="text-2xl md:text-3xl font-heading font-light text-[#0E0E0E] mb-10">
-                  Contact Information
-                </h2>
+                <div className="mb-8">
+                  <h2 className="text-2xl md:text-3xl font-heading font-light text-[#0E0E0E] mb-3">
+                    Contact Information
+                  </h2>
+                  <p className="text-sm text-[#0E0E0E]/50 font-body">
+                    Visit our studio or reach out directly.
+                  </p>
+                </div>
                 
-                <div className="space-y-8">
+                {/* Contact Cards */}
+                <div className="bg-white/40 backdrop-blur-sm rounded-xl border border-white/60 shadow-lg 
+                               shadow-[#0E0E0E]/3 overflow-hidden mb-8">
                   <ContactItem 
                     icon={MapPin}
                     label="Studio Address"
@@ -326,26 +343,31 @@ const Contact = () => {
                     icon={Clock}
                     label="Office Hours"
                     value="Monday - Saturday: 10:00 AM - 7:00 PM"
+                    isLast
                   />
                 </div>
                 
-                {/* Property Image */}
-                <div className="mt-12 relative rounded-sm overflow-hidden">
+                {/* Property Image with Enhanced Design */}
+                <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-[#0E0E0E]/10 group">
                   <img 
-                    src={heroImage} 
-                    alt="EdgeHomes Architecture" 
-                    className="w-full h-64 object-cover"
+                    src={contactProperty} 
+                    alt="EdgeHomes Luxury Project" 
+                    className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/20 to-transparent" />
                   
-                  {/* Location Pin */}
-                  <div className="absolute inset-0 flex items-center justify-center flex-col">
-                    <div className="w-10 h-10 rounded-full border-2 border-[#C7A56A] flex items-center justify-center mb-2">
-                      <MapPin className="w-4 h-4 text-[#C7A56A]" />
+                  {/* Location Overlay */}
+                  <div className="absolute inset-0 flex items-end p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#C7A56A]/20 backdrop-blur-sm border border-[#C7A56A]/40 
+                                      flex items-center justify-center">
+                        <MapPin className="w-4 h-4 text-[#C7A56A]" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-mono tracking-[0.2em] text-white/60 uppercase mb-0.5">Our Projects</p>
+                        <p className="text-sm font-body text-white">Faridabad, Haryana</p>
+                      </div>
                     </div>
-                    <p className="text-[10px] font-mono tracking-[0.3em] text-white uppercase">
-                      Faridabad, Haryana
-                    </p>
                   </div>
                 </div>
               </div>
