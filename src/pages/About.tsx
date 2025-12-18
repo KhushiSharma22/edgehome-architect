@@ -309,263 +309,211 @@ const HeroAbout = () => {
   );
 };
 
-// Philosophy Section - Immersive 3D Cards
-const PhilosophySection = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
-  const containerRef = useRef<HTMLDivElement>(null);
+// Immersive Manifesto Section - Architectural Path
+const ManifestoSection = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [lineHeight, setLineHeight] = useState(0);
+  const { ref: beliefRef, isVisible: beliefVisible } = useScrollAnimation({ threshold: 0.3 });
+  const { ref: pathRef, isVisible: pathVisible } = useScrollAnimation({ threshold: 0.1 });
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePos({
-      x: (e.clientX - rect.left) / rect.width,
-      y: (e.clientY - rect.top) / rect.height,
-    });
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const sectionHeight = rect.height;
+      
+      // Calculate progress through section
+      const progress = Math.max(0, Math.min(1, 
+        (viewportHeight - rect.top) / (viewportHeight + sectionHeight * 0.5)
+      ));
+      setScrollProgress(progress);
+      setLineHeight(progress * 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const philosophies = [
     {
-      number: '01',
+      index: '01',
       title: 'Simplicity as Luxury',
-      quote: 'The most powerful design is invisible.',
-      description: 'It doesn\'t demand attention—it earns it through quiet confidence and intentional restraint.',
-      visual: '◇',
+      thought: 'The most powerful design is invisible.',
+      continuation: 'It earns attention through restraint.',
+      align: 'left',
+      geometry: '◇',
     },
     {
-      number: '02',
+      index: '02', 
       title: 'Execution Over Promises',
-      quote: 'Ideas are abundant.',
-      description: 'What separates us is our obsessive focus on bringing every detail to life exactly as envisioned—no compromises.',
-      visual: '△',
+      thought: 'Ideas are abundant.',
+      continuation: 'What separates us is obsessive focus on bringing every detail to life—no compromises.',
+      align: 'right',
+      geometry: '△',
     },
     {
-      number: '03',
+      index: '03',
       title: 'Timeless Over Trendy',
-      quote: 'Trends fade in seasons.',
-      description: 'We design spaces meant to age gracefully. We build for decades.',
-      visual: '○',
+      thought: 'Trends fade in seasons.',
+      continuation: 'We build for decades.',
+      align: 'left',
+      geometry: '○',
     },
   ];
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative py-48 md:py-64 overflow-hidden"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 bg-[#050505]" />
+    <section ref={sectionRef} className="relative py-40 md:py-56 overflow-hidden">
+      {/* Dark Background */}
+      <div className="absolute inset-0 bg-[#040404]" />
       
-      {/* Animated Mesh Gradient */}
+      {/* Subtle ambient glow on section enter */}
       <div 
-        className="absolute inset-0 opacity-30 transition-all duration-1000"
+        className="absolute inset-0 transition-opacity duration-[2000ms]"
         style={{
-          background: `
-            conic-gradient(from ${mousePos.x * 360}deg at ${mousePos.x * 100}% ${mousePos.y * 100}%, 
-              hsl(38 42% 60% / 0.1) 0deg, 
-              transparent 60deg, 
-              hsl(30 8% 70% / 0.05) 120deg, 
-              transparent 180deg,
-              hsl(38 42% 60% / 0.1) 240deg,
-              transparent 300deg,
-              hsl(38 42% 60% / 0.1) 360deg
-            )
-          `,
+          background: 'radial-gradient(ellipse 80% 50% at 50% 50%, hsl(38 42% 55% / 0.02) 0%, transparent 70%)',
+          opacity: scrollProgress > 0.1 ? 1 : 0,
         }}
       />
 
-      {/* Floating Lines */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(5)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-            style={{
-              width: `${30 + i * 15}%`,
-              top: `${20 + i * 15}%`,
-              left: `${10 + i * 5}%`,
-              transform: `translateX(${Math.sin((mousePos.x + i) * Math.PI) * 30}px)`,
-              transition: 'transform 0.5s ease-out',
-            }}
-          />
-        ))}
+      {/* PART 1 - THE BELIEF */}
+      <div ref={beliefRef} className="relative z-10 max-w-4xl mx-auto px-6 mb-48 md:mb-64">
+        {/* Small Label */}
+        <div className={`text-center mb-12 transition-all duration-1000 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <span className="text-primary/40 text-[9px] tracking-[0.6em] uppercase">Our Belief</span>
+        </div>
+        
+        {/* Main Belief Statement - Calm, not loud */}
+        <div className="text-center">
+          <p className={`font-heading text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.3] tracking-tight transition-all duration-1000 delay-200 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <span className="text-foreground/80">A space should feel </span>
+            <span className="text-primary/70">calm</span>
+          </p>
+          <p className={`font-heading text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.3] tracking-tight mt-1 transition-all duration-1000 delay-400 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <span className="text-foreground/50">before it looks beautiful.</span>
+          </p>
+        </div>
+        
+        {/* Subtle line below */}
+        <div className={`flex justify-center mt-16 transition-all duration-1500 delay-600 ${beliefVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent transition-all duration-[2000ms] delay-800 ${beliefVisible ? 'w-32' : 'w-0'}`} />
+        </div>
       </div>
 
-      <div ref={ref} className="relative z-10 max-w-8xl mx-auto px-6">
-        {/* Section Quote - Massive Typography */}
-        <div className={`text-center mb-32 md:mb-48 transition-all duration-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Decorative Quote Mark */}
-          <div className="relative">
-            <span className="absolute -top-32 left-1/2 -translate-x-1/2 text-[300px] md:text-[500px] font-heading text-primary/[0.02] leading-none select-none pointer-events-none">
-              "
-            </span>
-          </div>
+      {/* PART 2 - PHILOSOPHY PATH */}
+      <div ref={pathRef} className="relative z-10 max-w-6xl mx-auto px-6">
+        
+        {/* Central Vertical Line - The Path */}
+        <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px hidden md:block">
+          {/* Base line (faint) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.06] to-transparent" />
           
-          <blockquote className="relative font-heading text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] max-w-6xl mx-auto">
-            <span className={`block overflow-hidden transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-              <span className={`inline-block ${isVisible ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-1000 delay-300`}>
-                A space should feel
-              </span>
-            </span>
-            <span className={`block overflow-hidden transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-              <span className={`inline-block text-gradient-gold ${isVisible ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-1000 delay-500`}>
-                calm
-              </span>
-            </span>
-            <span className={`block overflow-hidden text-foreground/50 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-              <span className={`inline-block ${isVisible ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-1000 delay-700`}>
-                before it looks beautiful.
-              </span>
-            </span>
-          </blockquote>
-
-          {/* Animated Line Below Quote */}
-          <div className={`flex items-center justify-center gap-4 mt-16 transition-all duration-1500 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-            <div className={`h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent transition-all duration-2000 delay-1200 ${isVisible ? 'w-96' : 'w-0'}`} />
-          </div>
+          {/* Animated progress line */}
+          <div 
+            className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary/30 via-primary/20 to-transparent transition-all duration-500"
+            style={{ height: `${lineHeight}%` }}
+          />
+          
+          {/* Measurement ticks */}
+          <div className="absolute top-[15%] left-0 w-3 h-px bg-primary/10 -translate-x-1/2" />
+          <div className="absolute top-[35%] left-0 w-2 h-px bg-primary/8 -translate-x-1/2" />
+          <div className="absolute top-[55%] left-0 w-3 h-px bg-primary/10 -translate-x-1/2" />
+          <div className="absolute top-[75%] left-0 w-2 h-px bg-primary/8 -translate-x-1/2" />
+          <div className="absolute top-[95%] left-0 w-3 h-px bg-primary/10 -translate-x-1/2" />
         </div>
 
-        {/* Philosophy Cards - 3D Perspective Grid */}
-        <div className="relative perspective-[2000px]">
-          {/* Section Label */}
-          <div className={`flex items-center justify-center gap-8 mb-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="h-px flex-1 max-w-48 bg-gradient-to-r from-transparent to-primary/30" />
-            <span className="text-[10px] text-primary/50 tracking-[0.6em] uppercase">Our Philosophy</span>
-            <div className="h-px flex-1 max-w-48 bg-gradient-to-l from-transparent to-primary/30" />
-          </div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-            {philosophies.map((philosophy, index) => {
-              const isHovered = hoveredIndex === index;
-              
-              return (
-                <div
-                  key={philosophy.number}
-                  className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}`}
-                  style={{ 
-                    transitionDelay: `${800 + index * 200}ms`,
-                    transform: isHovered 
-                      ? `perspective(1000px) rotateX(${(mousePos.y - 0.5) * 5}deg) rotateY(${(mousePos.x - 0.5) * 5}deg) translateZ(50px)` 
-                      : 'none',
+        {/* Philosophy Points */}
+        <div className="relative space-y-32 md:space-y-48">
+          {philosophies.map((philosophy, index) => {
+            const isVisible = pathVisible && scrollProgress > (index * 0.2 + 0.2);
+            const alignLeft = philosophy.align === 'left';
+            
+            return (
+              <div 
+                key={philosophy.index}
+                className={`relative flex ${alignLeft ? 'md:justify-start' : 'md:justify-end'} justify-center`}
+              >
+                {/* Geometry accent - very faint */}
+                <div 
+                  className={`absolute top-0 hidden md:block transition-all duration-1000 ${isVisible ? 'opacity-[0.05]' : 'opacity-0'}`}
+                  style={{
+                    left: alignLeft ? '48%' : 'auto',
+                    right: alignLeft ? 'auto' : '48%',
                   }}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  {/* Card Glow Effect */}
-                  <div className={`absolute -inset-1 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-[2rem] blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
-                  
-                  {/* Card */}
-                  <div className={`
-                    relative min-h-[500px] lg:min-h-[600px] rounded-[2rem] overflow-hidden
-                    border border-border/10 bg-card/20 backdrop-blur-md
-                    transition-all duration-700
-                    ${isHovered ? 'border-primary/30 bg-card/30' : ''}
-                  `}>
-                    {/* Animated Background Pattern */}
-                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000`}>
-                      <div className="absolute inset-0" style={{
-                        backgroundImage: `radial-gradient(circle at 50% 50%, hsl(38 42% 60% / 0.05) 0%, transparent 50%)`,
-                        backgroundSize: '100px 100px',
-                      }} />
-                    </div>
-
-                    {/* Number - Oversized */}
-                    <div className="absolute top-8 left-8 right-8">
-                      <span className={`
-                        text-[180px] md:text-[220px] font-heading leading-none
-                        bg-gradient-to-b from-primary/10 via-primary/5 to-transparent bg-clip-text text-transparent
-                        transition-all duration-700
-                        ${isHovered ? 'from-primary/20 scale-105' : ''}
-                      `}>
-                        {philosophy.number}
-                      </span>
-                    </div>
-
-                    {/* Floating Visual */}
-                    <div className={`
-                      absolute top-16 right-8 text-6xl text-primary/20
-                      transition-all duration-700
-                      ${isHovered ? 'text-primary/40 scale-125 rotate-12' : ''}
-                    `}>
-                      {philosophy.visual}
-                    </div>
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                      {/* Animated Top Border */}
-                      <div className={`absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent transition-all duration-700 ${isHovered ? 'opacity-100' : 'opacity-30'}`} />
-                      
-                      <div className="relative pt-8">
-                        {/* Title */}
-                        <h3 className={`
-                          font-heading text-3xl md:text-4xl text-foreground/90 mb-4
-                          transition-all duration-500
-                          ${isHovered ? 'text-foreground translate-x-2' : ''}
-                        `}>
-                          {philosophy.title}
-                        </h3>
-                        
-                        {/* Quote Highlight */}
-                        <p className={`
-                          text-primary/80 text-lg md:text-xl font-light italic mb-4
-                          transition-all duration-500 delay-100
-                          ${isHovered ? 'opacity-100 translate-x-2' : 'opacity-70'}
-                        `}>
-                          "{philosophy.quote}"
-                        </p>
-                        
-                        {/* Description */}
-                        <p className={`
-                          text-muted-foreground/70 text-base leading-relaxed
-                          transition-all duration-500 delay-200
-                          ${isHovered ? 'opacity-100 translate-x-2' : 'opacity-50'}
-                        `}>
-                          {philosophy.description}
-                        </p>
-
-                        {/* Bottom Accent Line */}
-                        <div className={`
-                          mt-8 h-[2px] bg-gradient-to-r from-primary/60 to-transparent
-                          transition-all duration-700
-                          ${isHovered ? 'w-full' : 'w-16'}
-                        `} />
-                      </div>
-                    </div>
-
-                    {/* Corner Decorations */}
-                    <div className="absolute top-6 left-6 w-12 h-12">
-                      <div className={`absolute top-0 left-0 w-8 h-px bg-primary/30 transition-all duration-500 ${isHovered ? 'w-12' : ''}`} />
-                      <div className={`absolute top-0 left-0 w-px h-8 bg-primary/30 transition-all duration-500 ${isHovered ? 'h-12' : ''}`} />
-                    </div>
-                    <div className="absolute bottom-6 right-6 w-12 h-12">
-                      <div className={`absolute bottom-0 right-0 w-8 h-px bg-primary/30 transition-all duration-500 ${isHovered ? 'w-12' : ''}`} />
-                      <div className={`absolute bottom-0 right-0 w-px h-8 bg-primary/30 transition-all duration-500 ${isHovered ? 'h-12' : ''}`} />
-                    </div>
-
-                    {/* Shimmer Sweep */}
-                    <div className={`
-                      absolute inset-0 -translate-x-full group-hover:translate-x-full
-                      bg-gradient-to-r from-transparent via-white/[0.03] to-transparent
-                      transition-transform duration-1500 ease-out
-                      pointer-events-none
-                    `} />
-                  </div>
+                  <span className="text-4xl text-primary">{philosophy.geometry}</span>
                 </div>
-              );
-            })}
-          </div>
+
+                {/* Content Block */}
+                <div 
+                  className={`relative max-w-md ${alignLeft ? 'md:pr-24 md:text-right' : 'md:pl-24 md:text-left'} text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                  style={{
+                    transitionDelay: `${index * 150}ms`,
+                    transform: isVisible 
+                      ? 'translateY(0) translateX(0)' 
+                      : `translateY(32px) translateX(${alignLeft ? '-20px' : '20px'})`,
+                  }}
+                >
+                  {/* Index Number - Subtle */}
+                  <div className={`mb-6 ${alignLeft ? 'md:text-right' : 'md:text-left'}`}>
+                    <span className="text-primary/25 text-[11px] tracking-[0.3em] font-light">
+                      {philosophy.index}
+                    </span>
+                  </div>
+                  
+                  {/* Title */}
+                  <h3 className={`font-heading text-xl md:text-2xl text-foreground/85 mb-5 tracking-tight`}>
+                    {philosophy.title}
+                  </h3>
+                  
+                  {/* Thought - Main Line */}
+                  <p className="text-foreground/60 text-[15px] md:text-base leading-relaxed mb-2 font-light">
+                    {philosophy.thought}
+                  </p>
+                  
+                  {/* Continuation */}
+                  <p className="text-muted-foreground/45 text-[14px] md:text-[15px] leading-relaxed font-light">
+                    {philosophy.continuation}
+                  </p>
+                  
+                  {/* Connection line to center path */}
+                  <div 
+                    className={`hidden md:block absolute top-8 h-px bg-gradient-to-r transition-all duration-1000 delay-300 ${
+                      alignLeft 
+                        ? 'right-0 from-transparent to-primary/15' 
+                        : 'left-0 from-primary/15 to-transparent'
+                    } ${isVisible ? 'w-20' : 'w-0'}`}
+                    style={{
+                      right: alignLeft ? '-96px' : 'auto',
+                      left: alignLeft ? 'auto' : '-96px',
+                    }}
+                  />
+                  
+                  {/* Small dot at connection */}
+                  <div 
+                    className={`hidden md:block absolute top-[30px] w-1.5 h-1.5 rounded-full bg-primary/20 transition-all duration-500 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
+                    style={{
+                      right: alignLeft ? '-100px' : 'auto',
+                      left: alignLeft ? 'auto' : '-100px',
+                    }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Bottom Accent */}
-        <div className={`flex items-center justify-center mt-32 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="flex items-center gap-6">
-            <div className="w-2 h-2 bg-primary/40 rotate-45" />
-            <span className="text-muted-foreground/30 text-xs tracking-[0.4em] uppercase">These guide everything we create</span>
-            <div className="w-2 h-2 bg-primary/40 rotate-45" />
-          </div>
+        {/* Bottom closure */}
+        <div className={`flex flex-col items-center mt-40 md:mt-56 transition-all duration-1000 ${pathVisible && scrollProgress > 0.8 ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Final point on path */}
+          <div className="w-2 h-2 bg-primary/20 rotate-45 mb-8" />
+          
+          {/* Closing thought */}
+          <p className="text-muted-foreground/30 text-[11px] tracking-[0.4em] uppercase text-center">
+            These guide everything we create
+          </p>
         </div>
       </div>
     </section>
@@ -906,7 +854,7 @@ const About = () => {
       <Header />
       <main>
         <HeroAbout />
-        <PhilosophySection />
+        <ManifestoSection />
         <ProcessSection />
         <FoundersSection />
       </main>
