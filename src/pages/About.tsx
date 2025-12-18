@@ -8,83 +8,97 @@ import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
 import portfolioDining from "@/assets/portfolio-dining.jpg";
 
 
-// Architectural Blueprint Background - Refined & Subtle
-const ArchitecturalBackground = ({ scrollY = 0 }: { scrollY?: number }) => {
+// Particle System Component
+const ParticleField = () => {
+  const particles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 3 + 1,
+    duration: Math.random() * 20 + 15,
+    delay: Math.random() * -20,
+  }));
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Blueprint Grid - Very Subtle */}
-      <svg 
-        className="absolute inset-0 w-full h-full opacity-[0.03]"
-        style={{ 
-          transform: `translate(${scrollY * 0.015}px, ${scrollY * 0.01}px)`,
-          transition: 'transform 0.5s ease-out',
-        }}
-      >
-        <defs>
-          <pattern id="blueprintGrid" width="100" height="100" patternUnits="userSpaceOnUse">
-            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-            <path d="M 50 0 L 50 100 M 0 50 L 100 50" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.15" opacity="0.5" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#blueprintGrid)" />
-      </svg>
-
-      {/* Interior Wall Outlines - Abstract */}
-      <svg 
-        className="absolute inset-0 w-full h-full opacity-[0.04]"
-        style={{ 
-          transform: `translate(${scrollY * 0.02}px, ${scrollY * 0.015}px)`,
-          transition: 'transform 0.6s ease-out',
-        }}
-      >
-        {/* Wall frame suggestion - left side */}
-        <path 
-          d="M 8% 35% L 8% 75% L 28% 75% L 28% 55% L 18% 55% L 18% 35% Z" 
-          fill="none" 
-          stroke="hsl(38 42% 55%)" 
-          strokeWidth="0.4"
-          opacity="0.6"
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          className="absolute rounded-full bg-primary/30"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            animation: `float ${p.duration}s ease-in-out infinite`,
+            animationDelay: `${p.delay}s`,
+            filter: 'blur(0.5px)',
+          }}
         />
-        
-        {/* Ceiling grid hints */}
-        <line x1="15%" y1="20%" x2="45%" y2="20%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.4" />
-        <line x1="18%" y1="24%" x2="42%" y2="24%" stroke="hsl(30 8% 60%)" strokeWidth="0.2" opacity="0.3" />
-        
-        {/* Furniture geometry - table silhouette */}
-        <rect x="20%" y="60%" width="15%" height="8%" fill="none" stroke="hsl(30 8% 55%)" strokeWidth="0.3" opacity="0.4" />
-        
-        {/* Construction framing - corner joint */}
-        <path d="M 5% 30% L 5% 35% L 10% 35%" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.5" />
-        
-        {/* Measurement marker */}
-        <g opacity="0.3">
-          <line x1="12%" y1="85%" x2="12%" y2="88%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-          <line x1="12%" y1="86.5%" x2="25%" y2="86.5%" stroke="hsl(38 42% 55%)" strokeWidth="0.2" strokeDasharray="2,4" />
-          <line x1="25%" y1="85%" x2="25%" y2="88%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-        </g>
-      </svg>
-
-      {/* Diagonal drift lines - very faint */}
-      <div 
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          background: `
-            linear-gradient(135deg, transparent 48%, hsl(38 42% 55% / 0.3) 49%, hsl(38 42% 55% / 0.3) 51%, transparent 52%),
-            linear-gradient(135deg, transparent 58%, hsl(30 8% 55% / 0.2) 59%, hsl(30 8% 55% / 0.2) 61%, transparent 62%)
-          `,
-          backgroundSize: '200px 200px',
-          transform: `translate(${scrollY * 0.03}px, ${scrollY * 0.02}px)`,
-          transition: 'transform 0.8s ease-out',
-        }}
-      />
+      ))}
     </div>
   );
 };
 
-// Hero Section - Asymmetrical Editorial Composition
+// Morphing 3D Shape
+const MorphingShape = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => {
+  return (
+    <div 
+      className={`absolute ${className}`}
+      style={{ animationDelay: `${delay}s` }}
+    >
+      <svg viewBox="0 0 200 200" className="w-full h-full">
+        <defs>
+          <linearGradient id="morphGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(38 42% 55% / 0.3)" />
+            <stop offset="50%" stopColor="hsl(38 50% 60% / 0.15)" />
+            <stop offset="100%" stopColor="hsl(30 40% 50% / 0.2)" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+        <path 
+          fill="url(#morphGradient)" 
+          filter="url(#glow)"
+          className="animate-morph"
+          d="M47.5,-57.2C59.9,-45.8,67.5,-29.5,70.8,-12.1C74.1,5.4,73.1,24,64.3,37.6C55.5,51.2,38.9,59.8,21.5,65.2C4.1,70.6,-14.2,72.8,-30.3,67.2C-46.4,61.6,-60.4,48.2,-68.5,31.6C-76.6,15,-78.9,-4.8,-73.2,-22.1C-67.5,-39.4,-53.8,-54.2,-38.4,-65C-23,-75.8,-5.8,-82.6,9.4,-79.8C24.6,-77,35.1,-68.6,47.5,-57.2Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+    </div>
+  );
+};
+
+// Animated Text Reveal with Stagger
+const RevealText = ({ text, className = "", delay = 0 }: { text: string; className?: string; delay?: number }) => {
+  const words = text.split(' ');
+  return (
+    <span className={className}>
+      {words.map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden">
+          <span 
+            className="inline-block animate-slide-up"
+            style={{ animationDelay: `${delay + i * 0.1}s`, animationFillMode: 'backwards' }}
+          >
+            {word}&nbsp;
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+};
+
+// Hero Section - Unprecedented Cinematic Design
 const HeroAbout = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
@@ -96,196 +110,398 @@ const HeroAbout = () => {
     };
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setMousePos({
+      x: (e.clientX - rect.left - rect.width / 2) / rect.width,
+      y: (e.clientY - rect.top - rect.height / 2) / rect.height,
+    });
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Base Background */}
-      <div className="absolute inset-0 bg-background" />
+    <section 
+      ref={heroRef}
+      className="relative min-h-screen flex items-center overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* === LAYERED BACKGROUND SYSTEM === */}
       
-      {/* Architectural Blueprint Layer - with slight blur */}
-      <div className="absolute inset-0" style={{ filter: 'blur(0.5px)' }}>
-        <ArchitecturalBackground scrollY={scrollY} />
-      </div>
-
-      {/* Cinematic overlays matching homepage */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background z-10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/70 z-10" />
-      <div className="absolute inset-0 z-10" style={{
-        background: 'radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.5) 60%, hsl(var(--background)) 100%)'
-      }} />
+      {/* Base - Deep Dark with Warmth */}
+      <div className="absolute inset-0 bg-[#050403]" />
       
-      {/* Animated grain texture */}
-      <div className="absolute inset-0 grain z-20 opacity-40" />
-      
-      {/* Floating orbs like homepage */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-[120px] animate-float" style={{ animationDelay: '-3s' }} />
-      <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-primary/8 rounded-full blur-[80px] animate-float" style={{ animationDelay: '-5s' }} />
-      
-      {/* Light rays */}
-      <div className="absolute inset-0 z-15 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/20 via-transparent to-transparent animate-pulse" style={{ animationDuration: '3s' }} />
-        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
-      </div>
-
-      {/* Cinematic Vertical Image Strip */}
+      {/* Dynamic Gradient that follows mouse */}
       <div 
-        className={`absolute right-[5%] top-[15%] bottom-[15%] w-[15%] hidden xl:block transition-all duration-[2800ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-        style={{ 
-          transitionDelay: '1500ms',
-          transform: `translateY(${scrollY * -0.025}px)`,
+        className="absolute inset-0 transition-all duration-1000 ease-out"
+        style={{
+          background: `
+            radial-gradient(circle at ${50 + mousePos.x * 20}% ${50 + mousePos.y * 20}%, 
+              hsl(38 50% 50% / 0.12) 0%, 
+              transparent 50%
+            ),
+            radial-gradient(circle at ${30 - mousePos.x * 10}% ${70 - mousePos.y * 10}%, 
+              hsl(25 45% 45% / 0.08) 0%, 
+              transparent 40%
+            ),
+            radial-gradient(circle at ${70 + mousePos.x * 15}% ${30 + mousePos.y * 15}%, 
+              hsl(42 55% 55% / 0.06) 0%, 
+              transparent 35%
+            )
+          `
+        }}
+      />
+
+      {/* Animated Mesh Grid - 3D Perspective */}
+      <div 
+        className="absolute inset-0 opacity-[0.04]"
+        style={{
+          perspective: '1000px',
+          perspectiveOrigin: `${50 + mousePos.x * 30}% ${50 + mousePos.y * 30}%`,
         }}
       >
         <div 
-          className="absolute -inset-px"
+          className="absolute inset-0"
           style={{
-            background: 'linear-gradient(180deg, hsl(38 42% 55% / 0.25), hsl(38 42% 55% / 0.15), hsl(38 42% 55% / 0.25))',
-            boxShadow: '0 0 40px hsl(38 42% 55% / 0.12)',
+            backgroundImage: `
+              linear-gradient(hsl(38 42% 55%) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(38 42% 55%) 1px, transparent 1px)
+            `,
+            backgroundSize: '80px 80px',
+            transform: `rotateX(${60 + mousePos.y * 10}deg) translateZ(-100px) scale(2.5)`,
+            transformOrigin: 'center center',
+            transition: 'transform 0.3s ease-out',
           }}
         />
-        <div className="relative w-full h-full overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80"
-            alt="Luxury interior detail"
-            className="w-full h-full object-cover"
-            style={{
-              transform: `scale(1.15) translateY(${scrollY * 0.015}px)`,
-              transition: 'transform 0.8s ease-out',
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/75" />
-          
-          {/* Corner Crop Marks */}
-          <div className="absolute top-4 left-4">
-            <div className="w-6 h-px bg-primary/50" />
-            <div className="w-px h-6 bg-primary/50" />
-          </div>
-          <div className="absolute top-4 right-4 flex flex-col items-end">
-            <div className="w-6 h-px bg-primary/50" />
-            <div className="w-px h-6 bg-primary/50 ml-auto" />
-          </div>
-          <div className="absolute bottom-4 left-4 flex flex-col justify-end">
-            <div className="w-px h-6 bg-primary/50" />
-            <div className="w-6 h-px bg-primary/50" />
-          </div>
-          <div className="absolute bottom-4 right-4 flex flex-col items-end justify-end">
-            <div className="w-px h-6 bg-primary/50 ml-auto" />
-            <div className="w-6 h-px bg-primary/50" />
-          </div>
-          
-          <div className="absolute bottom-6 left-0 right-0 px-4">
-            <div className="text-center">
-              <p className="text-primary/60 text-[9px] tracking-[0.25em] uppercase mb-1">
-                Project Snapshot
-              </p>
-              <p className="text-foreground/35 text-[8px] tracking-[0.15em]">
-                Residential · Delhi
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
 
-      {/* Main Content */}
+      {/* Morphing Shapes Layer */}
+      <MorphingShape className="w-[600px] h-[600px] -top-32 -left-32 opacity-40" delay={0} />
+      <MorphingShape className="w-[500px] h-[500px] -bottom-20 -right-20 opacity-30" delay={-5} />
+      <MorphingShape className="w-[300px] h-[300px] top-1/2 left-1/4 opacity-20" delay={-10} />
+
+      {/* Particle Field */}
+      <ParticleField />
+
+      {/* Diagonal Light Beams */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div 
+          className="absolute w-[200%] h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          style={{
+            top: '30%',
+            left: '-50%',
+            transform: `rotate(-15deg) translateX(${scrollY * 0.3}px)`,
+            transition: 'transform 0.1s ease-out',
+          }}
+        />
+        <div 
+          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+          style={{
+            top: '60%',
+            left: '-50%',
+            transform: `rotate(-15deg) translateX(${-scrollY * 0.2}px)`,
+            transition: 'transform 0.1s ease-out',
+          }}
+        />
+        <div 
+          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent"
+          style={{
+            top: '80%',
+            left: '-50%',
+            transform: `rotate(-15deg) translateX(${scrollY * 0.15}px)`,
+            transition: 'transform 0.1s ease-out',
+          }}
+        />
+      </div>
+
+      {/* Vertical Light Pillars */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[15, 35, 65, 85].map((pos, i) => (
+          <div 
+            key={i}
+            className="absolute top-0 bottom-0 w-px"
+            style={{
+              left: `${pos}%`,
+              background: `linear-gradient(180deg, 
+                transparent 0%, 
+                hsl(38 42% 55% / ${0.1 + i * 0.02}) 30%, 
+                hsl(38 42% 55% / ${0.15 + i * 0.03}) 50%, 
+                hsl(38 42% 55% / ${0.1 + i * 0.02}) 70%, 
+                transparent 100%
+              )`,
+              opacity: isLoaded ? 1 : 0,
+              transition: `opacity 2s ease-out ${1 + i * 0.3}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Floating Orbs with Parallax */}
+      <div 
+        className="absolute w-96 h-96 rounded-full blur-[150px] animate-float"
+        style={{
+          top: '10%',
+          left: '20%',
+          background: 'radial-gradient(circle, hsl(38 50% 55% / 0.2) 0%, transparent 70%)',
+          transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -30}px)`,
+          transition: 'transform 0.5s ease-out',
+        }}
+      />
+      <div 
+        className="absolute w-[500px] h-[500px] rounded-full blur-[180px] animate-float"
+        style={{
+          bottom: '10%',
+          right: '15%',
+          background: 'radial-gradient(circle, hsl(30 45% 50% / 0.15) 0%, transparent 70%)',
+          transform: `translate(${mousePos.x * 40}px, ${mousePos.y * 40}px)`,
+          transition: 'transform 0.7s ease-out',
+          animationDelay: '-7s',
+        }}
+      />
+
+      {/* Cinematic Vignette */}
+      <div className="absolute inset-0" style={{
+        background: `
+          radial-gradient(ellipse 120% 100% at 50% 50%, transparent 30%, hsl(0 0% 3% / 0.6) 100%),
+          linear-gradient(180deg, hsl(0 0% 3% / 0.3) 0%, transparent 30%, transparent 70%, hsl(0 0% 3% / 0.5) 100%)
+        `
+      }} />
+
+      {/* Grain Texture */}
+      <div className="absolute inset-0 grain opacity-50" />
+
+      {/* === SPLIT SCREEN REVEAL PANELS === */}
+      <div 
+        className={`absolute inset-0 flex transition-all duration-[2000ms] ease-out ${isLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        style={{ zIndex: 50 }}
+      >
+        <div 
+          className="w-1/2 h-full bg-[#050403]"
+          style={{
+            transform: isLoaded ? 'translateX(-100%)' : 'translateX(0)',
+            transition: 'transform 1.5s cubic-bezier(0.77, 0, 0.175, 1)',
+          }}
+        />
+        <div 
+          className="w-1/2 h-full bg-[#050403]"
+          style={{
+            transform: isLoaded ? 'translateX(100%)' : 'translateX(0)',
+            transition: 'transform 1.5s cubic-bezier(0.77, 0, 0.175, 1)',
+          }}
+        />
+      </div>
+
+      {/* === MAIN CONTENT === */}
       <div className="relative z-30 w-full max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-6 items-center min-h-screen py-32">
           
-          {/* Left Side - Intentional negative space */}
-          <div className="col-span-12 lg:col-span-4 hidden lg:block" />
-
-          {/* Center/Right Side - Text Content */}
-          <div className="col-span-12 lg:col-span-8 text-center lg:text-left">
+          {/* Left Column - Large Typography */}
+          <div className="col-span-12 lg:col-span-7 text-center lg:text-left">
             
-            {/* Philosophy Label */}
+            {/* Philosophy Label with animated line */}
             <div 
-              className={`mb-10 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`mb-12 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: '1.5s' }}
             >
               <span className="inline-flex items-center gap-4">
-                <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
+                <span 
+                  className="h-px bg-gradient-to-r from-transparent to-primary"
+                  style={{
+                    width: isLoaded ? '4rem' : '0',
+                    transition: 'width 1s ease-out 2s',
+                  }}
+                />
                 <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
                   The EdgeHomes Philosophy
                 </span>
-                <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
+                <span 
+                  className="h-px bg-gradient-to-l from-transparent to-primary"
+                  style={{
+                    width: isLoaded ? '4rem' : '0',
+                    transition: 'width 1s ease-out 2s',
+                  }}
+                />
               </span>
             </div>
 
-            {/* Headline - Large like homepage */}
-            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-foreground mb-10 leading-[0.95]">
+            {/* Main Headline - Massive & Bold */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-[9rem] font-heading text-foreground mb-12 leading-[0.85] tracking-tight">
               <span 
-                className={`block overflow-hidden mb-3 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: '400ms' }}
+                className={`block overflow-hidden mb-2 transition-all duration-[1500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                style={{ transitionDelay: '1.7s' }}
               >
-                Design is not
+                <span className="block" style={{
+                  transform: isLoaded ? 'translateY(0) rotateX(0)' : 'translateY(100%) rotateX(-45deg)',
+                  transition: 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.8s',
+                }}>
+                  Design is
+                </span>
               </span>
               <span 
-                className={`block overflow-hidden mb-3 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: '600ms' }}
+                className={`block overflow-hidden mb-2 transition-all duration-[1500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                style={{ transitionDelay: '2s' }}
               >
-                what we do.
+                <span className="block text-muted-foreground" style={{
+                  transform: isLoaded ? 'translateY(0) rotateX(0)' : 'translateY(100%) rotateX(-45deg)',
+                  transition: 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.1s',
+                }}>
+                  not what
+                </span>
               </span>
               <span 
-                className={`block overflow-hidden transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                style={{ transitionDelay: '800ms' }}
+                className={`block overflow-hidden mb-2 transition-all duration-[1500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                style={{ transitionDelay: '2.3s' }}
               >
-                <span className="text-muted-foreground">It's how we </span>
-                <span className="text-shimmer italic">think.</span>
+                <span className="block text-muted-foreground" style={{
+                  transform: isLoaded ? 'translateY(0) rotateX(0)' : 'translateY(100%) rotateX(-45deg)',
+                  transition: 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.4s',
+                }}>
+                  we do.
+                </span>
+              </span>
+              <span 
+                className={`block overflow-hidden transition-all duration-[1500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                style={{ transitionDelay: '2.6s' }}
+              >
+                <span className="block" style={{
+                  transform: isLoaded ? 'translateY(0) rotateX(0)' : 'translateY(100%) rotateX(-45deg)',
+                  transition: 'transform 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.7s',
+                }}>
+                  It's how we{' '}
+                  <span className="relative inline-block">
+                    <span className="text-shimmer italic">think.</span>
+                    {/* Animated underline */}
+                    <span 
+                      className="absolute -bottom-2 left-0 h-[3px] bg-gradient-to-r from-primary via-primary/80 to-primary/50"
+                      style={{
+                        width: isLoaded ? '100%' : '0%',
+                        transition: 'width 1s ease-out 3.5s',
+                      }}
+                    />
+                  </span>
+                </span>
               </span>
             </h1>
 
             {/* Subtext */}
             <p 
-              className={`text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-12 leading-relaxed transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={{ transitionDelay: '1000ms' }}
+              className={`text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-14 leading-relaxed transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
+              style={{ transitionDelay: '3s' }}
             >
               A design & build studio shaping spaces that feel lived in, timeless, and intentional.
             </p>
 
-            {/* Trust badges */}
+            {/* Interactive Stats Row */}
             <div 
-              className={`flex flex-wrap items-center justify-center lg:justify-start gap-8 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ transitionDelay: '1200ms' }}
+              className={`flex flex-wrap items-center justify-center lg:justify-start gap-12 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+              style={{ transitionDelay: '3.3s' }}
             >
               {[
-                'Design Studio',
-                'Turnkey Execution',
-                'Delhi NCR',
-              ].map((label) => (
-                <span 
-                  key={label} 
-                  className="flex items-center gap-3 text-sm text-muted-foreground group cursor-default"
+                { value: '10+', label: 'Years Experience' },
+                { value: '200+', label: 'Projects Delivered' },
+                { value: '100%', label: 'Client Satisfaction' },
+              ].map((stat, i) => (
+                <div 
+                  key={stat.label}
+                  className="group relative text-center lg:text-left cursor-default"
                 >
-                  <span className="w-1.5 h-1.5 bg-primary/60 rotate-45 group-hover:bg-primary group-hover:scale-125 transition-all duration-300" />
-                  <span className="group-hover:text-foreground transition-colors duration-300">{label}</span>
-                </span>
+                  <div className="text-3xl md:text-4xl font-heading text-primary mb-1 transition-transform duration-300 group-hover:scale-110">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-muted-foreground tracking-wider uppercase">
+                    {stat.label}
+                  </div>
+                  {/* Hover glow effect */}
+                  <div className="absolute -inset-4 bg-primary/5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                </div>
               ))}
+            </div>
+          </div>
+
+          {/* Right Column - Visual Element */}
+          <div className="col-span-12 lg:col-span-5 hidden lg:flex items-center justify-center">
+            <div 
+              className={`relative transition-all duration-[2000ms] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
+              style={{ transitionDelay: '2s' }}
+            >
+              {/* Floating architectural frame */}
+              <div 
+                className="relative w-80 h-96"
+                style={{
+                  transform: `perspective(1000px) rotateY(${mousePos.x * 10}deg) rotateX(${mousePos.y * -10}deg)`,
+                  transition: 'transform 0.3s ease-out',
+                }}
+              >
+                {/* Outer frame */}
+                <div className="absolute inset-0 border border-primary/30">
+                  {/* Corner accents */}
+                  <div className="absolute -top-2 -left-2 w-6 h-6 border-l-2 border-t-2 border-primary" />
+                  <div className="absolute -top-2 -right-2 w-6 h-6 border-r-2 border-t-2 border-primary" />
+                  <div className="absolute -bottom-2 -left-2 w-6 h-6 border-l-2 border-b-2 border-primary" />
+                  <div className="absolute -bottom-2 -right-2 w-6 h-6 border-r-2 border-b-2 border-primary" />
+                </div>
+                
+                {/* Inner content */}
+                <div className="absolute inset-4 overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80"
+                    alt="Luxury interior"
+                    className="w-full h-full object-cover"
+                    style={{
+                      transform: `scale(1.1) translate(${mousePos.x * -10}px, ${mousePos.y * -10}px)`,
+                      transition: 'transform 0.5s ease-out',
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
+                  
+                  {/* Floating label */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <div className="text-[10px] text-primary tracking-[0.3em] uppercase mb-1">Featured Project</div>
+                    <div className="text-sm text-foreground/80">Modern Residence • Delhi</div>
+                  </div>
+                </div>
+
+                {/* Decorative elements */}
+                <div className="absolute -right-8 top-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-primary/50 to-transparent" />
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 h-px w-32 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+                
+                {/* Floating diamonds */}
+                <div className="absolute -top-6 right-12 w-3 h-3 bg-primary/40 rotate-45 animate-pulse" style={{ animationDuration: '3s' }} />
+                <div className="absolute -left-6 bottom-20 w-2 h-2 bg-primary/30 rotate-45 animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Corner accents like homepage */}
-      <div className={`absolute top-8 left-8 transition-all duration-1000 delay-[2200ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-l border-t border-primary/20" />
+      {/* Corner Frames */}
+      <div className={`absolute top-8 left-8 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '3.5s' }}>
+        <div className="w-20 h-20 border-l-2 border-t-2 border-primary/30" />
       </div>
-      <div className={`absolute top-8 right-8 transition-all duration-1000 delay-[2300ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-r border-t border-primary/20" />
+      <div className={`absolute top-8 right-8 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '3.6s' }}>
+        <div className="w-20 h-20 border-r-2 border-t-2 border-primary/30" />
       </div>
-      <div className={`absolute bottom-8 left-8 transition-all duration-1000 delay-[2400ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-l border-b border-primary/20" />
+      <div className={`absolute bottom-8 left-8 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '3.7s' }}>
+        <div className="w-20 h-20 border-l-2 border-b-2 border-primary/30" />
       </div>
-      <div className={`absolute bottom-8 right-8 transition-all duration-1000 delay-[2500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-r border-b border-primary/20" />
+      <div className={`absolute bottom-8 right-8 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} style={{ transitionDelay: '3.8s' }}>
+        <div className="w-20 h-20 border-r-2 border-b-2 border-primary/30" />
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll Indicator */}
       <div 
-        className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-30 cursor-pointer transition-all duration-1000 delay-[2000ms] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-30 cursor-pointer transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        style={{ transitionDelay: '4s' }}
       >
-        <div className="flex flex-col items-center gap-3 group">
+        <div className="flex flex-col items-center gap-4 group">
           <span className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase group-hover:text-primary transition-colors duration-500">
-            Scroll
+            Discover
           </span>
-          <div className="relative w-6 h-10 rounded-full border border-primary/30 group-hover:border-primary/60 transition-colors duration-500">
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-2 bg-primary rounded-full animate-scroll-mouse" />
+          <div className="relative">
+            <div className="w-8 h-14 rounded-full border-2 border-primary/40 group-hover:border-primary transition-colors duration-500">
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-1.5 h-3 bg-primary rounded-full animate-scroll-mouse" />
+            </div>
+            {/* Animated rings */}
+            <div className="absolute inset-0 rounded-full border border-primary/20 animate-ping" style={{ animationDuration: '2s' }} />
           </div>
         </div>
       </div>
