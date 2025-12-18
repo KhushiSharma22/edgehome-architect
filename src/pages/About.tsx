@@ -103,75 +103,43 @@ const HeroAbout = () => {
         <ArchitecturalBackground scrollY={scrollY} />
       </div>
 
-      {/* Subtle gradient on left side */}
-      <div className="absolute left-0 top-0 bottom-0 w-[50%] bg-gradient-to-r from-black/30 to-transparent" />
-
-      {/* Left Side - Architectural Visual Element */}
-      <div 
-        className={`absolute left-[5%] top-[15%] bottom-[15%] w-[18%] hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ 
-          transitionDelay: '1200ms',
-          transform: `translateY(${scrollY * 0.02}px)`,
-        }}
-      >
-        {/* Subtle architectural frame */}
-        <div className="relative w-full h-full">
-          {/* Blueprint grid background */}
-          <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
-            <defs>
-              <pattern id="leftGrid" width="50" height="50" patternUnits="userSpaceOnUse">
-                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#leftGrid)" />
-          </svg>
-          
-          {/* Architectural outline */}
-          <div className="absolute inset-4 border border-primary/[0.06]" />
-          
-          {/* Corner accents */}
-          <div className="absolute top-8 left-8 w-8 h-8 border-l border-t border-primary/10" />
-          <div className="absolute bottom-8 right-8 w-8 h-8 border-r border-b border-primary/10" />
-          
-          {/* Center measurement cross */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.06]">
-            <div className="w-12 h-px bg-primary" />
-            <div className="w-px h-12 bg-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-          </div>
-          
-          {/* Floating diamond */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-3 h-3 border border-primary/10 rotate-45" />
-        </div>
+      {/* Cinematic overlays matching homepage */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/70 z-10" />
+      <div className="absolute inset-0 z-10" style={{
+        background: 'radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.5) 60%, hsl(var(--background)) 100%)'
+      }} />
+      
+      {/* Animated grain texture */}
+      <div className="absolute inset-0 grain z-20 opacity-40" />
+      
+      {/* Floating orbs like homepage */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-[120px] animate-float" style={{ animationDelay: '-3s' }} />
+      <div className="absolute top-1/2 right-1/3 w-48 h-48 bg-primary/8 rounded-full blur-[80px] animate-float" style={{ animationDelay: '-5s' }} />
+      
+      {/* Light rays */}
+      <div className="absolute inset-0 z-15 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/20 via-transparent to-transparent animate-pulse" style={{ animationDuration: '3s' }} />
+        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
       </div>
 
-      {/* Designer Easter Egg - Thin Vertical Gold Line (center divider) */}
+      {/* Cinematic Vertical Image Strip */}
       <div 
-        className={`absolute left-[42%] top-[20%] bottom-[20%] w-px hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ transitionDelay: '1800ms' }}
-      >
-        <div className="w-full h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
-      </div>
-
-      {/* Cinematic Vertical Image Strip - moved further right */}
-      <div 
-        className={`absolute right-[3%] top-[12%] bottom-[12%] w-[12%] hidden xl:block transition-all duration-[2800ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        className={`absolute right-[5%] top-[15%] bottom-[15%] w-[15%] hidden xl:block transition-all duration-[2800ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         style={{ 
           transitionDelay: '1500ms',
           transform: `translateY(${scrollY * -0.025}px)`,
         }}
       >
-        {/* Gold Border with soft glow */}
         <div 
           className="absolute -inset-px"
           style={{
-            background: 'linear-gradient(180deg, hsl(38 42% 55% / 0.2), hsl(38 42% 55% / 0.1), hsl(38 42% 55% / 0.2))',
-            boxShadow: '0 0 25px hsl(38 42% 55% / 0.08)',
+            background: 'linear-gradient(180deg, hsl(38 42% 55% / 0.25), hsl(38 42% 55% / 0.15), hsl(38 42% 55% / 0.25))',
+            boxShadow: '0 0 40px hsl(38 42% 55% / 0.12)',
           }}
         />
-        
-        {/* Image Container */}
         <div className="relative w-full h-full overflow-hidden">
-          {/* Interior Image - warm minimal */}
           <img 
             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80"
             alt="Luxury interior detail"
@@ -181,55 +149,32 @@ const HeroAbout = () => {
               transition: 'transform 0.8s ease-out',
             }}
           />
-          
-          {/* Heavy Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85" />
-          
-          {/* Blueprint Wireframe Overlay */}
-          <svg 
-            className="absolute inset-0 w-full h-full opacity-[0.08]"
-            style={{
-              transform: `translateY(${scrollY * 0.01}px)`,
-              transition: 'transform 0.6s ease-out',
-            }}
-          >
-            <defs>
-              <pattern id="stripBlueprint" width="32" height="32" patternUnits="userSpaceOnUse">
-                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="hsl(38 42% 65%)" strokeWidth="0.4" />
-                <path d="M 16 0 L 16 32 M 0 16 L 32 16" fill="none" stroke="hsl(38 42% 65%)" strokeWidth="0.2" opacity="0.4" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#stripBlueprint)" />
-          </svg>
-          
-          {/* Inner Gold Edge */}
-          <div className="absolute inset-[1px] border border-primary/15 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/75" />
           
           {/* Corner Crop Marks */}
-          <div className="absolute top-3 left-3">
-            <div className="w-4 h-px bg-primary/35" />
-            <div className="w-px h-4 bg-primary/35" />
+          <div className="absolute top-4 left-4">
+            <div className="w-6 h-px bg-primary/50" />
+            <div className="w-px h-6 bg-primary/50" />
           </div>
-          <div className="absolute top-3 right-3 flex flex-col items-end">
-            <div className="w-4 h-px bg-primary/35" />
-            <div className="w-px h-4 bg-primary/35 ml-auto" />
+          <div className="absolute top-4 right-4 flex flex-col items-end">
+            <div className="w-6 h-px bg-primary/50" />
+            <div className="w-px h-6 bg-primary/50 ml-auto" />
           </div>
-          <div className="absolute bottom-3 left-3 flex flex-col justify-end">
-            <div className="w-px h-4 bg-primary/35" />
-            <div className="w-4 h-px bg-primary/35" />
+          <div className="absolute bottom-4 left-4 flex flex-col justify-end">
+            <div className="w-px h-6 bg-primary/50" />
+            <div className="w-6 h-px bg-primary/50" />
           </div>
-          <div className="absolute bottom-3 right-3 flex flex-col items-end justify-end">
-            <div className="w-px h-4 bg-primary/35 ml-auto" />
-            <div className="w-4 h-px bg-primary/35" />
+          <div className="absolute bottom-4 right-4 flex flex-col items-end justify-end">
+            <div className="w-px h-6 bg-primary/50 ml-auto" />
+            <div className="w-6 h-px bg-primary/50" />
           </div>
           
-          {/* Micro Label - Project Snapshot */}
-          <div className="absolute bottom-5 left-0 right-0 px-3">
+          <div className="absolute bottom-6 left-0 right-0 px-4">
             <div className="text-center">
-              <p className="text-primary/45 text-[7px] tracking-[0.2em] uppercase mb-0.5">
+              <p className="text-primary/60 text-[9px] tracking-[0.25em] uppercase mb-1">
                 Project Snapshot
               </p>
-              <p className="text-foreground/25 text-[6px] tracking-[0.1em]">
+              <p className="text-foreground/35 text-[8px] tracking-[0.15em]">
                 Residential · Delhi
               </p>
             </div>
@@ -237,73 +182,109 @@ const HeroAbout = () => {
         </div>
       </div>
 
-      {/* Main Content - Asymmetrical Layout */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12">
+      {/* Main Content */}
+      <div className="relative z-30 w-full max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-6 items-center min-h-screen py-32">
           
           {/* Left Side - Intentional negative space */}
-          <div className="col-span-12 lg:col-span-5 hidden lg:block" />
+          <div className="col-span-12 lg:col-span-4 hidden lg:block" />
 
-          {/* Right Side - Text Content */}
-          <div className="col-span-12 lg:col-span-7 lg:pl-6">
+          {/* Center/Right Side - Text Content */}
+          <div className="col-span-12 lg:col-span-8 text-center lg:text-left">
             
-            {/* Philosophy Label - First to appear */}
+            {/* Philosophy Label */}
             <div 
-              className={`mb-12 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
-              style={{ transitionDelay: '200ms' }}
+              className={`mb-10 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             >
-              <span className="text-primary/45 text-[9px] tracking-[0.5em] uppercase font-light">
-                The EdgeHomes Philosophy
+              <span className="inline-flex items-center gap-4">
+                <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
+                <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
+                  The EdgeHomes Philosophy
+                </span>
+                <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
               </span>
             </div>
 
-            {/* Headline - Refined Editorial Scale */}
-            <div className="mb-12">
-              <h1 className="font-heading leading-[1.12] tracking-[-0.01em]">
-                {/* Line 1 */}
-                <span 
-                  className={`block text-[1.75rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[2.85rem] text-foreground/95 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
-                  style={{ transitionDelay: '450ms' }}
-                >
-                  Design is not what we do.
-                </span>
-                
-                {/* Line 2 */}
-                <span 
-                  className={`block text-[1.75rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[2.85rem] mt-1 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
-                  style={{ transitionDelay: '650ms' }}
-                >
-                  <span className="text-foreground/65">It's how we </span>
-                  <span className="italic text-primary/90">think.</span>
-                </span>
-              </h1>
-            </div>
+            {/* Headline - Large like homepage */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-foreground mb-10 leading-[0.95]">
+              <span 
+                className={`block overflow-hidden mb-3 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: '400ms' }}
+              >
+                Design is not
+              </span>
+              <span 
+                className={`block overflow-hidden mb-3 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: '600ms' }}
+              >
+                what we do.
+              </span>
+              <span 
+                className={`block overflow-hidden transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+                style={{ transitionDelay: '800ms' }}
+              >
+                <span className="text-muted-foreground">It's how we </span>
+                <span className="text-shimmer italic">think.</span>
+              </span>
+            </h1>
 
-            {/* Subtle Divider Line */}
-            <div 
-              className={`mb-8 transition-all duration-[1800ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ transitionDelay: '900ms' }}
-            >
-              <div className={`h-px bg-gradient-to-r from-primary/35 via-primary/20 to-transparent transition-all duration-[1800ms] ease-out ${isLoaded ? 'w-20' : 'w-0'}`} style={{ transitionDelay: '1100ms' }} />
-            </div>
-
-            {/* Subtext - Single Line, improved contrast */}
+            {/* Subtext */}
             <p 
-              className={`text-muted-foreground/70 text-[13px] md:text-[15px] max-w-[420px] leading-[1.7] font-light tracking-wide transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
+              className={`text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-12 leading-relaxed transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: '1000ms' }}
             >
               A design & build studio shaping spaces that feel lived in, timeless, and intentional.
             </p>
+
+            {/* Trust badges */}
+            <div 
+              className={`flex flex-wrap items-center justify-center lg:justify-start gap-8 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+              style={{ transitionDelay: '1200ms' }}
+            >
+              {[
+                'Design Studio',
+                'Turnkey Execution',
+                'Delhi NCR',
+              ].map((label) => (
+                <span 
+                  key={label} 
+                  className="flex items-center gap-3 text-sm text-muted-foreground group cursor-default"
+                >
+                  <span className="w-1.5 h-1.5 bg-primary/60 rotate-45 group-hover:bg-primary group-hover:scale-125 transition-all duration-300" />
+                  <span className="group-hover:text-foreground transition-colors duration-300">{label}</span>
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Hint - Minimal */}
+      {/* Corner accents like homepage */}
+      <div className={`absolute top-8 left-8 transition-all duration-1000 delay-[2200ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-l border-t border-primary/20" />
+      </div>
+      <div className={`absolute top-8 right-8 transition-all duration-1000 delay-[2300ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-r border-t border-primary/20" />
+      </div>
+      <div className={`absolute bottom-8 left-8 transition-all duration-1000 delay-[2400ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-l border-b border-primary/20" />
+      </div>
+      <div className={`absolute bottom-8 right-8 transition-all duration-1000 delay-[2500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-r border-b border-primary/20" />
+      </div>
+
+      {/* Scroll indicator */}
       <div 
-        className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ transitionDelay: '2000ms' }}
+        className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-30 cursor-pointer transition-all duration-1000 delay-[2000ms] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
       >
-        <div className="w-px h-8 bg-gradient-to-b from-primary/30 to-transparent" />
+        <div className="flex flex-col items-center gap-3 group">
+          <span className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase group-hover:text-primary transition-colors duration-500">
+            Scroll
+          </span>
+          <div className="relative w-6 h-10 rounded-full border border-primary/30 group-hover:border-primary/60 transition-colors duration-500">
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-2 bg-primary rounded-full animate-scroll-mouse" />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -467,133 +448,110 @@ const ArchitecturalPhilosophySection = () => {
         <circle cx="18%" cy="78%" r="4" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.04" />
       </svg>
 
+      {/* Floating orbs */}
+      <div className="absolute top-1/3 left-1/5 w-72 h-72 bg-primary/8 rounded-full blur-[100px] animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] animate-float" style={{ animationDelay: '-4s' }} />
+
       {/* === CONTENT: Three Spatial Philosophy Zones === */}
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         
+        {/* Section Header */}
+        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-flex items-center gap-4 mb-8">
+            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
+            <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
+              Our Philosophy
+            </span>
+            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-foreground leading-[1]">
+            <span className="block">What We</span>
+            <span className="text-shimmer italic">Believe</span>
+          </h2>
+        </div>
+        
         {/* Layout grid for three visible zones */}
-        <div className="grid grid-cols-12 gap-6 min-h-[70vh] items-start">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           
-          {/* === ZONE A: Left Upper - Simplicity as Luxury === */}
+          {/* === ZONE A: Simplicity as Luxury === */}
           <div 
-            className={`col-span-12 md:col-span-5 lg:col-span-4 pt-8 md:pt-0 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
+            className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
             style={{ transitionDelay: '200ms' }}
           >
-            <div className="relative">
-              {/* Attached to structural edge - vertical gold rule */}
-              <div className="absolute -left-4 top-0 bottom-0 w-px bg-gradient-to-b from-primary/25 via-primary/10 to-transparent hidden lg:block" />
-              
-              {/* Defined architectural plane background */}
-              <div className="absolute -inset-6 border-l border-t border-primary/[0.04] -z-10" />
-              <div className="absolute -inset-6 bg-gradient-to-br from-primary/[0.015] to-transparent -z-10" />
-              
-              {/* Tiny index label */}
-              <span className="text-primary/15 text-[9px] tracking-[0.3em] uppercase font-mono mb-6 block">
-                Philosophy
-              </span>
-              
-              {/* Title - serif, left aligned */}
-              <h3 className="font-heading text-lg md:text-xl lg:text-2xl text-foreground/85 mb-4 tracking-tight text-left">
-                Simplicity as <span className="text-primary/70">Luxury</span>
-              </h3>
-              
-              {/* Thought - 1-2 lines */}
-              <p className="text-foreground/50 text-[13px] md:text-sm leading-[1.7] font-light text-left max-w-xs">
-                The most powerful design is invisible. It earns attention through <span className="text-primary/50">restraint</span>, not noise.
-              </p>
+            <div className="relative p-8 lg:p-10 rounded-2xl border border-border/10 bg-card/5 hover:border-primary/20 hover:bg-card/10 transition-all duration-500 h-full">
+              {/* Glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               
               {/* Corner accent */}
-              <div className="absolute -top-3 -right-3 w-5 h-5 border-r border-b border-primary/10 hidden md:block" />
-            </div>
-          </div>
-
-          {/* Middle spacer */}
-          <div className="hidden lg:block lg:col-span-4" />
-
-          {/* === ZONE B: Right Center - Execution Over Promises === */}
-          <div 
-            className={`col-span-12 md:col-span-6 lg:col-span-4 md:col-start-7 lg:col-start-auto self-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
-            style={{ transitionDelay: '500ms' }}
-          >
-            <div className="relative md:pl-8">
-              {/* Anchored to vertical structural line */}
-              <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden md:block" />
+              <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
               
-              {/* Slightly more prominent glow */}
-              <div className="absolute -inset-8 bg-gradient-to-l from-primary/[0.02] to-transparent rounded-lg -z-10" />
+              {/* Icon */}
+              <div className="relative mb-8">
+                <span className="text-6xl text-primary/15 group-hover:text-primary/25 transition-colors duration-500">◯</span>
+              </div>
               
-              {/* Geometry hint */}
-              <div className="absolute -top-4 left-8 w-3 h-3 border border-primary/10 rotate-45 hidden md:block" />
-              
-              <span className="text-primary/15 text-[9px] tracking-[0.3em] uppercase font-mono mb-6 block">
-                Commitment
-              </span>
-              
-              <h3 className="font-heading text-lg md:text-xl lg:text-2xl text-foreground/90 mb-4 tracking-tight text-left">
-                Execution Over <span className="text-primary/75">Promises</span>
+              <h3 className="font-heading text-2xl lg:text-3xl text-foreground/90 mb-4 group-hover:text-foreground transition-colors duration-500">
+                Simplicity as <span className="text-primary">Luxury</span>
               </h3>
               
-              <p className="text-foreground/55 text-[13px] md:text-sm leading-[1.7] font-light text-left max-w-sm">
-                Ideas are abundant. What separates us is obsessive focus on bringing every <span className="text-primary/55">detail</span> to life—without compromise.
+              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
+                The most powerful design is invisible. It earns attention through <span className="text-primary/70">restraint</span>, not noise.
               </p>
               
-              {/* Thin gold rule attached */}
-              <div className="mt-6 h-px w-24 bg-gradient-to-r from-primary/25 to-transparent" />
+              {/* Bottom line */}
+              <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           </div>
 
-          {/* === ZONE C: Lower Left - Timeless Over Trendy === */}
+          {/* === ZONE B: Execution Over Promises === */}
           <div 
-            className={`col-span-12 md:col-span-5 lg:col-span-5 mt-16 md:mt-24 lg:mt-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            style={{ transitionDelay: '800ms' }}
+            className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+            style={{ transitionDelay: '400ms' }}
           >
-            <div className="relative">
-              {/* Embedded inside a darker material block */}
-              <div className="absolute -inset-8 bg-gradient-to-t from-black/40 via-black/20 to-transparent rounded-lg -z-10" />
-              <div className="absolute -inset-8 border border-primary/[0.03] rounded-lg -z-10" />
+            <div className="relative p-8 lg:p-10 rounded-2xl border border-border/10 bg-card/5 hover:border-primary/20 hover:bg-card/10 transition-all duration-500 h-full">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               
-              {/* Softer ambient light */}
-              <div className="absolute -inset-12 bg-radial-gradient opacity-30 -z-20" style={{
-                background: 'radial-gradient(ellipse at center, hsl(38 42% 55% / 0.02) 0%, transparent 70%)'
-              }} />
+              <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
               
-              <span className="text-primary/12 text-[9px] tracking-[0.3em] uppercase font-mono mb-6 block">
-                Permanence
-              </span>
+              <div className="relative mb-8">
+                <span className="text-6xl text-primary/15 group-hover:text-primary/25 transition-colors duration-500">◇</span>
+              </div>
               
-              <h3 className="font-heading text-lg md:text-xl text-foreground/75 mb-4 tracking-tight text-left">
-                Timeless Over <span className="text-primary/60">Trendy</span>
+              <h3 className="font-heading text-2xl lg:text-3xl text-foreground/90 mb-4 group-hover:text-foreground transition-colors duration-500">
+                Execution Over <span className="text-primary">Promises</span>
               </h3>
               
-              <p className="text-foreground/40 text-[13px] leading-[1.7] font-light text-left max-w-xs">
-                Trends fade in seasons. We build for <span className="text-primary/45">decades</span>.
+              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
+                Ideas are abundant. What separates us is obsessive focus on bringing every <span className="text-primary/70">detail</span> to life—without compromise.
               </p>
               
-              {/* Bottom crop marks */}
-              <div className="absolute -bottom-4 -left-4 flex items-end gap-px opacity-60">
-                <div className="w-4 h-px bg-primary/15" />
-                <div className="w-px h-4 bg-primary/15 -mb-[3px]" />
-              </div>
+              <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           </div>
 
-          {/* Right side closing element */}
+          {/* === ZONE C: Timeless Over Trendy === */}
           <div 
-            className={`hidden lg:block lg:col-span-6 lg:col-start-7 mt-16 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-            style={{ transitionDelay: '1100ms' }}
+            className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+            style={{ transitionDelay: '600ms' }}
           >
-            <div className="relative h-full flex items-end justify-end pr-8 pb-8">
-              {/* Closing architectural notation */}
-              <div className="text-right">
-                <div className="flex items-center justify-end gap-3 mb-3">
-                  <div className="w-12 h-px bg-gradient-to-l from-primary/20 to-transparent" />
-                  <span className="text-primary/15 text-[8px] tracking-[0.4em] uppercase font-mono">These guide us</span>
-                </div>
-                <div className="flex items-center justify-end gap-2">
-                  <div className="w-1.5 h-1.5 border border-primary/20 rotate-45" />
-                  <div className="w-1 h-1 bg-primary/15 rounded-full" />
-                  <div className="w-1.5 h-1.5 border border-primary/15" />
-                </div>
+            <div className="relative p-8 lg:p-10 rounded-2xl border border-border/10 bg-card/5 hover:border-primary/20 hover:bg-card/10 transition-all duration-500 h-full">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+              
+              <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
+              
+              <div className="relative mb-8">
+                <span className="text-6xl text-primary/15 group-hover:text-primary/25 transition-colors duration-500">△</span>
               </div>
+              
+              <h3 className="font-heading text-2xl lg:text-3xl text-foreground/90 mb-4 group-hover:text-foreground transition-colors duration-500">
+                Timeless Over <span className="text-primary">Trendy</span>
+              </h3>
+              
+              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
+                Trends fade in seasons. We build for <span className="text-primary/70">decades</span>.
+              </p>
+              
+              <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
           </div>
         </div>
@@ -603,7 +561,7 @@ const ArchitecturalPhilosophySection = () => {
       <div 
         className="absolute inset-0 pointer-events-none transition-opacity duration-[2000ms]"
         style={{
-          background: 'radial-gradient(ellipse 100% 60% at 50% 100%, hsl(38 42% 55% / 0.012) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse 100% 60% at 50% 100%, hsl(38 42% 55% / 0.02) 0%, transparent 50%)',
           opacity: sectionVisible ? 1 : 0,
         }}
       />
@@ -662,9 +620,16 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section ref={containerRef} className="relative py-24 md:py-32 overflow-hidden">
+    <section ref={containerRef} className="relative py-32 md:py-40 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-background to-[#050505]" />
+      
+      {/* Floating orbs */}
+      <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary/8 rounded-full blur-[100px] animate-float" />
+      <div className="absolute bottom-1/3 left-1/5 w-80 h-80 bg-primary/5 rounded-full blur-[120px] animate-float" style={{ animationDelay: '-3s' }} />
+      
+      {/* Grain */}
+      <div className="absolute inset-0 grain opacity-30" />
       
       {/* Progress Line */}
       <div className="absolute top-1/2 left-0 right-0 h-px bg-border/5 -translate-y-1/2 hidden lg:block">
@@ -674,17 +639,24 @@ const ProcessSection = () => {
         />
       </div>
 
-      <div ref={ref} className="relative z-10 max-w-6xl mx-auto px-6">
+      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="text-primary/40 text-[8px] tracking-[0.5em] uppercase mb-4 block">Our Journey</span>
-          <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground/85">
-            From <span className="text-primary/70">First Call</span> to Handover
+        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-flex items-center gap-4 mb-8">
+            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
+            <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
+              Our Journey
+            </span>
+            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-foreground leading-[1]">
+            <span className="block">From First Call to</span>
+            <span className="text-shimmer italic">Handover</span>
           </h2>
         </div>
 
         {/* Timeline */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {phases.map((phase, index) => (
             <div
               key={phase.number}
@@ -692,29 +664,35 @@ const ProcessSection = () => {
               style={{ transitionDelay: `${200 + index * 100}ms` }}
             >
               {index < phases.length - 1 && (
-                <div className="absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/20 to-transparent hidden lg:block" />
+                <div className="absolute top-1/2 -right-4 w-8 h-px bg-gradient-to-r from-primary/25 to-transparent hidden lg:block" />
               )}
               
-              <div className="relative p-6 rounded-xl border border-border/5 bg-card/5 hover:border-primary/15 hover:bg-card/10 transition-all duration-500">
+              <div className="relative p-8 rounded-2xl border border-border/10 bg-card/5 hover:border-primary/20 hover:bg-card/10 transition-all duration-500 h-full">
+                {/* Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                
+                {/* Corner */}
+                <div className="absolute top-0 left-0 w-10 h-10 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
+                
                 {/* Number */}
-                <div className="relative mb-6">
-                  <span className="text-5xl font-heading text-primary/8 group-hover:text-primary/15 transition-colors duration-500">
+                <div className="relative mb-8">
+                  <span className="text-7xl font-heading text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
                     {phase.number}
                   </span>
-                  <span className="absolute top-2 left-12 text-xl text-primary/20 group-hover:text-primary/35 group-hover:rotate-6 transition-all duration-500">
+                  <span className="absolute top-3 left-16 text-2xl text-primary/25 group-hover:text-primary/40 group-hover:rotate-6 transition-all duration-500">
                     {phase.icon}
                   </span>
                 </div>
 
-                <h3 className="font-heading text-base text-foreground/80 mb-1 group-hover:text-foreground/90 transition-colors duration-500">
+                <h3 className="font-heading text-xl lg:text-2xl text-foreground/90 mb-2 group-hover:text-foreground transition-colors duration-500">
                   {phase.title}
                 </h3>
-                <p className="text-primary/45 text-[11px] italic mb-4">{phase.subtitle}</p>
-                <p className="text-muted-foreground/50 text-[12px] leading-relaxed group-hover:text-muted-foreground/65 transition-colors duration-500">
+                <p className="text-primary/50 text-sm italic mb-5">{phase.subtitle}</p>
+                <p className="text-muted-foreground text-base leading-relaxed group-hover:text-muted-foreground/80 transition-colors duration-500">
                   {phase.description}
                 </p>
 
-                <div className="absolute bottom-6 left-6 right-6 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             </div>
           ))}
@@ -760,22 +738,29 @@ const FoundersSection = () => {
   return (
     <section 
       ref={ref} 
-      className="relative py-24 md:py-32 overflow-hidden"
+      className="relative py-32 md:py-40 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Background */}
       <div className="absolute inset-0 bg-[#040404]" />
       
-      {/* Subtle Orbs */}
+      {/* Floating orbs */}
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[120px] animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[140px] animate-float" style={{ animationDelay: '-4s' }} />
+      
+      {/* Dynamic Orb */}
       <div 
-        className="absolute w-[500px] h-[500px] rounded-full blur-[150px] opacity-10"
+        className="absolute w-[600px] h-[600px] rounded-full blur-[180px] opacity-15"
         style={{
-          background: 'radial-gradient(circle, hsl(38 42% 60% / 0.25), transparent)',
-          left: `${mousePos.x * 20}%`,
-          top: `${mousePos.y * 20}%`,
+          background: 'radial-gradient(circle, hsl(38 42% 60% / 0.3), transparent)',
+          left: `${mousePos.x * 25}%`,
+          top: `${mousePos.y * 25}%`,
           transition: 'all 1.5s ease-out',
         }}
       />
+      
+      {/* Grain */}
+      <div className="absolute inset-0 grain opacity-30" />
 
       {/* Subtle Grid */}
       <div className="absolute inset-0 overflow-hidden opacity-[0.04]">
@@ -789,22 +774,24 @@ const FoundersSection = () => {
         </svg>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <span className="text-primary/35 text-[8px] tracking-[0.5em] uppercase mb-4 block">The Visionaries</span>
-          <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground/85">
-            Who We <span className="text-primary/70">Are</span>
+        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <span className="inline-flex items-center gap-4 mb-8">
+            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
+            <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
+              The Visionaries
+            </span>
+            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-foreground leading-[1]">
+            <span className="block">Who We</span>
+            <span className="text-shimmer italic">Are</span>
           </h2>
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/25" />
-            <span className="text-muted-foreground/25 text-[8px] tracking-[0.3em] uppercase">Our Team</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/25" />
-          </div>
         </div>
 
-        {/* Founders - Compact Cards */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        {/* Founders - Enhanced Cards */}
+        <div className="grid lg:grid-cols-2 gap-10">
           {founders.map((founder, index) => {
             const isActive = activeFounder === index;
             
@@ -817,23 +804,26 @@ const FoundersSection = () => {
                 onMouseLeave={() => setActiveFounder(null)}
               >
                 {/* Card Glow */}
-                <div className={`absolute -inset-2 bg-gradient-to-br from-primary/8 via-transparent to-primary/4 rounded-2xl blur-xl transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+                <div className={`absolute -inset-3 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 rounded-3xl blur-xl transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
                 
                 {/* Main Card */}
                 <div className={`
-                  relative rounded-xl overflow-hidden p-8
-                  border border-border/5 bg-gradient-to-br from-card/15 via-card/5 to-transparent
+                  relative rounded-2xl overflow-hidden p-10 lg:p-12
+                  border border-border/10 bg-gradient-to-br from-card/15 via-card/5 to-transparent
                   backdrop-blur-sm transition-all duration-500
-                  ${isActive ? 'border-primary/15' : ''}
+                  ${isActive ? 'border-primary/20' : ''}
                 `}>
+                  {/* Corner accent */}
+                  <div className="absolute top-0 left-0 w-14 h-14 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
+                  
                   {/* Initial Background */}
-                  <div className="absolute top-0 right-0 -mr-8 -mt-8 overflow-hidden">
+                  <div className="absolute top-0 right-0 -mr-6 -mt-6 overflow-hidden">
                     <span 
                       className={`
-                        text-[180px] font-heading leading-none select-none
-                        bg-gradient-to-b from-primary/[0.05] to-transparent bg-clip-text text-transparent
+                        text-[220px] font-heading leading-none select-none
+                        bg-gradient-to-b from-primary/[0.06] to-transparent bg-clip-text text-transparent
                         transition-all duration-700
-                        ${isActive ? 'from-primary/[0.08]' : ''}
+                        ${isActive ? 'from-primary/[0.1]' : ''}
                       `}
                     >
                       {founder.initial}
@@ -842,49 +832,49 @@ const FoundersSection = () => {
 
                   {/* Geometric Accent */}
                   <div className={`
-                    absolute top-6 right-6 w-12 h-12 border border-primary/8 rotate-45
+                    absolute top-8 right-8 w-14 h-14 border border-primary/10 rotate-45
                     transition-all duration-700
-                    ${isActive ? 'rotate-[55deg] border-primary/20' : ''}
+                    ${isActive ? 'rotate-[55deg] border-primary/25' : ''}
                   `} />
 
                   {/* Content */}
                   <div className="relative">
                     <h3 className={`
-                      font-heading text-xl md:text-2xl text-foreground/85 mb-2
+                      font-heading text-2xl md:text-3xl lg:text-4xl text-foreground/90 mb-3
                       transition-all duration-500
-                      ${isActive ? 'text-foreground/95' : ''}
+                      ${isActive ? 'text-foreground' : ''}
                     `}>
                       {founder.name}
                     </h3>
                     
-                    <div className="flex flex-col gap-0.5 mb-6">
-                      <span className={`text-primary/60 text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-500`}>
+                    <div className="flex flex-col gap-1 mb-8">
+                      <span className={`text-primary text-sm tracking-[0.2em] uppercase font-medium transition-all duration-500`}>
                         {founder.role}
                       </span>
-                      <span className="text-muted-foreground/40 text-[9px] tracking-wider">
+                      <span className="text-muted-foreground/50 text-xs tracking-wider">
                         {founder.department}
                       </span>
                     </div>
 
-                    <p className={`text-muted-foreground/55 text-[13px] leading-relaxed mb-3 transition-all duration-500 ${isActive ? 'text-muted-foreground/70' : ''}`}>
+                    <p className={`text-muted-foreground text-base lg:text-lg leading-relaxed mb-4 transition-all duration-500 ${isActive ? 'text-muted-foreground/90' : ''}`}>
                       {founder.description}
                     </p>
-                    <p className={`text-muted-foreground/40 text-[12px] italic leading-relaxed transition-all duration-500 ${isActive ? 'text-muted-foreground/55' : ''}`}>
+                    <p className={`text-muted-foreground/60 text-sm lg:text-base italic leading-relaxed transition-all duration-500 ${isActive ? 'text-muted-foreground/75' : ''}`}>
                       {founder.philosophy}
                     </p>
 
                     {/* Bottom Accent */}
-                    <div className={`mt-6 h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent transition-all duration-700 ${isActive ? 'w-full' : 'w-16'}`} />
+                    <div className={`mt-8 h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent transition-all duration-700 ${isActive ? 'w-full' : 'w-20'}`} />
                   </div>
 
                   {/* Corner Frames */}
-                  <div className="absolute top-4 left-4">
-                    <div className={`w-6 h-px bg-primary/20 transition-all duration-500 ${isActive ? 'w-8' : ''}`} />
-                    <div className={`w-px h-6 bg-primary/20 transition-all duration-500 ${isActive ? 'h-8' : ''}`} />
+                  <div className="absolute top-6 left-6">
+                    <div className={`w-8 h-px bg-primary/25 transition-all duration-500 ${isActive ? 'w-10' : ''}`} />
+                    <div className={`w-px h-8 bg-primary/25 transition-all duration-500 ${isActive ? 'h-10' : ''}`} />
                   </div>
-                  <div className="absolute bottom-4 right-4">
-                    <div className={`w-6 h-px bg-primary/20 ml-auto transition-all duration-500 ${isActive ? 'w-8' : ''}`} />
-                    <div className={`w-px h-6 bg-primary/20 ml-auto transition-all duration-500 ${isActive ? 'h-8' : ''}`} />
+                  <div className="absolute bottom-6 right-6">
+                    <div className={`w-8 h-px bg-primary/25 ml-auto transition-all duration-500 ${isActive ? 'w-10' : ''}`} />
+                    <div className={`w-px h-8 bg-primary/25 ml-auto transition-all duration-500 ${isActive ? 'h-10' : ''}`} />
                   </div>
                 </div>
               </div>
@@ -893,8 +883,8 @@ const FoundersSection = () => {
         </div>
 
         {/* Bottom Tagline */}
-        <div className={`text-center mt-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <p className="text-muted-foreground/20 text-[9px] tracking-[0.4em] uppercase">
+        <div className={`text-center mt-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <p className="text-muted-foreground/30 text-sm tracking-[0.4em] uppercase">
             Design × Construction × Vision
           </p>
         </div>
