@@ -82,10 +82,9 @@ const Header = () => {
             <li className="ml-4">
               <a
                 href="#contact"
-                className="relative px-6 py-2.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm uppercase tracking-wider font-medium overflow-hidden group hover:border-primary/60 transition-all duration-500"
+                className="px-6 py-2.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm uppercase tracking-wider font-medium hover:bg-primary/20 hover:border-primary/60 transition-all duration-500"
               >
-                <span className="relative z-10">Get Quote</span>
-                <span className="absolute inset-0 bg-primary/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                Get Quote
               </a>
             </li>
           </ul>

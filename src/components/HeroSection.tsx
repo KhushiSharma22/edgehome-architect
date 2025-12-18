@@ -145,17 +145,16 @@ const HeroSection = () => {
           className={`flex flex-wrap items-center justify-center gap-8 transition-all duration-1000 delay-[1800ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         >
           {[
-            { label: 'Design + Build', icon: '◆' },
-            { label: 'Turnkey Execution', icon: '◆' },
-            { label: 'Delhi NCR', icon: '◆' },
-          ].map((item, index) => (
+            'Design + Build',
+            'Turnkey Execution',
+            'Delhi NCR',
+          ].map((label) => (
             <span 
-              key={item.label} 
+              key={label} 
               className="flex items-center gap-3 text-sm text-muted-foreground group cursor-default"
-              style={{ animationDelay: `${1800 + index * 100}ms` }}
             >
               <span className="w-1.5 h-1.5 bg-primary/60 rotate-45 group-hover:bg-primary group-hover:scale-125 transition-all duration-300" />
-              <span className="group-hover:text-foreground transition-colors duration-300">{item.label}</span>
+              <span className="group-hover:text-foreground transition-colors duration-300">{label}</span>
             </span>
           ))}
         </div>
@@ -168,7 +167,7 @@ const HeroSection = () => {
       >
         <div className="flex flex-col items-center gap-3 group">
           <span className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase group-hover:text-primary transition-colors duration-500">
-            Explore
+            Scroll
           </span>
           <div className="relative w-6 h-10 rounded-full border border-primary/30 group-hover:border-primary/60 transition-colors duration-500">
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-2 bg-primary rounded-full animate-scroll-mouse" />
