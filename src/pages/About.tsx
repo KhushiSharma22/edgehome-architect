@@ -3,258 +3,318 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { MessageCircle, Calendar, ArrowRight } from 'lucide-react';
 
-// Architectural Background Component - Multi-layered animated wireframe
-const ArchitecturalBackground = ({ scrollY = 0 }: { scrollY?: number }) => {
+// Magnetic Cursor Effect Component
+const MagneticCursor = () => {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+      setIsVisible(true);
+    };
+    const handleMouseLeave = () => setIsVisible(false);
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* LAYER 1: Blueprint Grid (Back) */}
-      <svg 
-        className="absolute inset-0 w-full h-full opacity-[0.04] blur-[0.5px]"
-        style={{ transform: `translate(${scrollY * 0.02}px, ${scrollY * 0.01}px)` }}
-      >
-        <defs>
-          <pattern id="blueprintGrid" width="80" height="80" patternUnits="userSpaceOnUse">
-            <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(38, 50%, 50%)" strokeWidth="0.3" opacity="0.5" />
-            <path d="M 40 0 L 40 80 M 0 40 L 80 40" fill="none" stroke="hsl(38, 50%, 50%)" strokeWidth="0.15" opacity="0.3" />
-          </pattern>
-          <linearGradient id="gridFade" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="30%" stopColor="white" stopOpacity="1" />
-            <stop offset="70%" stopColor="white" stopOpacity="1" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
-          </linearGradient>
-          <mask id="gridMask">
-            <rect width="100%" height="100%" fill="url(#gridFade)" />
-          </mask>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#blueprintGrid)" mask="url(#gridMask)" />
-        {/* Measurement marks */}
-        {[...Array(5)].map((_, i) => (
-          <g key={i} className="animate-[fadeInSlow_3s_ease-out_forwards]" style={{ animationDelay: `${i * 0.5}s` }}>
-            <line x1={`${15 + i * 18}%`} y1="10%" x2={`${15 + i * 18}%`} y2="12%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.5" opacity="0.4" />
-            <line x1={`${15 + i * 18}%`} y1="88%" x2={`${15 + i * 18}%`} y2="90%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.5" opacity="0.4" />
-          </g>
-        ))}
-      </svg>
-
-      {/* LAYER 2: Interior Wall Outlines (Mid) - Animated line drawing */}
-      <svg 
-        className="absolute inset-0 w-full h-full opacity-[0.05] blur-[0.3px]"
-        style={{ transform: `translate(${scrollY * 0.04}px, ${scrollY * 0.02}px)` }}
-      >
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(38, 50%, 55%)" />
-            <stop offset="50%" stopColor="hsl(40, 30%, 60%)" />
-            <stop offset="100%" stopColor="hsl(0, 0%, 50%)" />
-          </linearGradient>
-        </defs>
-        
-        {/* Wall frame - left */}
-        <g className="wall-outline-left">
-          <path 
-            d="M 5% 30% L 5% 85% L 25% 85% L 25% 60% L 15% 60% L 15% 30% Z" 
-            fill="none" 
-            stroke="url(#lineGradient)" 
-            strokeWidth="0.5"
-            strokeDasharray="1000"
-            strokeDashoffset="1000"
-            className="animate-[drawLine_8s_ease-out_forwards]"
-          />
-        </g>
-
-        {/* Wall frame - right */}
-        <g className="wall-outline-right">
-          <path 
-            d="M 95% 25% L 95% 80% L 75% 80% L 75% 50% L 85% 50% L 85% 25% Z" 
-            fill="none" 
-            stroke="url(#lineGradient)" 
-            strokeWidth="0.5"
-            strokeDasharray="1000"
-            strokeDashoffset="1000"
-            className="animate-[drawLine_8s_ease-out_1s_forwards]"
-          />
-        </g>
-
-        {/* Ceiling panels */}
-        <g className="ceiling-panels">
-          <line x1="20%" y1="15%" x2="80%" y2="15%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.4" strokeDasharray="800" strokeDashoffset="800" className="animate-[drawLine_6s_ease-out_0.5s_forwards]" />
-          <line x1="25%" y1="18%" x2="75%" y2="18%" stroke="hsl(0, 0%, 50%)" strokeWidth="0.3" strokeDasharray="600" strokeDashoffset="600" className="animate-[drawLine_5s_ease-out_1s_forwards]" />
-          <line x1="30%" y1="21%" x2="70%" y2="21%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.3" strokeDasharray="500" strokeDashoffset="500" className="animate-[drawLine_5s_ease-out_1.5s_forwards]" />
-        </g>
-
-        {/* Furniture silhouette - sofa outline */}
-        <g className="furniture-sofa" style={{ transform: 'translate(30%, 70%)' }}>
-          <path 
-            d="M 0 0 L 120 0 L 120 -20 L 110 -20 L 110 -40 L 10 -40 L 10 -20 L 0 -20 Z" 
-            fill="none" 
-            stroke="hsl(0, 0%, 45%)" 
-            strokeWidth="0.4"
-            strokeDasharray="500"
-            strokeDashoffset="500"
-            className="animate-[drawLine_6s_ease-out_2s_forwards]"
-          />
-        </g>
-
-        {/* Stair edges */}
-        <g className="stairs">
-          {[...Array(5)].map((_, i) => (
-            <line 
-              key={i}
-              x1={`${85 - i * 3}%`} 
-              y1={`${90 - i * 5}%`} 
-              x2={`${92 - i * 3}%`} 
-              y2={`${90 - i * 5}%`}
-              stroke="hsl(38, 35%, 50%)"
-              strokeWidth="0.4"
-              strokeDasharray="100"
-              strokeDashoffset="100"
-              className="animate-[drawLine_2s_ease-out_forwards]"
-              style={{ animationDelay: `${2.5 + i * 0.3}s` }}
-            />
-          ))}
-        </g>
-
-        {/* Corner joints */}
-        <g className="corner-joints">
-          <path d="M 10% 25% L 10% 30% L 15% 30%" fill="none" stroke="hsl(38, 50%, 55%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3s_forwards]" />
-          <path d="M 90% 25% L 90% 30% L 85% 30%" fill="none" stroke="hsl(38, 50%, 55%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3.2s_forwards]" />
-          <path d="M 10% 85% L 10% 80% L 15% 80%" fill="none" stroke="hsl(0, 0%, 50%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3.4s_forwards]" />
-          <path d="M 90% 85% L 90% 80% L 85% 80%" fill="none" stroke="hsl(0, 0%, 50%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3.6s_forwards]" />
-        </g>
-      </svg>
-
-      {/* LAYER 3: Geometric Shapes (Front) - Floating diamonds and rectangles */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{ transform: `translate(${scrollY * 0.06}px, ${scrollY * 0.03}px)` }}
-      >
-        {/* Diamond shapes */}
-        <div className="absolute top-[15%] left-[10%] w-32 h-32 border border-primary/40 rotate-45 animate-[driftSlow_30s_linear_infinite] blur-[1px]" />
-        <div className="absolute top-[60%] right-[15%] w-24 h-24 border border-primary/30 rotate-45 animate-[driftSlowReverse_25s_linear_infinite] blur-[0.5px]" />
-        <div className="absolute top-[40%] left-[70%] w-16 h-16 border border-muted-foreground/30 rotate-45 animate-[driftSlow_35s_linear_infinite] blur-[1px]" />
-        
-        {/* Rectangles - framing geometry */}
-        <div className="absolute top-[25%] right-[25%] w-48 h-28 border border-primary/20 animate-[driftSlowReverse_40s_linear_infinite] blur-[0.5px]" />
-        <div className="absolute bottom-[20%] left-[20%] w-36 h-20 border border-muted-foreground/25 animate-[driftSlow_45s_linear_infinite] blur-[1px]" />
-        
-        {/* Intersecting lines */}
-        <div className="absolute top-[35%] left-[5%] w-[200px] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-[driftHorizontal_50s_linear_infinite] blur-[0.5px]" />
-        <div className="absolute top-[55%] right-0 w-[150px] h-px bg-gradient-to-r from-primary/20 via-muted-foreground/20 to-transparent animate-[driftHorizontalReverse_40s_linear_infinite] blur-[0.5px]" />
-        <div className="absolute top-[20%] left-[30%] w-px h-[100px] bg-gradient-to-b from-transparent via-primary/25 to-transparent animate-[driftVertical_35s_linear_infinite] blur-[0.5px]" />
-        <div className="absolute top-[45%] right-[35%] w-px h-[80px] bg-gradient-to-b from-primary/20 via-transparent to-muted-foreground/20 animate-[driftVerticalReverse_30s_linear_infinite] blur-[0.5px]" />
-      </div>
-
-      {/* LAYER 4: Ambient glow spots */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-primary/50 rounded-full blur-[80px] animate-[pulse_8s_ease-in-out_infinite]" />
-        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-muted-foreground/30 rounded-full blur-[60px] animate-[pulse_10s_ease-in-out_infinite_2s]" />
-      </div>
+    <div 
+      className={`fixed pointer-events-none z-50 mix-blend-difference transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      style={{ 
+        left: position.x - 150, 
+        top: position.y - 150,
+      }}
+    >
+      <div className="w-[300px] h-[300px] rounded-full bg-gradient-radial from-primary/10 via-transparent to-transparent blur-2xl" />
     </div>
   );
 };
 
-// Hero Section
+// Floating Particles Background
+const FloatingParticles = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {[...Array(30)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute w-1 h-1 bg-primary/30 rounded-full"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animation: `floatParticle ${15 + Math.random() * 20}s linear infinite`,
+            animationDelay: `${Math.random() * -20}s`,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+// Cinematic Hero with Split Screen Reveal
 const HeroAbout = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const { ref, isVisible } = useScrollAnimation();
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     setIsLoaded(true);
-    
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePos({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
+    });
+  };
+
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Cinematic Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/95" />
-      
-      {/* Architectural Background - Multi-layered wireframe */}
-      <ArchitecturalBackground scrollY={scrollY} />
-      
-      {/* Architectural Light Rays */}
+    <section 
+      className="relative min-h-[150vh] flex items-start justify-center overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Morphing Background Gradient */}
+      <div 
+        className="absolute inset-0 transition-all duration-1000"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 60% at ${mousePos.x * 100}% ${mousePos.y * 100}%, hsl(38 42% 60% / 0.08), transparent),
+            radial-gradient(ellipse 60% 80% at ${100 - mousePos.x * 100}% ${100 - mousePos.y * 100}%, hsl(30 8% 70% / 0.05), transparent),
+            linear-gradient(to bottom, hsl(0 0% 4%), hsl(0 0% 3%))
+          `,
+        }}
+      />
+
+      {/* Animated Grid Lines */}
+      <div className="absolute inset-0 overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
+          <defs>
+            <pattern id="heroGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+              <path d="M 120 0 L 0 0 0 120" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+          <rect 
+            width="200%" height="200%" fill="url(#heroGrid)" 
+            style={{ 
+              transform: `translate(${(mousePos.x - 0.5) * -50}px, ${(mousePos.y - 0.5) * -50 + scrollY * 0.1}px)`,
+              transition: 'transform 0.3s ease-out',
+            }}
+          />
+        </svg>
+      </div>
+
+      {/* Diagonal Light Beams */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute top-0 left-1/4 w-px h-[70vh] bg-gradient-to-b from-primary/20 via-primary/5 to-transparent"
-          style={{ transform: `translateY(${isLoaded ? 0 : -100}%)`, transition: 'transform 2s ease-out' }}
-        />
-        <div 
-          className="absolute top-0 right-1/3 w-px h-[60vh] bg-gradient-to-b from-primary/15 via-primary/5 to-transparent"
-          style={{ transform: `translateY(${isLoaded ? 0 : -100}%)`, transition: 'transform 2.5s ease-out 0.3s' }}
-        />
-        <div 
-          className="absolute top-0 right-1/4 w-px h-[80vh] bg-gradient-to-b from-primary/10 via-primary/5 to-transparent"
-          style={{ transform: `translateY(${isLoaded ? 0 : -100}%)`, transition: 'transform 3s ease-out 0.5s' }}
+          className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-[0.03]"
+          style={{
+            background: `
+              linear-gradient(45deg, transparent 40%, hsl(38 42% 60% / 0.3) 50%, transparent 60%),
+              linear-gradient(135deg, transparent 40%, hsl(38 42% 60% / 0.2) 50%, transparent 60%)
+            `,
+            transform: `rotate(${scrollY * 0.02}deg) scale(${1 + scrollY * 0.0005})`,
+          }}
         />
       </div>
 
-      {/* Floating Geometric Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-32 h-32 border border-primary/10 rotate-45 animate-float-slow" />
-        <div className="absolute bottom-1/3 right-16 w-24 h-24 border border-primary/5 rotate-12 animate-float-slower" />
-        <div className="absolute top-1/2 left-1/4 w-2 h-2 bg-primary/30 rounded-full animate-pulse-glow" />
+      {/* 3D Floating Geometric Shapes */}
+      <div className="absolute inset-0 perspective-[1000px]">
+        <div 
+          className="absolute top-[20%] left-[10%] w-40 h-40 border border-primary/10"
+          style={{
+            transform: `
+              rotateX(${(mousePos.y - 0.5) * 30}deg) 
+              rotateY(${(mousePos.x - 0.5) * 30}deg) 
+              rotate(45deg)
+              translateZ(${scrollY * 0.1}px)
+            `,
+            transition: 'transform 0.3s ease-out',
+          }}
+        />
+        <div 
+          className="absolute top-[40%] right-[15%] w-32 h-32 border border-primary/5 rounded-full"
+          style={{
+            transform: `
+              rotateX(${(mousePos.y - 0.5) * -20}deg) 
+              rotateY(${(mousePos.x - 0.5) * -20}deg)
+              translateZ(${scrollY * 0.15}px)
+            `,
+            transition: 'transform 0.4s ease-out',
+          }}
+        />
+        <div 
+          className="absolute bottom-[30%] left-[20%] w-24 h-24 border border-muted-foreground/10"
+          style={{
+            transform: `
+              rotateX(${(mousePos.y - 0.5) * 25}deg) 
+              rotateY(${(mousePos.x - 0.5) * -25}deg) 
+              rotate(12deg)
+            `,
+            transition: 'transform 0.5s ease-out',
+          }}
+        />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        {/* Pre-headline */}
-        <div 
-          className={`transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          <span className="inline-block text-primary/60 text-xs tracking-[0.5em] uppercase mb-8">
-            The EdgeHomes Story
-          </span>
+      <FloatingParticles />
+
+      {/* Content Container */}
+      <div className="relative z-10 w-full min-h-screen flex items-center justify-center pt-20">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          {/* Animated Pre-headline with Line Drawing */}
+          <div className={`relative inline-block mb-12 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="flex items-center gap-8">
+              <div className={`h-px bg-gradient-to-r from-transparent to-primary/60 transition-all duration-1500 delay-700 ${isLoaded ? 'w-24' : 'w-0'}`} />
+              <span className="text-primary/70 text-[10px] md:text-xs tracking-[0.6em] uppercase font-light">
+                The EdgeHomes Story
+              </span>
+              <div className={`h-px bg-gradient-to-l from-transparent to-primary/60 transition-all duration-1500 delay-700 ${isLoaded ? 'w-24' : 'w-0'}`} />
+            </div>
+          </div>
+
+          {/* Main Headline with Character Reveal */}
+          <div className="relative mb-16">
+            <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl xl:text-[10rem] leading-[0.85] tracking-tight">
+              {['Design', 'is', 'not'].map((word, wordIdx) => (
+                <span key={wordIdx} className="inline-block overflow-hidden mr-[0.3em]">
+                  {word.split('').map((char, charIdx) => (
+                    <span 
+                      key={charIdx}
+                      className={`inline-block text-foreground/90 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                      style={{ transitionDelay: `${600 + wordIdx * 100 + charIdx * 40}ms` }}
+                    >
+                      {char}
+                    </span>
+                  ))}
+                </span>
+              ))}
+              <br />
+              <span className="inline-block overflow-hidden mr-[0.3em]">
+                {'what'.split('').map((char, charIdx) => (
+                  <span 
+                    key={charIdx}
+                    className={`inline-block text-foreground/90 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                    style={{ transitionDelay: `${900 + charIdx * 40}ms` }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              <span className="inline-block overflow-hidden mr-[0.3em]">
+                {'we'.split('').map((char, charIdx) => (
+                  <span 
+                    key={charIdx}
+                    className={`inline-block text-foreground/90 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                    style={{ transitionDelay: `${1050 + charIdx * 40}ms` }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              <span className="inline-block overflow-hidden">
+                <span 
+                  className={`inline-block text-gradient-gold transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                  style={{ transitionDelay: '1150ms' }}
+                >
+                  do.
+                </span>
+              </span>
+              <br />
+              <span className="inline-block overflow-hidden mr-[0.3em]">
+                {"It's".split('').map((char, charIdx) => (
+                  <span 
+                    key={charIdx}
+                    className={`inline-block text-foreground/70 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                    style={{ transitionDelay: `${1250 + charIdx * 40}ms` }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              <span className="inline-block overflow-hidden mr-[0.3em]">
+                {'how'.split('').map((char, charIdx) => (
+                  <span 
+                    key={charIdx}
+                    className={`inline-block text-foreground/70 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                    style={{ transitionDelay: `${1350 + charIdx * 40}ms` }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              <span className="inline-block overflow-hidden mr-[0.3em]">
+                {'we'.split('').map((char, charIdx) => (
+                  <span 
+                    key={charIdx}
+                    className={`inline-block text-foreground/70 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                    style={{ transitionDelay: `${1450 + charIdx * 40}ms` }}
+                  >
+                    {char}
+                  </span>
+                ))}
+              </span>
+              <span className="inline-block overflow-hidden">
+                <span 
+                  className={`inline-block italic text-primary transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
+                  style={{ transitionDelay: '1550ms' }}
+                >
+                  think.
+                </span>
+              </span>
+            </h1>
+
+            {/* Animated Underline */}
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4">
+              <div className={`h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent transition-all duration-2000 delay-1800 ${isLoaded ? 'w-64' : 'w-0'}`} />
+            </div>
+          </div>
+
+          {/* Subtext with Fade */}
+          <p 
+            className={`text-lg md:text-xl lg:text-2xl text-muted-foreground/60 max-w-3xl mx-auto leading-relaxed font-light transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ transitionDelay: '2000ms' }}
+          >
+            EdgeHomes is a design & build studio shaping spaces that feel 
+            <span className="text-primary/80"> lived in</span>, 
+            <span className="text-foreground/70"> timeless</span>, and 
+            <span className="text-primary/60"> intentional</span>.
+          </p>
         </div>
+      </div>
 
-        {/* Main Headline */}
-        <h1 
-          className={`font-heading text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] mb-8 transition-all duration-1200 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-        >
-          <span className="block text-foreground/90">Design is not</span>
-          <span className="block mt-2">
-            <span className="text-foreground/90">what we </span>
-            <span className="text-gradient-gold">do.</span>
-          </span>
-          <span className="block mt-2 text-foreground/90">
-            It's how we <span className="italic text-primary">think.</span>
-          </span>
-        </h1>
-
-        {/* Subtext */}
-        <p 
-          className={`text-lg md:text-xl text-muted-foreground/70 max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-[800ms] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-        >
-          EdgeHomes is a design & build studio shaping spaces that feel lived in, timeless, and intentional.
-        </p>
-
-        {/* Scroll Hint */}
-        <div 
-          className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 transition-all duration-1000 delay-[1200ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        >
-          <span className="text-[10px] text-muted-foreground/50 tracking-[0.4em] uppercase">Discover</span>
-          <div className="w-px h-16 bg-gradient-to-b from-primary/40 to-transparent animate-pulse" />
+      {/* Scroll Indicator */}
+      <div 
+        className={`absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transitionDelay: '2500ms' }}
+      >
+        <span className="text-[9px] text-muted-foreground/40 tracking-[0.5em] uppercase">Scroll to Discover</span>
+        <div className="relative w-6 h-12 border border-primary/20 rounded-full overflow-hidden">
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-3 bg-primary/50 rounded-full animate-scrollDown" />
         </div>
       </div>
     </section>
   );
 };
 
-// Philosophy Section - Ultra Cinematic Museum Experience
+// Philosophy Section - Immersive 3D Cards
 const PhilosophySection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-  const [activePhilosophy, setActivePhilosophy] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
     setMousePos({
       x: (e.clientX - rect.left) / rect.width,
       y: (e.clientY - rect.top) / rect.height,
@@ -265,241 +325,227 @@ const PhilosophySection = () => {
     {
       number: '01',
       title: 'Simplicity as Luxury',
-      subtitle: 'The Art of Restraint',
-      text: 'We believe the most powerful design is invisible. It doesn\'t demand attention—it earns it through quiet confidence and intentional restraint.',
-      accent: 'from-primary/20',
-      icon: '◇',
+      quote: 'The most powerful design is invisible.',
+      description: 'It doesn\'t demand attention—it earns it through quiet confidence and intentional restraint.',
+      visual: '◇',
     },
     {
-      number: '02', 
+      number: '02',
       title: 'Execution Over Promises',
-      subtitle: 'Where Vision Meets Reality',
-      text: 'Ideas are abundant. What separates us is our obsessive focus on bringing every detail to life exactly as envisioned—no compromises, no excuses.',
-      accent: 'from-amber-400/20',
-      icon: '△',
+      quote: 'Ideas are abundant.',
+      description: 'What separates us is our obsessive focus on bringing every detail to life exactly as envisioned—no compromises.',
+      visual: '△',
     },
     {
       number: '03',
       title: 'Timeless Over Trendy',
-      subtitle: 'Designing for Decades',
-      text: 'We design spaces meant to age gracefully. Trends fade in seasons. We build for decades.',
-      accent: 'from-stone-400/20',
-      icon: '○',
+      quote: 'Trends fade in seasons.',
+      description: 'We design spaces meant to age gracefully. We build for decades.',
+      visual: '○',
     },
   ];
 
   return (
     <section 
-      ref={sectionRef}
+      ref={containerRef}
+      className="relative py-48 md:py-64 overflow-hidden"
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen py-32 md:py-48 overflow-hidden"
     >
-      {/* Dynamic Background Layers */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-[#060606] to-background" />
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 bg-[#050505]" />
       
-      {/* Animated Light Beam following mouse */}
+      {/* Animated Mesh Gradient */}
       <div 
-        className="absolute inset-0 opacity-30 pointer-events-none transition-all duration-1000 ease-out"
+        className="absolute inset-0 opacity-30 transition-all duration-1000"
         style={{
-          background: `radial-gradient(ellipse 600px 400px at ${mousePos.x * 100}% ${mousePos.y * 100}%, hsl(38 42% 60% / 0.08), transparent)`,
+          background: `
+            conic-gradient(from ${mousePos.x * 360}deg at ${mousePos.x * 100}% ${mousePos.y * 100}%, 
+              hsl(38 42% 60% / 0.1) 0deg, 
+              transparent 60deg, 
+              hsl(30 8% 70% / 0.05) 120deg, 
+              transparent 180deg,
+              hsl(38 42% 60% / 0.1) 240deg,
+              transparent 300deg,
+              hsl(38 42% 60% / 0.1) 360deg
+            )
+          `,
         }}
       />
 
-      {/* Floating Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(90deg, hsl(38 42% 60% / 0.3) 1px, transparent 1px),
-              linear-gradient(hsl(38 42% 60% / 0.3) 1px, transparent 1px)
-            `,
-            backgroundSize: '100px 100px',
-            transform: `translate(${(mousePos.x - 0.5) * 20}px, ${(mousePos.y - 0.5) * 20}px)`,
-            transition: 'transform 0.5s ease-out',
-          }}
-        />
+      {/* Floating Lines */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+            style={{
+              width: `${30 + i * 15}%`,
+              top: `${20 + i * 15}%`,
+              left: `${10 + i * 5}%`,
+              transform: `translateX(${Math.sin((mousePos.x + i) * Math.PI) * 30}px)`,
+              transition: 'transform 0.5s ease-out',
+            }}
+          />
+        ))}
       </div>
 
-      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6">
-        
-        {/* Giant Quote - Cinematic Reveal */}
-        <div className={`relative mb-32 md:mb-48 transition-all duration-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Massive decorative quote mark */}
-          <div className="absolute -top-20 -left-10 md:-top-32 md:-left-20 text-[200px] md:text-[400px] font-heading text-primary/[0.03] leading-none select-none pointer-events-none">
-            "
+      <div ref={ref} className="relative z-10 max-w-8xl mx-auto px-6">
+        {/* Section Quote - Massive Typography */}
+        <div className={`text-center mb-32 md:mb-48 transition-all duration-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Decorative Quote Mark */}
+          <div className="relative">
+            <span className="absolute -top-32 left-1/2 -translate-x-1/2 text-[300px] md:text-[500px] font-heading text-primary/[0.02] leading-none select-none pointer-events-none">
+              "
+            </span>
           </div>
           
-          {/* Quote Container with glass effect */}
-          <div className="relative max-w-5xl mx-auto">
-            <div className="relative p-8 md:p-16 rounded-3xl overflow-hidden">
-              {/* Animated border glow */}
-              <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-[shimmer_3s_linear_infinite]" />
-              
-              {/* Inner glass */}
-              <div className="absolute inset-[1px] rounded-3xl bg-card/30 backdrop-blur-sm" />
-              
-              <blockquote className="relative z-10 font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.15] text-center">
-                <span className={`block transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  A space should feel
-                </span>
-                <span className={`block mt-2 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  <span className="relative inline-block">
-                    <span className="text-gradient-gold">calm</span>
-                    <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse" />
-                  </span>
-                </span>
-                <span className={`block mt-2 text-foreground/70 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                  before it looks beautiful.
-                </span>
-              </blockquote>
-            </div>
+          <blockquote className="relative font-heading text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] max-w-6xl mx-auto">
+            <span className={`block overflow-hidden transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <span className={`inline-block ${isVisible ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-1000 delay-300`}>
+                A space should feel
+              </span>
+            </span>
+            <span className={`block overflow-hidden transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <span className={`inline-block text-gradient-gold ${isVisible ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-1000 delay-500`}>
+                calm
+              </span>
+            </span>
+            <span className={`block overflow-hidden text-foreground/50 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              <span className={`inline-block ${isVisible ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-1000 delay-700`}>
+                before it looks beautiful.
+              </span>
+            </span>
+          </blockquote>
+
+          {/* Animated Line Below Quote */}
+          <div className={`flex items-center justify-center gap-4 mt-16 transition-all duration-1500 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent transition-all duration-2000 delay-1200 ${isVisible ? 'w-96' : 'w-0'}`} />
           </div>
         </div>
 
-        {/* Philosophy Cards - Staggered Bento Grid */}
-        <div className="relative">
+        {/* Philosophy Cards - 3D Perspective Grid */}
+        <div className="relative perspective-[2000px]">
           {/* Section Label */}
-          <div className={`flex items-center justify-center gap-6 mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="h-px flex-1 max-w-32 bg-gradient-to-r from-transparent to-primary/30" />
-            <span className="text-xs text-primary/60 tracking-[0.5em] uppercase">Our Philosophy</span>
-            <div className="h-px flex-1 max-w-32 bg-gradient-to-l from-transparent to-primary/30" />
+          <div className={`flex items-center justify-center gap-8 mb-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="h-px flex-1 max-w-48 bg-gradient-to-r from-transparent to-primary/30" />
+            <span className="text-[10px] text-primary/50 tracking-[0.6em] uppercase">Our Philosophy</span>
+            <div className="h-px flex-1 max-w-48 bg-gradient-to-l from-transparent to-primary/30" />
           </div>
 
-          {/* Unique Asymmetric Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
             {philosophies.map((philosophy, index) => {
-              const gridClass = index === 0 
-                ? 'lg:col-span-7 lg:row-span-2' 
-                : index === 1 
-                  ? 'lg:col-span-5' 
-                  : 'lg:col-span-5';
-              
-              const isActive = activePhilosophy === index;
+              const isHovered = hoveredIndex === index;
               
               return (
                 <div
                   key={philosophy.number}
-                  className={`
-                    group relative ${gridClass}
-                    transition-all duration-700
-                    ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}
-                  `}
+                  className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}`}
                   style={{ 
                     transitionDelay: `${800 + index * 200}ms`,
-                    transform: isActive ? 'scale(1.02)' : 'scale(1)',
+                    transform: isHovered 
+                      ? `perspective(1000px) rotateX(${(mousePos.y - 0.5) * 5}deg) rotateY(${(mousePos.x - 0.5) * 5}deg) translateZ(50px)` 
+                      : 'none',
                   }}
-                  onMouseEnter={() => setActivePhilosophy(index)}
-                  onMouseLeave={() => setActivePhilosophy(null)}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
-                  {/* Card Container */}
+                  {/* Card Glow Effect */}
+                  <div className={`absolute -inset-1 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 rounded-[2rem] blur-xl transition-opacity duration-700 ${isHovered ? 'opacity-100' : 'opacity-0'}`} />
+                  
+                  {/* Card */}
                   <div className={`
-                    relative h-full min-h-[300px] ${index === 0 ? 'lg:min-h-[500px]' : 'min-h-[240px]'}
-                    rounded-3xl overflow-hidden cursor-default
-                    border border-border/20 
+                    relative min-h-[500px] lg:min-h-[600px] rounded-[2rem] overflow-hidden
+                    border border-border/10 bg-card/20 backdrop-blur-md
                     transition-all duration-700
-                    ${isActive ? 'border-primary/40 shadow-2xl shadow-primary/10' : 'hover:border-border/40'}
+                    ${isHovered ? 'border-primary/30 bg-card/30' : ''}
                   `}>
-                    {/* Gradient Background Layer */}
-                    <div className={`
-                      absolute inset-0 bg-gradient-to-br ${philosophy.accent} to-transparent
-                      opacity-0 group-hover:opacity-100 transition-opacity duration-700
-                    `} />
-                    
-                    {/* Glass Layer */}
-                    <div className="absolute inset-0 bg-card/40 backdrop-blur-sm" />
-                    
-                    {/* Animated Corner Lines */}
-                    <div className="absolute top-0 left-0 w-20 h-20 pointer-events-none">
-                      <div className={`absolute top-4 left-4 w-12 h-px bg-primary/40 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
-                      <div className={`absolute top-4 left-4 w-px h-12 bg-primary/40 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+                    {/* Animated Background Pattern */}
+                    <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000`}>
+                      <div className="absolute inset-0" style={{
+                        backgroundImage: `radial-gradient(circle at 50% 50%, hsl(38 42% 60% / 0.05) 0%, transparent 50%)`,
+                        backgroundSize: '100px 100px',
+                      }} />
                     </div>
-                    <div className="absolute bottom-0 right-0 w-20 h-20 pointer-events-none">
-                      <div className={`absolute bottom-4 right-4 w-12 h-px bg-primary/40 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
-                      <div className={`absolute bottom-4 right-4 w-px h-12 bg-primary/40 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+
+                    {/* Number - Oversized */}
+                    <div className="absolute top-8 left-8 right-8">
+                      <span className={`
+                        text-[180px] md:text-[220px] font-heading leading-none
+                        bg-gradient-to-b from-primary/10 via-primary/5 to-transparent bg-clip-text text-transparent
+                        transition-all duration-700
+                        ${isHovered ? 'from-primary/20 scale-105' : ''}
+                      `}>
+                        {philosophy.number}
+                      </span>
+                    </div>
+
+                    {/* Floating Visual */}
+                    <div className={`
+                      absolute top-16 right-8 text-6xl text-primary/20
+                      transition-all duration-700
+                      ${isHovered ? 'text-primary/40 scale-125 rotate-12' : ''}
+                    `}>
+                      {philosophy.visual}
                     </div>
 
                     {/* Content */}
-                    <div className="relative z-10 h-full flex flex-col justify-between p-8 lg:p-10">
-                      {/* Top Section */}
-                      <div>
-                        {/* Number + Icon Row */}
-                        <div className="flex items-start justify-between mb-6">
-                          <span className={`
-                            text-6xl md:text-7xl ${index === 0 ? 'lg:text-9xl' : 'lg:text-8xl'}
-                            font-heading text-primary/10 leading-none
-                            transition-all duration-500
-                            ${isActive ? 'text-primary/20 scale-110' : ''}
-                          `}>
-                            {philosophy.number}
-                          </span>
-                          <span className={`
-                            text-3xl text-primary/30 
-                            transition-all duration-500
-                            ${isActive ? 'text-primary/50 rotate-12 scale-110' : ''}
-                          `}>
-                            {philosophy.icon}
-                          </span>
-                        </div>
-
+                    <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
+                      {/* Animated Top Border */}
+                      <div className={`absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent transition-all duration-700 ${isHovered ? 'opacity-100' : 'opacity-30'}`} />
+                      
+                      <div className="relative pt-8">
                         {/* Title */}
                         <h3 className={`
-                          font-heading text-2xl md:text-3xl ${index === 0 ? 'lg:text-4xl' : 'lg:text-3xl'}
-                          text-foreground/90 mb-2
+                          font-heading text-3xl md:text-4xl text-foreground/90 mb-4
                           transition-all duration-500
-                          ${isActive ? 'text-foreground' : ''}
+                          ${isHovered ? 'text-foreground translate-x-2' : ''}
                         `}>
                           {philosophy.title}
                         </h3>
                         
-                        {/* Subtitle */}
-                        <p className="text-primary/60 text-sm tracking-wide mb-6">
-                          {philosophy.subtitle}
+                        {/* Quote Highlight */}
+                        <p className={`
+                          text-primary/80 text-lg md:text-xl font-light italic mb-4
+                          transition-all duration-500 delay-100
+                          ${isHovered ? 'opacity-100 translate-x-2' : 'opacity-70'}
+                        `}>
+                          "{philosophy.quote}"
                         </p>
                         
-                        {/* Animated Divider */}
-                        <div className={`
-                          h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent
-                          transition-all duration-700
-                          ${isActive ? 'w-full' : 'w-16'}
-                        `} />
-                      </div>
-
-                      {/* Bottom Section - Description */}
-                      <div className={`
-                        mt-auto pt-6
-                        transition-all duration-500
-                        ${isActive ? 'opacity-100 translate-y-0' : 'opacity-70'}
-                      `}>
+                        {/* Description */}
                         <p className={`
-                          text-muted-foreground leading-relaxed
-                          ${index === 0 ? 'text-base lg:text-lg' : 'text-sm lg:text-base'}
+                          text-muted-foreground/70 text-base leading-relaxed
+                          transition-all duration-500 delay-200
+                          ${isHovered ? 'opacity-100 translate-x-2' : 'opacity-50'}
                         `}>
-                          "{philosophy.text}"
+                          {philosophy.description}
                         </p>
-                      </div>
 
-                      {/* Hover Reveal - Hidden insight */}
-                      <div className={`
-                        absolute bottom-0 left-0 right-0 p-8 pt-16
-                        bg-gradient-to-t from-card via-card/80 to-transparent
-                        translate-y-full group-hover:translate-y-0
-                        transition-transform duration-700 ease-out
-                        pointer-events-none
-                      `}>
-                        <div className="flex items-center gap-3 text-xs text-primary/70">
-                          <div className="w-8 h-px bg-primary/50" />
-                          <span className="tracking-wider uppercase">Core Belief #{philosophy.number}</span>
-                        </div>
+                        {/* Bottom Accent Line */}
+                        <div className={`
+                          mt-8 h-[2px] bg-gradient-to-r from-primary/60 to-transparent
+                          transition-all duration-700
+                          ${isHovered ? 'w-full' : 'w-16'}
+                        `} />
                       </div>
                     </div>
 
-                    {/* Shimmer Effect on Hover */}
+                    {/* Corner Decorations */}
+                    <div className="absolute top-6 left-6 w-12 h-12">
+                      <div className={`absolute top-0 left-0 w-8 h-px bg-primary/30 transition-all duration-500 ${isHovered ? 'w-12' : ''}`} />
+                      <div className={`absolute top-0 left-0 w-px h-8 bg-primary/30 transition-all duration-500 ${isHovered ? 'h-12' : ''}`} />
+                    </div>
+                    <div className="absolute bottom-6 right-6 w-12 h-12">
+                      <div className={`absolute bottom-0 right-0 w-8 h-px bg-primary/30 transition-all duration-500 ${isHovered ? 'w-12' : ''}`} />
+                      <div className={`absolute bottom-0 right-0 w-px h-8 bg-primary/30 transition-all duration-500 ${isHovered ? 'h-12' : ''}`} />
+                    </div>
+
+                    {/* Shimmer Sweep */}
                     <div className={`
-                      absolute inset-0 opacity-0 group-hover:opacity-100
+                      absolute inset-0 -translate-x-full group-hover:translate-x-full
                       bg-gradient-to-r from-transparent via-white/[0.03] to-transparent
-                      -translate-x-full group-hover:translate-x-full
-                      transition-all duration-1000 ease-out
+                      transition-transform duration-1500 ease-out
                       pointer-events-none
                     `} />
                   </div>
@@ -510,15 +556,11 @@ const PhilosophySection = () => {
         </div>
 
         {/* Bottom Accent */}
-        <div className={`
-          flex items-center justify-center mt-24
-          transition-all duration-1000 delay-1000
-          ${isVisible ? 'opacity-100' : 'opacity-0'}
-        `}>
-          <div className="flex items-center gap-4">
-            <div className="w-2 h-2 bg-primary/30 rotate-45" />
-            <span className="text-muted-foreground/40 text-xs tracking-[0.3em] uppercase">These guide everything we create</span>
-            <div className="w-2 h-2 bg-primary/30 rotate-45" />
+        <div className={`flex items-center justify-center mt-32 transition-all duration-1000 delay-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="flex items-center gap-6">
+            <div className="w-2 h-2 bg-primary/40 rotate-45" />
+            <span className="text-muted-foreground/30 text-xs tracking-[0.4em] uppercase">These guide everything we create</span>
+            <div className="w-2 h-2 bg-primary/40 rotate-45" />
           </div>
         </div>
       </div>
@@ -526,55 +568,116 @@ const PhilosophySection = () => {
   );
 };
 
-// Cinematic Process Section
-const CinematicProcess = () => {
+// Process Section - Horizontal Scroll Timeline
+const ProcessSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const progress = Math.max(0, Math.min(1, (viewportHeight - rect.top) / (viewportHeight + rect.height)));
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const phases = [
     { 
       number: '01', 
       title: 'The First Conversation', 
       subtitle: 'Where dreams find words',
-      description: 'Before any line is drawn, we listen. To understand not just what you want—but why you want it.'
+      description: 'Before any line is drawn, we listen. To understand not just what you want—but why you want it.',
+      icon: '◯',
     },
     { 
       number: '02', 
       title: 'The First Drawing', 
       subtitle: 'Where vision takes shape',
-      description: 'Ideas crystallize. Rough sketches become refined plans. Your future home begins to breathe on paper.'
+      description: 'Ideas crystallize. Rough sketches become refined plans. Your future home begins to breathe on paper.',
+      icon: '◇',
     },
     { 
       number: '03', 
       title: 'The First Brick', 
       subtitle: 'Where intention meets action',
-      description: 'Ground breaks. Material arrives. The invisible becomes tangible, one carefully placed element at a time.'
+      description: 'Ground breaks. Material arrives. The invisible becomes tangible, one carefully placed element at a time.',
+      icon: '△',
     },
     { 
       number: '04', 
       title: 'The Final Silence', 
       subtitle: 'Where we hand over the keys',
-      description: 'The dust settles. The tools retreat. What remains is a space that was always meant for you.'
+      description: 'The dust settles. The tools retreat. What remains is a space that was always meant for you.',
+      icon: '□',
     }
   ];
 
   return (
-    <section className="relative py-32 md:py-48">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+    <section ref={containerRef} className="relative py-48 md:py-64 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-background to-[#050505]" />
       
-      {/* Vertical timeline line */}
-      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden lg:block" />
+      {/* Progress Line - Animated */}
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-border/10 -translate-y-1/2 hidden lg:block">
+        <div 
+          className="h-full bg-gradient-to-r from-primary/50 to-primary/20 transition-all duration-300"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
+      <div ref={ref} className="relative z-10 max-w-8xl mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-24">
-          <span className="text-primary/60 text-xs tracking-[0.5em] uppercase mb-4 block">Our Journey Together</span>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground/90">
-            From First Call to Final Handover
+        <div className={`text-center mb-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <span className="text-primary/50 text-[10px] tracking-[0.6em] uppercase mb-6 block">Our Journey Together</span>
+          <h2 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground/90">
+            From <span className="text-gradient-gold">First Call</span> to Final Handover
           </h2>
         </div>
 
-        {/* Phases */}
-        <div className="space-y-32">
+        {/* Timeline Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
           {phases.map((phase, index) => (
-            <PhaseItem key={phase.number} phase={phase} index={index} />
+            <div
+              key={phase.number}
+              className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}
+              style={{ transitionDelay: `${300 + index * 150}ms` }}
+            >
+              {/* Connection Line */}
+              {index < phases.length - 1 && (
+                <div className="absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/30 to-transparent hidden lg:block" />
+              )}
+              
+              {/* Card */}
+              <div className="relative min-h-[400px] p-8 rounded-2xl border border-border/10 bg-card/10 backdrop-blur-sm hover:border-primary/20 hover:bg-card/20 transition-all duration-700">
+                {/* Number */}
+                <div className="relative mb-12">
+                  <span className="text-8xl font-heading text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
+                    {phase.number}
+                  </span>
+                  <span className="absolute top-4 left-20 text-3xl text-primary/30 group-hover:text-primary/50 group-hover:rotate-12 transition-all duration-500">
+                    {phase.icon}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <h3 className="font-heading text-2xl text-foreground/90 mb-2 group-hover:text-foreground transition-colors duration-500">
+                  {phase.title}
+                </h3>
+                <p className="text-primary/60 text-sm italic mb-6">{phase.subtitle}</p>
+                <p className="text-muted-foreground/60 text-sm leading-relaxed group-hover:text-muted-foreground/80 transition-colors duration-500">
+                  {phase.description}
+                </p>
+
+                {/* Bottom Line */}
+                <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -582,62 +685,15 @@ const CinematicProcess = () => {
   );
 };
 
-const PhaseItem = ({ phase, index }: { phase: { number: string; title: string; subtitle: string; description: string }; index: number }) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 });
-  const isEven = index % 2 === 0;
-
-  return (
-    <div 
-      ref={ref}
-      className={`relative grid lg:grid-cols-2 gap-12 items-center transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-    >
-      {/* Content */}
-      <div className={`${isEven ? 'lg:pr-16' : 'lg:pl-16 lg:order-2'} ${isVisible ? (isEven ? 'translate-x-0' : 'translate-x-0') : (isEven ? '-translate-x-12' : 'translate-x-12')} transition-all duration-1000`}>
-        <span className="text-7xl md:text-8xl font-heading text-primary/10 absolute -top-8 -left-4">
-          {phase.number}
-        </span>
-        <div className="relative">
-          <h3 className="font-heading text-3xl md:text-4xl text-foreground/90 mb-2">
-            {phase.title}
-          </h3>
-          <p className="text-primary/70 text-sm tracking-wide mb-6 italic">
-            {phase.subtitle}
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            {phase.description}
-          </p>
-        </div>
-      </div>
-
-      {/* Visual Element */}
-      <div className={`${isEven ? 'lg:order-2 lg:pl-16' : 'lg:pr-16'} ${isVisible ? 'translate-x-0 opacity-100' : (isEven ? 'translate-x-12 opacity-0' : '-translate-x-12 opacity-0')} transition-all duration-1000 delay-200`}>
-        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
-          <div className="absolute inset-0 border border-border/20 rounded-2xl" />
-          {/* Abstract architectural pattern */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-32 h-32 border border-primary/20 rotate-45 animate-pulse-slow" />
-            <div className="absolute w-24 h-24 border border-primary/10 rotate-12" />
-          </div>
-        </div>
-      </div>
-
-      {/* Timeline dot */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-primary/50 hidden lg:block">
-        <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-20" />
-      </div>
-    </div>
-  );
-};
-// Founders Section - Cinematic Dual Portrait
+// Founders Section - Magazine Editorial Style
 const FoundersSection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
   const [activeFounder, setActiveFounder] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
+    setMousePos({
       x: (e.clientX - rect.left) / rect.width,
       y: (e.clientY - rect.top) / rect.height,
     });
@@ -651,7 +707,6 @@ const FoundersSection = () => {
       initial: 'B',
       description: 'Her designs, effected by an intuitive sensitivity to client preferences and an obsessive attention to detail, synchronizes social and cultural nuances to exude a subtle, yet distinctive, individuality.',
       philosophy: 'Bringing the serenity of spiritualism to the design desk, she translates her own connection to nature and human interaction with space to compose ergonomic and responsive structural forms.',
-      accent: 'from-primary/30 via-primary/10',
     },
     {
       name: 'Deepak Manchanda',
@@ -660,191 +715,178 @@ const FoundersSection = () => {
       initial: 'D',
       description: 'In the world of construction, where every brick laid and beam placed plays a pivotal role in shaping dreams into reality, there exists an unsung hero who embodies dedication, expertise, and relentless pursuit of excellence.',
       philosophy: 'In an industry where trust is paramount, his integrity and client-centric approach have set EdgeHomes apart as the benchmark for quality construction.',
-      accent: 'from-amber-500/30 via-amber-500/10',
     },
   ];
 
   return (
     <section 
       ref={ref} 
-      className="relative py-32 md:py-48 overflow-hidden"
+      className="relative py-48 md:py-64 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-[#080808] to-background" />
+      {/* Background with Gradient Orbs */}
+      <div className="absolute inset-0 bg-[#040404]" />
       
-      {/* Animated Grid Lines */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent w-full"
-            style={{
-              top: `${15 + i * 15}%`,
-              transform: `translateX(${(mousePosition.x - 0.5) * 20}px)`,
-              transition: 'transform 0.5s ease-out',
-            }}
-          />
-        ))}
-        {[...Array(4)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-px bg-gradient-to-b from-transparent via-primary/30 to-transparent h-full"
-            style={{
-              left: `${20 + i * 20}%`,
-              transform: `translateY(${(mousePosition.y - 0.5) * 20}px)`,
-              transition: 'transform 0.5s ease-out',
-            }}
-          />
-        ))}
+      {/* Animated Orbs */}
+      <div 
+        className="absolute w-[800px] h-[800px] rounded-full blur-[200px] opacity-20"
+        style={{
+          background: 'radial-gradient(circle, hsl(38 42% 60% / 0.3), transparent)',
+          left: `${mousePos.x * 30}%`,
+          top: `${mousePos.y * 30}%`,
+          transition: 'all 1s ease-out',
+        }}
+      />
+      <div 
+        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-15"
+        style={{
+          background: 'radial-gradient(circle, hsl(30 8% 70% / 0.3), transparent)',
+          right: `${(1 - mousePos.x) * 30}%`,
+          bottom: `${(1 - mousePos.y) * 30}%`,
+          transition: 'all 1.5s ease-out',
+        }}
+      />
+
+      {/* Grid Lines */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <svg className="w-full h-full">
+          <defs>
+            <pattern id="foundersGrid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.3" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#foundersGrid)" />
+        </svg>
       </div>
 
-      {/* Floating Orbs */}
-      <div 
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[100px] animate-float-slow"
-        style={{
-          transform: `translate(${(mousePosition.x - 0.5) * 50}px, ${(mousePosition.y - 0.5) * 50}px)`,
-        }}
-      />
-      <div 
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-500/5 rounded-full blur-[100px] animate-float-slower"
-        style={{
-          transform: `translate(${(mousePosition.x - 0.5) * -30}px, ${(mousePosition.y - 0.5) * -30}px)`,
-        }}
-      />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-8xl mx-auto px-6">
         {/* Section Header */}
-        <div className={`text-center mb-24 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <span className="text-primary/60 text-xs tracking-[0.5em] uppercase mb-4 block">The Visionaries</span>
-          <h2 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground/90 mb-6">
+        <div className={`text-center mb-32 md:mb-48 transition-all duration-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
+          <span className="text-primary/50 text-[10px] tracking-[0.6em] uppercase mb-6 block">The Visionaries</span>
+          <h2 className="font-heading text-6xl md:text-7xl lg:text-8xl text-foreground/90">
             Who We <span className="text-gradient-gold">Are</span>
           </h2>
-          <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/50" />
-            <span className="text-muted-foreground/50 text-sm tracking-widest">OUR TEAM</span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/50" />
+          <div className="flex items-center justify-center gap-6 mt-8">
+            <div className="h-px w-24 bg-gradient-to-r from-transparent to-primary/40" />
+            <span className="text-muted-foreground/30 text-[10px] tracking-[0.4em] uppercase">Our Team</span>
+            <div className="h-px w-24 bg-gradient-to-l from-transparent to-primary/40" />
           </div>
         </div>
 
-        {/* Founders Grid - Cinematic Cards */}
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
-          {founders.map((founder, index) => (
-            <div
-              key={founder.name}
-              className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}
-              style={{ transitionDelay: `${index * 300}ms` }}
-              onMouseEnter={() => setActiveFounder(index)}
-              onMouseLeave={() => setActiveFounder(null)}
-            >
-              {/* Card Container */}
-              <div className={`
-                relative rounded-3xl overflow-hidden
-                border border-border/20 bg-card/20 backdrop-blur-sm
-                transition-all duration-700
-                ${activeFounder === index ? 'border-primary/40 scale-[1.02] shadow-2xl shadow-primary/10' : 'hover:border-border/40'}
-              `}>
-                {/* Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${founder.accent} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+        {/* Founders Cards - Magazine Layout */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          {founders.map((founder, index) => {
+            const isActive = activeFounder === index;
+            
+            return (
+              <div
+                key={founder.name}
+                className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}`}
+                style={{ transitionDelay: `${500 + index * 300}ms` }}
+                onMouseEnter={() => setActiveFounder(index)}
+                onMouseLeave={() => setActiveFounder(null)}
+              >
+                {/* Card Glow */}
+                <div className={`absolute -inset-4 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 rounded-[3rem] blur-2xl transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
                 
-                {/* Top Section - Initial & Name */}
-                <div className="relative p-8 lg:p-10">
-                  {/* Large Initial */}
-                  <div className="relative mb-8">
-                    <span className={`
-                      absolute -top-4 -left-2 text-[180px] md:text-[220px] font-heading 
-                      leading-none select-none pointer-events-none
-                      bg-gradient-to-b from-primary/10 to-transparent bg-clip-text text-transparent
-                      transition-all duration-700
-                      ${activeFounder === index ? 'scale-110 from-primary/20' : ''}
-                    `}>
+                {/* Main Card */}
+                <div className={`
+                  relative min-h-[700px] rounded-[2.5rem] overflow-hidden
+                  border border-border/10 bg-gradient-to-br from-card/30 via-card/10 to-transparent
+                  backdrop-blur-xl transition-all duration-700
+                  ${isActive ? 'border-primary/20 scale-[1.02]' : ''}
+                `}>
+                  {/* Giant Initial - Background */}
+                  <div className="absolute top-0 left-0 right-0 h-[400px] flex items-center justify-center overflow-hidden">
+                    <span 
+                      className={`
+                        text-[400px] md:text-[500px] font-heading leading-none select-none
+                        bg-gradient-to-b from-primary/[0.08] to-transparent bg-clip-text text-transparent
+                        transition-all duration-1000
+                        ${isActive ? 'scale-110 from-primary/[0.12]' : ''}
+                      `}
+                    >
                       {founder.initial}
                     </span>
-                    
-                    {/* Geometric Accent */}
-                    <div className={`
-                      absolute top-8 right-0 w-24 h-24 border border-primary/20 rotate-45
-                      transition-all duration-700
-                      ${activeFounder === index ? 'rotate-[60deg] scale-110 border-primary/40' : ''}
-                    `} />
-                    <div className={`
-                      absolute top-12 right-4 w-16 h-16 border border-primary/10 rotate-12
-                      transition-all duration-700
-                      ${activeFounder === index ? 'rotate-[25deg] scale-90' : ''}
-                    `} />
                   </div>
 
-                  {/* Name & Role */}
-                  <div className="relative z-10 mt-32">
-                    <h3 className={`
-                      font-heading text-3xl md:text-4xl lg:text-5xl text-foreground/90 mb-3
-                      transition-all duration-500
-                      ${activeFounder === index ? 'text-foreground' : ''}
-                    `}>
-                      {founder.name}
-                    </h3>
+                  {/* Geometric Accents */}
+                  <div className={`
+                    absolute top-16 right-16 w-32 h-32 border border-primary/10 rotate-45
+                    transition-all duration-1000
+                    ${isActive ? 'rotate-[60deg] scale-110 border-primary/30' : ''}
+                  `} />
+                  <div className={`
+                    absolute top-24 right-24 w-20 h-20 border border-primary/5 rotate-12
+                    transition-all duration-1000
+                    ${isActive ? 'rotate-[30deg] scale-90 border-primary/20' : ''}
+                  `} />
+
+                  {/* Content Area */}
+                  <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-14">
+                    {/* Top Border Glow */}
+                    <div className={`absolute top-0 left-10 right-10 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-30'}`} />
                     
-                    <div className="flex flex-col gap-1 mb-8">
-                      <span className="text-primary text-sm tracking-[0.2em] uppercase font-medium">
-                        {founder.role}
-                      </span>
-                      <span className="text-muted-foreground/60 text-xs tracking-wider">
-                        ({founder.department})
-                      </span>
+                    <div className="relative pt-10">
+                      {/* Name */}
+                      <h3 className={`
+                        font-heading text-4xl md:text-5xl lg:text-6xl text-foreground/90 mb-4
+                        transition-all duration-500
+                        ${isActive ? 'text-foreground translate-x-2' : ''}
+                      `}>
+                        {founder.name}
+                      </h3>
+                      
+                      {/* Role */}
+                      <div className="flex flex-col gap-1 mb-10">
+                        <span className={`text-primary text-sm tracking-[0.3em] uppercase font-medium transition-all duration-500 ${isActive ? 'translate-x-2' : ''}`}>
+                          {founder.role}
+                        </span>
+                        <span className={`text-muted-foreground/50 text-xs tracking-wider transition-all duration-500 delay-100 ${isActive ? 'translate-x-2' : ''}`}>
+                          ({founder.department})
+                        </span>
+                      </div>
+
+                      {/* Description */}
+                      <div className={`space-y-4 transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60'}`}>
+                        <p className={`text-muted-foreground leading-relaxed transition-all duration-500 delay-200 ${isActive ? 'translate-x-2' : ''}`}>
+                          "{founder.description}"
+                        </p>
+                        <p className={`text-muted-foreground/60 text-sm italic leading-relaxed transition-all duration-500 delay-300 ${isActive ? 'translate-x-2' : ''}`}>
+                          {founder.philosophy}
+                        </p>
+                      </div>
+
+                      {/* Bottom Accent */}
+                      <div className={`mt-10 h-[2px] bg-gradient-to-r from-primary/60 via-primary/30 to-transparent transition-all duration-1000 ${isActive ? 'w-full' : 'w-24'}`} />
                     </div>
-
-                    {/* Animated Line */}
-                    <div className={`
-                      h-px bg-gradient-to-r from-primary/50 via-primary/20 to-transparent
-                      transition-all duration-700
-                      ${activeFounder === index ? 'w-full' : 'w-24'}
-                    `} />
-                  </div>
-                </div>
-
-                {/* Description Section */}
-                <div className="relative px-8 lg:px-10 pb-10">
-                  <div className={`
-                    space-y-4 transition-all duration-700
-                    ${activeFounder === index ? 'opacity-100 translate-y-0' : 'opacity-70'}
-                  `}>
-                    <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
-                      "{founder.description}"
-                    </p>
-                    <p className="text-muted-foreground/70 leading-relaxed text-sm italic">
-                      {founder.philosophy}
-                    </p>
                   </div>
 
-                  {/* Bottom Accent */}
+                  {/* Corner Frames */}
+                  <div className="absolute top-8 left-8 w-16 h-16">
+                    <div className={`absolute top-0 left-0 w-12 h-px bg-primary/30 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
+                    <div className={`absolute top-0 left-0 w-px h-12 bg-primary/30 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+                  </div>
+                  <div className="absolute bottom-8 right-8 w-16 h-16">
+                    <div className={`absolute bottom-0 right-0 w-12 h-px bg-primary/30 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
+                    <div className={`absolute bottom-0 right-0 w-px h-12 bg-primary/30 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+                  </div>
+
+                  {/* Shimmer Effect */}
                   <div className={`
-                    absolute bottom-0 left-0 right-0 h-1 
-                    bg-gradient-to-r from-transparent via-primary/30 to-transparent
-                    transform origin-center scale-x-0 group-hover:scale-x-100
-                    transition-transform duration-700
+                    absolute inset-0 -translate-x-full group-hover:translate-x-full
+                    bg-gradient-to-r from-transparent via-white/[0.02] to-transparent
+                    transition-transform duration-2000 ease-out pointer-events-none
                   `} />
                 </div>
-
-                {/* Corner Accents */}
-                <div className="absolute top-4 right-4 w-8 h-8">
-                  <div className="absolute top-0 right-0 w-full h-px bg-primary/30" />
-                  <div className="absolute top-0 right-0 h-full w-px bg-primary/30" />
-                </div>
-                <div className="absolute bottom-4 left-4 w-8 h-8">
-                  <div className="absolute bottom-0 left-0 w-full h-px bg-primary/30" />
-                  <div className="absolute bottom-0 left-0 h-full w-px bg-primary/30" />
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Bottom Tagline */}
-        <div className={`
-          text-center mt-24 transition-all duration-1000 delay-700
-          ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-        `}>
-          <p className="text-muted-foreground/50 text-sm tracking-[0.3em] uppercase">
+        <div className={`text-center mt-32 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <p className="text-muted-foreground/30 text-[10px] tracking-[0.5em] uppercase">
             Design × Construction × Vision
           </p>
         </div>
@@ -857,11 +899,12 @@ const FoundersSection = () => {
 const About = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
+      <MagneticCursor />
       <Header />
       <main>
         <HeroAbout />
         <PhilosophySection />
-        <CinematicProcess />
+        <ProcessSection />
         <FoundersSection />
       </main>
       <Footer />
