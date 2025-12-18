@@ -5,19 +5,178 @@ import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { MessageCircle, Calendar, ArrowRight } from 'lucide-react';
 
+// Architectural Background Component - Multi-layered animated wireframe
+const ArchitecturalBackground = ({ scrollY = 0 }: { scrollY?: number }) => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* LAYER 1: Blueprint Grid (Back) */}
+      <svg 
+        className="absolute inset-0 w-full h-full opacity-[0.04] blur-[0.5px]"
+        style={{ transform: `translate(${scrollY * 0.02}px, ${scrollY * 0.01}px)` }}
+      >
+        <defs>
+          <pattern id="blueprintGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+            <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(38, 50%, 50%)" strokeWidth="0.3" opacity="0.5" />
+            <path d="M 40 0 L 40 80 M 0 40 L 80 40" fill="none" stroke="hsl(38, 50%, 50%)" strokeWidth="0.15" opacity="0.3" />
+          </pattern>
+          <linearGradient id="gridFade" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="30%" stopColor="white" stopOpacity="1" />
+            <stop offset="70%" stopColor="white" stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+          <mask id="gridMask">
+            <rect width="100%" height="100%" fill="url(#gridFade)" />
+          </mask>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#blueprintGrid)" mask="url(#gridMask)" />
+        {/* Measurement marks */}
+        {[...Array(5)].map((_, i) => (
+          <g key={i} className="animate-[fadeInSlow_3s_ease-out_forwards]" style={{ animationDelay: `${i * 0.5}s` }}>
+            <line x1={`${15 + i * 18}%`} y1="10%" x2={`${15 + i * 18}%`} y2="12%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.5" opacity="0.4" />
+            <line x1={`${15 + i * 18}%`} y1="88%" x2={`${15 + i * 18}%`} y2="90%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.5" opacity="0.4" />
+          </g>
+        ))}
+      </svg>
+
+      {/* LAYER 2: Interior Wall Outlines (Mid) - Animated line drawing */}
+      <svg 
+        className="absolute inset-0 w-full h-full opacity-[0.05] blur-[0.3px]"
+        style={{ transform: `translate(${scrollY * 0.04}px, ${scrollY * 0.02}px)` }}
+      >
+        <defs>
+          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="hsl(38, 50%, 55%)" />
+            <stop offset="50%" stopColor="hsl(40, 30%, 60%)" />
+            <stop offset="100%" stopColor="hsl(0, 0%, 50%)" />
+          </linearGradient>
+        </defs>
+        
+        {/* Wall frame - left */}
+        <g className="wall-outline-left">
+          <path 
+            d="M 5% 30% L 5% 85% L 25% 85% L 25% 60% L 15% 60% L 15% 30% Z" 
+            fill="none" 
+            stroke="url(#lineGradient)" 
+            strokeWidth="0.5"
+            strokeDasharray="1000"
+            strokeDashoffset="1000"
+            className="animate-[drawLine_8s_ease-out_forwards]"
+          />
+        </g>
+
+        {/* Wall frame - right */}
+        <g className="wall-outline-right">
+          <path 
+            d="M 95% 25% L 95% 80% L 75% 80% L 75% 50% L 85% 50% L 85% 25% Z" 
+            fill="none" 
+            stroke="url(#lineGradient)" 
+            strokeWidth="0.5"
+            strokeDasharray="1000"
+            strokeDashoffset="1000"
+            className="animate-[drawLine_8s_ease-out_1s_forwards]"
+          />
+        </g>
+
+        {/* Ceiling panels */}
+        <g className="ceiling-panels">
+          <line x1="20%" y1="15%" x2="80%" y2="15%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.4" strokeDasharray="800" strokeDashoffset="800" className="animate-[drawLine_6s_ease-out_0.5s_forwards]" />
+          <line x1="25%" y1="18%" x2="75%" y2="18%" stroke="hsl(0, 0%, 50%)" strokeWidth="0.3" strokeDasharray="600" strokeDashoffset="600" className="animate-[drawLine_5s_ease-out_1s_forwards]" />
+          <line x1="30%" y1="21%" x2="70%" y2="21%" stroke="hsl(38, 40%, 55%)" strokeWidth="0.3" strokeDasharray="500" strokeDashoffset="500" className="animate-[drawLine_5s_ease-out_1.5s_forwards]" />
+        </g>
+
+        {/* Furniture silhouette - sofa outline */}
+        <g className="furniture-sofa" style={{ transform: 'translate(30%, 70%)' }}>
+          <path 
+            d="M 0 0 L 120 0 L 120 -20 L 110 -20 L 110 -40 L 10 -40 L 10 -20 L 0 -20 Z" 
+            fill="none" 
+            stroke="hsl(0, 0%, 45%)" 
+            strokeWidth="0.4"
+            strokeDasharray="500"
+            strokeDashoffset="500"
+            className="animate-[drawLine_6s_ease-out_2s_forwards]"
+          />
+        </g>
+
+        {/* Stair edges */}
+        <g className="stairs">
+          {[...Array(5)].map((_, i) => (
+            <line 
+              key={i}
+              x1={`${85 - i * 3}%`} 
+              y1={`${90 - i * 5}%`} 
+              x2={`${92 - i * 3}%`} 
+              y2={`${90 - i * 5}%`}
+              stroke="hsl(38, 35%, 50%)"
+              strokeWidth="0.4"
+              strokeDasharray="100"
+              strokeDashoffset="100"
+              className="animate-[drawLine_2s_ease-out_forwards]"
+              style={{ animationDelay: `${2.5 + i * 0.3}s` }}
+            />
+          ))}
+        </g>
+
+        {/* Corner joints */}
+        <g className="corner-joints">
+          <path d="M 10% 25% L 10% 30% L 15% 30%" fill="none" stroke="hsl(38, 50%, 55%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3s_forwards]" />
+          <path d="M 90% 25% L 90% 30% L 85% 30%" fill="none" stroke="hsl(38, 50%, 55%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3.2s_forwards]" />
+          <path d="M 10% 85% L 10% 80% L 15% 80%" fill="none" stroke="hsl(0, 0%, 50%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3.4s_forwards]" />
+          <path d="M 90% 85% L 90% 80% L 85% 80%" fill="none" stroke="hsl(0, 0%, 50%)" strokeWidth="0.5" strokeDasharray="100" strokeDashoffset="100" className="animate-[drawLine_2s_ease-out_3.6s_forwards]" />
+        </g>
+      </svg>
+
+      {/* LAYER 3: Geometric Shapes (Front) - Floating diamonds and rectangles */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{ transform: `translate(${scrollY * 0.06}px, ${scrollY * 0.03}px)` }}
+      >
+        {/* Diamond shapes */}
+        <div className="absolute top-[15%] left-[10%] w-32 h-32 border border-primary/40 rotate-45 animate-[driftSlow_30s_linear_infinite] blur-[1px]" />
+        <div className="absolute top-[60%] right-[15%] w-24 h-24 border border-primary/30 rotate-45 animate-[driftSlowReverse_25s_linear_infinite] blur-[0.5px]" />
+        <div className="absolute top-[40%] left-[70%] w-16 h-16 border border-muted-foreground/30 rotate-45 animate-[driftSlow_35s_linear_infinite] blur-[1px]" />
+        
+        {/* Rectangles - framing geometry */}
+        <div className="absolute top-[25%] right-[25%] w-48 h-28 border border-primary/20 animate-[driftSlowReverse_40s_linear_infinite] blur-[0.5px]" />
+        <div className="absolute bottom-[20%] left-[20%] w-36 h-20 border border-muted-foreground/25 animate-[driftSlow_45s_linear_infinite] blur-[1px]" />
+        
+        {/* Intersecting lines */}
+        <div className="absolute top-[35%] left-[5%] w-[200px] h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-[driftHorizontal_50s_linear_infinite] blur-[0.5px]" />
+        <div className="absolute top-[55%] right-0 w-[150px] h-px bg-gradient-to-r from-primary/20 via-muted-foreground/20 to-transparent animate-[driftHorizontalReverse_40s_linear_infinite] blur-[0.5px]" />
+        <div className="absolute top-[20%] left-[30%] w-px h-[100px] bg-gradient-to-b from-transparent via-primary/25 to-transparent animate-[driftVertical_35s_linear_infinite] blur-[0.5px]" />
+        <div className="absolute top-[45%] right-[35%] w-px h-[80px] bg-gradient-to-b from-primary/20 via-transparent to-muted-foreground/20 animate-[driftVerticalReverse_30s_linear_infinite] blur-[0.5px]" />
+      </div>
+
+      {/* LAYER 4: Ambient glow spots */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute top-1/4 left-1/3 w-64 h-64 bg-primary/50 rounded-full blur-[80px] animate-[pulse_8s_ease-in-out_infinite]" />
+        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-muted-foreground/30 rounded-full blur-[60px] animate-[pulse_10s_ease-in-out_infinite_2s]" />
+      </div>
+    </div>
+  );
+};
+
 // Hero Section
 const HeroAbout = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const { ref, isVisible } = useScrollAnimation();
 
   useEffect(() => {
     setIsLoaded(true);
+    
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Cinematic Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background/95" />
+      
+      {/* Architectural Background - Multi-layered wireframe */}
+      <ArchitecturalBackground scrollY={scrollY} />
       
       {/* Architectural Light Rays */}
       <div className="absolute inset-0 overflow-hidden">
