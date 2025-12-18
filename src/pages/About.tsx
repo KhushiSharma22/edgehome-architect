@@ -891,6 +891,178 @@ const ProcessSection = () => {
   );
 };
 
+// Inspiration Banner Section
+const InspirationBanner = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section 
+      ref={sectionRef}
+      className="relative py-32 md:py-40 bg-[#F6F1EA] overflow-hidden"
+    >
+      {/* Subtle texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      <div className="container mx-auto px-4 relative">
+        <div className="flex items-center justify-between">
+          {/* Left Furniture - Abstract Chair SVG */}
+          <div 
+            className={`hidden md:block w-64 lg:w-80 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
+            }`}
+            style={{ transitionDelay: '0.2s' }}
+          >
+            <svg viewBox="0 0 300 300" className="w-full h-auto drop-shadow-2xl">
+              {/* Modern organic chair shape */}
+              <defs>
+                <linearGradient id="chairGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#2D4A47" />
+                  <stop offset="100%" stopColor="#1A2E2C" />
+                </linearGradient>
+                <linearGradient id="legGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#D4A574" />
+                  <stop offset="100%" stopColor="#B8956A" />
+                </linearGradient>
+              </defs>
+              {/* Chair back/body - organic shape */}
+              <ellipse cx="120" cy="120" rx="90" ry="80" fill="url(#chairGradient1)" transform="rotate(-15 120 120)" />
+              <ellipse cx="140" cy="140" rx="70" ry="60" fill="url(#chairGradient1)" transform="rotate(-10 140 140)" />
+              {/* Seat cushion */}
+              <ellipse cx="130" cy="170" rx="75" ry="35" fill="#3A5956" />
+              {/* Pillow */}
+              <ellipse cx="90" cy="130" rx="30" ry="25" fill="#9BA8AB" transform="rotate(-20 90 130)" />
+              {/* Wooden legs */}
+              <line x1="70" y1="200" x2="60" y2="270" stroke="url(#legGradient)" strokeWidth="8" strokeLinecap="round" />
+              <line x1="190" y1="195" x2="200" y2="265" stroke="url(#legGradient)" strokeWidth="8" strokeLinecap="round" />
+              <line x1="130" y1="200" x2="130" y2="268" stroke="url(#legGradient)" strokeWidth="6" strokeLinecap="round" />
+              {/* Small table attachment */}
+              <ellipse cx="210" cy="155" rx="25" ry="8" fill="url(#legGradient)" />
+              <line x1="210" y1="160" x2="210" y2="200" stroke="url(#legGradient)" strokeWidth="4" strokeLinecap="round" />
+              {/* Cup on table */}
+              <rect x="200" y="140" width="16" height="15" rx="2" fill="#FFFFFF" />
+              <rect x="202" y="142" width="12" height="8" rx="1" fill="#E8DED4" />
+            </svg>
+          </div>
+
+          {/* Center Text */}
+          <div 
+            className={`flex-1 text-center px-8 md:px-16 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+            style={{ transitionDelay: '0.4s' }}
+          >
+            <h2 
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#1C1C1C] tracking-[0.15em] leading-tight"
+              style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+            >
+              INSPIRED BY ARTISTRY,
+              <br />
+              <span className="text-[#C7A76A]">OBJECTS</span>, DESIGNS
+              <br />
+              AND THE FUTURE
+            </h2>
+          </div>
+
+          {/* Right Furniture - Egg Chair SVG */}
+          <div 
+            className={`hidden md:block w-64 lg:w-80 transition-all duration-1000 ease-out ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
+            }`}
+            style={{ transitionDelay: '0.6s' }}
+          >
+            <svg viewBox="0 0 300 350" className="w-full h-auto drop-shadow-2xl">
+              {/* Egg chair shape */}
+              <defs>
+                <linearGradient id="eggChairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#D4875A" />
+                  <stop offset="50%" stopColor="#C67A4E" />
+                  <stop offset="100%" stopColor="#A86642" />
+                </linearGradient>
+                <linearGradient id="eggInnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#E8956A" />
+                  <stop offset="100%" stopColor="#D4875A" />
+                </linearGradient>
+                <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#B8B8B8" />
+                  <stop offset="50%" stopColor="#8A8A8A" />
+                  <stop offset="100%" stopColor="#6A6A6A" />
+                </linearGradient>
+              </defs>
+              {/* Main egg shell */}
+              <ellipse cx="150" cy="130" rx="95" ry="115" fill="url(#eggChairGradient)" />
+              {/* Inner curve detail */}
+              <ellipse cx="155" cy="135" rx="80" ry="100" fill="url(#eggInnerGradient)" />
+              {/* Seat area */}
+              <ellipse cx="150" cy="200" rx="65" ry="30" fill="#B86B45" />
+              {/* Chair opening/hollow */}
+              <ellipse cx="160" cy="120" rx="55" ry="70" fill="#A86642" />
+              {/* Stitch detail line */}
+              <path d="M100 80 Q150 60 200 80" stroke="#8B5A3C" strokeWidth="2" fill="none" strokeDasharray="8,4" />
+              {/* Metal base - star shape */}
+              <ellipse cx="150" cy="295" rx="50" ry="12" fill="url(#metalGradient)" />
+              <line x1="150" y1="240" x2="150" y2="295" stroke="url(#metalGradient)" strokeWidth="12" />
+              {/* Base arms */}
+              <line x1="150" y1="295" x2="100" y2="320" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
+              <line x1="150" y1="295" x2="200" y2="320" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
+              <line x1="150" y1="295" x2="130" y2="325" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
+              <line x1="150" y1="295" x2="170" y2="325" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Mobile: Show smaller centered furniture */}
+        <div className="md:hidden flex justify-center gap-8 mt-12">
+          <svg viewBox="0 0 300 300" className="w-32 h-auto drop-shadow-lg">
+            <defs>
+              <linearGradient id="chairGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#2D4A47" />
+                <stop offset="100%" stopColor="#1A2E2C" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="150" cy="130" rx="80" ry="70" fill="url(#chairGradientMobile)" />
+            <ellipse cx="150" cy="170" rx="70" ry="30" fill="#3A5956" />
+          </svg>
+          <svg viewBox="0 0 300 350" className="w-32 h-auto drop-shadow-lg">
+            <defs>
+              <linearGradient id="eggMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#D4875A" />
+                <stop offset="100%" stopColor="#A86642" />
+              </linearGradient>
+            </defs>
+            <ellipse cx="150" cy="140" rx="85" ry="105" fill="url(#eggMobile)" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Subtle bottom line */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-[#C7A76A]/30" />
+    </section>
+  );
+};
+
 // Founders Section - Magazine Editorial Style
 const FoundersSection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
@@ -1111,6 +1283,7 @@ const About = () => {
         <HeroAbout />
         <ArchitecturalPhilosophySection />
         <ProcessSection />
+        <InspirationBanner />
         <FoundersSection />
       </main>
       <Footer />
