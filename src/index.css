@@ -1184,3 +1184,29 @@
   50% { transform: translateY(-40px); opacity: 0.3; }
   100% { transform: translateY(0); opacity: 0.4; }
 }
+
+/* Philosophy Section Animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { 
+    background-position: 0% 50%;
+    opacity: 0.3;
+  }
+  50% { 
+    background-position: 100% 50%;
+    opacity: 0.6;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-border-glow {
+  background-size: 200% 200%;
+  animation: borderGlow 4s ease-in-out infinite;
+}
