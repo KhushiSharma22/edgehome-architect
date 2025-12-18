@@ -98,93 +98,133 @@ const HeroAbout = () => {
       {/* Base Background */}
       <div className="absolute inset-0 bg-background" />
       
-      {/* Architectural Blueprint Layer */}
-      <ArchitecturalBackground scrollY={scrollY} />
+      {/* Architectural Blueprint Layer - with slight blur */}
+      <div className="absolute inset-0" style={{ filter: 'blur(0.5px)' }}>
+        <ArchitecturalBackground scrollY={scrollY} />
+      </div>
 
       {/* Subtle gradient on left side */}
-      <div className="absolute left-0 top-0 bottom-0 w-[40%] bg-gradient-to-r from-black/20 to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-[40%] bg-gradient-to-r from-black/25 to-transparent" />
+
+      {/* Left Side Architectural Margin Line - Drawing guide */}
+      <div 
+        className={`absolute left-[12%] top-[20%] bottom-[20%] hidden lg:flex flex-col items-center transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-[0.04]' : 'opacity-0'}`}
+        style={{ transitionDelay: '2000ms' }}
+      >
+        {/* Vertical guideline */}
+        <div className="w-px h-full bg-gradient-to-b from-transparent via-primary to-transparent" />
+        {/* Measurement dot */}
+        <div className="absolute top-1/3 -left-1 w-2 h-px bg-primary/60" />
+        <div className="absolute top-1/3 left-1 w-1 h-1 rounded-full bg-primary/40" />
+      </div>
 
       {/* Designer Easter Egg - Thin Vertical Gold Line */}
       <div 
-        className={`absolute left-[38%] top-[15%] bottom-[15%] w-px transition-all duration-[2000ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute left-[38%] top-[18%] bottom-[18%] w-px hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{ transitionDelay: '1800ms' }}
       >
-        <div className="w-full h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent" />
+        <div className="w-full h-full bg-gradient-to-b from-transparent via-primary/25 to-transparent" />
       </div>
 
       {/* Small Diamond Accent - Floating */}
       <div 
-        className={`absolute left-[32%] top-[25%] transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute left-[28%] top-[28%] hidden lg:block transition-all duration-[1800ms] ${isLoaded ? 'opacity-[0.03]' : 'opacity-0'}`}
         style={{ 
-          transitionDelay: '2200ms',
-          transform: `translateY(${scrollY * 0.05}px)`,
+          transitionDelay: '2400ms',
+          transform: `translateY(${scrollY * 0.04}px)`,
         }}
       >
-        <div className="w-3 h-3 border border-primary/20 rotate-45" />
+        <div className="w-4 h-4 border border-primary rotate-45" />
       </div>
 
-      {/* Cinematic Vertical Image Strip */}
+      {/* Cinematic Vertical Image Strip - Architectural Signature */}
       <div 
-        className={`absolute right-[8%] top-[12%] bottom-[12%] w-[14%] hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute right-[6%] top-[10%] bottom-[10%] w-[15%] hidden lg:block transition-all duration-[2800ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         style={{ 
-          transitionDelay: '1400ms',
-          transform: `translateY(${scrollY * -0.03}px)`,
+          transitionDelay: '1500ms',
+          transform: `translateY(${scrollY * -0.025}px)`,
         }}
       >
-        {/* Gold Border Glow */}
+        {/* Gold Border with soft glow */}
         <div 
-          className="absolute -inset-[1px] rounded-sm"
+          className="absolute -inset-px"
           style={{
-            background: 'linear-gradient(135deg, hsl(38 42% 55% / 0.4), hsl(38 42% 55% / 0.1), hsl(38 42% 55% / 0.3))',
-            boxShadow: '0 0 20px hsl(38 42% 55% / 0.15), inset 0 0 20px hsl(38 42% 55% / 0.05)',
+            background: 'linear-gradient(180deg, hsl(38 42% 55% / 0.25), hsl(38 42% 55% / 0.15), hsl(38 42% 55% / 0.25))',
+            boxShadow: '0 0 30px hsl(38 42% 55% / 0.1)',
           }}
         />
         
         {/* Image Container */}
-        <div className="relative w-full h-full overflow-hidden rounded-sm">
-          {/* Interior Image */}
+        <div className="relative w-full h-full overflow-hidden">
+          {/* Interior Image - warm minimal */}
           <img 
             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80"
             alt="Luxury interior detail"
             className="w-full h-full object-cover"
             style={{
-              transform: `scale(1.1) translateY(${scrollY * 0.02}px)`,
-              transition: 'transform 0.6s ease-out',
+              transform: `scale(1.15) translateY(${scrollY * 0.015}px)`,
+              transition: 'transform 0.8s ease-out',
             }}
           />
           
           {/* Heavy Dark Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/85" />
           
           {/* Blueprint Wireframe Overlay */}
           <svg 
-            className="absolute inset-0 w-full h-full opacity-[0.08]"
+            className="absolute inset-0 w-full h-full opacity-[0.09]"
             style={{
-              transform: `translateY(${scrollY * 0.015}px)`,
-              transition: 'transform 0.5s ease-out',
+              transform: `translateY(${scrollY * 0.01}px)`,
+              transition: 'transform 0.6s ease-out',
             }}
           >
             <defs>
-              <pattern id="stripBlueprint" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(38 42% 70%)" strokeWidth="0.5" />
-                <path d="M 20 0 L 20 40 M 0 20 L 40 20" fill="none" stroke="hsl(38 42% 70%)" strokeWidth="0.25" opacity="0.5" />
+              <pattern id="stripBlueprint" width="32" height="32" patternUnits="userSpaceOnUse">
+                <path d="M 32 0 L 0 0 0 32" fill="none" stroke="hsl(38 42% 65%)" strokeWidth="0.4" />
+                <path d="M 16 0 L 16 32 M 0 16 L 32 16" fill="none" stroke="hsl(38 42% 65%)" strokeWidth="0.2" opacity="0.4" />
               </pattern>
             </defs>
             <rect width="100%" height="100%" fill="url(#stripBlueprint)" />
-            
-            {/* Abstract construction lines */}
-            <line x1="10%" y1="25%" x2="90%" y2="25%" stroke="hsl(38 42% 60%)" strokeWidth="0.3" opacity="0.6" />
-            <line x1="10%" y1="50%" x2="70%" y2="50%" stroke="hsl(38 42% 60%)" strokeWidth="0.3" opacity="0.4" />
-            <line x1="30%" y1="75%" x2="90%" y2="75%" stroke="hsl(38 42% 60%)" strokeWidth="0.3" opacity="0.5" />
-            <rect x="20%" y="35%" width="60%" height="20%" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.4" opacity="0.3" />
           </svg>
           
           {/* Inner Gold Edge */}
-          <div className="absolute inset-0 border border-primary/20 rounded-sm pointer-events-none" />
+          <div className="absolute inset-[1px] border border-primary/15 pointer-events-none" />
           
-          {/* Corner Accents */}
-          <div className="absolute top-3 left-3 w-4 h-4 border-l border-t border-primary/30" />
-          <div className="absolute bottom-3 right-3 w-4 h-4 border-r border-b border-primary/30" />
+          {/* Corner Crop Marks - Top Left */}
+          <div className="absolute top-3 left-3">
+            <div className="w-5 h-px bg-primary/40" />
+            <div className="w-px h-5 bg-primary/40" />
+          </div>
+          
+          {/* Corner Crop Marks - Top Right */}
+          <div className="absolute top-3 right-3">
+            <div className="w-5 h-px bg-primary/40 ml-auto" />
+            <div className="w-px h-5 bg-primary/40 ml-auto" />
+          </div>
+          
+          {/* Corner Crop Marks - Bottom Left */}
+          <div className="absolute bottom-3 left-3 flex flex-col items-start">
+            <div className="w-px h-5 bg-primary/40" />
+            <div className="w-5 h-px bg-primary/40" />
+          </div>
+          
+          {/* Corner Crop Marks - Bottom Right */}
+          <div className="absolute bottom-3 right-3 flex flex-col items-end">
+            <div className="w-px h-5 bg-primary/40" />
+            <div className="w-5 h-px bg-primary/40" />
+          </div>
+          
+          {/* Micro Label - Project Snapshot */}
+          <div className="absolute bottom-6 left-0 right-0 px-4">
+            <div className="text-center">
+              <p className="text-primary/50 text-[8px] tracking-[0.25em] uppercase mb-1">
+                Project Snapshot
+              </p>
+              <p className="text-foreground/30 text-[7px] tracking-[0.15em]">
+                Residential Interior · Delhi NCR
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -192,62 +232,59 @@ const HeroAbout = () => {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-6 items-center min-h-screen py-32">
           
-          {/* Left Side - Empty Space with subtle element */}
-          <div className="col-span-12 lg:col-span-5 hidden lg:block">
-            {/* Intentional negative space */}
-          </div>
+          {/* Left Side - Intentional negative space */}
+          <div className="col-span-12 lg:col-span-5 hidden lg:block" />
 
           {/* Right Side - Text Content */}
-          <div className="col-span-12 lg:col-span-7 lg:pl-8">
+          <div className="col-span-12 lg:col-span-7 lg:pl-6">
             
-            {/* Philosophy Label - Micro Story */}
+            {/* Philosophy Label - First to appear */}
             <div 
-              className={`mb-10 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{ transitionDelay: '300ms' }}
+              className={`mb-12 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
+              style={{ transitionDelay: '200ms' }}
             >
-              <span className="text-primary/50 text-[10px] tracking-[0.4em] uppercase font-light">
+              <span className="text-primary/45 text-[9px] tracking-[0.5em] uppercase font-light">
                 The EdgeHomes Philosophy
               </span>
             </div>
 
             {/* Headline - Refined Editorial Scale */}
-            <div className="mb-10">
-              <h1 className="font-heading leading-[1.15] tracking-tight">
+            <div className="mb-12">
+              <h1 className="font-heading leading-[1.12] tracking-[-0.01em]">
                 {/* Line 1 */}
                 <span 
-                  className={`block text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl text-foreground/90 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-                  style={{ transitionDelay: '500ms' }}
+                  className={`block text-[1.75rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[2.85rem] text-foreground/95 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                  style={{ transitionDelay: '450ms' }}
                 >
                   Design is not what we do.
                 </span>
                 
                 {/* Line 2 */}
                 <span 
-                  className={`block text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl mt-2 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-                  style={{ transitionDelay: '700ms' }}
+                  className={`block text-[1.75rem] sm:text-[2rem] md:text-[2.5rem] lg:text-[2.85rem] mt-1 transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                  style={{ transitionDelay: '650ms' }}
                 >
-                  <span className="text-foreground/70">It's how we </span>
-                  <span className="italic text-primary">think.</span>
+                  <span className="text-foreground/65">It's how we </span>
+                  <span className="italic text-primary/90">think.</span>
                 </span>
               </h1>
             </div>
 
             {/* Subtle Divider Line */}
             <div 
-              className={`mb-8 transition-all duration-[1500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ transitionDelay: '1000ms' }}
+              className={`mb-8 transition-all duration-[1800ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+              style={{ transitionDelay: '900ms' }}
             >
-              <div className={`h-px bg-gradient-to-r from-primary/40 to-transparent transition-all duration-[1500ms] ease-out ${isLoaded ? 'w-24' : 'w-0'}`} style={{ transitionDelay: '1200ms' }} />
+              <div className={`h-px bg-gradient-to-r from-primary/35 via-primary/20 to-transparent transition-all duration-[1800ms] ease-out ${isLoaded ? 'w-20' : 'w-0'}`} style={{ transitionDelay: '1100ms' }} />
             </div>
 
-            {/* Subtext - Single Line */}
+            {/* Subtext - Single Line, improved contrast */}
             <p 
-              className={`text-muted-foreground/60 text-sm md:text-base max-w-md leading-relaxed font-light transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{ transitionDelay: '1100ms' }}
+              className={`text-muted-foreground/70 text-[13px] md:text-[15px] max-w-[420px] leading-[1.7] font-light tracking-wide transition-all duration-[1200ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}
+              style={{ transitionDelay: '1000ms' }}
             >
               A design & build studio shaping spaces that feel lived in, timeless, and intentional.
             </p>
-
           </div>
         </div>
       </div>
