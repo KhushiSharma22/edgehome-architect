@@ -148,73 +148,6 @@ const PhilosophySection = () => {
   );
 };
 
-// Invisible Details Section
-const InvisibleDetailsSection = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.15 });
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
-  const details = [
-    { title: 'Site Supervision', poetic: 'Every brick placed under watchful eyes. Because foundations are built on presence, not paperwork.' },
-    { title: 'Material Sourcing', poetic: 'We touch every tile before it touches your floor. Quality isn\'t checked—it\'s chosen.' },
-    { title: 'Vendor Coordination', poetic: 'Twenty hands work as one. Orchestrated chaos, seamless delivery.' },
-    { title: 'Cost Transparency', poetic: 'No hidden lines. No surprise chapters. Your budget tells a story we honor.' },
-    { title: 'Timeline Discipline', poetic: 'Deadlines aren\'t targets—they\'re promises. We don\'t negotiate with time.' },
-    { title: 'Quality Rituals', poetic: 'What you won\'t see matters most. The layers beneath, the joints within.' }
-  ];
-
-  return (
-    <section ref={ref} className="relative py-32 md:py-48 overflow-hidden">
-      {/* Background texture */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-[#0a0a0a] to-background" />
-      <div className="absolute inset-0 grain opacity-30" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* Section Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <span className="text-primary/60 text-xs tracking-[0.5em] uppercase mb-4 block">What People Don't See</span>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground/90 mb-6">
-            The Invisible Details
-          </h2>
-          <p className="text-muted-foreground/60 max-w-xl mx-auto text-lg">
-            Most people see the finish. We obsess over what lies beneath.
-          </p>
-        </div>
-
-        {/* Floating Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {details.map((detail, index) => (
-            <div
-              key={detail.title}
-              className={`group relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <div className={`
-                relative p-8 rounded-2xl border border-border/30 bg-card/30 backdrop-blur-sm
-                transition-all duration-500 cursor-default
-                ${hoveredCard === index ? 'border-primary/40 bg-primary/5 scale-[1.02] shadow-2xl shadow-primary/10' : 'hover:border-border/50'}
-              `}>
-                {/* Glow effect */}
-                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent opacity-0 transition-opacity duration-500 ${hoveredCard === index ? 'opacity-100' : ''}`} />
-                
-                <div className="relative z-10">
-                  <div className="w-8 h-px bg-primary/50 mb-6 transition-all duration-500 group-hover:w-12" />
-                  <h3 className="font-heading text-xl text-foreground/90 mb-4 group-hover:text-primary transition-colors duration-300">
-                    {detail.title}
-                  </h3>
-                  <p className="text-muted-foreground/70 text-sm leading-relaxed italic">
-                    "{detail.poetic}"
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // Cinematic Process Section
 const CinematicProcess = () => {
@@ -320,134 +253,8 @@ const PhaseItem = ({ phase, index }: { phase: { number: string; title: string; s
   );
 };
 
-// Trust Wall Section
-const TrustWall = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
-  const statements = [
-    'Every project personally supervised',
-    'One team from design to execution',
-    'No hidden costs, ever',
-    'Built to last, not trend',
-    '5-year structural warranty',
-    'Weekly progress updates',
-    'Premium materials only',
-    'Fixed price contracts'
-  ];
 
-  return (
-    <section ref={ref} className="relative py-32 md:py-48 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-[#080808] to-background" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6">
-        {/* Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <span className="text-primary/60 text-xs tracking-[0.5em] uppercase mb-4 block">Trust Without Testimonials</span>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-foreground/90 mb-6">
-            Why Clients Trust Us
-          </h2>
-          <p className="text-muted-foreground/60 max-w-xl mx-auto">
-            No faces. No stars. Just principles we live by.
-          </p>
-        </div>
-
-        {/* Manifesto Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {statements.map((statement, index) => (
-            <div
-              key={statement}
-              className={`group relative p-6 border border-border/20 rounded-xl bg-card/20 backdrop-blur-sm
-                hover:border-primary/30 hover:bg-primary/5 transition-all duration-500 cursor-default
-                ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <div className="absolute top-4 left-4 w-1.5 h-1.5 bg-primary/50 rounded-full group-hover:scale-150 transition-transform duration-300" />
-              <p className="text-foreground/80 text-sm pl-4 group-hover:text-foreground transition-colors duration-300">
-                {statement}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Brand Punch Section
-const BrandPunch = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 });
-
-  return (
-    <section ref={ref} className="relative py-48 md:py-64 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-background" />
-      
-      {/* Subtle glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[100px]" />
-
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        <div className={`transition-all duration-1500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-          <span className="text-primary/40 text-xs tracking-[0.5em] uppercase mb-8 block">EdgeHomes in One Sentence</span>
-          <h2 className="font-heading text-4xl md:text-6xl lg:text-7xl xl:text-8xl leading-[1.1] text-foreground/90">
-            <span className="block">Quiet luxury.</span>
-            <span className="block mt-2 text-primary">Honest execution.</span>
-            <span className="block mt-2">Thoughtful design.</span>
-          </h2>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Client Fit Section
-const ClientFit = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
-
-  const values = [
-    'Clarity over chaos',
-    'Quality over shortcuts',
-    'Long-term thinking',
-    'Calm decision-making',
-    'Trust over micromanagement',
-    'Vision over budget-first'
-  ];
-
-  return (
-    <section ref={ref} className="relative py-32 md:py-48 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-
-      <div className="relative z-10 max-w-4xl mx-auto px-6">
-        <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <span className="text-primary/60 text-xs tracking-[0.5em] uppercase mb-4 block text-center">The Right Fit</span>
-          <h2 className="font-heading text-4xl md:text-5xl text-foreground/90 text-center mb-4">
-            We work best with people who value...
-          </h2>
-          <p className="text-muted-foreground/60 text-center mb-16 max-w-xl mx-auto">
-            Great projects come from great partnerships. Here's what aligns us.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {values.map((value, index) => (
-            <div
-              key={value}
-              className={`group flex items-center gap-6 p-6 rounded-xl border border-border/20 
-                hover:border-primary/30 hover:bg-primary/5 transition-all duration-500
-                ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
-              style={{ transitionDelay: `${index * 100 + 300}ms` }}
-            >
-              <div className="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center group-hover:bg-primary/10 transition-all duration-300">
-                <span className="text-primary text-lg">✓</span>
-              </div>
-              <span className="text-foreground/80 text-lg group-hover:text-foreground transition-colors duration-300">
-                {value}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // Final CTA Section
 const FinalCTA = () => {
@@ -505,11 +312,7 @@ const About = () => {
       <main>
         <HeroAbout />
         <PhilosophySection />
-        <InvisibleDetailsSection />
         <CinematicProcess />
-        <TrustWall />
-        <BrandPunch />
-        <ClientFit />
         <FinalCTA />
       </main>
       <Footer />
