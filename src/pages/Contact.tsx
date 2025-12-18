@@ -58,9 +58,17 @@ const ArchitecturalBackground = () => {
         <line x1="0" y1="1080" x2="700" y2="600" stroke="#C7A36B" strokeWidth="0.3" strokeDasharray="4 8" />
       </svg>
       
-      {/* Light gradients - architectural lighting */}
-      <div className="absolute top-0 left-1/4 w-96 h-[600px] bg-gradient-to-b from-primary/[0.02] to-transparent blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-[500px] bg-gradient-to-t from-primary/[0.015] to-transparent blur-3xl" />
+      {/* Light gradients - architectural lighting - enhanced atmosphere */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[700px] bg-gradient-to-b from-primary/[0.04] to-transparent blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[600px] bg-gradient-to-t from-primary/[0.03] to-transparent blur-3xl" />
+      <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-gradient-radial from-primary/[0.025] to-transparent blur-2xl rounded-full" />
+      
+      {/* Subtle ambient orbs */}
+      <div className="absolute top-[20%] left-[10%] w-64 h-64 bg-primary/[0.02] rounded-full blur-3xl animate-pulse" style={{ animationDuration: '8s' }} />
+      <div className="absolute bottom-[30%] right-[15%] w-48 h-48 bg-primary/[0.015] rounded-full blur-2xl animate-pulse" style={{ animationDuration: '10s' }} />
+      
+      {/* Cinematic vignette */}
+      <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background/40" />
       
       {/* Corner architectural details */}
       <div className="absolute top-8 left-8 w-24 h-24 opacity-[0.06]">
@@ -511,7 +519,7 @@ const Contact = () => {
                         Studio Location
                       </span>
                       <h3 className="text-2xl font-heading font-light text-foreground/80">
-                        Delhi NCR
+                        Faridabad, Haryana
                       </h3>
                     </div>
                     
@@ -539,7 +547,7 @@ const Contact = () => {
                     <div className="space-y-4 text-sm">
                       <div className="flex items-start gap-4">
                         <span className="text-primary/40 text-[10px] font-mono">01</span>
-                        <span className="text-foreground/50 font-body">Pitampura, Delhi 110034</span>
+                        <span className="text-foreground/60 font-body leading-relaxed">SCO 8, 1st Floor, OMAXE WORLD STREET, Sec-79, Faridabad, Haryana 121004</span>
                       </div>
                       <div className="flex items-start gap-4">
                         <span className="text-primary/40 text-[10px] font-mono">02</span>
