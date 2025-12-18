@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ChevronRight, Phone, MessageCircle, Plus, Minus } from "lucide-react";
+import { ChevronRight, Plus, Minus, ArrowRight } from "lucide-react";
 import architectureHero from "@/assets/architecture-hero.jpg";
 
 const Architecture = () => {
@@ -11,6 +11,7 @@ const Architecture = () => {
   const [activePrinciple, setActivePrinciple] = useState<number | null>(null);
   const [activeBlueprint, setActiveBlueprint] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
@@ -24,39 +25,29 @@ const Architecture = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   const principles = [
     {
       title: "Function becomes form.",
       desc: "Every space earns its shape. We design around how you live — not around trends.",
-      icon: (
-        <svg viewBox="0 0 40 40" className="w-6 h-6">
-          <rect x="8" y="8" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1"/>
-          <circle cx="20" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="1"/>
-        </svg>
-      )
+      num: "01"
     },
     {
       title: "Light is a material.",
       desc: "We sculpt with sunlight. Every window, every void is placed with intention.",
-      icon: (
-        <svg viewBox="0 0 40 40" className="w-6 h-6">
-          <circle cx="20" cy="20" r="8" fill="none" stroke="currentColor" strokeWidth="1"/>
-          <line x1="20" y1="4" x2="20" y2="10" stroke="currentColor" strokeWidth="1"/>
-          <line x1="20" y1="30" x2="20" y2="36" stroke="currentColor" strokeWidth="1"/>
-          <line x1="4" y1="20" x2="10" y2="20" stroke="currentColor" strokeWidth="1"/>
-          <line x1="30" y1="20" x2="36" y2="20" stroke="currentColor" strokeWidth="1"/>
-        </svg>
-      )
+      num: "02"
     },
     {
       title: "Details carry the weight.",
       desc: "The joints, the thresholds, the edges — these are where architecture lives.",
-      icon: (
-        <svg viewBox="0 0 40 40" className="w-6 h-6">
-          <path d="M8 32 L20 8 L32 32" fill="none" stroke="currentColor" strokeWidth="1"/>
-          <line x1="12" y1="24" x2="28" y2="24" stroke="currentColor" strokeWidth="1"/>
-        </svg>
-      )
+      num: "03"
     }
   ];
 
@@ -81,324 +72,363 @@ const Architecture = () => {
     <div className="min-h-screen bg-ivory text-charcoal overflow-x-hidden">
       <Header />
 
-      {/* ===== SECTION 1: HERO - REDESIGNED PREMIUM ===== */}
-      <section className="relative pt-28 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
-        {/* Breadcrumb - inline */}
-        <div className="container mx-auto px-6 lg:px-12 mb-12">
-          <nav className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-graphite/60">
-            <Link to="/" className="hover:text-charcoal transition-colors">HOME</Link>
+      {/* ===== SECTION 1: HERO - CINEMATIC IMMERSIVE ===== */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Full background image with overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src={architectureHero}
+            alt="Modern architecture"
+            className="w-full h-full object-cover"
+            style={{
+              transform: `scale(1.05) translateY(${scrollY * 0.1}px)`,
+              transition: "transform 0.1s ease-out"
+            }}
+          />
+          {/* Gradient overlays for depth */}
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/60 to-charcoal/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-charcoal/40" />
+        </div>
+
+        {/* Animated geometric elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Floating lines */}
+          <div 
+            className="absolute top-1/4 left-0 w-[40%] h-[1px] bg-gradient-to-r from-muted-gold/60 to-transparent"
+            style={{
+              transform: `translateX(${isLoaded ? 0 : -100}%)`,
+              transition: "transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.8s"
+            }}
+          />
+          <div 
+            className="absolute top-1/2 right-0 w-[30%] h-[1px] bg-gradient-to-l from-muted-gold/40 to-transparent"
+            style={{
+              transform: `translateX(${isLoaded ? 0 : 100}%)`,
+              transition: "transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) 1s"
+            }}
+          />
+          <div 
+            className="absolute bottom-1/3 left-[10%] w-[1px] h-[20%] bg-gradient-to-b from-muted-gold/30 to-transparent"
+            style={{
+              transform: `translateY(${isLoaded ? 0 : -100}%)`,
+              transition: "transform 1.5s cubic-bezier(0.16, 1, 0.3, 1) 1.2s"
+            }}
+          />
+
+          {/* Corner frames */}
+          <div 
+            className="absolute top-20 left-8 lg:left-16"
+            style={{
+              opacity: isLoaded ? 1 : 0,
+              transition: "opacity 1s ease-out 1.5s"
+            }}
+          >
+            <div className="w-20 h-20 border-l border-t border-muted-gold/40" />
+          </div>
+          <div 
+            className="absolute bottom-20 right-8 lg:right-16"
+            style={{
+              opacity: isLoaded ? 1 : 0,
+              transition: "opacity 1s ease-out 1.7s"
+            }}
+          >
+            <div className="w-20 h-20 border-r border-b border-muted-gold/40" />
+          </div>
+
+          {/* Floating dots */}
+          <div 
+            className="absolute top-[30%] right-[15%] w-2 h-2 rounded-full bg-muted-gold/50"
+            style={{
+              transform: `translate(${(mousePosition.x - window.innerWidth/2) * 0.02}px, ${(mousePosition.y - window.innerHeight/2) * 0.02}px)`
+            }}
+          />
+          <div 
+            className="absolute bottom-[40%] left-[20%] w-1.5 h-1.5 rounded-full bg-muted-gold/30"
+            style={{
+              transform: `translate(${(mousePosition.x - window.innerWidth/2) * -0.015}px, ${(mousePosition.y - window.innerHeight/2) * -0.015}px)`
+            }}
+          />
+        </div>
+
+        {/* Main content */}
+        <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28">
+          {/* Breadcrumb */}
+          <nav 
+            className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/50 mb-16"
+            style={{
+              opacity: isLoaded ? 1 : 0,
+              transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+              transition: "all 0.8s ease-out 0.3s"
+            }}
+          >
+            <Link to="/" className="hover:text-ivory transition-colors">HOME</Link>
             <ChevronRight className="w-3 h-3" />
             <span>SERVICES</span>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-charcoal">ARCHITECTURE</span>
+            <span className="text-muted-gold">ARCHITECTURE</span>
           </nav>
-        </div>
 
-        {/* Paper grain texture */}
-        <div className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-          }}
-        />
-
-        {/* Decorative grid lines */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-muted-gold/20 to-transparent" />
-          <div className="absolute top-3/4 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-muted-gold/10 to-transparent" />
-          <div className="absolute left-1/4 top-0 h-full w-[1px] bg-gradient-to-b from-transparent via-graphite/5 to-transparent hidden lg:block" />
-        </div>
-
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          {/* Main hero layout */}
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-            
-            {/* Left column - Text content */}
-            <div className="lg:col-span-5 space-y-8">
-              {/* Edition tag */}
-              <div 
-                className="inline-flex items-center gap-3"
-                style={{
-                  opacity: isLoaded ? 1 : 0,
-                  transform: isLoaded ? "translateY(0)" : "translateY(20px)",
-                  transition: "all 0.8s ease-out 0.2s"
-                }}
-              >
-                <div className="w-8 h-[1px] bg-muted-gold" />
-                <span className="text-[9px] tracking-[0.25em] text-muted-gold font-mono">
-                  ARCHITECTURE STUDIO
-                </span>
-              </div>
-
-              {/* Main headline */}
-              <div 
-                className="space-y-1"
-                style={{
-                  opacity: isLoaded ? 1 : 0,
-                  transform: isLoaded ? "translateY(0)" : "translateY(30px)",
-                  transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s"
-                }}
-              >
-                <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-heading leading-[1.15] text-charcoal">
-                  Architecture that
-                  <br />
-                  <em className="italic text-muted-gold">feels calm</em> —
-                  <br />
-                  long before it
-                  <br />
-                  looks beautiful.
-                </h1>
-              </div>
-
-              {/* Subcopy */}
-              <p 
-                className="text-base text-graphite leading-relaxed max-w-md"
-                style={{
-                  opacity: isLoaded ? 1 : 0,
-                  transform: isLoaded ? "translateY(0)" : "translateY(25px)",
-                  transition: "all 0.9s ease-out 0.8s"
-                }}
-              >
-                We design homes with restraint, clarity, and quiet confidence. 
-                Every line has a reason, every space has a story.
-              </p>
-
-              {/* CTAs */}
-              <div 
-                className="flex flex-wrap gap-4 pt-2"
-                style={{
-                  opacity: isLoaded ? 1 : 0,
-                  transform: isLoaded ? "translateY(0)" : "translateY(25px)",
-                  transition: "all 0.9s ease-out 1s"
-                }}
-              >
-                <Link 
-                  to="/contact"
-                  className="group inline-flex items-center gap-3 bg-charcoal text-ivory px-7 py-3.5 text-sm tracking-wider hover:bg-charcoal/90 transition-all duration-500"
-                >
-                  Request a Consultation
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <button 
-                  onClick={() => document.getElementById('faq-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="inline-flex items-center gap-3 border border-charcoal/30 text-charcoal px-7 py-3.5 text-sm tracking-wider hover:bg-charcoal/5 transition-all duration-500"
-                >
-                  Learn More
-                </button>
-              </div>
-
-              {/* Signature line */}
-              <div 
-                className="pt-8 flex items-center gap-4"
-                style={{
-                  opacity: isLoaded ? 1 : 0,
-                  transition: "opacity 1s ease-out 1.3s"
-                }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-muted-gold/60" />
-                  <span className="text-[9px] tracking-[0.2em] text-graphite/50">DESIGN-FIRST</span>
-                </div>
-                <div className="w-6 h-[1px] bg-graphite/20" />
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-muted-gold/60" />
-                  <span className="text-[9px] tracking-[0.2em] text-graphite/50">DETAIL-OBSESSED</span>
-                </div>
-              </div>
+          <div className="max-w-4xl">
+            {/* Edition tag */}
+            <div 
+              className="inline-flex items-center gap-4 mb-8"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+                transition: "all 0.9s ease-out 0.5s"
+              }}
+            >
+              <div className="w-12 h-[1px] bg-muted-gold" />
+              <span className="text-[10px] tracking-[0.3em] text-muted-gold font-mono">
+                ARCHITECTURE STUDIO
+              </span>
+              <div className="w-3 h-3 rotate-45 border border-muted-gold/60" />
             </div>
 
-            {/* Right column - Hero image with artistic frame */}
-            <div className="lg:col-span-7 relative">
-              <div 
-                className="relative"
-                style={{
-                  opacity: isLoaded ? 1 : 0,
-                  transform: isLoaded ? "translateY(0) scale(1)" : "translateY(20px) scale(0.98)",
-                  transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s"
-                }}
-              >
-                {/* Outer decorative frame */}
-                <div className="absolute -top-4 -right-4 w-32 h-32 border-t border-r border-muted-gold/30" />
-                <div className="absolute -bottom-4 -left-4 w-32 h-32 border-b border-l border-muted-gold/30" />
-                
-                {/* Floating measurement marks */}
-                <div className="absolute -left-6 top-1/4 flex items-center gap-2">
-                  <div className="w-4 h-[1px] bg-graphite/30" />
-                  <span className="text-[8px] font-mono text-graphite/40">A</span>
-                </div>
-                <div className="absolute -left-6 top-3/4 flex items-center gap-2">
-                  <div className="w-4 h-[1px] bg-graphite/30" />
-                  <span className="text-[8px] font-mono text-graphite/40">B</span>
-                </div>
-
-                {/* Main image container */}
-                <div className="relative aspect-[4/3] lg:aspect-[5/4] overflow-hidden bg-graphite/5">
-                  <img 
-                    src={architectureHero}
-                    alt="Modern architecture by EdgeHomes"
-                    className="w-full h-full object-cover"
+            {/* Main headline - staggered reveal */}
+            <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory leading-[0.95] mb-8">
+              {["Architecture", "that feels", "calm"].map((line, i) => (
+                <span 
+                  key={i}
+                  className="block overflow-hidden"
+                >
+                  <span 
+                    className={`inline-block ${i === 2 ? "italic text-muted-gold" : ""}`}
                     style={{
-                      transform: `translateY(${scrollY * 0.03}px)`,
-                      transition: "transform 0.1s ease-out"
+                      opacity: isLoaded ? 1 : 0,
+                      transform: isLoaded ? "translateY(0)" : "translateY(100%)",
+                      transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.7 + i * 0.12}s`
                     }}
-                  />
-                  
-                  {/* Subtle blueprint overlay lines */}
-                  <svg 
-                    className="absolute inset-0 w-full h-full pointer-events-none"
-                    viewBox="0 0 500 400"
-                    preserveAspectRatio="none"
-                    style={{ opacity: 0.08 }}
                   >
-                    <g stroke="hsl(var(--muted-gold))" strokeWidth="0.5" fill="none">
-                      <line x1="0" y1="100" x2="500" y2="100" />
-                      <line x1="0" y1="300" x2="500" y2="300" />
-                      <line x1="150" y1="0" x2="150" y2="400" />
-                      <line x1="350" y1="0" x2="350" y2="400" />
-                      <circle cx="250" cy="200" r="60" strokeDasharray="4 4" />
-                    </g>
-                  </svg>
-
-                  {/* Edge gradients */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-ivory/20 via-transparent to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-ivory/10 via-transparent to-ivory/10" />
-                </div>
-
-                {/* Bottom label */}
-                <div className="absolute -bottom-3 left-8 bg-ivory px-4 py-2">
-                  <span className="text-[8px] tracking-[0.25em] text-graphite/60 font-mono">
-                    EDGEHOMES / EDITION 01
+                    {line}
                   </span>
-                </div>
+                </span>
+              ))}
+            </h1>
 
-                {/* Floating accent element */}
-                <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-24 flex flex-col items-center justify-between">
-                  <div className="w-[1px] h-8 bg-gradient-to-b from-transparent to-muted-gold/40" />
-                  <div className="w-2 h-2 rotate-45 border border-muted-gold/60" />
-                  <div className="w-[1px] h-8 bg-gradient-to-t from-transparent to-muted-gold/40" />
-                </div>
-              </div>
+            {/* Subcopy */}
+            <p 
+              className="text-lg md:text-xl text-ivory/70 leading-relaxed max-w-xl mb-10"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+                transition: "all 1s ease-out 1.2s"
+              }}
+            >
+              We design homes with restraint, clarity, and quiet confidence. 
+              Every line has a reason, every space has a story.
+            </p>
+
+            {/* CTA */}
+            <div 
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+                transition: "all 1s ease-out 1.4s"
+              }}
+            >
+              <Link 
+                to="/contact"
+                className="group inline-flex items-center gap-4 bg-muted-gold text-charcoal px-8 py-4 text-sm tracking-wider font-medium hover:bg-ivory transition-all duration-500"
+              >
+                Begin Your Project
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+              </Link>
             </div>
+          </div>
+
+          {/* Bottom signature */}
+          <div 
+            className="absolute bottom-12 left-6 lg:left-12 flex items-center gap-6"
+            style={{
+              opacity: isLoaded ? 1 : 0,
+              transition: "opacity 1s ease-out 1.8s"
+            }}
+          >
+            <span className="text-[9px] tracking-[0.2em] text-ivory/40">DESIGN-FIRST</span>
+            <div className="w-8 h-[1px] bg-ivory/20" />
+            <span className="text-[9px] tracking-[0.2em] text-ivory/40">DETAIL-OBSESSED</span>
+          </div>
+
+          {/* Scroll indicator */}
+          <div 
+            className="absolute bottom-12 right-6 lg:right-12 flex flex-col items-center gap-3"
+            style={{
+              opacity: isLoaded ? 1 : 0,
+              transition: "opacity 1s ease-out 2s"
+            }}
+          >
+            <span className="text-[9px] tracking-[0.3em] text-ivory/40 rotate-90 origin-center translate-x-6">SCROLL</span>
+            <div className="w-[1px] h-16 bg-gradient-to-b from-muted-gold/60 to-transparent animate-pulse" />
           </div>
         </div>
       </section>
 
-      {/* ===== SECTION 2: THE 3 PRINCIPLES - STUDIO WALL ===== */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
-        {/* Split tone: ivory top fading to warm grey */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ivory via-ivory to-ivory-dark/30" />
-        
+      {/* ===== SECTION 2: PRINCIPLES - IMMERSIVE CARDS ===== */}
+      <section className="relative py-28 lg:py-40 bg-ivory overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-[0.03]">
+          <svg className="w-full h-full">
+            <defs>
+              <pattern id="archGrid" width="100" height="100" patternUnits="userSpaceOnUse">
+                <circle cx="50" cy="50" r="1" fill="hsl(var(--charcoal))" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#archGrid)" />
+          </svg>
+        </div>
+
+        {/* Floating decorative elements */}
+        <div 
+          className="absolute top-20 right-20 w-40 h-40 border border-muted-gold/10 rounded-full"
+          style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+        />
+        <div 
+          className="absolute bottom-40 left-10 w-24 h-24 border border-graphite/5"
+          style={{ transform: `rotate(45deg) translateY(${scrollY * -0.03}px)` }}
+        />
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          {/* Section label */}
+          {/* Section header */}
           <div 
-            className="mb-16"
+            className="flex items-center justify-between mb-20"
             style={{
-              opacity: scrollY > 300 ? 1 : 0,
-              transform: scrollY > 300 ? "translateY(0)" : "translateY(30px)",
+              opacity: scrollY > 400 ? 1 : 0,
+              transform: scrollY > 400 ? "translateY(0)" : "translateY(40px)",
               transition: "all 1s ease-out"
             }}
           >
-            <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono">
-              OUR PHILOSOPHY
-            </span>
+            <div className="flex items-center gap-6">
+              <div className="w-16 h-16 rounded-full border border-muted-gold/30 flex items-center justify-center">
+                <span className="text-[10px] tracking-[0.2em] text-muted-gold">03</span>
+              </div>
+              <div>
+                <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono block mb-2">
+                  OUR PHILOSOPHY
+                </span>
+                <h2 className="text-3xl md:text-4xl font-heading text-charcoal">
+                  Core <em className="italic text-muted-gold">Principles</em>
+                </h2>
+              </div>
+            </div>
+            <div className="hidden lg:block w-32 h-[1px] bg-gradient-to-r from-muted-gold/50 to-transparent" />
           </div>
 
-          {/* Gallery rail - horizontal scrollable on mobile */}
-          <div className="relative">
-            {/* Thin horizontal rail line */}
-            <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-graphite/10" />
-
-            <div className="flex flex-col lg:flex-row lg:justify-between gap-12 lg:gap-8">
-              {principles.map((principle, index) => (
+          {/* Principles grid - asymmetric layout */}
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-6">
+            {principles.map((principle, index) => {
+              const colSpan = index === 0 ? "lg:col-span-5" : index === 1 ? "lg:col-span-4" : "lg:col-span-3";
+              const marginTop = index === 1 ? "lg:mt-20" : index === 2 ? "lg:mt-40" : "";
+              
+              return (
                 <div 
                   key={index}
-                  className="relative group flex-1 max-w-md"
+                  className={`${colSpan} ${marginTop} group`}
                   onMouseEnter={() => setActivePrinciple(index)}
                   onMouseLeave={() => setActivePrinciple(null)}
                   style={{
-                    opacity: scrollY > 400 ? 1 : 0,
-                    transform: scrollY > 400 
-                      ? `translateY(0) translateX(${activePrinciple === index ? 0 : (index - 1) * 3}px)` 
-                      : "translateY(40px)",
-                    transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.2}s`
+                    opacity: scrollY > 500 ? 1 : 0,
+                    transform: scrollY > 500 ? "translateY(0)" : "translateY(60px)",
+                    transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s`
                   }}
                 >
-                  {/* Connector line to rail */}
-                  <div className="hidden lg:block absolute top-0 left-8 w-[1px] h-10 bg-gradient-to-b from-muted-gold/50 to-transparent" />
-                  
-                  {/* Pin dot */}
-                  <div className="hidden lg:block absolute -top-1 left-8 -translate-x-1/2 w-2 h-2 rounded-full bg-muted-gold/60" />
+                  <div 
+                    className={`relative p-8 lg:p-10 transition-all duration-700 ${
+                      activePrinciple === index 
+                        ? "bg-charcoal" 
+                        : "bg-ivory-dark/30 hover:bg-ivory-dark/50"
+                    }`}
+                  >
+                    {/* Number */}
+                    <span 
+                      className={`text-6xl lg:text-7xl font-heading transition-colors duration-500 ${
+                        activePrinciple === index ? "text-muted-gold/30" : "text-graphite/10"
+                      }`}
+                    >
+                      {principle.num}
+                    </span>
 
-                  {/* Principle card */}
-                  <div className="pt-14 lg:pt-16">
-                    <div className="flex items-start gap-4">
-                      <div className="text-muted-gold opacity-60 group-hover:opacity-100 transition-opacity duration-500">
-                        {principle.icon}
-                      </div>
-                      <div>
-                        <h3 className="text-xl md:text-2xl font-heading text-charcoal mb-3">
-                          {principle.title}
-                        </h3>
-                        <p 
-                          className="text-sm text-graphite leading-relaxed max-w-xs"
-                          style={{
-                            opacity: activePrinciple === index ? 1 : 0.7,
-                            maxHeight: activePrinciple === index ? "100px" : "0",
-                            overflow: "hidden",
-                            transition: "all 0.5s ease-out"
-                          }}
-                        >
-                          {principle.desc}
-                        </p>
-                      </div>
+                    {/* Content */}
+                    <div className="mt-6">
+                      <h3 
+                        className={`text-xl md:text-2xl font-heading mb-4 transition-colors duration-500 ${
+                          activePrinciple === index ? "text-ivory" : "text-charcoal"
+                        }`}
+                      >
+                        {principle.title}
+                      </h3>
+                      <p 
+                        className={`text-sm leading-relaxed transition-all duration-500 ${
+                          activePrinciple === index ? "text-ivory/70" : "text-graphite"
+                        }`}
+                      >
+                        {principle.desc}
+                      </p>
+                    </div>
+
+                    {/* Corner accent */}
+                    <div 
+                      className={`absolute top-0 right-0 w-12 h-12 transition-all duration-500 ${
+                        activePrinciple === index ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <div className="absolute top-0 right-0 w-full h-[1px] bg-muted-gold" />
+                      <div className="absolute top-0 right-0 h-full w-[1px] bg-muted-gold" />
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
       {/* ===== SECTION 3: DESIGN DNA - COMPACT ===== */}
-      <section className="relative py-16 lg:py-20 bg-charcoal overflow-hidden">
+      <section className="relative py-16 lg:py-24 bg-charcoal overflow-hidden">
+        {/* Animated background lines */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-ivory/5 to-transparent"
+            style={{ transform: `translateY(${(scrollY - 1000) * 0.1}px)` }}
+          />
+          <div 
+            className="absolute top-0 right-1/3 w-[1px] h-full bg-gradient-to-b from-transparent via-muted-gold/10 to-transparent"
+            style={{ transform: `translateY(${(scrollY - 1000) * -0.08}px)` }}
+          />
+        </div>
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             {/* Left: Blueprint panel */}
             <div 
-              className="relative aspect-[4/3]"
+              className="relative aspect-[4/3] group"
               style={{
-                opacity: scrollY > 700 ? 1 : 0,
-                transform: scrollY > 700 ? "translateX(0)" : "translateX(-40px)",
+                opacity: scrollY > 900 ? 1 : 0,
+                transform: scrollY > 900 ? "translateX(0)" : "translateX(-40px)",
                 transition: "all 1s ease-out"
               }}
             >
+              {/* Outer frame */}
+              <div className="absolute -inset-4 border border-muted-gold/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              
               {/* Blueprint SVG */}
-              <svg viewBox="0 0 400 300" className="w-full h-full">
+              <svg viewBox="0 0 400 300" className="w-full h-full bg-charcoal/50">
                 <defs>
                   <pattern id="blueprintGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--ivory) / 0.1)" strokeWidth="0.3"/>
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--ivory) / 0.08)" strokeWidth="0.3"/>
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#blueprintGrid)" />
                 
                 {/* Floor plan lines */}
                 <g stroke="hsl(var(--ivory))" strokeWidth="0.5" fill="none" opacity="0.4">
-                  {/* Outer walls */}
                   <rect x="50" y="40" width="300" height="220" />
-                  
-                  {/* Rooms */}
                   <line x1="50" y1="120" x2="200" y2="120" />
                   <line x1="200" y1="40" x2="200" y2="160" />
                   <line x1="200" y1="200" x2="350" y2="200" />
                   <line x1="260" y1="120" x2="260" y2="260" />
-                  
-                  {/* Courtyard */}
                   <rect x="150" y="120" width="70" height="70" strokeDasharray="4 2" />
-                  
-                  {/* Entry */}
                   <path d="M50 180 L30 180 L30 220 L50 220" />
-                  
-                  {/* Stairs */}
                   <g>
                     <line x1="280" y1="60" x2="280" y2="110" />
                     <line x1="280" y1="70" x2="320" y2="70" />
@@ -415,38 +445,47 @@ const Architecture = () => {
                       cx={anno.x * 4} 
                       cy={anno.y * 3} 
                       r="16"
-                      fill={activeBlueprint === anno.id ? "hsl(var(--muted-gold) / 0.15)" : "transparent"}
+                      fill={activeBlueprint === anno.id ? "hsl(var(--muted-gold) / 0.2)" : "transparent"}
                       stroke={activeBlueprint === anno.id ? "hsl(var(--muted-gold))" : "transparent"}
-                      strokeWidth="1"
+                      strokeWidth="1.5"
                       style={{ transition: "all 0.5s ease-out" }}
                     />
                   </g>
                 ))}
               </svg>
+
+              {/* Corner labels */}
+              <div className="absolute -top-2 -left-2 text-[8px] font-mono text-muted-gold/60">A1</div>
+              <div className="absolute -bottom-2 -right-2 text-[8px] font-mono text-muted-gold/60">B4</div>
             </div>
 
             {/* Right: Annotations */}
             <div 
               className="space-y-6"
               style={{
-                opacity: scrollY > 700 ? 1 : 0,
-                transform: scrollY > 700 ? "translateX(0)" : "translateX(40px)",
+                opacity: scrollY > 900 ? 1 : 0,
+                transform: scrollY > 900 ? "translateX(0)" : "translateX(40px)",
                 transition: "all 1s ease-out 0.2s"
               }}
             >
-              <span className="text-[9px] tracking-[0.3em] text-muted-gold font-mono">
-                DESIGN DNA
-              </span>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full border border-muted-gold/40 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-muted-gold rounded-full" />
+                </div>
+                <span className="text-[9px] tracking-[0.3em] text-muted-gold font-mono">
+                  DESIGN DNA
+                </span>
+              </div>
               
               <h2 className="text-2xl md:text-3xl font-heading text-ivory leading-tight">
                 Good architecture is invisible engineering — disguised as <em className="italic text-muted-gold">ease</em>.
               </h2>
 
-              <div className="space-y-3 pt-4">
+              <div className="space-y-2 pt-4">
                 {blueprintAnnotations.map((anno, index) => (
                   <button
                     key={anno.id}
-                    className={`group w-full text-left flex items-center gap-4 py-2.5 border-b transition-all duration-300 ${
+                    className={`group w-full text-left flex items-center gap-4 py-3 border-b transition-all duration-300 ${
                       activeBlueprint === anno.id 
                         ? "border-muted-gold/50" 
                         : "border-ivory/10 hover:border-ivory/30"
@@ -454,7 +493,11 @@ const Architecture = () => {
                     onMouseEnter={() => setActiveBlueprint(anno.id)}
                     onMouseLeave={() => setActiveBlueprint(null)}
                   >
-                    <span className="text-[10px] font-mono text-graphite/60 w-6">
+                    <span className={`w-6 h-6 rounded-full border flex items-center justify-center text-[9px] font-mono transition-all duration-300 ${
+                      activeBlueprint === anno.id 
+                        ? "border-muted-gold text-muted-gold" 
+                        : "border-ivory/20 text-ivory/40"
+                    }`}>
                       {String(index + 1).padStart(2, '0')}
                     </span>
                     <span className={`text-sm tracking-wide transition-colors duration-300 ${
@@ -462,7 +505,7 @@ const Architecture = () => {
                     }`}>
                       {anno.label}
                     </span>
-                    <ChevronRight className={`w-4 h-4 ml-auto transition-all duration-300 ${
+                    <ArrowRight className={`w-4 h-4 ml-auto transition-all duration-300 ${
                       activeBlueprint === anno.id 
                         ? "opacity-100 translate-x-0 text-muted-gold" 
                         : "opacity-0 -translate-x-2 text-ivory"
@@ -477,20 +520,28 @@ const Architecture = () => {
 
       {/* ===== SECTION 4: FAQ ===== */}
       <section id="faq-section" className="relative py-24 lg:py-32 bg-ivory overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-20 right-10 w-32 h-32 border border-graphite/5 rounded-full" />
+        <div className="absolute bottom-20 left-10 w-2 h-2 bg-muted-gold/40 rounded-full" />
+
         <div className="container mx-auto px-6 lg:px-12">
           <div className="max-w-3xl mx-auto">
             {/* Section header */}
             <div 
               className="text-center mb-14"
               style={{
-                opacity: scrollY > 1000 ? 1 : 0,
-                transform: scrollY > 1000 ? "translateY(0)" : "translateY(30px)",
+                opacity: scrollY > 1300 ? 1 : 0,
+                transform: scrollY > 1300 ? "translateY(0)" : "translateY(30px)",
                 transition: "all 1s ease-out"
               }}
             >
-              <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono block mb-6">
-                QUESTIONS
-              </span>
+              <div className="inline-flex items-center gap-4 mb-6">
+                <div className="w-8 h-[1px] bg-muted-gold/50" />
+                <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono">
+                  QUESTIONS
+                </span>
+                <div className="w-8 h-[1px] bg-muted-gold/50" />
+              </div>
               <h2 className="text-3xl md:text-4xl font-heading text-charcoal">
                 Common questions
               </h2>
@@ -500,7 +551,7 @@ const Architecture = () => {
             <div 
               className="space-y-0"
               style={{
-                opacity: scrollY > 1100 ? 1 : 0,
+                opacity: scrollY > 1400 ? 1 : 0,
                 transition: "opacity 1s ease-out"
               }}
             >
@@ -539,70 +590,6 @@ const Architecture = () => {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ===== SECTION 5: CTA - BEGIN THE CONVERSATION ===== */}
-      <section className="relative overflow-hidden">
-        <div className="grid lg:grid-cols-2 min-h-[50vh]">
-          {/* Left: Warm ivory */}
-          <div className="bg-ivory flex items-center justify-center p-10 lg:p-16">
-            <div 
-              className="max-w-md"
-              style={{
-                opacity: scrollY > 1400 ? 1 : 0,
-                transform: scrollY > 1400 ? "translateX(0)" : "translateX(-30px)",
-                transition: "all 1s ease-out"
-              }}
-            >
-              <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono block mb-5">
-                LET'S BEGIN
-              </span>
-              <h2 className="text-2xl md:text-3xl font-heading text-charcoal leading-tight mb-5">
-                Bring us the site. We'll bring the <em className="italic text-muted-gold">clarity</em>.
-              </h2>
-              <p className="text-xs text-graphite/60">
-                Limited annual projects. Thoughtful work takes time.
-              </p>
-            </div>
-          </div>
-
-          {/* Right: Charcoal */}
-          <div className="bg-charcoal flex items-center justify-center p-10 lg:p-16">
-            <div 
-              className="space-y-5"
-              style={{
-                opacity: scrollY > 1400 ? 1 : 0,
-                transform: scrollY > 1400 ? "translateX(0)" : "translateX(30px)",
-                transition: "all 1s ease-out 0.2s"
-              }}
-            >
-              <Link 
-                to="/contact"
-                className="group flex items-center gap-4 bg-muted-gold text-charcoal px-7 py-3.5 text-sm tracking-wider hover:bg-muted-gold/90 transition-all duration-300"
-              >
-                <Phone className="w-4 h-4" />
-                Request a Consultation
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <a 
-                href="https://wa.me/919876543210"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 border border-ivory/30 text-ivory px-7 py-3.5 text-sm tracking-wider hover:bg-ivory/10 transition-all duration-300"
-              >
-                <MessageCircle className="w-4 h-4" />
-                WhatsApp Us
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Credibility line */}
-        <div className="absolute bottom-6 left-0 right-0 text-center">
-          <span className="text-[9px] tracking-[0.3em] text-graphite/40">
-            DESIGN-FIRST. DETAIL-OBSESSED. BUILT FOR DECADES.
-          </span>
         </div>
       </section>
 
