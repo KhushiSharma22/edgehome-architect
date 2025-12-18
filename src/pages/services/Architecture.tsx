@@ -1,489 +1,534 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Link } from "react-router-dom";
+import { ChevronRight, Phone, MessageCircle, Plus, Minus } from "lucide-react";
+import architectureHero from "@/assets/architecture-hero.jpg";
+import architectureCase1 from "@/assets/architecture-case-1.jpg";
+import architectureCase2 from "@/assets/architecture-case-2.jpg";
+import architectureCase3 from "@/assets/architecture-case-3.jpg";
 
 const Architecture = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [activePrinciple, setActivePrinciple] = useState<number | null>(null);
+  const [activeBlueprint, setActiveBlueprint] = useState<string | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-
-    window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const philosophyWords = [
-    { word: "VISION", delay: 0 },
-    { word: "FORM", delay: 0.2 },
-    { word: "LIGHT", delay: 0.4 },
-    { word: "SPACE", delay: 0.6 },
+  const principles = [
+    {
+      title: "Function becomes form.",
+      desc: "Every space earns its shape. We design around how you live — not around trends.",
+      icon: (
+        <svg viewBox="0 0 40 40" className="w-6 h-6">
+          <rect x="8" y="8" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1"/>
+          <circle cx="20" cy="20" r="6" fill="none" stroke="currentColor" strokeWidth="1"/>
+        </svg>
+      )
+    },
+    {
+      title: "Light is a material.",
+      desc: "We sculpt with sunlight. Every window, every void is placed with intention.",
+      icon: (
+        <svg viewBox="0 0 40 40" className="w-6 h-6">
+          <circle cx="20" cy="20" r="8" fill="none" stroke="currentColor" strokeWidth="1"/>
+          <line x1="20" y1="4" x2="20" y2="10" stroke="currentColor" strokeWidth="1"/>
+          <line x1="20" y1="30" x2="20" y2="36" stroke="currentColor" strokeWidth="1"/>
+          <line x1="4" y1="20" x2="10" y2="20" stroke="currentColor" strokeWidth="1"/>
+          <line x1="30" y1="20" x2="36" y2="20" stroke="currentColor" strokeWidth="1"/>
+        </svg>
+      )
+    },
+    {
+      title: "Details carry the weight.",
+      desc: "The joints, the thresholds, the edges — these are where architecture lives.",
+      icon: (
+        <svg viewBox="0 0 40 40" className="w-6 h-6">
+          <path d="M8 32 L20 8 L32 32" fill="none" stroke="currentColor" strokeWidth="1"/>
+          <line x1="12" y1="24" x2="28" y2="24" stroke="currentColor" strokeWidth="1"/>
+        </svg>
+      )
+    }
+  ];
+
+  const blueprintAnnotations = [
+    { id: "entry", label: "Entry sequence", x: 15, y: 30 },
+    { id: "courtyard", label: "Courtyard / void", x: 50, y: 45 },
+    { id: "stair", label: "Stair as sculpture", x: 75, y: 25 },
+    { id: "sightlines", label: "Sightlines", x: 35, y: 70 },
+    { id: "ventilation", label: "Ventilation logic", x: 65, y: 75 }
+  ];
+
+  const services = [
+    "New homes & villas",
+    "Renovations & extensions",
+    "Facade studies",
+    "Layout optimization",
+    "Structural coordination",
+    "Landscape integration",
+    "3D massing & spatial studies",
+    "Municipal drawing sets"
   ];
 
   const processSteps = [
-    { num: "01", title: "CONCEPT", desc: "Ideas crystallize into vision" },
-    { num: "02", title: "DEVELOP", desc: "Forms emerge from intention" },
-    { num: "03", title: "REFINE", desc: "Details define excellence" },
-    { num: "04", title: "REALIZE", desc: "Dreams become reality" },
+    { num: "01", title: "Discovery & site reading", deliverable: "Site report" },
+    { num: "02", title: "Concept & massing", deliverable: "Concept deck" },
+    { num: "03", title: "Plans, elevations, and light studies", deliverable: "Plan set" },
+    { num: "04", title: "Technical coordination", deliverable: "Technical drawings" },
+    { num: "05", title: "Detailing & documentation", deliverable: "Material palette" },
+    { num: "06", title: "On-site review (optional)", deliverable: "Site visits" }
+  ];
+
+  const caseStudies = [
+    {
+      image: architectureCase1,
+      title: "The Light House",
+      location: "Gurgaon, 2024",
+      type: "Private Residence",
+      highlights: ["Double-height living", "North light control", "Warm material palette"]
+    },
+    {
+      image: architectureCase2,
+      title: "Courtyard Villa",
+      location: "Noida, 2023",
+      type: "Weekend Home",
+      highlights: ["Central courtyard", "Passive cooling", "Stone facade"]
+    },
+    {
+      image: architectureCase3,
+      title: "The Sculptural Stair",
+      location: "Delhi, 2024",
+      type: "Renovation",
+      highlights: ["Sculptural staircase", "Skylight integration", "Concrete & wood"]
+    }
+  ];
+
+  const faqs = [
+    { q: "What is your typical timeline?", a: "Most residential projects take 8-16 weeks for design, depending on complexity. We believe in thorough exploration over rushed decisions." },
+    { q: "Do you do turnkey?", a: "We focus on design and documentation. For construction, we partner with trusted contractors or work with your chosen builder." },
+    { q: "How do you charge?", a: "We work on a phased fee structure based on project scope. An initial consultation helps us provide a detailed proposal." },
+    { q: "Can you work with my contractor?", a: "Absolutely. We're experienced in coordinating with external teams and ensuring our design intent is executed precisely." },
+    { q: "How many concepts do you provide?", a: "We typically present 2-3 distinct directions, then refine the chosen approach through iterations." },
+    { q: "What do you need from me to start?", a: "Site survey, plot documents, a brief conversation about your vision, and trust in the process." }
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-background text-foreground overflow-hidden">
+    <div className="min-h-screen bg-ivory text-charcoal overflow-x-hidden">
       <Header />
-      
-      {/* Hero Section - Cinematic Dark */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0">
-          <svg className="w-full h-full opacity-10" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="heroGrid" width="100" height="100" patternUnits="userSpaceOnUse">
-                <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.3"/>
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#heroGrid)" 
-              style={{ 
-                transform: `translate(${mousePos.x * 0.02}px, ${mousePos.y * 0.02}px)`,
-                transition: "transform 0.5s ease-out"
-              }}
-            />
-          </svg>
-        </div>
 
-        {/* Floating Geometric Shapes */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Large rotating cube wireframe */}
-          <div 
-            className="absolute top-1/4 right-[15%] w-64 h-64 md:w-96 md:h-96"
-            style={{
-              transform: `rotateX(${scrollY * 0.05}deg) rotateY(${scrollY * 0.08}deg) rotateZ(${mousePos.x * 0.01}deg)`,
-              transition: "transform 0.3s ease-out"
-            }}
-          >
-            <svg viewBox="0 0 200 200" className="w-full h-full opacity-20">
-              <g stroke="hsl(var(--primary))" strokeWidth="0.5" fill="none">
-                {/* Front face */}
-                <path d="M50,50 L150,50 L150,150 L50,150 Z" 
-                  strokeDasharray="400" 
-                  strokeDashoffset={isLoaded ? 0 : 400}
-                  style={{ transition: "stroke-dashoffset 2s ease-out" }}
-                />
-                {/* Back face */}
-                <path d="M80,20 L180,20 L180,120 L80,120 Z" 
-                  strokeDasharray="400" 
-                  strokeDashoffset={isLoaded ? 0 : 400}
-                  style={{ transition: "stroke-dashoffset 2.5s ease-out 0.3s" }}
-                  opacity="0.5"
-                />
-                {/* Connecting lines */}
-                <line x1="50" y1="50" x2="80" y2="20" 
-                  strokeDasharray="50" 
-                  strokeDashoffset={isLoaded ? 0 : 50}
-                  style={{ transition: "stroke-dashoffset 1s ease-out 1s" }}
-                />
-                <line x1="150" y1="50" x2="180" y2="20"
-                  strokeDasharray="50" 
-                  strokeDashoffset={isLoaded ? 0 : 50}
-                  style={{ transition: "stroke-dashoffset 1s ease-out 1.2s" }}
-                />
-                <line x1="150" y1="150" x2="180" y2="120"
-                  strokeDasharray="50" 
-                  strokeDashoffset={isLoaded ? 0 : 50}
-                  style={{ transition: "stroke-dashoffset 1s ease-out 1.4s" }}
-                />
-                <line x1="50" y1="150" x2="80" y2="120"
-                  strokeDasharray="50" 
-                  strokeDashoffset={isLoaded ? 0 : 50}
-                  style={{ transition: "stroke-dashoffset 1s ease-out 1.6s" }}
-                />
-              </g>
-            </svg>
-          </div>
+      {/* Breadcrumb */}
+      <div className="fixed top-24 left-8 z-40 hidden lg:block">
+        <nav className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-graphite/60">
+          <Link to="/" className="hover:text-charcoal transition-colors">HOME</Link>
+          <ChevronRight className="w-3 h-3" />
+          <span>SERVICES</span>
+          <ChevronRight className="w-3 h-3" />
+          <span className="text-charcoal">ARCHITECTURE</span>
+        </nav>
+      </div>
 
-          {/* Floating triangles */}
-          <div 
-            className="absolute top-[60%] left-[10%] w-32 h-32"
-            style={{
-              transform: `translateY(${Math.sin(scrollY * 0.01) * 20}px) rotate(${scrollY * 0.1}deg)`,
-              transition: "transform 0.2s ease-out"
-            }}
-          >
-            <svg viewBox="0 0 100 100" className="w-full h-full opacity-30">
-              <polygon points="50,10 90,90 10,90" fill="none" stroke="hsl(var(--primary))" strokeWidth="1"/>
-            </svg>
-          </div>
-
-          {/* Circle rings */}
-          <div 
-            className="absolute bottom-[20%] right-[20%] w-48 h-48"
-            style={{
-              transform: `scale(${1 + Math.sin(scrollY * 0.005) * 0.1})`,
-            }}
-          >
-            <svg viewBox="0 0 100 100" className="w-full h-full opacity-20">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5"/>
-              <circle cx="50" cy="50" r="35" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.3"/>
-              <circle cx="50" cy="50" r="25" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.3"/>
-            </svg>
-          </div>
-        </div>
-
-        {/* Dramatic Light Beam */}
-        <div 
-          className="absolute top-0 left-1/2 w-[2px] h-0 bg-gradient-to-b from-primary via-primary/50 to-transparent"
+      {/* ===== SECTION 1: HERO - THE BLUEPRINT MOMENT ===== */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Paper grain texture */}
+        <div className="absolute inset-0 opacity-[0.04]"
           style={{
-            height: isLoaded ? "40%" : "0%",
-            transition: "height 2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s",
-            boxShadow: "0 0 80px 20px hsl(var(--primary) / 0.3)"
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
           }}
         />
 
-        {/* Main Content */}
-        <div className="relative z-10 text-center px-6">
-          {/* Eyebrow */}
-          <div 
-            className="overflow-hidden mb-8"
-            style={{
-              opacity: isLoaded ? 1 : 0,
-              transition: "opacity 1s ease-out 1s"
-            }}
-          >
-            <span className="inline-block text-xs md:text-sm tracking-[0.4em] text-primary font-mono">
-              ARCHITECTURAL EXCELLENCE
-            </span>
-          </div>
+        {/* Drafting grid */}
+        <svg className="absolute inset-0 w-full h-full" style={{ opacity: isLoaded ? 0.05 : 0, transition: "opacity 2s ease-out" }}>
+          <defs>
+            <pattern id="draftGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(var(--charcoal))" strokeWidth="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#draftGrid)" />
+        </svg>
 
-          {/* Main Title with Split Animation */}
-          <div className="relative">
-            <h1 className="text-[12vw] md:text-[10vw] lg:text-[8vw] font-heading font-bold leading-none tracking-tighter">
-              {"ARCHITECTURE".split("").map((letter, i) => (
-                <span
-                  key={i}
-                  className="inline-block"
-                  style={{
-                    opacity: isLoaded ? 1 : 0,
-                    transform: isLoaded ? "translateY(0) rotateX(0)" : "translateY(100%) rotateX(-90deg)",
-                    transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${1.5 + i * 0.05}s`,
-                  }}
-                >
-                  {letter}
-                </span>
-              ))}
-            </h1>
+        {/* Top dark vignette */}
+        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-charcoal/10 to-transparent" />
+
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[80vh]">
             
-            {/* Glowing underline */}
-            <div 
-              className="mx-auto mt-6 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"
-              style={{
-                width: isLoaded ? "60%" : "0%",
-                transition: "width 1.5s cubic-bezier(0.16, 1, 0.3, 1) 2.5s",
-                boxShadow: "0 0 30px hsl(var(--primary) / 0.5)"
-              }}
-            />
-          </div>
-
-          {/* Subtitle */}
-          <p 
-            className="mt-12 text-lg md:text-xl text-muted-foreground max-w-xl mx-auto tracking-wide"
-            style={{
-              opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? "translateY(0)" : "translateY(30px)",
-              transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 2.8s"
-            }}
-          >
-            Where imagination meets precision.
-            <br />
-            <span className="text-primary">Spaces that transcend time.</span>
-          </p>
-
-          {/* Scroll Indicator */}
-          <div 
-            className="absolute bottom-[-40vh] left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
-            style={{
-              opacity: isLoaded ? 1 : 0,
-              transition: "opacity 1s ease-out 3.5s"
-            }}
-          >
-            <span className="text-xs tracking-[0.3em] text-muted-foreground">EXPLORE</span>
-            <div className="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent animate-pulse" />
-          </div>
-        </div>
-
-        {/* Ambient Glow */}
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full pointer-events-none"
-          style={{
-            background: "radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
-            transform: `translate(-50%, -50%) translate(${(mousePos.x - window.innerWidth / 2) * 0.02}px, ${(mousePos.y - window.innerHeight / 2) * 0.02}px)`,
-            transition: "transform 0.5s ease-out"
-          }}
-        />
-      </section>
-
-      {/* Philosophy Section - Dramatic Words */}
-      <section className="relative py-40 md:py-60 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
-        
-        {/* Animated diagonal lines */}
-        <div className="absolute inset-0 opacity-10">
-          {[...Array(5)].map((_, i) => (
-            <div 
-              key={i}
-              className="absolute w-[1px] h-[200%] bg-gradient-to-b from-transparent via-primary to-transparent"
-              style={{
-                left: `${15 + i * 20}%`,
-                top: "-50%",
-                transform: `rotate(15deg) translateY(${scrollY * 0.1 * (i % 2 === 0 ? 1 : -1)}px)`,
-                transition: "transform 0.3s ease-out"
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-            {philosophyWords.map((item, index) => (
+            {/* Left: Editorial content */}
+            <div className="lg:col-span-5 lg:col-start-1 space-y-8 pt-24 lg:pt-0">
+              {/* Project sheet tag */}
               <div 
-                key={index}
-                className="group relative"
+                className="inline-block"
                 style={{
-                  opacity: scrollY > 300 ? 1 : 0,
-                  transform: scrollY > 300 ? "translateY(0)" : "translateY(60px)",
-                  transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${item.delay}s`
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+                  transition: "all 1s ease-out 0.3s"
                 }}
               >
-                <span className="text-5xl md:text-7xl lg:text-9xl font-heading font-bold tracking-tighter text-foreground/10 group-hover:text-primary transition-colors duration-700">
-                  {item.word}
+                <span className="text-[9px] tracking-[0.3em] text-graphite/70 font-mono border border-graphite/20 px-4 py-2">
+                  EDGEHOMES / ARCHITECTURE / EDITION 01
                 </span>
-                <div className="absolute -bottom-2 left-0 w-0 h-[2px] bg-primary group-hover:w-full transition-all duration-700" />
               </div>
-            ))}
-          </div>
 
-          {/* Central Philosophy Text */}
-          <div 
-            className="mt-32 max-w-4xl mx-auto text-center"
-            style={{
-              opacity: scrollY > 500 ? 1 : 0,
-              transform: scrollY > 500 ? "translateY(0)" : "translateY(40px)",
-              transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}
-          >
-            <p className="text-2xl md:text-3xl lg:text-4xl font-heading leading-relaxed text-muted-foreground">
-              Architecture is the <span className="text-gradient-gold">silent poetry</span> of human existence.
-              It shapes not just spaces, but the very fabric of our daily rituals.
-            </p>
-          </div>
-        </div>
-      </section>
+              {/* Headline */}
+              <div className="space-y-2">
+                <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-heading leading-[1.1] text-charcoal">
+                  {["Architecture that", "feels calm —", "long before it", "looks beautiful."].map((line, i) => (
+                    <span 
+                      key={i}
+                      className="block overflow-hidden"
+                    >
+                      <span 
+                        className="inline-block"
+                        style={{
+                          opacity: isLoaded ? 1 : 0,
+                          transform: isLoaded ? "translateY(0)" : "translateY(100%)",
+                          transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.5 + i * 0.15}s`
+                        }}
+                      >
+                        {line.includes("calm") ? (
+                          <>Architecture that <em className="font-serif italic text-muted-gold">feels calm</em> —</>
+                        ) : line}
+                      </span>
+                    </span>
+                  ))}
+                </h1>
+              </div>
 
-      {/* Process Section - Cinematic Cards */}
-      <section className="relative py-32 md:py-48">
-        <div className="container mx-auto px-6">
-          {/* Section Header */}
-          <div 
-            className="mb-24 md:mb-32"
-            style={{
-              opacity: scrollY > 800 ? 1 : 0,
-              transform: scrollY > 800 ? "translateY(0)" : "translateY(40px)",
-              transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}
-          >
-            <span className="text-xs tracking-[0.4em] text-primary font-mono">THE PROCESS</span>
-            <h2 className="mt-4 text-4xl md:text-6xl font-heading font-bold">
-              How We Create
-            </h2>
-          </div>
-
-          {/* Process Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {processSteps.map((step, index) => (
-              <div
-                key={index}
-                className="group relative"
+              {/* Subcopy */}
+              <p 
+                className="text-base md:text-lg text-graphite leading-relaxed max-w-md"
                 style={{
-                  opacity: scrollY > 900 ? 1 : 0,
-                  transform: scrollY > 900 ? "translateY(0)" : "translateY(60px)",
-                  transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s`
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+                  transition: "all 1s ease-out 1.2s"
                 }}
               >
-                {/* Card */}
-                <div className="relative h-80 md:h-96 rounded-2xl overflow-hidden glass border border-border/50 hover:border-primary/50 transition-all duration-700 hover:-translate-y-4">
-                  {/* Number Background */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-[200px] font-heading font-bold text-primary/5 group-hover:text-primary/10 transition-colors duration-700">
-                      {step.num}
-                    </span>
-                  </div>
+                We design homes with restraint, clarity, and quiet confidence. Every line has a reason, every space has a story.
+              </p>
 
-                  {/* Content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <span className="text-xs font-mono text-primary tracking-wider">{step.num}</span>
-                    <h3 className="mt-2 text-2xl md:text-3xl font-heading font-bold tracking-tight group-hover:text-primary transition-colors duration-500">
-                      {step.title}
-                    </h3>
-                    <p className="mt-3 text-sm text-muted-foreground">{step.desc}</p>
-                    
-                    {/* Hover line */}
-                    <div className="mt-6 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-700" />
-                  </div>
-
-                  {/* Corner accent */}
-                  <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden">
-                    <div className="absolute top-0 right-0 w-[1px] h-0 bg-primary group-hover:h-16 transition-all duration-500" />
-                    <div className="absolute top-0 right-0 h-[1px] w-0 bg-primary group-hover:w-16 transition-all duration-500 delay-200" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Immersive Statement Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Morphing Background Shape */}
-        <div 
-          className="absolute w-[600px] h-[600px] md:w-[800px] md:h-[800px]"
-          style={{
-            background: "radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
-            borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%",
-            animation: "morphBlob 15s ease-in-out infinite"
-          }}
-        />
-
-        {/* Orbiting Elements */}
-        <div className="absolute w-[500px] h-[500px] md:w-[700px] md:h-[700px]">
-          <svg viewBox="0 0 200 200" className="w-full h-full opacity-30">
-            <circle 
-              cx="100" cy="100" r="90" 
-              fill="none" 
-              stroke="hsl(var(--primary))" 
-              strokeWidth="0.3"
-              strokeDasharray="2 8"
-              style={{
-                transform: `rotate(${scrollY * 0.02}deg)`,
-                transformOrigin: "center",
-                transition: "transform 0.1s linear"
-              }}
-            />
-            <circle 
-              cx="100" cy="100" r="70" 
-              fill="none" 
-              stroke="hsl(var(--primary))" 
-              strokeWidth="0.3"
-              strokeDasharray="4 6"
-              style={{
-                transform: `rotate(${-scrollY * 0.03}deg)`,
-                transformOrigin: "center"
-              }}
-            />
-          </svg>
-        </div>
-
-        {/* Central Statement */}
-        <div 
-          className="relative z-10 text-center px-6 max-w-5xl"
-          style={{
-            opacity: scrollY > 1500 ? 1 : 0,
-            transform: scrollY > 1500 ? "scale(1)" : "scale(0.9)",
-            transition: "all 1.5s cubic-bezier(0.16, 1, 0.3, 1)"
-          }}
-        >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight">
-            We don't just design
-            <br />
-            <span className="text-gradient-gold">buildings</span>.
-            <br />
-            We design
-            <br />
-            <span className="text-gradient-gold">experiences</span>.
-          </h2>
-        </div>
-      </section>
-
-      {/* Gallery Teaser Section */}
-      <section className="py-32 md:py-48 relative">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left - Visual */}
-            <div 
-              className="relative aspect-square"
-              style={{
-                opacity: scrollY > 2000 ? 1 : 0,
-                transform: scrollY > 2000 ? "translateX(0)" : "translateX(-60px)",
-                transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)"
-              }}
-            >
-              {/* Layered frames */}
-              <div className="absolute inset-8 border border-primary/20 rounded-2xl" />
-              <div className="absolute inset-4 border border-primary/10 rounded-2xl" />
-              <div className="absolute inset-0 rounded-2xl overflow-hidden glass">
-                {/* Abstract pattern inside */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <svg viewBox="0 0 200 200" className="w-3/4 h-3/4 opacity-20">
-                    <g stroke="hsl(var(--primary))" strokeWidth="0.5" fill="none">
-                      <rect x="30" y="30" width="60" height="80" />
-                      <rect x="100" y="50" width="70" height="100" />
-                      <rect x="50" y="120" width="80" height="50" />
-                      <line x1="30" y1="110" x2="170" y2="110" strokeDasharray="4 2" />
-                      <line x1="100" y1="30" x2="100" y2="170" strokeDasharray="4 2" />
-                    </g>
-                  </svg>
-                </div>
-                
-                {/* Hover glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-primary/10 opacity-0 hover:opacity-100 transition-opacity duration-700" />
+              {/* CTAs */}
+              <div 
+                className="flex flex-wrap gap-4 pt-4"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+                  transition: "all 1s ease-out 1.4s"
+                }}
+              >
+                <Link 
+                  to="/contact"
+                  className="group inline-flex items-center gap-3 bg-charcoal text-ivory px-8 py-4 text-sm tracking-wider hover:bg-charcoal/90 transition-all duration-500"
+                >
+                  Request a Consultation
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <button 
+                  onClick={() => document.getElementById('signature-work')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="inline-flex items-center gap-3 border border-charcoal/30 text-charcoal px-8 py-4 text-sm tracking-wider hover:bg-charcoal/5 transition-all duration-500"
+                >
+                  View Signature Work
+                </button>
               </div>
             </div>
 
-            {/* Right - Content */}
-            <div
+            {/* Right: Hero image with blueprint overlay */}
+            <div className="lg:col-span-6 lg:col-start-7 relative">
+              <div 
+                className="relative"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0) translateX(0)" : "translateY(40px) translateX(20px)",
+                  transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s"
+                }}
+              >
+                {/* Scale ruler line */}
+                <div className="absolute -left-8 top-0 bottom-0 flex flex-col items-center">
+                  <div className="w-[1px] h-full bg-gradient-to-b from-transparent via-muted-gold/50 to-transparent" />
+                  {[0, 25, 50, 75, 100].map((tick) => (
+                    <div 
+                      key={tick}
+                      className="absolute flex items-center gap-2"
+                      style={{ top: `${tick}%` }}
+                    >
+                      <div className="w-3 h-[1px] bg-muted-gold/50" />
+                      <span className="text-[8px] font-mono text-graphite/40">{tick}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Main image container */}
+                <div className="relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden">
+                  <img 
+                    src={architectureHero}
+                    alt="Modern architecture by EdgeHomes"
+                    className="w-full h-full object-cover"
+                    style={{
+                      transform: `translateY(${scrollY * 0.05}px)`,
+                      transition: "transform 0.1s ease-out"
+                    }}
+                  />
+                  
+                  {/* Blueprint overlay */}
+                  <svg 
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    viewBox="0 0 400 500"
+                    style={{ opacity: 0.15 }}
+                  >
+                    {/* Blueprint lines that draw in */}
+                    <g stroke="hsl(var(--muted-gold))" strokeWidth="0.5" fill="none">
+                      <rect 
+                        x="40" y="80" width="320" height="340" 
+                        strokeDasharray="1320"
+                        strokeDashoffset={isLoaded ? 0 : 1320}
+                        style={{ transition: "stroke-dashoffset 3s ease-out 1s" }}
+                      />
+                      <line 
+                        x1="40" y1="200" x2="360" y2="200"
+                        strokeDasharray="320"
+                        strokeDashoffset={isLoaded ? 0 : 320}
+                        style={{ transition: "stroke-dashoffset 2s ease-out 2s" }}
+                      />
+                      <line 
+                        x1="200" y1="80" x2="200" y2="420"
+                        strokeDasharray="340"
+                        strokeDashoffset={isLoaded ? 0 : 340}
+                        style={{ transition: "stroke-dashoffset 2s ease-out 2.3s" }}
+                      />
+                      <circle 
+                        cx="200" cy="250" r="60"
+                        strokeDasharray="377"
+                        strokeDashoffset={isLoaded ? 0 : 377}
+                        style={{ transition: "stroke-dashoffset 2s ease-out 2.6s" }}
+                      />
+                    </g>
+                  </svg>
+
+                  {/* Soft gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-ivory/30 via-transparent to-transparent" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div 
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: "opacity 1s ease-out 2s"
+          }}
+        >
+          <span className="text-[9px] tracking-[0.3em] text-graphite/50">SCROLL</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-muted-gold to-transparent" />
+        </div>
+      </section>
+
+      {/* ===== SECTION 2: THE 3 PRINCIPLES - STUDIO WALL ===== */}
+      <section className="relative py-32 lg:py-48 overflow-hidden">
+        {/* Split tone: ivory top fading to warm grey */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ivory via-ivory to-ivory-dark/30" />
+        
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          {/* Section label */}
+          <div 
+            className="mb-20"
+            style={{
+              opacity: scrollY > 400 ? 1 : 0,
+              transform: scrollY > 400 ? "translateY(0)" : "translateY(30px)",
+              transition: "all 1s ease-out"
+            }}
+          >
+            <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono">
+              OUR PHILOSOPHY
+            </span>
+          </div>
+
+          {/* Gallery rail - horizontal scrollable on mobile */}
+          <div className="relative">
+            {/* Thin horizontal rail line */}
+            <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-graphite/10" />
+
+            <div className="flex flex-col lg:flex-row lg:justify-between gap-16 lg:gap-8">
+              {principles.map((principle, index) => (
+                <div 
+                  key={index}
+                  className="relative group flex-1 max-w-md"
+                  onMouseEnter={() => setActivePrinciple(index)}
+                  onMouseLeave={() => setActivePrinciple(null)}
+                  style={{
+                    opacity: scrollY > 500 ? 1 : 0,
+                    transform: scrollY > 500 
+                      ? `translateY(0) translateX(${activePrinciple === index ? 0 : (index - 1) * 3}px)` 
+                      : "translateY(40px)",
+                    transition: `all 1s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.2}s`
+                  }}
+                >
+                  {/* Connector line to rail */}
+                  <div className="hidden lg:block absolute top-0 left-8 w-[1px] h-12 bg-gradient-to-b from-muted-gold/50 to-transparent" />
+                  
+                  {/* Pin dot */}
+                  <div className="hidden lg:block absolute -top-1 left-8 -translate-x-1/2 w-2 h-2 rounded-full bg-muted-gold/60" />
+
+                  {/* Principle card */}
+                  <div className="pt-16 lg:pt-20">
+                    <div className="flex items-start gap-4">
+                      <div className="text-muted-gold opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+                        {principle.icon}
+                      </div>
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-heading text-charcoal mb-3">
+                          {principle.title}
+                        </h3>
+                        <p 
+                          className="text-sm text-graphite leading-relaxed max-w-xs"
+                          style={{
+                            opacity: activePrinciple === index ? 1 : 0.7,
+                            maxHeight: activePrinciple === index ? "100px" : "0",
+                            overflow: "hidden",
+                            transition: "all 0.5s ease-out"
+                          }}
+                        >
+                          {principle.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SECTION 3: DESIGN DNA - INTERACTIVE BLUEPRINT ===== */}
+      <section className="relative py-32 lg:py-48 bg-charcoal overflow-hidden">
+        {/* Subtle paper texture */}
+        <div className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+          }}
+        />
+
+        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left: Blueprint panel */}
+            <div 
+              className="relative aspect-square"
               style={{
-                opacity: scrollY > 2000 ? 1 : 0,
-                transform: scrollY > 2000 ? "translateX(0)" : "translateX(60px)",
-                transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s"
+                opacity: scrollY > 1000 ? 1 : 0,
+                transform: scrollY > 1000 ? "translateX(0)" : "translateX(-40px)",
+                transition: "all 1s ease-out"
               }}
             >
-              <span className="text-xs tracking-[0.4em] text-primary font-mono">OUR APPROACH</span>
-              <h3 className="mt-4 text-3xl md:text-5xl font-heading font-bold leading-tight">
-                Every project is a
-                <br />
-                <span className="text-gradient-gold">conversation</span>
-              </h3>
-              <p className="mt-8 text-lg text-muted-foreground leading-relaxed">
-                We listen to the land, to the light, to the dreams of those who will inhabit our spaces. 
-                Architecture, for us, is not about imposing form—it's about discovering the form that was always meant to be.
-              </p>
+              {/* Blueprint SVG */}
+              <svg viewBox="0 0 400 400" className="w-full h-full">
+                <defs>
+                  <pattern id="blueprintGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--ivory) / 0.1)" strokeWidth="0.3"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#blueprintGrid)" />
+                
+                {/* Floor plan lines */}
+                <g stroke="hsl(var(--ivory))" strokeWidth="0.5" fill="none" opacity="0.4">
+                  {/* Outer walls */}
+                  <rect x="60" y="60" width="280" height="280" />
+                  
+                  {/* Rooms */}
+                  <line x1="60" y1="160" x2="200" y2="160" />
+                  <line x1="200" y1="60" x2="200" y2="200" />
+                  <line x1="200" y1="260" x2="340" y2="260" />
+                  <line x1="260" y1="160" x2="260" y2="340" />
+                  
+                  {/* Courtyard */}
+                  <rect x="160" y="160" width="80" height="80" strokeDasharray="4 2" />
+                  
+                  {/* Entry */}
+                  <path d="M60 240 L40 240 L40 280 L60 280" />
+                  
+                  {/* Stairs */}
+                  <g>
+                    <line x1="280" y1="80" x2="280" y2="140" />
+                    <line x1="280" y1="90" x2="320" y2="90" />
+                    <line x1="280" y1="100" x2="320" y2="100" />
+                    <line x1="280" y1="110" x2="320" y2="110" />
+                    <line x1="280" y1="120" x2="320" y2="120" />
+                    <line x1="280" y1="130" x2="320" y2="130" />
+                  </g>
+                </g>
+
+                {/* Annotation highlights */}
+                {blueprintAnnotations.map((anno) => (
+                  <g key={anno.id}>
+                    <circle 
+                      cx={anno.x * 4} 
+                      cy={anno.y * 4} 
+                      r="20"
+                      fill={activeBlueprint === anno.id ? "hsl(var(--muted-gold) / 0.15)" : "transparent"}
+                      stroke={activeBlueprint === anno.id ? "hsl(var(--muted-gold))" : "transparent"}
+                      strokeWidth="1"
+                      style={{ transition: "all 0.5s ease-out" }}
+                    />
+                  </g>
+                ))}
+              </svg>
+            </div>
+
+            {/* Right: Annotations */}
+            <div 
+              className="space-y-8"
+              style={{
+                opacity: scrollY > 1000 ? 1 : 0,
+                transform: scrollY > 1000 ? "translateX(0)" : "translateX(40px)",
+                transition: "all 1s ease-out 0.2s"
+              }}
+            >
+              <span className="text-[9px] tracking-[0.3em] text-muted-gold font-mono">
+                DESIGN DNA
+              </span>
               
-              {/* Stats */}
-              <div className="mt-12 grid grid-cols-3 gap-8">
-                {[
-                  { num: "150+", label: "Projects" },
-                  { num: "25", label: "Years" },
-                  { num: "40+", label: "Awards" },
-                ].map((stat, i) => (
-                  <div key={i} className="text-center md:text-left">
-                    <span className="text-3xl md:text-4xl font-heading font-bold text-primary">{stat.num}</span>
-                    <p className="mt-1 text-xs tracking-wider text-muted-foreground uppercase">{stat.label}</p>
-                  </div>
+              <h2 className="text-3xl md:text-4xl font-heading text-ivory leading-tight">
+                Good architecture is invisible engineering — disguised as <em className="italic text-muted-gold">ease</em>.
+              </h2>
+
+              <div className="space-y-4 pt-8">
+                {blueprintAnnotations.map((anno, index) => (
+                  <button
+                    key={anno.id}
+                    className={`group w-full text-left flex items-center gap-4 py-3 border-b transition-all duration-300 ${
+                      activeBlueprint === anno.id 
+                        ? "border-muted-gold/50" 
+                        : "border-ivory/10 hover:border-ivory/30"
+                    }`}
+                    onMouseEnter={() => setActiveBlueprint(anno.id)}
+                    onMouseLeave={() => setActiveBlueprint(null)}
+                  >
+                    <span className="text-[10px] font-mono text-graphite/60 w-6">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className={`text-sm tracking-wide transition-colors duration-300 ${
+                      activeBlueprint === anno.id ? "text-muted-gold" : "text-ivory/70"
+                    }`}>
+                      {anno.label}
+                    </span>
+                    <ChevronRight className={`w-4 h-4 ml-auto transition-all duration-300 ${
+                      activeBlueprint === anno.id 
+                        ? "opacity-100 translate-x-0 text-muted-gold" 
+                        : "opacity-0 -translate-x-2 text-ivory"
+                    }`} />
+                  </button>
                 ))}
               </div>
             </div>
@@ -491,64 +536,336 @@ const Architecture = () => {
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="py-40 md:py-56 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-            <pattern id="ctaPattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="30" r="1" fill="hsl(var(--primary))"/>
-            </pattern>
-            <rect width="100%" height="100%" fill="url(#ctaPattern)" />
-          </svg>
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10 text-center">
-          <p 
-            className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold leading-tight"
-            style={{
-              opacity: scrollY > 2500 ? 1 : 0,
-              transform: scrollY > 2500 ? "translateY(0)" : "translateY(40px)",
-              transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}
-          >
-            Ready to shape your
-            <br />
-            <span className="text-gradient-gold">architectural vision</span>?
-          </p>
-
-          <div 
-            className="mt-16"
-            style={{
-              opacity: scrollY > 2600 ? 1 : 0,
-              transition: "opacity 1s ease-out 0.3s"
-            }}
-          >
-            <Link
-              to="/contact"
-              className="group relative inline-flex items-center gap-4 px-10 py-5 rounded-full border border-primary/50 hover:border-primary transition-all duration-500 hover:shadow-[0_0_60px_hsl(var(--primary)/0.3)]"
+      {/* ===== SECTION 4: WHAT WE DESIGN ===== */}
+      <section className="relative py-32 lg:py-48 bg-ivory overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+            {/* Left: Title */}
+            <div 
+              className="lg:col-span-4"
+              style={{
+                opacity: scrollY > 1600 ? 1 : 0,
+                transform: scrollY > 1600 ? "translateY(0)" : "translateY(30px)",
+                transition: "all 1s ease-out"
+              }}
             >
-              <span className="text-sm tracking-[0.2em] uppercase">Start a Conversation</span>
-              <svg className="w-5 h-5 text-primary group-hover:translate-x-2 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+              <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono block mb-6">
+                OUR SCOPE
+              </span>
+              <h2 className="text-4xl md:text-5xl font-heading text-charcoal">
+                We design:
+              </h2>
+            </div>
+
+            {/* Right: Services list */}
+            <div 
+              className="lg:col-span-7 lg:col-start-6"
+              style={{
+                opacity: scrollY > 1600 ? 1 : 0,
+                transform: scrollY > 1600 ? "translateY(0)" : "translateY(30px)",
+                transition: "all 1s ease-out 0.2s"
+              }}
+            >
+              <ul className="space-y-4">
+                {services.map((service, index) => (
+                  <li 
+                    key={index}
+                    className="flex items-center gap-4 py-3 border-b border-graphite/10 group hover:border-muted-gold/30 transition-colors duration-300"
+                  >
+                    <span className="text-[10px] font-mono text-graphite/40 w-6">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-lg text-charcoal group-hover:text-muted-gold transition-colors duration-300">
+                      {service}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Footnote */}
+              <p className="mt-8 text-xs text-graphite/60 italic">
+                Every scope can be tailored. We don't force packages.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Navigation */}
-      <section className="py-24 border-t border-border/50">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <Link 
-              to="/services/construction" 
-              className="group flex items-center gap-4 text-muted-foreground hover:text-foreground transition-colors duration-500"
-            >
-              <span className="text-xs font-mono tracking-[0.2em] uppercase">Next Service</span>
-              <span className="text-2xl font-heading group-hover:text-primary transition-colors duration-500">Construction →</span>
-            </Link>
+      {/* ===== SECTION 5: THE PROCESS - CINEMATIC TIMELINE ===== */}
+      <section className="relative py-32 lg:py-48 bg-ivory-dark/30 overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12">
+          {/* Section header */}
+          <div 
+            className="text-center mb-20"
+            style={{
+              opacity: scrollY > 2200 ? 1 : 0,
+              transform: scrollY > 2200 ? "translateY(0)" : "translateY(30px)",
+              transition: "all 1s ease-out"
+            }}
+          >
+            <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono block mb-6">
+              THE JOURNEY
+            </span>
+            <h2 className="text-4xl md:text-5xl font-heading text-charcoal">
+              From vision to <em className="italic text-muted-gold">reality</em>
+            </h2>
           </div>
+
+          {/* Timeline */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Center spine */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-muted-gold/50 to-transparent -translate-x-1/2" />
+
+            <div className="space-y-16">
+              {processSteps.map((step, index) => {
+                const isLeft = index % 2 === 0;
+                const stepScrollThreshold = 2300 + index * 100;
+                const isActive = scrollY > stepScrollThreshold;
+
+                return (
+                  <div 
+                    key={index}
+                    className={`relative flex items-center gap-8 ${isLeft ? "lg:flex-row" : "lg:flex-row-reverse"}`}
+                    style={{
+                      opacity: isActive ? 1 : 0.3,
+                      transform: isActive ? "translateY(0)" : "translateY(20px)",
+                      transition: "all 0.8s ease-out"
+                    }}
+                  >
+                    {/* Node */}
+                    <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+                      <div 
+                        className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                          isActive ? "border-muted-gold bg-ivory" : "border-graphite/20 bg-ivory-dark/50"
+                        }`}
+                      >
+                        <div className={`w-2 h-2 rounded-full transition-all duration-500 ${
+                          isActive ? "bg-muted-gold" : "bg-graphite/30"
+                        }`} />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className={`w-full lg:w-[45%] ${isLeft ? "lg:pr-16 lg:text-right" : "lg:pl-16 lg:text-left"} ${!isLeft && "lg:ml-auto"}`}>
+                      <span className={`text-2xl font-heading transition-all duration-500 ${
+                        isActive ? "text-muted-gold" : "text-graphite/30"
+                      }`}>
+                        {step.num}
+                      </span>
+                      <h3 className="text-xl font-heading text-charcoal mt-2 mb-3">
+                        {step.title}
+                      </h3>
+                      <span className="inline-block text-[10px] tracking-wider font-mono text-graphite/60 border border-graphite/20 px-3 py-1">
+                        {step.deliverable}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SECTION 6: SIGNATURE WORK ===== */}
+      <section id="signature-work" className="relative py-32 lg:py-48 bg-charcoal overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12">
+          {/* Section header */}
+          <div 
+            className="mb-20"
+            style={{
+              opacity: scrollY > 3000 ? 1 : 0,
+              transform: scrollY > 3000 ? "translateY(0)" : "translateY(30px)",
+              transition: "all 1s ease-out"
+            }}
+          >
+            <span className="text-[9px] tracking-[0.3em] text-muted-gold font-mono block mb-6">
+              CURATED WORK
+            </span>
+            <h2 className="text-4xl md:text-5xl font-heading text-ivory">
+              Signature projects
+            </h2>
+          </div>
+
+          {/* Case studies grid */}
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-6">
+            {caseStudies.map((study, index) => (
+              <div 
+                key={index}
+                className="group"
+                style={{
+                  opacity: scrollY > 3100 ? 1 : 0,
+                  transform: scrollY > 3100 ? "translateY(0)" : "translateY(40px)",
+                  transition: `all 1s ease-out ${index * 0.15}s`
+                }}
+              >
+                {/* Image */}
+                <div className="relative aspect-[4/5] overflow-hidden mb-6">
+                  <img 
+                    src={study.image}
+                    alt={study.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent" />
+                </div>
+
+                {/* Info */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 text-[10px] tracking-wider text-graphite/60">
+                    <span>{study.location}</span>
+                    <span>•</span>
+                    <span>{study.type}</span>
+                  </div>
+                  <h3 className="text-xl font-heading text-ivory group-hover:text-muted-gold transition-colors duration-300">
+                    {study.title}
+                  </h3>
+                  <ul className="space-y-1">
+                    {study.highlights.map((highlight, i) => (
+                      <li key={i} className="text-xs text-ivory/60 flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-muted-gold/60" />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="text-xs tracking-wider text-muted-gold hover:text-ivory transition-colors duration-300 flex items-center gap-2 mt-4">
+                    View full project
+                    <ChevronRight className="w-3 h-3" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SECTION 7: FAQ ===== */}
+      <section className="relative py-32 lg:py-48 bg-ivory overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="max-w-3xl mx-auto">
+            {/* Section header */}
+            <div 
+              className="text-center mb-16"
+              style={{
+                opacity: scrollY > 3700 ? 1 : 0,
+                transform: scrollY > 3700 ? "translateY(0)" : "translateY(30px)",
+                transition: "all 1s ease-out"
+              }}
+            >
+              <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono block mb-6">
+                QUESTIONS
+              </span>
+              <h2 className="text-3xl md:text-4xl font-heading text-charcoal">
+                Common questions
+              </h2>
+            </div>
+
+            {/* FAQ accordion */}
+            <div 
+              className="space-y-0"
+              style={{
+                opacity: scrollY > 3800 ? 1 : 0,
+                transition: "opacity 1s ease-out"
+              }}
+            >
+              {faqs.map((faq, index) => (
+                <div 
+                  key={index}
+                  className="border-b border-graphite/10"
+                >
+                  <button
+                    className="w-full py-6 flex items-center justify-between text-left group"
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  >
+                    <span className={`text-base transition-colors duration-300 ${
+                      openFaq === index ? "text-muted-gold" : "text-charcoal group-hover:text-muted-gold"
+                    }`}>
+                      {faq.q}
+                    </span>
+                    {openFaq === index ? (
+                      <Minus className="w-4 h-4 text-muted-gold flex-shrink-0" />
+                    ) : (
+                      <Plus className="w-4 h-4 text-graphite/50 group-hover:text-muted-gold flex-shrink-0" />
+                    )}
+                  </button>
+                  <div 
+                    className="overflow-hidden transition-all duration-500"
+                    style={{
+                      maxHeight: openFaq === index ? "200px" : "0",
+                      opacity: openFaq === index ? 1 : 0
+                    }}
+                  >
+                    <p className="pb-6 text-sm text-graphite leading-relaxed pr-8">
+                      {faq.a}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SECTION 8: CTA - BEGIN THE CONVERSATION ===== */}
+      <section className="relative overflow-hidden">
+        <div className="grid lg:grid-cols-2 min-h-[60vh]">
+          {/* Left: Warm ivory */}
+          <div className="bg-ivory flex items-center justify-center p-12 lg:p-20">
+            <div 
+              className="max-w-md"
+              style={{
+                opacity: scrollY > 4300 ? 1 : 0,
+                transform: scrollY > 4300 ? "translateX(0)" : "translateX(-30px)",
+                transition: "all 1s ease-out"
+              }}
+            >
+              <span className="text-[9px] tracking-[0.3em] text-graphite/50 font-mono block mb-6">
+                LET'S BEGIN
+              </span>
+              <h2 className="text-3xl md:text-4xl font-heading text-charcoal leading-tight mb-6">
+                Bring us the site. We'll bring the <em className="italic text-muted-gold">clarity</em>.
+              </h2>
+              <p className="text-xs text-graphite/60 mb-8">
+                Limited annual projects. Thoughtful work takes time.
+              </p>
+            </div>
+          </div>
+
+          {/* Right: Charcoal */}
+          <div className="bg-charcoal flex items-center justify-center p-12 lg:p-20">
+            <div 
+              className="space-y-6"
+              style={{
+                opacity: scrollY > 4300 ? 1 : 0,
+                transform: scrollY > 4300 ? "translateX(0)" : "translateX(30px)",
+                transition: "all 1s ease-out 0.2s"
+              }}
+            >
+              <Link 
+                to="/contact"
+                className="group flex items-center gap-4 bg-muted-gold text-charcoal px-8 py-4 text-sm tracking-wider hover:bg-muted-gold/90 transition-all duration-300"
+              >
+                <Phone className="w-4 h-4" />
+                Request a Consultation
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <a 
+                href="https://wa.me/919876543210"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 border border-ivory/30 text-ivory px-8 py-4 text-sm tracking-wider hover:bg-ivory/10 transition-all duration-300"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Credibility line */}
+        <div className="absolute bottom-8 left-0 right-0 text-center">
+          <span className="text-[9px] tracking-[0.3em] text-graphite/40">
+            DESIGN-FIRST. DETAIL-OBSESSED. BUILT FOR DECADES.
+          </span>
         </div>
       </section>
 
