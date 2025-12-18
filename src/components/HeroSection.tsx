@@ -1,67 +1,70 @@
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Home, PaintBucket, Wrench, Package } from "lucide-react";
 import heroImage from "@/assets/hero-luxury-interior.jpg";
 
 const HeroSection = () => {
-  const services = [
-    { icon: Home, label: "Architectural Design" },
-    { icon: PaintBucket, label: "Interior Design" },
-    { icon: Wrench, label: "Renovation" },
-    { icon: Package, label: "Turnkey Solutions" },
-  ];
+  const scrollToNext = () => {
+    document.getElementById('signature')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Enhanced Gradient Overlay */}
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden grain light-sweep">
+      {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30"></div>
+        {/* Cinematic gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center fade-in-up">
-        {/* Premium Label */}
-        <div className="mb-6 flex items-center justify-center gap-3">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary"></div>
-          <p className="text-primary text-sm tracking-[0.3em] font-body uppercase">
+        {/* Premium label */}
+        <div className="mb-8 flex items-center justify-center gap-4">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary" />
+          <p className="text-primary text-xs tracking-[0.4em] font-body uppercase">
             Premium Interior Designers
           </p>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary"></div>
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary" />
         </div>
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-8 tracking-tight leading-tight">
-          Professional Interior Design &<br />Construction Solutions
+        {/* Main headline */}
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-normal text-foreground mb-6 tracking-tight leading-[1.1]">
+          Design That
+          <br />
+          <span className="text-gradient-gold">Defines Space</span>
         </h1>
         
-        <p className="text-lg md:text-xl text-muted-foreground mb-12 font-body max-w-2xl mx-auto">
-          EdgeHomes Architects and Construction – Pitampura, Delhi's Trusted Design & Build Partner
+        {/* Subheadline */}
+        <p className="text-lg md:text-xl text-muted-foreground mb-10 font-body max-w-xl mx-auto leading-relaxed">
+          Architectural excellence meets refined interiors.
+          <br className="hidden sm:block" />
+          Transform your vision into reality.
         </p>
 
+        {/* CTA Button */}
         <Button 
-          variant="luxury" 
-          size="lg" 
-          className="mb-20 font-semibold rounded-full px-10 py-6 text-base hover:scale-105 transition-transform shadow-[0_4px_20px_rgba(197,165,107,0.2)] hover:shadow-[0_8px_30px_rgba(197,165,107,0.3)]"
+          className="btn-gold text-base mb-6 animate-pulse-glow"
+          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
         >
           Get Free Consultation
         </Button>
 
-        {/* Enhanced Services Bar with Glassmorphism */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {services.map((service, index) => (
-            <div
-              key={service.label}
-              className="glass-card rounded-2xl p-6 smooth-transition hover:scale-[1.03] hover:shadow-[0_8px_30px_rgba(197,165,107,0.15)] group"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 smooth-transition shadow-[0_0_20px_rgba(197,165,107,0.1)]">
-                <service.icon className="w-7 h-7 text-primary" />
-              </div>
-              <p className="text-foreground text-sm font-body font-medium">{service.label}</p>
-            </div>
-          ))}
-        </div>
+        {/* Trust line */}
+        <p className="text-xs text-muted-foreground tracking-widest uppercase mb-20">
+          Design + Build • Turnkey Execution • Delhi NCR
+        </p>
+
+        {/* Scroll hint */}
+        <button 
+          onClick={scrollToNext}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group"
+        >
+          <span className="text-2xs tracking-widest uppercase">Scroll</span>
+          <ChevronDown className="w-5 h-5 animate-scroll-hint" />
+        </button>
       </div>
     </section>
   );
