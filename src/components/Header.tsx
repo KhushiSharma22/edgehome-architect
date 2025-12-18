@@ -1,37 +1,42 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const location = useLocation();
+  const isAboutPage = location.pathname === "/about";
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      // Track active section
-      const sections = ["home", "signature", "method", "materials"];
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section);
-            break;
+      // Track active section (only on home page)
+      if (!isAboutPage) {
+        const sections = ["home", "signature", "method", "materials"];
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              setActiveSection(section);
+              break;
+            }
           }
         }
       }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isAboutPage]);
 
   const menuItems = [
-    { label: "Home", href: "#home" },
-    { label: "Process", href: "#method" },
-    { label: "Materials", href: "#materials" },
-    { label: "Contact", href: "#contact" },
+    { label: "Home", href: "/", isRoute: true },
+    { label: "About", href: "/about", isRoute: true },
+    { label: "Process", href: "/#method", isRoute: false },
+    { label: "Contact", href: "/#contact", isRoute: false },
   ];
 
   return (
@@ -45,43 +50,48 @@ const Header = () => {
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo with animated underline */}
-          <a href="#home" className="group relative">
+          <Link to="/" className="group relative">
             <span className="text-2xl md:text-3xl font-heading font-bold text-primary transition-all duration-500 group-hover:text-shimmer">
               EdgeHomes
             </span>
             <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-gold-light group-hover:w-full transition-all duration-500" />
-          </a>
+          </Link>
 
           {/* Desktop Menu with active indicators */}
           <ul className="hidden md:flex items-center gap-1">
             {menuItems.map((item, index) => (
               <li key={item.label}>
-                <a
-                  href={item.href}
-                  className={`relative px-5 py-2 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500 group ${
-                    activeSection === item.href.slice(1) 
-                      ? 'text-primary' 
-                      : 'text-foreground/70 hover:text-foreground'
-                  }`}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <span className="relative z-10">{item.label}</span>
-                  
-                  {/* Hover background */}
-                  <span className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
-                  
-                  {/* Active indicator dot */}
-                  {activeSection === item.href.slice(1) && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full animate-pulse" />
-                  )}
-                </a>
+                {item.isRoute ? (
+                  <Link
+                    to={item.href}
+                    className={`relative px-5 py-2 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500 group ${
+                      location.pathname === item.href 
+                        ? 'text-primary' 
+                        : 'text-foreground/70 hover:text-foreground'
+                    }`}
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                    <span className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
+                    {location.pathname === item.href && (
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full animate-pulse" />
+                    )}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className={`relative px-5 py-2 text-sm uppercase tracking-[0.2em] font-medium transition-all duration-500 group text-foreground/70 hover:text-foreground`}
+                  >
+                    <span className="relative z-10">{item.label}</span>
+                    <span className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
+                  </a>
+                )}
               </li>
             ))}
             
             {/* CTA Button */}
             <li className="ml-4">
               <a
-                href="#contact"
+                href="/#contact"
                 className="px-6 py-2.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm uppercase tracking-wider font-medium hover:bg-primary/20 hover:border-primary/60 transition-all duration-500"
               >
                 Get Quote
@@ -116,13 +126,23 @@ const Header = () => {
                   isMobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-8 opacity-0'
                 }`}
               >
-                <a
-                  href={item.href}
-                  className="block py-3 px-4 rounded-xl text-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300 font-medium tracking-wider uppercase text-sm"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
+                {item.isRoute ? (
+                  <Link
+                    to={item.href}
+                    className="block py-3 px-4 rounded-xl text-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300 font-medium tracking-wider uppercase text-sm"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.href}
+                    className="block py-3 px-4 rounded-xl text-foreground hover:text-primary hover:bg-primary/10 transition-all duration-300 font-medium tracking-wider uppercase text-sm"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
