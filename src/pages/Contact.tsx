@@ -505,40 +505,6 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 4 — PHILOSOPHY FOOTNOTE (Fill the Space)
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative py-28 px-6 bg-gradient-to-b from-[#F7F3EE] to-[#EDE9E3]">
-          <ArchitecturalGrid variant="light" />
-          
-          <div className="max-w-2xl mx-auto text-center relative z-10">
-            {/* Main philosophy text */}
-            <p className="text-lg md:text-xl font-heading font-light text-[#0E0E0E]/60 leading-relaxed italic mb-3">
-              We take on a limited number of projects each year.
-            </p>
-            <p className="text-base md:text-lg font-heading font-light text-[#0E0E0E]/40">
-              Thoughtful work takes time.
-            </p>
-            
-            {/* Architectural symbol */}
-            <div className="mt-12 mb-8">
-              <div className="inline-block relative">
-                <div className="w-10 h-10 border border-[#C7A56A]/30 rotate-45" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-3 h-3 bg-[#C7A56A]/20 rotate-45" />
-                </div>
-              </div>
-            </div>
-            
-            {/* Thin divider */}
-            <div className="w-16 h-[1px] bg-[#0E0E0E]/10 mx-auto mb-6" />
-            
-            {/* Sub-line */}
-            <p className="text-[10px] font-mono tracking-[0.3em] text-[#0E0E0E]/30 uppercase">
-              Quality over quantity. Always.
-            </p>
-          </div>
-        </section>
 
         {/* ═══════════════════════════════════════════════════════════════
             SECTION 5 — FINAL CTA (Dark, Cinematic but Restrained)
