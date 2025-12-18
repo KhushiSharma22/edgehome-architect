@@ -895,6 +895,16 @@
   animation: lineDraw 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
+/* Hand-drawn underline animation */
+@keyframes draw-underline {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
 /* Scale pop animation */
 @keyframes scalePop {
   0% {
