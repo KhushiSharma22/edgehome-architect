@@ -505,44 +505,6 @@ const Contact = () => {
           </div>
         </section>
 
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SECTION 5 — FINAL CTA (Dark, Cinematic but Restrained)
-        ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative py-32 px-6 bg-[#0E0E0E] overflow-hidden">
-          <ArchitecturalGrid variant="dark" />
-          
-          {/* Subtle spotlight */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-gradient-to-b from-[#C7A56A]/[0.04] to-transparent blur-3xl" />
-          
-          <div className="max-w-2xl mx-auto text-center relative z-10">
-            {/* Label */}
-            <span className="text-[9px] font-mono tracking-[0.4em] text-[#C7A56A]/60 uppercase block mb-6">
-              Start Your Journey
-            </span>
-            
-            {/* Main headline */}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-light text-white mb-6 leading-tight">
-              Let's Create Something<br />
-              <span className="text-[#C7A56A] italic">Beautiful</span>
-            </h2>
-            
-            {/* Subtext */}
-            <p className="text-sm text-white/35 font-body font-light max-w-sm mx-auto mb-10">
-              Ready to transform your space?<br />
-              Get in touch for a private consultation.
-            </p>
-            
-            {/* CTA Button - Gold outline with left-fill hover */}
-            <button className="group relative px-10 py-4 bg-transparent border border-[#C7A56A] text-[#C7A56A] 
-                              font-body text-xs tracking-[0.2em] uppercase overflow-hidden
-                              transition-all duration-500 hover:text-white">
-              {/* Fill animation */}
-              <div className="absolute inset-0 bg-[#C7A56A] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-              <span className="relative">Begin the Journey</span>
-            </button>
-          </div>
-        </section>
       </main>
       
       <Footer />
