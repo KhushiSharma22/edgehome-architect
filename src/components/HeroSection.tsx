@@ -1,175 +1,194 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-luxury-interior.jpg";
+
+// Split text into characters for animation
+const SplitText = ({ text, className = "", delay = 0 }: { text: string; className?: string; delay?: number }) => {
+  return (
+    <span className={className}>
+      {text.split('').map((char, index) => (
+        <span
+          key={index}
+          className="inline-block animate-char-reveal"
+          style={{ 
+            animationDelay: `${delay + index * 40}ms`,
+            animationFillMode: 'backwards'
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </span>
+  );
+};
 
 const HeroSection = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsLoaded(true);
+    const timer = setTimeout(() => setIsLoaded(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
     setMousePosition({
-      x: (clientX / innerWidth - 0.5) * 20,
-      y: (clientY / innerHeight - 0.5) * 20,
+      x: (e.clientX - rect.left - rect.width / 2) / 50,
+      y: (e.clientY - rect.top - rect.height / 2) / 50,
     });
   };
 
   const scrollToContact = () => {
-    const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const scrollToNext = () => {
-    const nextSection = document.querySelector('#signature');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    document.querySelector('#signature')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section 
       id="home"
+      ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Background Image with parallax */}
+      {/* Animated background with parallax */}
       <div 
-        className="absolute inset-0 z-0 transition-transform duration-700 ease-out"
+        className="absolute inset-0 z-0 transition-transform duration-1000 ease-out scale-110"
         style={{
-          transform: `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px) scale(1.1)`,
+          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px) scale(1.1)`,
         }}
       >
         <img
           src={heroImage}
           alt="Luxury interior design showcase"
-          className="w-full h-full object-cover"
+          className={`w-full h-full object-cover transition-all duration-[2s] ${isLoaded ? 'scale-100 blur-0' : 'scale-110 blur-md'}`}
         />
       </div>
 
-      {/* Cinematic gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/50 to-background z-10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60 z-10" />
-      
-      {/* Animated vignette */}
+      {/* Layered cinematic overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/40 to-background z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/70 z-10" />
       <div className="absolute inset-0 z-10" style={{
-        background: 'radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.4) 70%, hsl(var(--background)) 100%)'
+        background: 'radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.5) 60%, hsl(var(--background)) 100%)'
       }} />
       
-      {/* Subtle animated grain */}
-      <div className="absolute inset-0 grain z-20 opacity-60" />
+      {/* Animated grain texture */}
+      <div className="absolute inset-0 grain z-20 opacity-50" />
       
-      {/* Light sweep effect */}
-      <div className="absolute inset-0 light-sweep z-20 pointer-events-none" />
-      
-      {/* Floating particles effect */}
+      {/* Animated light rays */}
       <div className="absolute inset-0 z-15 pointer-events-none overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-primary/20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animation: `float ${6 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
-            }}
-          />
-        ))}
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/20 via-transparent to-transparent animate-pulse" style={{ animationDuration: '3s' }} />
+        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
       </div>
+      
+      {/* Floating orbs */}
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-float" />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-[120px] animate-float" style={{ animationDelay: '-3s' }} />
 
       {/* Content */}
       <div className="relative z-30 container mx-auto px-6 text-center">
-        {/* Premium tag with reveal animation */}
-        <div className={`mb-8 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-flex items-center gap-3">
-            <span className="h-px w-12 bg-gradient-to-r from-transparent to-primary animate-pulse" />
-            <span className="text-primary text-xs tracking-[0.4em] uppercase font-medium">
+        {/* Premium tag with line animation */}
+        <div className={`mb-10 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-flex items-center gap-4">
+            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
+            <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
               Premium Interior Designers
             </span>
-            <span className="h-px w-12 bg-gradient-to-l from-transparent to-primary animate-pulse" />
+            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
           </span>
         </div>
 
-        {/* Main headline with staggered reveal */}
-        <h1 
-          className={`text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-foreground mb-6 transition-all duration-1000 delay-200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-        >
-          <span className="block overflow-hidden">
-            <span className={`inline-block transition-transform duration-1000 delay-300 ${isLoaded ? 'translate-y-0' : 'translate-y-full'}`}>
-              Design That
-            </span>
+        {/* Main headline with character animation */}
+        <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-heading text-foreground mb-8 leading-[0.9]">
+          <span className="block overflow-hidden mb-2">
+            {isLoaded && <SplitText text="Design That" delay={600} />}
           </span>
           <span className="block overflow-hidden">
-            <span className={`inline-block text-shimmer transition-transform duration-1000 delay-500 ${isLoaded ? 'translate-y-0' : 'translate-y-full'}`}>
-              Defines Space
+            <span className="text-shimmer italic">
+              {isLoaded && <SplitText text="Defines Space" delay={1000} />}
             </span>
           </span>
         </h1>
 
-        {/* Subheadline */}
+        {/* Subheadline with fade */}
         <p 
-          className={`text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
+          className={`text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed transition-all duration-1000 delay-[1400ms] ${isLoaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
         >
-          Architectural excellence meets refined interiors.
-          <span className="text-foreground/90"> Transform your vision</span> into reality.
+          Where architectural vision meets exceptional craftsmanship
         </p>
 
-        {/* CTA Button with magnetic effect */}
+        {/* CTA Button with magnetic hover */}
         <div 
-          className={`mb-12 transition-all duration-1000 delay-900 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`mb-16 transition-all duration-1000 delay-[1600ms] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <Button 
             onClick={scrollToContact}
-            className="btn-gold text-lg px-10 py-6 animate-pulse-glow relative group overflow-hidden"
+            className="group relative btn-gold text-lg px-12 py-7 overflow-hidden"
           >
-            <span className="relative z-10">Get Free Consultation</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary via-gold-light to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-shimmer" />
+            <span className="relative z-10 flex items-center gap-3">
+              Get Free Consultation
+              <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+            <span className="absolute inset-0 bg-gradient-to-r from-gold-light via-primary to-gold-dark bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ backgroundPosition: '100% 0', animation: 'shimmer 2s linear infinite' }} />
           </Button>
         </div>
 
-        {/* Trust line */}
+        {/* Trust badges with stagger */}
         <div 
-          className={`flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-muted-foreground transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`flex flex-wrap items-center justify-center gap-8 transition-all duration-1000 delay-[1800ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         >
-          {['Design + Build', 'Turnkey Execution', 'Delhi NCR'].map((item, index) => (
-            <span key={item} className="flex items-center gap-4">
-              <span className="relative">
-                {item}
-                <span className="absolute -bottom-1 left-0 w-0 h-px bg-primary/50 group-hover:w-full transition-all duration-500" />
-              </span>
-              {index < 2 && <span className="w-1.5 h-1.5 rounded-full bg-primary/50 animate-pulse" />}
+          {[
+            { label: 'Design + Build', icon: '◆' },
+            { label: 'Turnkey Execution', icon: '◆' },
+            { label: 'Delhi NCR', icon: '◆' },
+          ].map((item, index) => (
+            <span 
+              key={item.label} 
+              className="flex items-center gap-3 text-sm text-muted-foreground group cursor-default"
+              style={{ animationDelay: `${1800 + index * 100}ms` }}
+            >
+              <span className="w-1.5 h-1.5 bg-primary/60 rotate-45 group-hover:bg-primary group-hover:scale-125 transition-all duration-300" />
+              <span className="group-hover:text-foreground transition-colors duration-300">{item.label}</span>
             </span>
           ))}
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator with enhanced animation */}
       <div 
-        className={`absolute bottom-10 left-1/2 -translate-x-1/2 z-30 cursor-pointer transition-all duration-1000 delay-1200 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-30 cursor-pointer transition-all duration-1000 delay-[2000ms] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         onClick={scrollToNext}
       >
-        <div className="flex flex-col items-center gap-2 group">
-          <span className="text-2xs text-muted-foreground tracking-widest uppercase group-hover:text-primary transition-colors">
-            Scroll
+        <div className="flex flex-col items-center gap-3 group">
+          <span className="text-[10px] text-muted-foreground tracking-[0.4em] uppercase group-hover:text-primary transition-colors duration-500">
+            Explore
           </span>
-          <div className="w-px h-12 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary to-transparent animate-scroll-hint" />
+          <div className="relative w-6 h-10 rounded-full border border-primary/30 group-hover:border-primary/60 transition-colors duration-500">
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-2 bg-primary rounded-full animate-scroll-mouse" />
           </div>
         </div>
       </div>
 
-      {/* Corner decorations */}
-      <div className={`absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-primary/20 transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} />
-      <div className={`absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-primary/20 transition-all duration-1000 delay-1100 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} />
-      <div className={`absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-primary/20 transition-all duration-1000 delay-1200 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} />
-      <div className={`absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-primary/20 transition-all duration-1000 delay-1300 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`} />
+      {/* Corner accents */}
+      <div className={`absolute top-8 left-8 transition-all duration-1000 delay-[2200ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-l border-t border-primary/20" />
+      </div>
+      <div className={`absolute top-8 right-8 transition-all duration-1000 delay-[2300ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-r border-t border-primary/20" />
+      </div>
+      <div className={`absolute bottom-8 left-8 transition-all duration-1000 delay-[2400ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-l border-b border-primary/20" />
+      </div>
+      <div className={`absolute bottom-8 right-8 transition-all duration-1000 delay-[2500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-16 h-16 border-r border-b border-primary/20" />
+      </div>
     </section>
   );
 };
