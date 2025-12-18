@@ -487,15 +487,10 @@ const ArchitecturalPhilosophySection = () => {
                   ))}
                 </div>
                 
-                {/* Decorative corner marks inside */}
-                <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-primary/40" />
-                <div className="absolute top-4 right-4 w-6 h-6 border-r border-t border-primary/40" />
-              </div>
-              
-              {/* Floating badge */}
-              <div className="absolute -right-4 top-1/4 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-4 py-2">
-                <span className="text-primary text-xs font-medium tracking-wider">10+ Years</span>
-              </div>
+              {/* Decorative corner marks inside */}
+              <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-primary/40" />
+              <div className="absolute top-4 right-4 w-6 h-6 border-r border-t border-primary/40" />
+            </div>
             </div>
           </div>
 
@@ -728,51 +723,36 @@ const FoundersSection = () => {
       className="relative py-32 md:py-40 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Brighter Background with warm gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0c0908] via-[#100c09] to-[#0c0908]" />
+      {/* Clean dark background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#080807] via-background to-[#080807]" />
       
-      {/* Rich warm ambient lighting */}
+      {/* Subtle ambient lighting - toned down */}
       <div className="absolute inset-0" style={{
         background: `
-          radial-gradient(ellipse 80% 70% at 30% 30%, hsl(38 55% 50% / 0.12) 0%, transparent 50%),
-          radial-gradient(ellipse 70% 60% at 70% 70%, hsl(32 50% 45% / 0.10) 0%, transparent 45%),
-          radial-gradient(ellipse 50% 50% at 50% 50%, hsl(38 45% 55% / 0.06) 0%, transparent 50%)
+          radial-gradient(ellipse 70% 50% at 30% 30%, hsl(38 40% 50% / 0.05) 0%, transparent 50%),
+          radial-gradient(ellipse 60% 40% at 70% 70%, hsl(30 35% 45% / 0.04) 0%, transparent 45%)
         `
       }} />
       
-      {/* Animated light rays */}
+      {/* Subtle light rays */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/20 via-primary/5 to-transparent animate-pulse" style={{ animationDuration: '3s' }} />
-        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-primary/15 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
-        <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent animate-pulse" style={{ animationDuration: '5s', animationDelay: '2s' }} />
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/8 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s' }} />
+        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-primary/6 via-transparent to-transparent animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
       </div>
       
-      {/* Brighter Floating orbs */}
-      <div className="absolute top-1/4 left-1/6 w-80 h-80 bg-primary/20 rounded-full blur-[120px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/6 w-96 h-96 bg-primary/15 rounded-full blur-[140px] animate-float" style={{ animationDelay: '-4s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px]" />
-      
-      {/* Dynamic Orb following mouse */}
-      <div 
-        className="absolute w-[700px] h-[700px] rounded-full blur-[200px] opacity-25"
-        style={{
-          background: 'radial-gradient(circle, hsl(38 55% 55% / 0.4), transparent)',
-          left: `${mousePos.x * 30}%`,
-          top: `${mousePos.y * 30}%`,
-          transition: 'all 1.5s ease-out',
-        }}
-      />
+      {/* Subtle floating orbs - reduced opacity */}
+      <div className="absolute top-1/4 left-1/6 w-72 h-72 bg-primary/8 rounded-full blur-[140px] animate-float" />
+      <div className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-primary/6 rounded-full blur-[160px] animate-float" style={{ animationDelay: '-4s' }} />
       
       {/* Grain */}
-      <div className="absolute inset-0 grain opacity-25" />
+      <div className="absolute inset-0 grain opacity-30" />
 
-      {/* Enhanced Grid with gold tint */}
-      <div className="absolute inset-0 overflow-hidden opacity-[0.06]">
+      {/* Clean Grid - subtle */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.03]">
         <svg className="w-full h-full">
           <defs>
-            <pattern id="foundersGrid" width="80" height="80" patternUnits="userSpaceOnUse">
-              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(38 50% 65%)" strokeWidth="0.3" />
-              <circle cx="0" cy="0" r="1" fill="hsl(38 50% 65%)" />
+            <pattern id="foundersGrid" width="100" height="100" patternUnits="userSpaceOnUse">
+              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(38 40% 55%)" strokeWidth="0.3" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#foundersGrid)" />
@@ -798,8 +778,8 @@ const FoundersSection = () => {
           </p>
         </div>
 
-        {/* Founders - Brighter Enhanced Cards */}
-        <div className="grid lg:grid-cols-2 gap-12">
+        {/* Founders Cards - Clean Professional */}
+        <div className="grid lg:grid-cols-2 gap-10">
           {founders.map((founder, index) => {
             const isActive = activeFounder === index;
             
@@ -811,49 +791,41 @@ const FoundersSection = () => {
                 onMouseEnter={() => setActiveFounder(index)}
                 onMouseLeave={() => setActiveFounder(null)}
               >
-                {/* Card Glow - More vibrant */}
-                <div className={`absolute -inset-4 bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 rounded-3xl blur-2xl transition-all duration-700 ${isActive ? 'opacity-100 scale-105' : 'opacity-40'}`} />
+                {/* Subtle card glow */}
+                <div className={`absolute -inset-3 bg-gradient-to-br from-primary/8 via-transparent to-primary/5 rounded-3xl blur-xl transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
                 
-                {/* Main Card - Brighter */}
+                {/* Main Card - Clean */}
                 <div className={`
-                  relative rounded-2xl overflow-hidden p-10 lg:p-12
+                  relative rounded-2xl overflow-hidden p-8 lg:p-10
                   border transition-all duration-500
                   ${isActive 
-                    ? 'border-primary/40 bg-gradient-to-br from-primary/20 via-card/20 to-primary/10' 
-                    : 'border-primary/20 bg-gradient-to-br from-primary/10 via-card/10 to-transparent'
+                    ? 'border-primary/25 bg-card/15' 
+                    : 'border-border/20 bg-card/5'
                   }
-                  backdrop-blur-sm
                 `}>
-                  {/* Animated border glow */}
-                  <div className={`absolute inset-0 rounded-2xl transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}
-                    style={{
-                      background: 'linear-gradient(135deg, hsl(38 50% 50% / 0.15), transparent, hsl(38 50% 50% / 0.15))',
-                    }}
-                  />
+                  {/* Corner accent - Subtle */}
+                  <div className="absolute top-0 left-0 w-12 h-12 border-l border-t border-primary/20 rounded-tl-2xl" />
+                  <div className="absolute bottom-0 right-0 w-12 h-12 border-r border-b border-primary/20 rounded-br-2xl" />
                   
-                  {/* Corner accent - More prominent */}
-                  <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-primary/40 rounded-tl-2xl" />
-                  <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-primary/40 rounded-br-2xl" />
-                  
-                  {/* Initial Background - Brighter */}
+                  {/* Initial Background - Subtle */}
                   <div className="absolute top-0 right-0 -mr-4 -mt-4 overflow-hidden">
                     <span 
                       className={`
-                        text-[200px] font-heading leading-none select-none
-                        bg-gradient-to-br from-primary/15 via-primary/10 to-transparent bg-clip-text text-transparent
+                        text-[180px] font-heading leading-none select-none
+                        bg-gradient-to-br from-primary/8 via-primary/5 to-transparent bg-clip-text text-transparent
                         transition-all duration-700
-                        ${isActive ? 'from-primary/25 via-primary/15' : ''}
+                        ${isActive ? 'from-primary/12 via-primary/8' : ''}
                       `}
                     >
                       {founder.initial}
                     </span>
                   </div>
 
-                  {/* Geometric Accent - More visible */}
+                  {/* Geometric Accent - Subtle */}
                   <div className={`
-                    absolute top-8 right-8 w-16 h-16 border-2 border-primary/20 rotate-45
+                    absolute top-6 right-6 w-12 h-12 border border-primary/10 rotate-45
                     transition-all duration-700
-                    ${isActive ? 'rotate-[55deg] border-primary/40 scale-110' : ''}
+                    ${isActive ? 'rotate-[55deg] border-primary/20' : ''}
                   `} />
 
                   {/* Content */}
