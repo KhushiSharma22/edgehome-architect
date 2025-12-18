@@ -6,6 +6,8 @@ import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import portfolioKitchen from "@/assets/portfolio-kitchen.jpg";
 import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
 import portfolioDining from "@/assets/portfolio-dining.jpg";
+import pelicanChair from "@/assets/pelican-chair.png";
+import eggChair from "@/assets/egg-chair.png";
 
 
 // Particle System Component
@@ -916,98 +918,33 @@ const InspirationBanner = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-16 md:py-20 bg-[#F6F1EA] overflow-hidden"
+      className="relative py-10 md:py-12 bg-[#F6F1EA] overflow-hidden"
     >
-      {/* Subtle texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
       <div className="container mx-auto px-4 relative">
         <div className="flex items-center justify-between">
-          {/* Left Furniture - Pelican Chair (Finn Juhl inspired) */}
+          {/* Left Furniture - Pelican Chair */}
           <div 
-            className={`hidden md:block w-48 lg:w-56 transition-all duration-1000 ease-out ${
+            className={`hidden md:block w-36 lg:w-44 transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
             }`}
             style={{ transitionDelay: '0.2s' }}
           >
-            <svg viewBox="0 0 280 260" className="w-full h-auto">
-              <defs>
-                {/* Fabric gradients with realistic shading */}
-                <linearGradient id="fabricMain" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3D6B66" />
-                  <stop offset="40%" stopColor="#2D524E" />
-                  <stop offset="100%" stopColor="#1E3835" />
-                </linearGradient>
-                <linearGradient id="fabricHighlight" x1="0%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stopColor="#4A7A75" />
-                  <stop offset="100%" stopColor="#3D6B66" />
-                </linearGradient>
-                <linearGradient id="fabricShadow" x1="100%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#2D524E" />
-                  <stop offset="100%" stopColor="#1A2E2C" />
-                </linearGradient>
-                <linearGradient id="woodLeg" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#E8C9A0" />
-                  <stop offset="30%" stopColor="#D4A574" />
-                  <stop offset="70%" stopColor="#C49564" />
-                  <stop offset="100%" stopColor="#A67B4A" />
-                </linearGradient>
-                <linearGradient id="pillowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#C8CED0" />
-                  <stop offset="50%" stopColor="#A8B0B3" />
-                  <stop offset="100%" stopColor="#8A9396" />
-                </linearGradient>
-                <filter id="softShadow">
-                  <feDropShadow dx="4" dy="6" stdDeviation="8" floodOpacity="0.25"/>
-                </filter>
-              </defs>
-              
-              {/* Chair back - organic wing shape */}
-              <path d="M45 85 Q30 60 50 35 Q80 10 130 15 Q170 20 190 50 Q200 75 185 110 Q175 130 160 145 Q140 160 120 165 Q90 170 65 155 Q45 140 45 115 Z" 
-                fill="url(#fabricMain)" filter="url(#softShadow)"/>
-              {/* Back highlight */}
-              <path d="M55 80 Q45 60 60 40 Q85 20 125 22 Q155 25 170 50 Q178 70 168 95 Q160 115 145 128 Q125 142 105 145 Q80 148 62 135 Q50 120 55 100 Z" 
-                fill="url(#fabricHighlight)" opacity="0.6"/>
-              
-              {/* Seat cushion - thick and plush */}
-              <ellipse cx="125" cy="155" rx="70" ry="28" fill="url(#fabricShadow)" filter="url(#softShadow)"/>
-              <ellipse cx="125" cy="152" rx="68" ry="26" fill="url(#fabricMain)"/>
-              <ellipse cx="120" cy="148" rx="55" ry="18" fill="url(#fabricHighlight)" opacity="0.4"/>
-              
-              {/* Pillow with realistic form */}
-              <ellipse cx="85" cy="115" rx="28" ry="22" fill="url(#pillowGrad)" transform="rotate(-18 85 115)" filter="url(#softShadow)"/>
-              <ellipse cx="82" cy="112" rx="22" ry="16" fill="#D8DEE0" transform="rotate(-18 82 112)" opacity="0.5"/>
-              
-              {/* Wooden legs with grain detail */}
-              <path d="M68 178 L58 235 Q57 240 60 242 L65 240 L78 180 Z" fill="url(#woodLeg)"/>
-              <path d="M180 175 L195 232 Q196 238 193 240 L188 238 L177 178 Z" fill="url(#woodLeg)"/>
-              <path d="M125 180 L125 238 Q125 242 128 243 L132 241 L132 180 Z" fill="url(#woodLeg)"/>
-              
-              {/* Small side table */}
-              <ellipse cx="215" cy="142" rx="22" ry="7" fill="url(#woodLeg)" filter="url(#softShadow)"/>
-              <rect x="212" y="145" width="6" height="48" rx="2" fill="url(#woodLeg)"/>
-              
-              {/* Cup on table */}
-              <ellipse cx="215" cy="130" rx="8" ry="3" fill="#FFFFFF"/>
-              <path d="M207 130 L207 142 Q207 145 215 145 Q223 145 223 142 L223 130 Z" fill="#FAFAFA"/>
-              <ellipse cx="215" cy="135" rx="6" ry="2" fill="#E8DDD4"/>
-            </svg>
+            <img 
+              src={pelicanChair} 
+              alt="Mid-century modern chair" 
+              className="w-full h-auto object-contain drop-shadow-xl"
+            />
           </div>
 
           {/* Center Text */}
           <div 
-            className={`flex-1 text-center px-6 md:px-12 transition-all duration-1000 ease-out ${
+            className={`flex-1 text-center px-4 md:px-8 transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             style={{ transitionDelay: '0.4s' }}
           >
             <h2 
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-[#1C1C1C] tracking-[0.12em] leading-relaxed"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-[#1C1C1C] tracking-[0.12em] leading-relaxed"
               style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
             >
               INSPIRED BY ARTISTRY,
@@ -1018,105 +955,27 @@ const InspirationBanner = () => {
             </h2>
           </div>
 
-          {/* Right Furniture - Egg Chair (Arne Jacobsen inspired) */}
+          {/* Right Furniture - Egg Chair */}
           <div 
-            className={`hidden md:block w-48 lg:w-56 transition-all duration-1000 ease-out ${
+            className={`hidden md:block w-36 lg:w-44 transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
             }`}
             style={{ transitionDelay: '0.6s' }}
           >
-            <svg viewBox="0 0 260 300" className="w-full h-auto">
-              <defs>
-                {/* Leather gradients */}
-                <linearGradient id="leatherOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#D68B5A" />
-                  <stop offset="30%" stopColor="#C47A4A" />
-                  <stop offset="70%" stopColor="#B5693C" />
-                  <stop offset="100%" stopColor="#8B4D2A" />
-                </linearGradient>
-                <linearGradient id="leatherInner" x1="20%" y1="0%" x2="80%" y2="100%">
-                  <stop offset="0%" stopColor="#E8A070" />
-                  <stop offset="50%" stopColor="#D68B5A" />
-                  <stop offset="100%" stopColor="#C47A4A" />
-                </linearGradient>
-                <linearGradient id="leatherDeep" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stopColor="#B5693C" />
-                  <stop offset="100%" stopColor="#7A4025" />
-                </linearGradient>
-                <linearGradient id="chromeMetal" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#D0D0D0" />
-                  <stop offset="25%" stopColor="#A8A8A8" />
-                  <stop offset="50%" stopColor="#E8E8E8" />
-                  <stop offset="75%" stopColor="#909090" />
-                  <stop offset="100%" stopColor="#787878" />
-                </linearGradient>
-                <radialGradient id="leatherShine" cx="30%" cy="20%" r="60%">
-                  <stop offset="0%" stopColor="#F0B080" stopOpacity="0.6"/>
-                  <stop offset="100%" stopColor="#D68B5A" stopOpacity="0"/>
-                </radialGradient>
-                <filter id="chairShadow">
-                  <feDropShadow dx="5" dy="8" stdDeviation="10" floodOpacity="0.3"/>
-                </filter>
-              </defs>
-              
-              {/* Main egg shell body */}
-              <path d="M130 20 Q45 25 35 120 Q30 180 55 210 Q85 245 130 248 Q175 245 205 210 Q230 180 225 120 Q215 25 130 20 Z" 
-                fill="url(#leatherOuter)" filter="url(#chairShadow)"/>
-              
-              {/* Inner shell curve */}
-              <path d="M130 35 Q65 40 55 115 Q52 165 72 192 Q95 220 130 222 Q165 220 188 192 Q208 165 205 115 Q195 40 130 35 Z" 
-                fill="url(#leatherInner)"/>
-              
-              {/* Deep interior/seat cavity */}
-              <path d="M130 55 Q85 60 78 120 Q75 155 90 175 Q110 195 130 196 Q150 195 170 175 Q185 155 182 120 Q175 60 130 55 Z" 
-                fill="url(#leatherDeep)"/>
-              
-              {/* Highlight shine */}
-              <ellipse cx="95" cy="80" rx="35" ry="50" fill="url(#leatherShine)"/>
-              
-              {/* Stitching detail */}
-              <path d="M65 50 Q130 30 195 50" stroke="#7A4025" strokeWidth="1.5" fill="none" strokeDasharray="6,4" opacity="0.6"/>
-              <path d="M55 100 Q130 85 205 100" stroke="#7A4025" strokeWidth="1" fill="none" strokeDasharray="4,3" opacity="0.4"/>
-              
-              {/* Chrome pedestal */}
-              <ellipse cx="130" cy="268" rx="35" ry="8" fill="url(#chromeMetal)"/>
-              <path d="M122 248 L118 268 L142 268 L138 248 Z" fill="url(#chromeMetal)"/>
-              
-              {/* Chrome star base */}
-              <path d="M130 268 L85 288 L82 292 L88 292 L130 275 Z" fill="url(#chromeMetal)"/>
-              <path d="M130 268 L175 288 L178 292 L172 292 L130 275 Z" fill="url(#chromeMetal)"/>
-              <path d="M130 268 L105 292 L102 296 L110 296 L130 278 Z" fill="url(#chromeMetal)"/>
-              <path d="M130 268 L155 292 L158 296 L150 296 L130 278 Z" fill="url(#chromeMetal)"/>
-            </svg>
+            <img 
+              src={eggChair} 
+              alt="Iconic egg chair" 
+              className="w-full h-auto object-contain drop-shadow-xl"
+            />
           </div>
         </div>
 
-        {/* Mobile: Compact furniture */}
-        <div className="md:hidden flex justify-center gap-6 mt-8">
-          <svg viewBox="0 0 120 110" className="w-24 h-auto">
-            <defs>
-              <linearGradient id="mobFabric" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#3D6B66" />
-                <stop offset="100%" stopColor="#1E3835" />
-              </linearGradient>
-            </defs>
-            <path d="M20 35 Q15 20 30 12 Q50 5 70 8 Q88 12 92 30 Q95 45 85 55 Q70 68 55 70 Q35 72 22 60 Q15 50 20 40 Z" fill="url(#mobFabric)"/>
-            <ellipse cx="55" cy="68" rx="32" ry="12" fill="#2D524E"/>
-          </svg>
-          <svg viewBox="0 0 100 120" className="w-20 h-auto">
-            <defs>
-              <linearGradient id="mobLeather" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#D68B5A" />
-                <stop offset="100%" stopColor="#8B4D2A" />
-              </linearGradient>
-            </defs>
-            <path d="M50 8 Q18 12 15 50 Q12 75 28 90 Q42 102 50 103 Q58 102 72 90 Q88 75 85 50 Q82 12 50 8 Z" fill="url(#mobLeather)"/>
-          </svg>
+        {/* Mobile: Show furniture */}
+        <div className="md:hidden flex justify-center gap-4 mt-6">
+          <img src={pelicanChair} alt="Chair" className="w-24 h-auto object-contain" />
+          <img src={eggChair} alt="Chair" className="w-20 h-auto object-contain" />
         </div>
       </div>
-
-      {/* Subtle bottom line */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-[#C7A76A]/30" />
     </section>
   );
 };
