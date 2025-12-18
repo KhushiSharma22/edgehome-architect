@@ -365,69 +365,61 @@ const ManifestoSection = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="relative py-40 md:py-56 overflow-hidden">
+    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
       {/* Dark Background */}
       <div className="absolute inset-0 bg-[#040404]" />
       
-      {/* Subtle ambient glow on section enter */}
+      {/* Subtle ambient glow */}
       <div 
         className="absolute inset-0 transition-opacity duration-[2000ms]"
         style={{
-          background: 'radial-gradient(ellipse 80% 50% at 50% 50%, hsl(38 42% 55% / 0.02) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse 60% 40% at 50% 50%, hsl(38 42% 55% / 0.015) 0%, transparent 70%)',
           opacity: scrollProgress > 0.1 ? 1 : 0,
         }}
       />
 
       {/* PART 1 - THE BELIEF */}
-      <div ref={beliefRef} className="relative z-10 max-w-4xl mx-auto px-6 mb-48 md:mb-64">
+      <div ref={beliefRef} className="relative z-10 max-w-3xl mx-auto px-6 mb-20 md:mb-28">
         {/* Small Label */}
-        <div className={`text-center mb-12 transition-all duration-1000 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <span className="text-primary/40 text-[9px] tracking-[0.6em] uppercase">Our Belief</span>
+        <div className={`text-center mb-8 transition-all duration-1000 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <span className="text-primary/35 text-[8px] tracking-[0.5em] uppercase">Our Belief</span>
         </div>
         
-        {/* Main Belief Statement - Calm, not loud */}
+        {/* Main Belief Statement */}
         <div className="text-center">
-          <p className={`font-heading text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.3] tracking-tight transition-all duration-1000 delay-200 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-            <span className="text-foreground/80">A space should feel </span>
-            <span className="text-primary/70">calm</span>
-          </p>
-          <p className={`font-heading text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[2.75rem] leading-[1.3] tracking-tight mt-1 transition-all duration-1000 delay-400 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-            <span className="text-foreground/50">before it looks beautiful.</span>
+          <p className={`font-heading text-xl sm:text-2xl md:text-3xl leading-[1.4] tracking-tight transition-all duration-1000 delay-200 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <span className="text-foreground/75">A space should feel </span>
+            <span className="text-primary/60">calm</span>
+            <span className="text-foreground/45"> before it looks beautiful.</span>
           </p>
         </div>
         
-        {/* Subtle line below */}
-        <div className={`flex justify-center mt-16 transition-all duration-1500 delay-600 ${beliefVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className={`h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent transition-all duration-[2000ms] delay-800 ${beliefVisible ? 'w-32' : 'w-0'}`} />
+        {/* Subtle line */}
+        <div className={`flex justify-center mt-10 transition-all duration-1500 delay-500 ${beliefVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className={`h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent transition-all duration-[1500ms] delay-700 ${beliefVisible ? 'w-20' : 'w-0'}`} />
         </div>
       </div>
 
       {/* PART 2 - PHILOSOPHY PATH */}
-      <div ref={pathRef} className="relative z-10 max-w-6xl mx-auto px-6">
+      <div ref={pathRef} className="relative z-10 max-w-5xl mx-auto px-6">
         
-        {/* Central Vertical Line - The Path */}
+        {/* Central Vertical Line */}
         <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px hidden md:block">
-          {/* Base line (faint) */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.06] to-transparent" />
-          
-          {/* Animated progress line */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.05] to-transparent" />
           <div 
-            className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary/30 via-primary/20 to-transparent transition-all duration-500"
+            className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary/25 via-primary/15 to-transparent transition-all duration-500"
             style={{ height: `${lineHeight}%` }}
           />
-          
-          {/* Measurement ticks */}
-          <div className="absolute top-[15%] left-0 w-3 h-px bg-primary/10 -translate-x-1/2" />
-          <div className="absolute top-[35%] left-0 w-2 h-px bg-primary/8 -translate-x-1/2" />
-          <div className="absolute top-[55%] left-0 w-3 h-px bg-primary/10 -translate-x-1/2" />
-          <div className="absolute top-[75%] left-0 w-2 h-px bg-primary/8 -translate-x-1/2" />
-          <div className="absolute top-[95%] left-0 w-3 h-px bg-primary/10 -translate-x-1/2" />
+          {/* Ticks */}
+          <div className="absolute top-[20%] left-0 w-2 h-px bg-primary/10 -translate-x-1/2" />
+          <div className="absolute top-[50%] left-0 w-2 h-px bg-primary/10 -translate-x-1/2" />
+          <div className="absolute top-[80%] left-0 w-2 h-px bg-primary/10 -translate-x-1/2" />
         </div>
 
         {/* Philosophy Points */}
-        <div className="relative space-y-32 md:space-y-48">
+        <div className="relative space-y-16 md:space-y-24">
           {philosophies.map((philosophy, index) => {
-            const isVisible = pathVisible && scrollProgress > (index * 0.2 + 0.2);
+            const isVisible = pathVisible && scrollProgress > (index * 0.15 + 0.15);
             const alignLeft = philosophy.align === 'left';
             
             return (
@@ -435,69 +427,39 @@ const ManifestoSection = () => {
                 key={philosophy.index}
                 className={`relative flex ${alignLeft ? 'md:justify-start' : 'md:justify-end'} justify-center`}
               >
-                {/* Geometry accent - very faint */}
+                {/* Geometry accent */}
                 <div 
-                  className={`absolute top-0 hidden md:block transition-all duration-1000 ${isVisible ? 'opacity-[0.05]' : 'opacity-0'}`}
-                  style={{
-                    left: alignLeft ? '48%' : 'auto',
-                    right: alignLeft ? 'auto' : '48%',
-                  }}
+                  className={`absolute top-0 hidden md:block transition-all duration-1000 ${isVisible ? 'opacity-[0.04]' : 'opacity-0'}`}
+                  style={{ left: alignLeft ? '48%' : 'auto', right: alignLeft ? 'auto' : '48%' }}
                 >
-                  <span className="text-4xl text-primary">{philosophy.geometry}</span>
+                  <span className="text-3xl text-primary">{philosophy.geometry}</span>
                 </div>
 
-                {/* Content Block */}
+                {/* Content */}
                 <div 
-                  className={`relative max-w-md ${alignLeft ? 'md:pr-24 md:text-right' : 'md:pl-24 md:text-left'} text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                  style={{
-                    transitionDelay: `${index * 150}ms`,
-                    transform: isVisible 
-                      ? 'translateY(0) translateX(0)' 
-                      : `translateY(32px) translateX(${alignLeft ? '-20px' : '20px'})`,
-                  }}
+                  className={`relative max-w-sm ${alignLeft ? 'md:pr-20 md:text-right' : 'md:pl-20 md:text-left'} text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  {/* Index Number - Subtle */}
-                  <div className={`mb-6 ${alignLeft ? 'md:text-right' : 'md:text-left'}`}>
-                    <span className="text-primary/25 text-[11px] tracking-[0.3em] font-light">
-                      {philosophy.index}
-                    </span>
-                  </div>
-                  
-                  {/* Title */}
-                  <h3 className={`font-heading text-xl md:text-2xl text-foreground/85 mb-5 tracking-tight`}>
+                  <span className="text-primary/20 text-[10px] tracking-[0.25em] font-light block mb-4">
+                    {philosophy.index}
+                  </span>
+                  <h3 className="font-heading text-lg md:text-xl text-foreground/80 mb-3 tracking-tight">
                     {philosophy.title}
                   </h3>
-                  
-                  {/* Thought - Main Line */}
-                  <p className="text-foreground/60 text-[15px] md:text-base leading-relaxed mb-2 font-light">
-                    {philosophy.thought}
+                  <p className="text-foreground/50 text-[13px] leading-relaxed font-light">
+                    {philosophy.thought} <span className="text-muted-foreground/40">{philosophy.continuation}</span>
                   </p>
                   
-                  {/* Continuation */}
-                  <p className="text-muted-foreground/45 text-[14px] md:text-[15px] leading-relaxed font-light">
-                    {philosophy.continuation}
-                  </p>
-                  
-                  {/* Connection line to center path */}
+                  {/* Connection line */}
                   <div 
-                    className={`hidden md:block absolute top-8 h-px bg-gradient-to-r transition-all duration-1000 delay-300 ${
-                      alignLeft 
-                        ? 'right-0 from-transparent to-primary/15' 
-                        : 'left-0 from-primary/15 to-transparent'
-                    } ${isVisible ? 'w-20' : 'w-0'}`}
-                    style={{
-                      right: alignLeft ? '-96px' : 'auto',
-                      left: alignLeft ? 'auto' : '-96px',
-                    }}
+                    className={`hidden md:block absolute top-6 h-px bg-gradient-to-r transition-all duration-700 delay-200 ${
+                      alignLeft ? 'right-0 from-transparent to-primary/10' : 'left-0 from-primary/10 to-transparent'
+                    } ${isVisible ? 'w-16' : 'w-0'}`}
+                    style={{ right: alignLeft ? '-80px' : 'auto', left: alignLeft ? 'auto' : '-80px' }}
                   />
-                  
-                  {/* Small dot at connection */}
                   <div 
-                    className={`hidden md:block absolute top-[30px] w-1.5 h-1.5 rounded-full bg-primary/20 transition-all duration-500 delay-500 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}`}
-                    style={{
-                      right: alignLeft ? '-100px' : 'auto',
-                      left: alignLeft ? 'auto' : '-100px',
-                    }}
+                    className={`hidden md:block absolute top-[22px] w-1 h-1 rounded-full bg-primary/15 transition-all duration-500 delay-400 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                    style={{ right: alignLeft ? '-84px' : 'auto', left: alignLeft ? 'auto' : '-84px' }}
                   />
                 </div>
               </div>
@@ -506,14 +468,9 @@ const ManifestoSection = () => {
         </div>
 
         {/* Bottom closure */}
-        <div className={`flex flex-col items-center mt-40 md:mt-56 transition-all duration-1000 ${pathVisible && scrollProgress > 0.8 ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Final point on path */}
-          <div className="w-2 h-2 bg-primary/20 rotate-45 mb-8" />
-          
-          {/* Closing thought */}
-          <p className="text-muted-foreground/30 text-[11px] tracking-[0.4em] uppercase text-center">
-            These guide everything we create
-          </p>
+        <div className={`flex flex-col items-center mt-20 transition-all duration-1000 ${pathVisible && scrollProgress > 0.7 ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="w-1.5 h-1.5 bg-primary/15 rotate-45 mb-5" />
+          <p className="text-muted-foreground/25 text-[9px] tracking-[0.35em] uppercase">These guide everything we create</p>
         </div>
       </div>
     </section>
@@ -571,63 +528,59 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section ref={containerRef} className="relative py-48 md:py-64 overflow-hidden">
+    <section ref={containerRef} className="relative py-24 md:py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-background to-[#050505]" />
       
-      {/* Progress Line - Animated */}
-      <div className="absolute top-1/2 left-0 right-0 h-px bg-border/10 -translate-y-1/2 hidden lg:block">
+      {/* Progress Line */}
+      <div className="absolute top-1/2 left-0 right-0 h-px bg-border/5 -translate-y-1/2 hidden lg:block">
         <div 
-          className="h-full bg-gradient-to-r from-primary/50 to-primary/20 transition-all duration-300"
+          className="h-full bg-gradient-to-r from-primary/40 to-primary/15 transition-all duration-300"
           style={{ width: `${scrollProgress * 100}%` }}
         />
       </div>
 
-      <div ref={ref} className="relative z-10 max-w-8xl mx-auto px-6">
+      <div ref={ref} className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Section Header */}
-        <div className={`text-center mb-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <span className="text-primary/50 text-[10px] tracking-[0.6em] uppercase mb-6 block">Our Journey Together</span>
-          <h2 className="font-heading text-5xl md:text-6xl lg:text-7xl text-foreground/90">
-            From <span className="text-gradient-gold">First Call</span> to Final Handover
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="text-primary/40 text-[8px] tracking-[0.5em] uppercase mb-4 block">Our Journey</span>
+          <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground/85">
+            From <span className="text-primary/70">First Call</span> to Handover
           </h2>
         </div>
 
-        {/* Timeline Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        {/* Timeline */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {phases.map((phase, index) => (
             <div
               key={phase.number}
-              className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}
-              style={{ transitionDelay: `${300 + index * 150}ms` }}
+              className={`group relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              style={{ transitionDelay: `${200 + index * 100}ms` }}
             >
-              {/* Connection Line */}
               {index < phases.length - 1 && (
-                <div className="absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/30 to-transparent hidden lg:block" />
+                <div className="absolute top-1/2 -right-3 w-6 h-px bg-gradient-to-r from-primary/20 to-transparent hidden lg:block" />
               )}
               
-              {/* Card */}
-              <div className="relative min-h-[400px] p-8 rounded-2xl border border-border/10 bg-card/10 backdrop-blur-sm hover:border-primary/20 hover:bg-card/20 transition-all duration-700">
+              <div className="relative p-6 rounded-xl border border-border/5 bg-card/5 hover:border-primary/15 hover:bg-card/10 transition-all duration-500">
                 {/* Number */}
-                <div className="relative mb-12">
-                  <span className="text-8xl font-heading text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
+                <div className="relative mb-6">
+                  <span className="text-5xl font-heading text-primary/8 group-hover:text-primary/15 transition-colors duration-500">
                     {phase.number}
                   </span>
-                  <span className="absolute top-4 left-20 text-3xl text-primary/30 group-hover:text-primary/50 group-hover:rotate-12 transition-all duration-500">
+                  <span className="absolute top-2 left-12 text-xl text-primary/20 group-hover:text-primary/35 group-hover:rotate-6 transition-all duration-500">
                     {phase.icon}
                   </span>
                 </div>
 
-                {/* Content */}
-                <h3 className="font-heading text-2xl text-foreground/90 mb-2 group-hover:text-foreground transition-colors duration-500">
+                <h3 className="font-heading text-base text-foreground/80 mb-1 group-hover:text-foreground/90 transition-colors duration-500">
                   {phase.title}
                 </h3>
-                <p className="text-primary/60 text-sm italic mb-6">{phase.subtitle}</p>
-                <p className="text-muted-foreground/60 text-sm leading-relaxed group-hover:text-muted-foreground/80 transition-colors duration-500">
+                <p className="text-primary/45 text-[11px] italic mb-4">{phase.subtitle}</p>
+                <p className="text-muted-foreground/50 text-[12px] leading-relaxed group-hover:text-muted-foreground/65 transition-colors duration-500">
                   {phase.description}
                 </p>
 
-                {/* Bottom Line */}
-                <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-6 left-6 right-6 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
             </div>
           ))}
@@ -673,163 +626,132 @@ const FoundersSection = () => {
   return (
     <section 
       ref={ref} 
-      className="relative py-48 md:py-64 overflow-hidden"
+      className="relative py-24 md:py-32 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Background with Gradient Orbs */}
+      {/* Background */}
       <div className="absolute inset-0 bg-[#040404]" />
       
-      {/* Animated Orbs */}
+      {/* Subtle Orbs */}
       <div 
-        className="absolute w-[800px] h-[800px] rounded-full blur-[200px] opacity-20"
+        className="absolute w-[500px] h-[500px] rounded-full blur-[150px] opacity-10"
         style={{
-          background: 'radial-gradient(circle, hsl(38 42% 60% / 0.3), transparent)',
-          left: `${mousePos.x * 30}%`,
-          top: `${mousePos.y * 30}%`,
-          transition: 'all 1s ease-out',
-        }}
-      />
-      <div 
-        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] opacity-15"
-        style={{
-          background: 'radial-gradient(circle, hsl(30 8% 70% / 0.3), transparent)',
-          right: `${(1 - mousePos.x) * 30}%`,
-          bottom: `${(1 - mousePos.y) * 30}%`,
+          background: 'radial-gradient(circle, hsl(38 42% 60% / 0.25), transparent)',
+          left: `${mousePos.x * 20}%`,
+          top: `${mousePos.y * 20}%`,
           transition: 'all 1.5s ease-out',
         }}
       />
 
-      {/* Grid Lines */}
-      <div className="absolute inset-0 overflow-hidden opacity-10">
+      {/* Subtle Grid */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.04]">
         <svg className="w-full h-full">
           <defs>
-            <pattern id="foundersGrid" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.3" />
+            <pattern id="foundersGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.2" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#foundersGrid)" />
         </svg>
       </div>
 
-      <div className="relative z-10 max-w-8xl mx-auto px-6">
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Section Header */}
-        <div className={`text-center mb-32 md:mb-48 transition-all duration-1500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
-          <span className="text-primary/50 text-[10px] tracking-[0.6em] uppercase mb-6 block">The Visionaries</span>
-          <h2 className="font-heading text-6xl md:text-7xl lg:text-8xl text-foreground/90">
-            Who We <span className="text-gradient-gold">Are</span>
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <span className="text-primary/35 text-[8px] tracking-[0.5em] uppercase mb-4 block">The Visionaries</span>
+          <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl text-foreground/85">
+            Who We <span className="text-primary/70">Are</span>
           </h2>
-          <div className="flex items-center justify-center gap-6 mt-8">
-            <div className="h-px w-24 bg-gradient-to-r from-transparent to-primary/40" />
-            <span className="text-muted-foreground/30 text-[10px] tracking-[0.4em] uppercase">Our Team</span>
-            <div className="h-px w-24 bg-gradient-to-l from-transparent to-primary/40" />
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/25" />
+            <span className="text-muted-foreground/25 text-[8px] tracking-[0.3em] uppercase">Our Team</span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/25" />
           </div>
         </div>
 
-        {/* Founders Cards - Magazine Layout */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        {/* Founders - Compact Cards */}
+        <div className="grid lg:grid-cols-2 gap-8">
           {founders.map((founder, index) => {
             const isActive = activeFounder === index;
             
             return (
               <div
                 key={founder.name}
-                className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}`}
-                style={{ transitionDelay: `${500 + index * 300}ms` }}
+                className={`group relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+                style={{ transitionDelay: `${300 + index * 150}ms` }}
                 onMouseEnter={() => setActiveFounder(index)}
                 onMouseLeave={() => setActiveFounder(null)}
               >
                 {/* Card Glow */}
-                <div className={`absolute -inset-4 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 rounded-[3rem] blur-2xl transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+                <div className={`absolute -inset-2 bg-gradient-to-br from-primary/8 via-transparent to-primary/4 rounded-2xl blur-xl transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
                 
                 {/* Main Card */}
                 <div className={`
-                  relative min-h-[700px] rounded-[2.5rem] overflow-hidden
-                  border border-border/10 bg-gradient-to-br from-card/30 via-card/10 to-transparent
-                  backdrop-blur-xl transition-all duration-700
-                  ${isActive ? 'border-primary/20 scale-[1.02]' : ''}
+                  relative rounded-xl overflow-hidden p-8
+                  border border-border/5 bg-gradient-to-br from-card/15 via-card/5 to-transparent
+                  backdrop-blur-sm transition-all duration-500
+                  ${isActive ? 'border-primary/15' : ''}
                 `}>
-                  {/* Giant Initial - Background */}
-                  <div className="absolute top-0 left-0 right-0 h-[400px] flex items-center justify-center overflow-hidden">
+                  {/* Initial Background */}
+                  <div className="absolute top-0 right-0 -mr-8 -mt-8 overflow-hidden">
                     <span 
                       className={`
-                        text-[400px] md:text-[500px] font-heading leading-none select-none
-                        bg-gradient-to-b from-primary/[0.08] to-transparent bg-clip-text text-transparent
-                        transition-all duration-1000
-                        ${isActive ? 'scale-110 from-primary/[0.12]' : ''}
+                        text-[180px] font-heading leading-none select-none
+                        bg-gradient-to-b from-primary/[0.05] to-transparent bg-clip-text text-transparent
+                        transition-all duration-700
+                        ${isActive ? 'from-primary/[0.08]' : ''}
                       `}
                     >
                       {founder.initial}
                     </span>
                   </div>
 
-                  {/* Geometric Accents */}
+                  {/* Geometric Accent */}
                   <div className={`
-                    absolute top-16 right-16 w-32 h-32 border border-primary/10 rotate-45
-                    transition-all duration-1000
-                    ${isActive ? 'rotate-[60deg] scale-110 border-primary/30' : ''}
-                  `} />
-                  <div className={`
-                    absolute top-24 right-24 w-20 h-20 border border-primary/5 rotate-12
-                    transition-all duration-1000
-                    ${isActive ? 'rotate-[30deg] scale-90 border-primary/20' : ''}
+                    absolute top-6 right-6 w-12 h-12 border border-primary/8 rotate-45
+                    transition-all duration-700
+                    ${isActive ? 'rotate-[55deg] border-primary/20' : ''}
                   `} />
 
-                  {/* Content Area */}
-                  <div className="absolute bottom-0 left-0 right-0 p-10 lg:p-14">
-                    {/* Top Border Glow */}
-                    <div className={`absolute top-0 left-10 right-10 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-30'}`} />
+                  {/* Content */}
+                  <div className="relative">
+                    <h3 className={`
+                      font-heading text-xl md:text-2xl text-foreground/85 mb-2
+                      transition-all duration-500
+                      ${isActive ? 'text-foreground/95' : ''}
+                    `}>
+                      {founder.name}
+                    </h3>
                     
-                    <div className="relative pt-10">
-                      {/* Name */}
-                      <h3 className={`
-                        font-heading text-4xl md:text-5xl lg:text-6xl text-foreground/90 mb-4
-                        transition-all duration-500
-                        ${isActive ? 'text-foreground translate-x-2' : ''}
-                      `}>
-                        {founder.name}
-                      </h3>
-                      
-                      {/* Role */}
-                      <div className="flex flex-col gap-1 mb-10">
-                        <span className={`text-primary text-sm tracking-[0.3em] uppercase font-medium transition-all duration-500 ${isActive ? 'translate-x-2' : ''}`}>
-                          {founder.role}
-                        </span>
-                        <span className={`text-muted-foreground/50 text-xs tracking-wider transition-all duration-500 delay-100 ${isActive ? 'translate-x-2' : ''}`}>
-                          ({founder.department})
-                        </span>
-                      </div>
-
-                      {/* Description */}
-                      <div className={`space-y-4 transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-60'}`}>
-                        <p className={`text-muted-foreground leading-relaxed transition-all duration-500 delay-200 ${isActive ? 'translate-x-2' : ''}`}>
-                          "{founder.description}"
-                        </p>
-                        <p className={`text-muted-foreground/60 text-sm italic leading-relaxed transition-all duration-500 delay-300 ${isActive ? 'translate-x-2' : ''}`}>
-                          {founder.philosophy}
-                        </p>
-                      </div>
-
-                      {/* Bottom Accent */}
-                      <div className={`mt-10 h-[2px] bg-gradient-to-r from-primary/60 via-primary/30 to-transparent transition-all duration-1000 ${isActive ? 'w-full' : 'w-24'}`} />
+                    <div className="flex flex-col gap-0.5 mb-6">
+                      <span className={`text-primary/60 text-[10px] tracking-[0.2em] uppercase font-medium transition-all duration-500`}>
+                        {founder.role}
+                      </span>
+                      <span className="text-muted-foreground/40 text-[9px] tracking-wider">
+                        {founder.department}
+                      </span>
                     </div>
+
+                    <p className={`text-muted-foreground/55 text-[13px] leading-relaxed mb-3 transition-all duration-500 ${isActive ? 'text-muted-foreground/70' : ''}`}>
+                      {founder.description}
+                    </p>
+                    <p className={`text-muted-foreground/40 text-[12px] italic leading-relaxed transition-all duration-500 ${isActive ? 'text-muted-foreground/55' : ''}`}>
+                      {founder.philosophy}
+                    </p>
+
+                    {/* Bottom Accent */}
+                    <div className={`mt-6 h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent transition-all duration-700 ${isActive ? 'w-full' : 'w-16'}`} />
                   </div>
 
                   {/* Corner Frames */}
-                  <div className="absolute top-8 left-8 w-16 h-16">
-                    <div className={`absolute top-0 left-0 w-12 h-px bg-primary/30 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
-                    <div className={`absolute top-0 left-0 w-px h-12 bg-primary/30 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+                  <div className="absolute top-4 left-4">
+                    <div className={`w-6 h-px bg-primary/20 transition-all duration-500 ${isActive ? 'w-8' : ''}`} />
+                    <div className={`w-px h-6 bg-primary/20 transition-all duration-500 ${isActive ? 'h-8' : ''}`} />
                   </div>
-                  <div className="absolute bottom-8 right-8 w-16 h-16">
-                    <div className={`absolute bottom-0 right-0 w-12 h-px bg-primary/30 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
-                    <div className={`absolute bottom-0 right-0 w-px h-12 bg-primary/30 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+                  <div className="absolute bottom-4 right-4">
+                    <div className={`w-6 h-px bg-primary/20 ml-auto transition-all duration-500 ${isActive ? 'w-8' : ''}`} />
+                    <div className={`w-px h-6 bg-primary/20 ml-auto transition-all duration-500 ${isActive ? 'h-8' : ''}`} />
                   </div>
-
-                  {/* Shimmer Effect */}
-                  <div className={`
-                    absolute inset-0 -translate-x-full group-hover:translate-x-full
-                    bg-gradient-to-r from-transparent via-white/[0.02] to-transparent
-                    transition-transform duration-2000 ease-out pointer-events-none
-                  `} />
                 </div>
               </div>
             );
@@ -837,8 +759,8 @@ const FoundersSection = () => {
         </div>
 
         {/* Bottom Tagline */}
-        <div className={`text-center mt-32 transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <p className="text-muted-foreground/30 text-[10px] tracking-[0.5em] uppercase">
+        <div className={`text-center mt-16 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <p className="text-muted-foreground/20 text-[9px] tracking-[0.4em] uppercase">
             Design × Construction × Vision
           </p>
         </div>
