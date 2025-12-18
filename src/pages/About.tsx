@@ -3,6 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import portfolioKitchen from "@/assets/portfolio-kitchen.jpg";
+import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
+import portfolioDining from "@/assets/portfolio-dining.jpg";
 
 
 // Architectural Blueprint Background - Refined & Subtle
@@ -290,11 +293,12 @@ const HeroAbout = () => {
   );
 };
 
-// Immersive Architectural Philosophy Section - Exploded Sectional View
+// Immersive Architectural Philosophy Section with Center Image
 const ArchitecturalPhilosophySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollY, setScrollY] = useState(0);
   const [sectionVisible, setSectionVisible] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
 
   useEffect(() => {
@@ -310,153 +314,53 @@ const ArchitecturalPhilosophySection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Auto-rotate images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImage(prev => (prev + 1) % 3);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const galleryImages = [
+    { src: portfolioKitchen, label: 'Kitchen Design' },
+    { src: portfolioBedroom, label: 'Bedroom Interiors' },
+    { src: portfolioDining, label: 'Dining Spaces' },
+  ];
+
   return (
-    <section ref={sectionRef} className="relative min-h-screen py-32 md:py-40 overflow-hidden">
-      {/* === LAYER 1: Base Dark Background === */}
-      <div className="absolute inset-0 bg-[#030303]" />
+    <section ref={sectionRef} className="relative py-32 md:py-40 overflow-hidden">
+      {/* === Rich Gradient Background === */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0806] via-[#0d0b08] to-[#080705]" />
       
-      {/* === LAYER 2: Structural Blueprint Grid === */}
-      <svg 
-        className="absolute inset-0 w-full h-full"
-        style={{ 
-          transform: `translate(${scrollY * 0.08}px, ${scrollY * 0.05}px)`,
-          transition: 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        <defs>
-          <pattern id="structuralGrid" width="120" height="120" patternUnits="userSpaceOnUse">
-            <path d="M 120 0 L 0 0 0 120" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.04" />
-            <path d="M 60 0 L 60 120 M 0 60 L 120 60" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.2" opacity="0.02" />
-            {/* Measurement ticks */}
-            <line x1="0" y1="0" x2="6" y2="0" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.06" />
-            <line x1="0" y1="0" x2="0" y2="6" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.06" />
-            <circle cx="60" cy="60" r="1" fill="hsl(38 42% 55%)" opacity="0.03" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#structuralGrid)" />
-      </svg>
+      {/* Warm ambient glow */}
+      <div className="absolute inset-0" style={{
+        background: `
+          radial-gradient(ellipse 80% 60% at 50% 40%, hsl(38 50% 50% / 0.06) 0%, transparent 50%),
+          radial-gradient(ellipse 60% 50% at 20% 80%, hsl(38 40% 45% / 0.04) 0%, transparent 40%),
+          radial-gradient(ellipse 60% 50% at 80% 20%, hsl(30 45% 50% / 0.04) 0%, transparent 40%)
+        `
+      }} />
+      
+      {/* Animated light rays */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/3 w-px h-full bg-gradient-to-b from-primary/15 via-transparent to-transparent animate-pulse" style={{ animationDuration: '3s' }} />
+        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+      </div>
 
-      {/* === LAYER 3: Abstract Architectural Forms (Wall/Ceiling Volumes) === */}
-      <svg 
-        className="absolute inset-0 w-full h-full"
-        style={{ 
-          transform: `translate(${scrollY * -0.03}px, ${scrollY * -0.02}px)`,
-          transition: 'transform 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
-        }}
-      >
-        {/* Large rectangular volume - top left */}
-        <rect x="5%" y="8%" width="28%" height="35%" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.5" opacity="0.04" />
-        <rect x="7%" y="12%" width="22%" height="26%" fill="hsl(38 42% 55%)" opacity="0.008" />
-        
-        {/* Ceiling edge planes - right */}
-        <path d="M 70% 5% L 95% 5% L 95% 25% L 85% 25% L 85% 15% L 70% 15% Z" fill="none" stroke="hsl(30 8% 55%)" strokeWidth="0.4" opacity="0.03" />
-        <path d="M 72% 7% L 93% 7% L 93% 23% L 87% 23% L 87% 13% L 72% 13% Z" fill="hsl(30 8% 55%)" opacity="0.006" />
-        
-        {/* Wall outline - bottom right */}
-        <path d="M 60% 65% L 92% 65% L 92% 95% L 75% 95% L 75% 80% L 60% 80% Z" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.5" opacity="0.035" />
-        
-        {/* Floating volume - center */}
-        <rect x="40%" y="40%" width="20%" height="18%" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.025" />
-        
-        {/* Overlapping planes - bottom left */}
-        <rect x="3%" y="70%" width="32%" height="25%" fill="none" stroke="hsl(30 8% 55%)" strokeWidth="0.4" opacity="0.03" />
-        <rect x="8%" y="75%" width="25%" height="17%" fill="hsl(38 42% 55%)" opacity="0.01" />
-      </svg>
+      {/* Floating orbs - More vibrant */}
+      <div className="absolute top-1/4 left-1/5 w-80 h-80 bg-primary/15 rounded-full blur-[120px] animate-float" />
+      <div className="absolute bottom-1/4 right-1/5 w-96 h-96 bg-primary/10 rounded-full blur-[140px] animate-float" style={{ animationDelay: '-4s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/8 rounded-full blur-[150px] animate-float" style={{ animationDelay: '-2s' }} />
+      
+      {/* Grain */}
+      <div className="absolute inset-0 grain opacity-40" />
 
-      {/* === LAYER 4: Light & Material Texture Gradients === */}
-      <div 
-        className="absolute inset-0"
-        style={{ 
-          background: `
-            radial-gradient(ellipse 80% 50% at 20% 30%, hsl(38 42% 55% / 0.02) 0%, transparent 50%),
-            radial-gradient(ellipse 60% 40% at 80% 70%, hsl(30 15% 50% / 0.015) 0%, transparent 45%),
-            radial-gradient(ellipse 50% 60% at 50% 50%, hsl(38 42% 55% / 0.008) 0%, transparent 60%)
-          `,
-          transform: `translateY(${scrollY * 0.15}px)`,
-          transition: 'transform 1s ease-out',
-        }}
-      />
-
-      {/* Subtle stone/concrete texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* === LAYER 5: Architectural Micro-Details === */}
-      <svg 
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ 
-          opacity: sectionVisible ? 1 : 0,
-          transition: 'opacity 1.5s ease-out',
-        }}
-      >
-        {/* Corner crop marks - top left */}
-        <g opacity="0.08">
-          <line x1="3%" y1="5%" x2="6%" y2="5%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-          <line x1="3%" y1="5%" x2="3%" y2="8%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-        </g>
-        
-        {/* Corner crop marks - top right */}
-        <g opacity="0.08">
-          <line x1="94%" y1="5%" x2="97%" y2="5%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-          <line x1="97%" y1="5%" x2="97%" y2="8%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-        </g>
-        
-        {/* Corner crop marks - bottom left */}
-        <g opacity="0.08">
-          <line x1="3%" y1="95%" x2="6%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-          <line x1="3%" y1="92%" x2="3%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-        </g>
-        
-        {/* Corner crop marks - bottom right */}
-        <g opacity="0.08">
-          <line x1="94%" y1="95%" x2="97%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-          <line x1="97%" y1="92%" x2="97%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
-        </g>
-        
-        {/* Measurement dots scattered */}
-        <circle cx="15%" cy="25%" r="1.5" fill="hsl(38 42% 55%)" opacity="0.05" />
-        <circle cx="85%" cy="35%" r="1.5" fill="hsl(38 42% 55%)" opacity="0.04" />
-        <circle cx="50%" cy="75%" r="1.5" fill="hsl(38 42% 55%)" opacity="0.05" />
-        <circle cx="25%" cy="85%" r="1.5" fill="hsl(30 8% 55%)" opacity="0.04" />
-        
-        {/* Alignment crosses */}
-        <g opacity="0.04">
-          <line x1="47%" y1="15%" x2="53%" y2="15%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-          <line x1="50%" y1="12%" x2="50%" y2="18%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-        </g>
-        <g opacity="0.035">
-          <line x1="12%" y1="55%" x2="18%" y2="55%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-          <line x1="15%" y1="52%" x2="15%" y2="58%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
-        </g>
-        
-        {/* Thin gold construction rules */}
-        <line x1="10%" y1="45%" x2="35%" y2="45%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.06" />
-        <line x1="65%" y1="55%" x2="90%" y2="55%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.05" />
-        
-        {/* Tiny labels */}
-        <text x="3.5%" y="9%" fill="hsl(38 42% 55%)" fontSize="6" opacity="0.06" fontFamily="monospace">A-01</text>
-        <text x="93%" y="9%" fill="hsl(38 42% 55%)" fontSize="6" opacity="0.05" fontFamily="monospace">SEC</text>
-        <text x="3.5%" y="91%" fill="hsl(30 8% 55%)" fontSize="6" opacity="0.05" fontFamily="monospace">PL-1</text>
-        
-        {/* Faint geometry accents near zones */}
-        <rect x="8%" y="18%" width="8" height="8" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.04" transform="rotate(45, 12%, 22%)" />
-        <polygon points="82,200 88,192 94,200" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.035" />
-        <circle cx="18%" cy="78%" r="4" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.04" />
-      </svg>
-
-      {/* Floating orbs */}
-      <div className="absolute top-1/3 left-1/5 w-72 h-72 bg-primary/8 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] animate-float" style={{ animationDelay: '-4s' }} />
-
-      {/* === CONTENT: Three Spatial Philosophy Zones === */}
+      {/* === CONTENT === */}
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
         
         {/* Section Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <span className="inline-flex items-center gap-4 mb-8">
             <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
             <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
@@ -470,98 +374,181 @@ const ArchitecturalPhilosophySection = () => {
           </h2>
         </div>
         
-        {/* Layout grid for three visible zones */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        {/* Main Grid: Left Content + Center Image + Right Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           
-          {/* === ZONE A: Simplicity as Luxury === */}
-          <div 
-            className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-            style={{ transitionDelay: '200ms' }}
-          >
-            <div className="relative p-8 lg:p-10 rounded-2xl border border-border/10 bg-card/5 hover:border-primary/20 hover:bg-card/10 transition-all duration-500 h-full">
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-              
-              {/* Corner accent */}
-              <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
-              
-              {/* Icon */}
-              <div className="relative mb-8">
-                <span className="text-6xl text-primary/15 group-hover:text-primary/25 transition-colors duration-500">◯</span>
+          {/* Left Column - Philosophy Cards */}
+          <div className="lg:col-span-4 space-y-6">
+            {/* Card 1 */}
+            <div 
+              className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
+              style={{ transitionDelay: '200ms' }}
+            >
+              <div className="relative p-6 lg:p-8 rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/10 via-card/10 to-transparent hover:border-primary/30 hover:from-primary/15 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <div className="absolute top-0 left-0 w-10 h-10 border-l-2 border-t-2 border-primary/30 rounded-tl-2xl" />
+                
+                <div className="relative mb-4">
+                  <span className="text-4xl text-primary/30 group-hover:text-primary/50 transition-colors duration-500">◯</span>
+                </div>
+                
+                <h3 className="font-heading text-xl lg:text-2xl text-foreground mb-3 group-hover:text-primary/90 transition-colors duration-500">
+                  Simplicity as <span className="text-primary">Luxury</span>
+                </h3>
+                
+                <p className="text-muted-foreground/80 text-sm lg:text-base leading-relaxed">
+                  The most powerful design is invisible. It earns attention through <span className="text-primary/80">restraint</span>.
+                </p>
               </div>
-              
-              <h3 className="font-heading text-2xl lg:text-3xl text-foreground/90 mb-4 group-hover:text-foreground transition-colors duration-500">
-                Simplicity as <span className="text-primary">Luxury</span>
-              </h3>
-              
-              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
-                The most powerful design is invisible. It earns attention through <span className="text-primary/70">restraint</span>, not noise.
-              </p>
-              
-              {/* Bottom line */}
-              <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+
+            {/* Card 2 */}
+            <div 
+              className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
+              style={{ transitionDelay: '400ms' }}
+            >
+              <div className="relative p-6 lg:p-8 rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/10 via-card/10 to-transparent hover:border-primary/30 hover:from-primary/15 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <div className="absolute top-0 left-0 w-10 h-10 border-l-2 border-t-2 border-primary/30 rounded-tl-2xl" />
+                
+                <div className="relative mb-4">
+                  <span className="text-4xl text-primary/30 group-hover:text-primary/50 transition-colors duration-500">◇</span>
+                </div>
+                
+                <h3 className="font-heading text-xl lg:text-2xl text-foreground mb-3 group-hover:text-primary/90 transition-colors duration-500">
+                  Execution Over <span className="text-primary">Promises</span>
+                </h3>
+                
+                <p className="text-muted-foreground/80 text-sm lg:text-base leading-relaxed">
+                  What separates us is obsessive focus on bringing every <span className="text-primary/80">detail</span> to life.
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* === ZONE B: Execution Over Promises === */}
+          {/* Center Column - Featured Image Gallery */}
           <div 
-            className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-            style={{ transitionDelay: '400ms' }}
+            className={`lg:col-span-4 transition-all duration-1000 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
+            style={{ transitionDelay: '300ms' }}
           >
-            <div className="relative p-8 lg:p-10 rounded-2xl border border-border/10 bg-card/5 hover:border-primary/20 hover:bg-card/10 transition-all duration-500 h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+            <div className="relative aspect-[3/4] max-w-md mx-auto">
+              {/* Decorative frame */}
+              <div className="absolute -inset-4 border border-primary/20 rounded-3xl" />
+              <div className="absolute -inset-8 border border-primary/10 rounded-[2rem]" />
               
-              <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
+              {/* Gold corner accents */}
+              <div className="absolute -top-6 -left-6 w-12 h-12 border-l-2 border-t-2 border-primary/50" />
+              <div className="absolute -top-6 -right-6 w-12 h-12 border-r-2 border-t-2 border-primary/50" />
+              <div className="absolute -bottom-6 -left-6 w-12 h-12 border-l-2 border-b-2 border-primary/50" />
+              <div className="absolute -bottom-6 -right-6 w-12 h-12 border-r-2 border-b-2 border-primary/50" />
               
-              <div className="relative mb-8">
-                <span className="text-6xl text-primary/15 group-hover:text-primary/25 transition-colors duration-500">◇</span>
+              {/* Glowing backdrop */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-2xl blur-2xl" />
+              
+              {/* Main image container */}
+              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+                {galleryImages.map((img, index) => (
+                  <div
+                    key={index}
+                    className={`absolute inset-0 transition-all duration-1000 ${
+                      activeImage === index 
+                        ? 'opacity-100 scale-100' 
+                        : 'opacity-0 scale-105'
+                    }`}
+                  >
+                    <img 
+                      src={img.src}
+                      alt={img.label}
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  </div>
+                ))}
+                
+                {/* Image label */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-primary/80 text-xs tracking-[0.3em] uppercase mb-2">Our Work</p>
+                  <p className="text-foreground/90 text-lg font-heading">{galleryImages[activeImage].label}</p>
+                </div>
+                
+                {/* Navigation dots */}
+                <div className="absolute bottom-6 right-6 flex gap-2">
+                  {galleryImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveImage(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        activeImage === index 
+                          ? 'bg-primary w-6' 
+                          : 'bg-foreground/30 hover:bg-foreground/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+                
+                {/* Decorative corner marks inside */}
+                <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-primary/40" />
+                <div className="absolute top-4 right-4 w-6 h-6 border-r border-t border-primary/40" />
               </div>
               
-              <h3 className="font-heading text-2xl lg:text-3xl text-foreground/90 mb-4 group-hover:text-foreground transition-colors duration-500">
-                Execution Over <span className="text-primary">Promises</span>
-              </h3>
-              
-              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
-                Ideas are abundant. What separates us is obsessive focus on bringing every <span className="text-primary/70">detail</span> to life—without compromise.
-              </p>
-              
-              <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Floating badge */}
+              <div className="absolute -right-4 top-1/4 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-4 py-2">
+                <span className="text-primary text-xs font-medium tracking-wider">10+ Years</span>
+              </div>
             </div>
           </div>
 
-          {/* === ZONE C: Timeless Over Trendy === */}
-          <div 
-            className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-            style={{ transitionDelay: '600ms' }}
-          >
-            <div className="relative p-8 lg:p-10 rounded-2xl border border-border/10 bg-card/5 hover:border-primary/20 hover:bg-card/10 transition-all duration-500 h-full">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-              
-              <div className="absolute top-0 left-0 w-12 h-12 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
-              
-              <div className="relative mb-8">
-                <span className="text-6xl text-primary/15 group-hover:text-primary/25 transition-colors duration-500">△</span>
+          {/* Right Column - Philosophy Card + Quote */}
+          <div className="lg:col-span-4 space-y-6">
+            {/* Card 3 */}
+            <div 
+              className={`group relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+              style={{ transitionDelay: '600ms' }}
+            >
+              <div className="relative p-6 lg:p-8 rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/10 via-card/10 to-transparent hover:border-primary/30 hover:from-primary/15 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <div className="absolute top-0 right-0 w-10 h-10 border-r-2 border-t-2 border-primary/30 rounded-tr-2xl" />
+                
+                <div className="relative mb-4">
+                  <span className="text-4xl text-primary/30 group-hover:text-primary/50 transition-colors duration-500">△</span>
+                </div>
+                
+                <h3 className="font-heading text-xl lg:text-2xl text-foreground mb-3 group-hover:text-primary/90 transition-colors duration-500">
+                  Timeless Over <span className="text-primary">Trendy</span>
+                </h3>
+                
+                <p className="text-muted-foreground/80 text-sm lg:text-base leading-relaxed">
+                  Trends fade in seasons. We build for <span className="text-primary/80">decades</span>.
+                </p>
               </div>
-              
-              <h3 className="font-heading text-2xl lg:text-3xl text-foreground/90 mb-4 group-hover:text-foreground transition-colors duration-500">
-                Timeless Over <span className="text-primary">Trendy</span>
-              </h3>
-              
-              <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
-                Trends fade in seasons. We build for <span className="text-primary/70">decades</span>.
-              </p>
-              
-              <div className="absolute bottom-8 left-8 right-8 h-px bg-gradient-to-r from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </div>
+
+            {/* Quote Block */}
+            <div 
+              className={`relative transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+              style={{ transitionDelay: '800ms' }}
+            >
+              <div className="relative p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent border border-primary/10">
+                <span className="text-6xl text-primary/20 font-heading leading-none absolute -top-2 left-4">"</span>
+                <p className="text-foreground/70 text-lg lg:text-xl italic leading-relaxed pt-4">
+                  A space should feel <span className="text-primary/90">calm</span> before it looks beautiful.
+                </p>
+                <div className="mt-4 flex items-center gap-3">
+                  <div className="w-8 h-px bg-primary/40" />
+                  <span className="text-muted-foreground/60 text-xs tracking-wider uppercase">Our Belief</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Section viewport glow effect */}
+      {/* Bottom glow */}
       <div 
         className="absolute inset-0 pointer-events-none transition-opacity duration-[2000ms]"
         style={{
-          background: 'radial-gradient(ellipse 100% 60% at 50% 100%, hsl(38 42% 55% / 0.02) 0%, transparent 50%)',
+          background: 'radial-gradient(ellipse 100% 40% at 50% 100%, hsl(38 42% 55% / 0.05) 0%, transparent 50%)',
           opacity: sectionVisible ? 1 : 0,
         }}
       />
@@ -741,33 +728,51 @@ const FoundersSection = () => {
       className="relative py-32 md:py-40 overflow-hidden"
       onMouseMove={handleMouseMove}
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-[#040404]" />
+      {/* Brighter Background with warm gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0c0908] via-[#100c09] to-[#0c0908]" />
       
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[120px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[140px] animate-float" style={{ animationDelay: '-4s' }} />
+      {/* Rich warm ambient lighting */}
+      <div className="absolute inset-0" style={{
+        background: `
+          radial-gradient(ellipse 80% 70% at 30% 30%, hsl(38 55% 50% / 0.12) 0%, transparent 50%),
+          radial-gradient(ellipse 70% 60% at 70% 70%, hsl(32 50% 45% / 0.10) 0%, transparent 45%),
+          radial-gradient(ellipse 50% 50% at 50% 50%, hsl(38 45% 55% / 0.06) 0%, transparent 50%)
+        `
+      }} />
       
-      {/* Dynamic Orb */}
+      {/* Animated light rays */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/20 via-primary/5 to-transparent animate-pulse" style={{ animationDuration: '3s' }} />
+        <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-primary/15 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s', animationDelay: '1s' }} />
+        <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent animate-pulse" style={{ animationDuration: '5s', animationDelay: '2s' }} />
+      </div>
+      
+      {/* Brighter Floating orbs */}
+      <div className="absolute top-1/4 left-1/6 w-80 h-80 bg-primary/20 rounded-full blur-[120px] animate-float" />
+      <div className="absolute bottom-1/4 right-1/6 w-96 h-96 bg-primary/15 rounded-full blur-[140px] animate-float" style={{ animationDelay: '-4s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[100px]" />
+      
+      {/* Dynamic Orb following mouse */}
       <div 
-        className="absolute w-[600px] h-[600px] rounded-full blur-[180px] opacity-15"
+        className="absolute w-[700px] h-[700px] rounded-full blur-[200px] opacity-25"
         style={{
-          background: 'radial-gradient(circle, hsl(38 42% 60% / 0.3), transparent)',
-          left: `${mousePos.x * 25}%`,
-          top: `${mousePos.y * 25}%`,
+          background: 'radial-gradient(circle, hsl(38 55% 55% / 0.4), transparent)',
+          left: `${mousePos.x * 30}%`,
+          top: `${mousePos.y * 30}%`,
           transition: 'all 1.5s ease-out',
         }}
       />
       
       {/* Grain */}
-      <div className="absolute inset-0 grain opacity-30" />
+      <div className="absolute inset-0 grain opacity-25" />
 
-      {/* Subtle Grid */}
-      <div className="absolute inset-0 overflow-hidden opacity-[0.04]">
+      {/* Enhanced Grid with gold tint */}
+      <div className="absolute inset-0 overflow-hidden opacity-[0.06]">
         <svg className="w-full h-full">
           <defs>
             <pattern id="foundersGrid" width="80" height="80" patternUnits="userSpaceOnUse">
-              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.2" />
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="hsl(38 50% 65%)" strokeWidth="0.3" />
+              <circle cx="0" cy="0" r="1" fill="hsl(38 50% 65%)" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#foundersGrid)" />
@@ -778,20 +783,23 @@ const FoundersSection = () => {
         {/* Section Header */}
         <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <span className="inline-flex items-center gap-4 mb-8">
-            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
-            <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
+            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-20' : 'w-0'}`} />
+            <span className="text-primary text-sm tracking-[0.5em] uppercase font-medium">
               The Visionaries
             </span>
-            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-16' : 'w-0'}`} />
+            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 ${isVisible ? 'w-20' : 'w-0'}`} />
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-foreground leading-[1]">
             <span className="block">Who We</span>
             <span className="text-shimmer italic">Are</span>
           </h2>
+          <p className="mt-6 text-muted-foreground/70 text-lg max-w-2xl mx-auto">
+            Meet the minds behind EdgeHomes — where passion meets precision.
+          </p>
         </div>
 
-        {/* Founders - Enhanced Cards */}
-        <div className="grid lg:grid-cols-2 gap-10">
+        {/* Founders - Brighter Enhanced Cards */}
+        <div className="grid lg:grid-cols-2 gap-12">
           {founders.map((founder, index) => {
             const isActive = activeFounder === index;
             
@@ -803,78 +811,93 @@ const FoundersSection = () => {
                 onMouseEnter={() => setActiveFounder(index)}
                 onMouseLeave={() => setActiveFounder(null)}
               >
-                {/* Card Glow */}
-                <div className={`absolute -inset-3 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 rounded-3xl blur-xl transition-opacity duration-700 ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+                {/* Card Glow - More vibrant */}
+                <div className={`absolute -inset-4 bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 rounded-3xl blur-2xl transition-all duration-700 ${isActive ? 'opacity-100 scale-105' : 'opacity-40'}`} />
                 
-                {/* Main Card */}
+                {/* Main Card - Brighter */}
                 <div className={`
                   relative rounded-2xl overflow-hidden p-10 lg:p-12
-                  border border-border/10 bg-gradient-to-br from-card/15 via-card/5 to-transparent
-                  backdrop-blur-sm transition-all duration-500
-                  ${isActive ? 'border-primary/20' : ''}
+                  border transition-all duration-500
+                  ${isActive 
+                    ? 'border-primary/40 bg-gradient-to-br from-primary/20 via-card/20 to-primary/10' 
+                    : 'border-primary/20 bg-gradient-to-br from-primary/10 via-card/10 to-transparent'
+                  }
+                  backdrop-blur-sm
                 `}>
-                  {/* Corner accent */}
-                  <div className="absolute top-0 left-0 w-14 h-14 border-l-2 border-t-2 border-primary/20 rounded-tl-2xl" />
+                  {/* Animated border glow */}
+                  <div className={`absolute inset-0 rounded-2xl transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-0'}`}
+                    style={{
+                      background: 'linear-gradient(135deg, hsl(38 50% 50% / 0.15), transparent, hsl(38 50% 50% / 0.15))',
+                    }}
+                  />
                   
-                  {/* Initial Background */}
-                  <div className="absolute top-0 right-0 -mr-6 -mt-6 overflow-hidden">
+                  {/* Corner accent - More prominent */}
+                  <div className="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-primary/40 rounded-tl-2xl" />
+                  <div className="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-primary/40 rounded-br-2xl" />
+                  
+                  {/* Initial Background - Brighter */}
+                  <div className="absolute top-0 right-0 -mr-4 -mt-4 overflow-hidden">
                     <span 
                       className={`
-                        text-[220px] font-heading leading-none select-none
-                        bg-gradient-to-b from-primary/[0.06] to-transparent bg-clip-text text-transparent
+                        text-[200px] font-heading leading-none select-none
+                        bg-gradient-to-br from-primary/15 via-primary/10 to-transparent bg-clip-text text-transparent
                         transition-all duration-700
-                        ${isActive ? 'from-primary/[0.1]' : ''}
+                        ${isActive ? 'from-primary/25 via-primary/15' : ''}
                       `}
                     >
                       {founder.initial}
                     </span>
                   </div>
 
-                  {/* Geometric Accent */}
+                  {/* Geometric Accent - More visible */}
                   <div className={`
-                    absolute top-8 right-8 w-14 h-14 border border-primary/10 rotate-45
+                    absolute top-8 right-8 w-16 h-16 border-2 border-primary/20 rotate-45
                     transition-all duration-700
-                    ${isActive ? 'rotate-[55deg] border-primary/25' : ''}
+                    ${isActive ? 'rotate-[55deg] border-primary/40 scale-110' : ''}
                   `} />
 
                   {/* Content */}
                   <div className="relative">
+                    {/* Role badge */}
+                    <div className={`inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border transition-all duration-500 ${
+                      isActive 
+                        ? 'bg-primary/20 border-primary/40' 
+                        : 'bg-primary/10 border-primary/20'
+                    }`}>
+                      <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                      <span className="text-primary text-xs tracking-[0.2em] uppercase font-medium">
+                        {founder.role}
+                      </span>
+                    </div>
+                    
                     <h3 className={`
-                      font-heading text-2xl md:text-3xl lg:text-4xl text-foreground/90 mb-3
+                      font-heading text-3xl md:text-4xl lg:text-5xl mb-2
                       transition-all duration-500
-                      ${isActive ? 'text-foreground' : ''}
+                      ${isActive ? 'text-foreground' : 'text-foreground/90'}
                     `}>
                       {founder.name}
                     </h3>
                     
-                    <div className="flex flex-col gap-1 mb-8">
-                      <span className={`text-primary text-sm tracking-[0.2em] uppercase font-medium transition-all duration-500`}>
-                        {founder.role}
-                      </span>
-                      <span className="text-muted-foreground/50 text-xs tracking-wider">
-                        {founder.department}
-                      </span>
-                    </div>
+                    <span className="text-primary/60 text-sm tracking-wider block mb-8">
+                      {founder.department}
+                    </span>
 
-                    <p className={`text-muted-foreground text-base lg:text-lg leading-relaxed mb-4 transition-all duration-500 ${isActive ? 'text-muted-foreground/90' : ''}`}>
+                    <p className={`text-foreground/70 text-base lg:text-lg leading-relaxed mb-4 transition-all duration-500 ${isActive ? 'text-foreground/85' : ''}`}>
                       {founder.description}
                     </p>
-                    <p className={`text-muted-foreground/60 text-sm lg:text-base italic leading-relaxed transition-all duration-500 ${isActive ? 'text-muted-foreground/75' : ''}`}>
-                      {founder.philosophy}
+                    <p className={`text-muted-foreground/60 text-sm lg:text-base italic leading-relaxed transition-all duration-500 ${isActive ? 'text-muted-foreground/80' : ''}`}>
+                      "{founder.philosophy}"
                     </p>
 
-                    {/* Bottom Accent */}
-                    <div className={`mt-8 h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent transition-all duration-700 ${isActive ? 'w-full' : 'w-20'}`} />
+                    {/* Bottom Accent - More prominent */}
+                    <div className={`mt-8 h-0.5 bg-gradient-to-r from-primary via-primary/50 to-transparent transition-all duration-700 ${isActive ? 'w-full' : 'w-24'}`} />
                   </div>
 
-                  {/* Corner Frames */}
-                  <div className="absolute top-6 left-6">
-                    <div className={`w-8 h-px bg-primary/25 transition-all duration-500 ${isActive ? 'w-10' : ''}`} />
-                    <div className={`w-px h-8 bg-primary/25 transition-all duration-500 ${isActive ? 'h-10' : ''}`} />
-                  </div>
-                  <div className="absolute bottom-6 right-6">
-                    <div className={`w-8 h-px bg-primary/25 ml-auto transition-all duration-500 ${isActive ? 'w-10' : ''}`} />
-                    <div className={`w-px h-8 bg-primary/25 ml-auto transition-all duration-500 ${isActive ? 'h-10' : ''}`} />
+                  {/* Decorative dots */}
+                  <div className="absolute top-1/2 -left-2 flex flex-col gap-2">
+                    <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${isActive ? 'bg-primary' : 'bg-primary/30'}`} />
+                    <div className={`w-1 h-1 rounded-full transition-all duration-500 ${isActive ? 'bg-primary/70' : 'bg-primary/20'}`} />
+                    <div className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${isActive ? 'bg-primary/50' : 'bg-primary/15'}`} />
                   </div>
                 </div>
               </div>
@@ -882,13 +905,20 @@ const FoundersSection = () => {
           })}
         </div>
 
-        {/* Bottom Tagline */}
-        <div className={`text-center mt-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <p className="text-muted-foreground/30 text-sm tracking-[0.4em] uppercase">
-            Design × Construction × Vision
-          </p>
+        {/* Bottom Tagline - Enhanced */}
+        <div className={`text-center mt-24 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="inline-flex items-center gap-6">
+            <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/50" />
+            <p className="text-primary/60 text-base tracking-[0.4em] uppercase font-medium">
+              Design × Construction × Vision
+            </p>
+            <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/50" />
+          </div>
         </div>
       </div>
+      
+      {/* Bottom warm glow */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-primary/5 to-transparent pointer-events-none" />
     </section>
   );
 };
