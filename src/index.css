@@ -1210,3 +1210,68 @@
   background-size: 200% 200%;
   animation: borderGlow 4s ease-in-out infinite;
 }
+
+/* Ultra Premium About Page Animations */
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(50px, -100px) scale(1.5);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(100px, -50px) scale(1);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translate(50px, -150px) scale(1.2);
+    opacity: 0.5;
+  }
+}
+
+@keyframes scrollDown {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+    opacity: 0.3;
+  }
+}
+
+.animate-scrollDown {
+  animation: scrollDown 2s ease-in-out infinite;
+}
+
+/* Utility Classes for 3D */
+.perspective-\[1000px\] {
+  perspective: 1000px;
+}
+
+.perspective-\[2000px\] {
+  perspective: 2000px;
+}
+
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Duration utilities */
+.duration-1500 {
+  transition-duration: 1500ms;
+}
+
+.duration-2000 {
+  transition-duration: 2000ms;
+}
+
+.delay-1800 {
+  transition-delay: 1800ms;
+}
+
+.delay-1200 {
+  transition-delay: 1200ms;
+}
