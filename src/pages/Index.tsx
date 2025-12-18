@@ -6,8 +6,8 @@ import EdgeHomesMethod from "@/components/EdgeHomesMethod";
 import MaterialsCraft from "@/components/MaterialsCraft";
 import ProjectsEditorial from "@/components/ProjectsEditorial";
 import TrustProofWall from "@/components/TrustProofWall";
+import PartnerLogos from "@/components/PartnerLogos";
 import InstantEstimate from "@/components/InstantEstimate";
-import ConsultationCTA from "@/components/ConsultationCTA";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
@@ -23,8 +23,8 @@ const Index = () => {
         <MaterialsCraft />
         <ProjectsEditorial />
         <TrustProofWall />
+        <PartnerLogos />
         <InstantEstimate />
-        <ConsultationCTA />
       </main>
       <Footer />
       <FloatingWhatsApp />

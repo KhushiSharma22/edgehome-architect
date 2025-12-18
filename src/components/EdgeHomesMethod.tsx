@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Search, Lightbulb, Eye, Hammer, CheckCircle2, Download } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Search, Lightbulb, Eye, Hammer, CheckCircle2 } from "lucide-react";
 
 const steps = [
   {
@@ -173,10 +172,6 @@ const EdgeHomesMethod = () => {
                 ))}
               </div>
 
-              <Button variant="outline" className="btn-gold-outline w-full gap-2">
-                <Download className="w-4 h-4" />
-                Download Sample Plan
-              </Button>
             </div>
           </div>
         </div>
