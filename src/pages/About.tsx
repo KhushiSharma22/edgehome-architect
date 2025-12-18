@@ -8,6 +8,7 @@ import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
 import portfolioDining from "@/assets/portfolio-dining.jpg";
 import pelicanChair from "@/assets/pelican-chair.png";
 import eggChair from "@/assets/egg-chair.png";
+import studioSketch from "@/assets/studio-sketch.jpg";
 
 
 // Particle System Component
@@ -1072,6 +1073,38 @@ const FoundersSection = () => {
           <p className="mt-6 text-muted-foreground/70 text-lg max-w-2xl mx-auto">
             Meet the minds behind EdgeHomes — where passion meets precision.
           </p>
+        </div>
+
+        {/* Studio Illustration Section */}
+        <div className={`mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="relative max-w-4xl mx-auto">
+            {/* Image Container with elegant frame */}
+            <div className="relative rounded-2xl overflow-hidden border border-primary/10 shadow-2xl">
+              {/* Corner label */}
+              <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-primary/20">
+                <span className="text-foreground/80 text-sm tracking-wider">Day Zero with EdgeHomes</span>
+              </div>
+              
+              <img 
+                src={studioSketch} 
+                alt="EdgeHomes Design Studio" 
+                className="w-full h-auto object-cover"
+              />
+              
+              {/* Subtle overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
+            </div>
+            
+            {/* Quote below image */}
+            <div className="text-center mt-10 max-w-2xl mx-auto">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-heading text-foreground leading-snug mb-4">
+                "Join Us For A '<span className="text-primary">Day Zero</span>' And Experience The Beginning Of Something Extraordinary."
+              </h3>
+              <p className="text-muted-foreground/70 text-base leading-relaxed">
+                In our company the "Day Zero" is about setting the stage for a successful partnership by ensuring everyone is on the same page and ready to embark on a new journey together.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Founders Cards - Clean Professional */}
