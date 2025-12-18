@@ -916,7 +916,7 @@ const InspirationBanner = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-32 md:py-40 bg-[#F6F1EA] overflow-hidden"
+      className="relative py-16 md:py-20 bg-[#F6F1EA] overflow-hidden"
     >
       {/* Subtle texture overlay */}
       <div 
@@ -928,54 +928,86 @@ const InspirationBanner = () => {
 
       <div className="container mx-auto px-4 relative">
         <div className="flex items-center justify-between">
-          {/* Left Furniture - Abstract Chair SVG */}
+          {/* Left Furniture - Pelican Chair (Finn Juhl inspired) */}
           <div 
-            className={`hidden md:block w-64 lg:w-80 transition-all duration-1000 ease-out ${
+            className={`hidden md:block w-48 lg:w-56 transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
             }`}
             style={{ transitionDelay: '0.2s' }}
           >
-            <svg viewBox="0 0 300 300" className="w-full h-auto drop-shadow-2xl">
-              {/* Modern organic chair shape */}
+            <svg viewBox="0 0 280 260" className="w-full h-auto">
               <defs>
-                <linearGradient id="chairGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#2D4A47" />
+                {/* Fabric gradients with realistic shading */}
+                <linearGradient id="fabricMain" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3D6B66" />
+                  <stop offset="40%" stopColor="#2D524E" />
+                  <stop offset="100%" stopColor="#1E3835" />
+                </linearGradient>
+                <linearGradient id="fabricHighlight" x1="0%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stopColor="#4A7A75" />
+                  <stop offset="100%" stopColor="#3D6B66" />
+                </linearGradient>
+                <linearGradient id="fabricShadow" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stopColor="#2D524E" />
                   <stop offset="100%" stopColor="#1A2E2C" />
                 </linearGradient>
-                <linearGradient id="legGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#D4A574" />
-                  <stop offset="100%" stopColor="#B8956A" />
+                <linearGradient id="woodLeg" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#E8C9A0" />
+                  <stop offset="30%" stopColor="#D4A574" />
+                  <stop offset="70%" stopColor="#C49564" />
+                  <stop offset="100%" stopColor="#A67B4A" />
                 </linearGradient>
+                <linearGradient id="pillowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#C8CED0" />
+                  <stop offset="50%" stopColor="#A8B0B3" />
+                  <stop offset="100%" stopColor="#8A9396" />
+                </linearGradient>
+                <filter id="softShadow">
+                  <feDropShadow dx="4" dy="6" stdDeviation="8" floodOpacity="0.25"/>
+                </filter>
               </defs>
-              {/* Chair back/body - organic shape */}
-              <ellipse cx="120" cy="120" rx="90" ry="80" fill="url(#chairGradient1)" transform="rotate(-15 120 120)" />
-              <ellipse cx="140" cy="140" rx="70" ry="60" fill="url(#chairGradient1)" transform="rotate(-10 140 140)" />
-              {/* Seat cushion */}
-              <ellipse cx="130" cy="170" rx="75" ry="35" fill="#3A5956" />
-              {/* Pillow */}
-              <ellipse cx="90" cy="130" rx="30" ry="25" fill="#9BA8AB" transform="rotate(-20 90 130)" />
-              {/* Wooden legs */}
-              <line x1="70" y1="200" x2="60" y2="270" stroke="url(#legGradient)" strokeWidth="8" strokeLinecap="round" />
-              <line x1="190" y1="195" x2="200" y2="265" stroke="url(#legGradient)" strokeWidth="8" strokeLinecap="round" />
-              <line x1="130" y1="200" x2="130" y2="268" stroke="url(#legGradient)" strokeWidth="6" strokeLinecap="round" />
-              {/* Small table attachment */}
-              <ellipse cx="210" cy="155" rx="25" ry="8" fill="url(#legGradient)" />
-              <line x1="210" y1="160" x2="210" y2="200" stroke="url(#legGradient)" strokeWidth="4" strokeLinecap="round" />
+              
+              {/* Chair back - organic wing shape */}
+              <path d="M45 85 Q30 60 50 35 Q80 10 130 15 Q170 20 190 50 Q200 75 185 110 Q175 130 160 145 Q140 160 120 165 Q90 170 65 155 Q45 140 45 115 Z" 
+                fill="url(#fabricMain)" filter="url(#softShadow)"/>
+              {/* Back highlight */}
+              <path d="M55 80 Q45 60 60 40 Q85 20 125 22 Q155 25 170 50 Q178 70 168 95 Q160 115 145 128 Q125 142 105 145 Q80 148 62 135 Q50 120 55 100 Z" 
+                fill="url(#fabricHighlight)" opacity="0.6"/>
+              
+              {/* Seat cushion - thick and plush */}
+              <ellipse cx="125" cy="155" rx="70" ry="28" fill="url(#fabricShadow)" filter="url(#softShadow)"/>
+              <ellipse cx="125" cy="152" rx="68" ry="26" fill="url(#fabricMain)"/>
+              <ellipse cx="120" cy="148" rx="55" ry="18" fill="url(#fabricHighlight)" opacity="0.4"/>
+              
+              {/* Pillow with realistic form */}
+              <ellipse cx="85" cy="115" rx="28" ry="22" fill="url(#pillowGrad)" transform="rotate(-18 85 115)" filter="url(#softShadow)"/>
+              <ellipse cx="82" cy="112" rx="22" ry="16" fill="#D8DEE0" transform="rotate(-18 82 112)" opacity="0.5"/>
+              
+              {/* Wooden legs with grain detail */}
+              <path d="M68 178 L58 235 Q57 240 60 242 L65 240 L78 180 Z" fill="url(#woodLeg)"/>
+              <path d="M180 175 L195 232 Q196 238 193 240 L188 238 L177 178 Z" fill="url(#woodLeg)"/>
+              <path d="M125 180 L125 238 Q125 242 128 243 L132 241 L132 180 Z" fill="url(#woodLeg)"/>
+              
+              {/* Small side table */}
+              <ellipse cx="215" cy="142" rx="22" ry="7" fill="url(#woodLeg)" filter="url(#softShadow)"/>
+              <rect x="212" y="145" width="6" height="48" rx="2" fill="url(#woodLeg)"/>
+              
               {/* Cup on table */}
-              <rect x="200" y="140" width="16" height="15" rx="2" fill="#FFFFFF" />
-              <rect x="202" y="142" width="12" height="8" rx="1" fill="#E8DED4" />
+              <ellipse cx="215" cy="130" rx="8" ry="3" fill="#FFFFFF"/>
+              <path d="M207 130 L207 142 Q207 145 215 145 Q223 145 223 142 L223 130 Z" fill="#FAFAFA"/>
+              <ellipse cx="215" cy="135" rx="6" ry="2" fill="#E8DDD4"/>
             </svg>
           </div>
 
           {/* Center Text */}
           <div 
-            className={`flex-1 text-center px-8 md:px-16 transition-all duration-1000 ease-out ${
+            className={`flex-1 text-center px-6 md:px-12 transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
             style={{ transitionDelay: '0.4s' }}
           >
             <h2 
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-[#1C1C1C] tracking-[0.15em] leading-tight"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-[#1C1C1C] tracking-[0.12em] leading-relaxed"
               style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
             >
               INSPIRED BY ARTISTRY,
@@ -986,79 +1018,105 @@ const InspirationBanner = () => {
             </h2>
           </div>
 
-          {/* Right Furniture - Egg Chair SVG */}
+          {/* Right Furniture - Egg Chair (Arne Jacobsen inspired) */}
           <div 
-            className={`hidden md:block w-64 lg:w-80 transition-all duration-1000 ease-out ${
+            className={`hidden md:block w-48 lg:w-56 transition-all duration-1000 ease-out ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
             }`}
             style={{ transitionDelay: '0.6s' }}
           >
-            <svg viewBox="0 0 300 350" className="w-full h-auto drop-shadow-2xl">
-              {/* Egg chair shape */}
+            <svg viewBox="0 0 260 300" className="w-full h-auto">
               <defs>
-                <linearGradient id="eggChairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#D4875A" />
-                  <stop offset="50%" stopColor="#C67A4E" />
-                  <stop offset="100%" stopColor="#A86642" />
+                {/* Leather gradients */}
+                <linearGradient id="leatherOuter" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#D68B5A" />
+                  <stop offset="30%" stopColor="#C47A4A" />
+                  <stop offset="70%" stopColor="#B5693C" />
+                  <stop offset="100%" stopColor="#8B4D2A" />
                 </linearGradient>
-                <linearGradient id="eggInnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#E8956A" />
-                  <stop offset="100%" stopColor="#D4875A" />
+                <linearGradient id="leatherInner" x1="20%" y1="0%" x2="80%" y2="100%">
+                  <stop offset="0%" stopColor="#E8A070" />
+                  <stop offset="50%" stopColor="#D68B5A" />
+                  <stop offset="100%" stopColor="#C47A4A" />
                 </linearGradient>
-                <linearGradient id="metalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#B8B8B8" />
-                  <stop offset="50%" stopColor="#8A8A8A" />
-                  <stop offset="100%" stopColor="#6A6A6A" />
+                <linearGradient id="leatherDeep" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stopColor="#B5693C" />
+                  <stop offset="100%" stopColor="#7A4025" />
                 </linearGradient>
+                <linearGradient id="chromeMetal" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#D0D0D0" />
+                  <stop offset="25%" stopColor="#A8A8A8" />
+                  <stop offset="50%" stopColor="#E8E8E8" />
+                  <stop offset="75%" stopColor="#909090" />
+                  <stop offset="100%" stopColor="#787878" />
+                </linearGradient>
+                <radialGradient id="leatherShine" cx="30%" cy="20%" r="60%">
+                  <stop offset="0%" stopColor="#F0B080" stopOpacity="0.6"/>
+                  <stop offset="100%" stopColor="#D68B5A" stopOpacity="0"/>
+                </radialGradient>
+                <filter id="chairShadow">
+                  <feDropShadow dx="5" dy="8" stdDeviation="10" floodOpacity="0.3"/>
+                </filter>
               </defs>
-              {/* Main egg shell */}
-              <ellipse cx="150" cy="130" rx="95" ry="115" fill="url(#eggChairGradient)" />
-              {/* Inner curve detail */}
-              <ellipse cx="155" cy="135" rx="80" ry="100" fill="url(#eggInnerGradient)" />
-              {/* Seat area */}
-              <ellipse cx="150" cy="200" rx="65" ry="30" fill="#B86B45" />
-              {/* Chair opening/hollow */}
-              <ellipse cx="160" cy="120" rx="55" ry="70" fill="#A86642" />
-              {/* Stitch detail line */}
-              <path d="M100 80 Q150 60 200 80" stroke="#8B5A3C" strokeWidth="2" fill="none" strokeDasharray="8,4" />
-              {/* Metal base - star shape */}
-              <ellipse cx="150" cy="295" rx="50" ry="12" fill="url(#metalGradient)" />
-              <line x1="150" y1="240" x2="150" y2="295" stroke="url(#metalGradient)" strokeWidth="12" />
-              {/* Base arms */}
-              <line x1="150" y1="295" x2="100" y2="320" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
-              <line x1="150" y1="295" x2="200" y2="320" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
-              <line x1="150" y1="295" x2="130" y2="325" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
-              <line x1="150" y1="295" x2="170" y2="325" stroke="url(#metalGradient)" strokeWidth="8" strokeLinecap="round" />
+              
+              {/* Main egg shell body */}
+              <path d="M130 20 Q45 25 35 120 Q30 180 55 210 Q85 245 130 248 Q175 245 205 210 Q230 180 225 120 Q215 25 130 20 Z" 
+                fill="url(#leatherOuter)" filter="url(#chairShadow)"/>
+              
+              {/* Inner shell curve */}
+              <path d="M130 35 Q65 40 55 115 Q52 165 72 192 Q95 220 130 222 Q165 220 188 192 Q208 165 205 115 Q195 40 130 35 Z" 
+                fill="url(#leatherInner)"/>
+              
+              {/* Deep interior/seat cavity */}
+              <path d="M130 55 Q85 60 78 120 Q75 155 90 175 Q110 195 130 196 Q150 195 170 175 Q185 155 182 120 Q175 60 130 55 Z" 
+                fill="url(#leatherDeep)"/>
+              
+              {/* Highlight shine */}
+              <ellipse cx="95" cy="80" rx="35" ry="50" fill="url(#leatherShine)"/>
+              
+              {/* Stitching detail */}
+              <path d="M65 50 Q130 30 195 50" stroke="#7A4025" strokeWidth="1.5" fill="none" strokeDasharray="6,4" opacity="0.6"/>
+              <path d="M55 100 Q130 85 205 100" stroke="#7A4025" strokeWidth="1" fill="none" strokeDasharray="4,3" opacity="0.4"/>
+              
+              {/* Chrome pedestal */}
+              <ellipse cx="130" cy="268" rx="35" ry="8" fill="url(#chromeMetal)"/>
+              <path d="M122 248 L118 268 L142 268 L138 248 Z" fill="url(#chromeMetal)"/>
+              
+              {/* Chrome star base */}
+              <path d="M130 268 L85 288 L82 292 L88 292 L130 275 Z" fill="url(#chromeMetal)"/>
+              <path d="M130 268 L175 288 L178 292 L172 292 L130 275 Z" fill="url(#chromeMetal)"/>
+              <path d="M130 268 L105 292 L102 296 L110 296 L130 278 Z" fill="url(#chromeMetal)"/>
+              <path d="M130 268 L155 292 L158 296 L150 296 L130 278 Z" fill="url(#chromeMetal)"/>
             </svg>
           </div>
         </div>
 
-        {/* Mobile: Show smaller centered furniture */}
-        <div className="md:hidden flex justify-center gap-8 mt-12">
-          <svg viewBox="0 0 300 300" className="w-32 h-auto drop-shadow-lg">
+        {/* Mobile: Compact furniture */}
+        <div className="md:hidden flex justify-center gap-6 mt-8">
+          <svg viewBox="0 0 120 110" className="w-24 h-auto">
             <defs>
-              <linearGradient id="chairGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#2D4A47" />
-                <stop offset="100%" stopColor="#1A2E2C" />
+              <linearGradient id="mobFabric" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#3D6B66" />
+                <stop offset="100%" stopColor="#1E3835" />
               </linearGradient>
             </defs>
-            <ellipse cx="150" cy="130" rx="80" ry="70" fill="url(#chairGradientMobile)" />
-            <ellipse cx="150" cy="170" rx="70" ry="30" fill="#3A5956" />
+            <path d="M20 35 Q15 20 30 12 Q50 5 70 8 Q88 12 92 30 Q95 45 85 55 Q70 68 55 70 Q35 72 22 60 Q15 50 20 40 Z" fill="url(#mobFabric)"/>
+            <ellipse cx="55" cy="68" rx="32" ry="12" fill="#2D524E"/>
           </svg>
-          <svg viewBox="0 0 300 350" className="w-32 h-auto drop-shadow-lg">
+          <svg viewBox="0 0 100 120" className="w-20 h-auto">
             <defs>
-              <linearGradient id="eggMobile" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#D4875A" />
-                <stop offset="100%" stopColor="#A86642" />
+              <linearGradient id="mobLeather" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#D68B5A" />
+                <stop offset="100%" stopColor="#8B4D2A" />
               </linearGradient>
             </defs>
-            <ellipse cx="150" cy="140" rx="85" ry="105" fill="url(#eggMobile)" />
+            <path d="M50 8 Q18 12 15 50 Q12 75 28 90 Q42 102 50 103 Q58 102 72 90 Q88 75 85 50 Q82 12 50 8 Z" fill="url(#mobLeather)"/>
           </svg>
         </div>
       </div>
 
       {/* Subtle bottom line */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-[#C7A76A]/30" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-[1px] bg-[#C7A76A]/30" />
     </section>
   );
 };
