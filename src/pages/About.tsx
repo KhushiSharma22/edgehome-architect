@@ -174,18 +174,18 @@ const HeroAbout = () => {
         />
       </div>
 
-      {/* Morphing Shapes Layer */}
-      <MorphingShape className="w-[600px] h-[600px] -top-32 -left-32 opacity-40" delay={0} />
-      <MorphingShape className="w-[500px] h-[500px] -bottom-20 -right-20 opacity-30" delay={-5} />
-      <MorphingShape className="w-[300px] h-[300px] top-1/2 left-1/4 opacity-20" delay={-10} />
+      {/* Morphing Shapes Layer - Reduced opacity */}
+      <MorphingShape className="w-[600px] h-[600px] -top-32 -left-32 opacity-20" delay={0} />
+      <MorphingShape className="w-[500px] h-[500px] -bottom-20 -right-20 opacity-15" delay={-5} />
+      <MorphingShape className="w-[300px] h-[300px] top-1/2 left-1/4 opacity-10" delay={-10} />
 
       {/* Particle Field */}
       <ParticleField />
 
-      {/* Diagonal Light Beams */}
+      {/* Diagonal Light Beams - Reduced */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute w-[200%] h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent"
           style={{
             top: '30%',
             left: '-50%',
@@ -194,7 +194,7 @@ const HeroAbout = () => {
           }}
         />
         <div 
-          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/10 to-transparent"
           style={{
             top: '60%',
             left: '-50%',
@@ -202,18 +202,9 @@ const HeroAbout = () => {
             transition: 'transform 0.1s ease-out',
           }}
         />
-        <div 
-          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent"
-          style={{
-            top: '80%',
-            left: '-50%',
-            transform: `rotate(-15deg) translateX(${scrollY * 0.15}px)`,
-            transition: 'transform 0.1s ease-out',
-          }}
-        />
       </div>
 
-      {/* Vertical Light Pillars */}
+      {/* Vertical Light Pillars - Reduced */}
       <div className="absolute inset-0 pointer-events-none">
         {[15, 35, 65, 85].map((pos, i) => (
           <div 
@@ -223,9 +214,9 @@ const HeroAbout = () => {
               left: `${pos}%`,
               background: `linear-gradient(180deg, 
                 transparent 0%, 
-                hsl(38 42% 55% / ${0.1 + i * 0.02}) 30%, 
-                hsl(38 42% 55% / ${0.15 + i * 0.03}) 50%, 
-                hsl(38 42% 55% / ${0.1 + i * 0.02}) 70%, 
+                hsl(38 42% 55% / ${0.04 + i * 0.01}) 30%, 
+                hsl(38 42% 55% / ${0.06 + i * 0.01}) 50%, 
+                hsl(38 42% 55% / ${0.04 + i * 0.01}) 70%, 
                 transparent 100%
               )`,
               opacity: isLoaded ? 1 : 0,
@@ -235,39 +226,39 @@ const HeroAbout = () => {
         ))}
       </div>
 
-      {/* Floating Orbs with Parallax */}
+      {/* Floating Orbs - Reduced glow */}
       <div 
-        className="absolute w-96 h-96 rounded-full blur-[150px] animate-float"
+        className="absolute w-80 h-80 rounded-full blur-[120px] animate-float"
         style={{
           top: '10%',
           left: '20%',
-          background: 'radial-gradient(circle, hsl(38 50% 55% / 0.2) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, hsl(38 50% 55% / 0.08) 0%, transparent 70%)',
           transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -30}px)`,
           transition: 'transform 0.5s ease-out',
         }}
       />
       <div 
-        className="absolute w-[500px] h-[500px] rounded-full blur-[180px] animate-float"
+        className="absolute w-96 h-96 rounded-full blur-[150px] animate-float"
         style={{
           bottom: '10%',
           right: '15%',
-          background: 'radial-gradient(circle, hsl(30 45% 50% / 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, hsl(30 45% 50% / 0.06) 0%, transparent 70%)',
           transform: `translate(${mousePos.x * 40}px, ${mousePos.y * 40}px)`,
           transition: 'transform 0.7s ease-out',
           animationDelay: '-7s',
         }}
       />
 
-      {/* Cinematic Vignette */}
+      {/* Cinematic Vignette - Lighter */}
       <div className="absolute inset-0" style={{
         background: `
-          radial-gradient(ellipse 120% 100% at 50% 50%, transparent 30%, hsl(0 0% 3% / 0.6) 100%),
-          linear-gradient(180deg, hsl(0 0% 3% / 0.3) 0%, transparent 30%, transparent 70%, hsl(0 0% 3% / 0.5) 100%)
+          radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, hsl(0 0% 3% / 0.4) 100%),
+          linear-gradient(180deg, hsl(0 0% 3% / 0.2) 0%, transparent 30%, transparent 70%, hsl(0 0% 3% / 0.3) 100%)
         `
       }} />
 
-      {/* Grain Texture */}
-      <div className="absolute inset-0 grain opacity-50" />
+      {/* Grain Texture - Reduced */}
+      <div className="absolute inset-0 grain opacity-30" />
 
       {/* === SPLIT SCREEN REVEAL PANELS === */}
       <div 
@@ -323,8 +314,8 @@ const HeroAbout = () => {
               </span>
             </div>
 
-            {/* Main Headline - Massive & Bold */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-[9rem] font-heading text-foreground mb-12 leading-[0.85] tracking-tight">
+            {/* Main Headline - Refined Size */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-foreground mb-10 leading-[0.9] tracking-tight">
               <span 
                 className={`block overflow-hidden mb-2 transition-all duration-[1500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
                 style={{ transitionDelay: '1.7s' }}
@@ -368,10 +359,10 @@ const HeroAbout = () => {
                 }}>
                   It's how we{' '}
                   <span className="relative inline-block">
-                    <span className="text-shimmer italic">think.</span>
-                    {/* Animated underline */}
+                    <span className="text-primary italic">think.</span>
+                    {/* Subtle underline */}
                     <span 
-                      className="absolute -bottom-2 left-0 h-[3px] bg-gradient-to-r from-primary via-primary/80 to-primary/50"
+                      className="absolute -bottom-1 left-0 h-[2px] bg-gradient-to-r from-primary/60 to-primary/30"
                       style={{
                         width: isLoaded ? '100%' : '0%',
                         transition: 'width 1s ease-out 3.5s',
