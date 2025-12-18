@@ -123,6 +123,71 @@ const HeroAbout = () => {
         <div className="w-3 h-3 border border-primary/20 rotate-45" />
       </div>
 
+      {/* Cinematic Vertical Image Strip */}
+      <div 
+        className={`absolute right-[8%] top-[12%] bottom-[12%] w-[14%] hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ 
+          transitionDelay: '1400ms',
+          transform: `translateY(${scrollY * -0.03}px)`,
+        }}
+      >
+        {/* Gold Border Glow */}
+        <div 
+          className="absolute -inset-[1px] rounded-sm"
+          style={{
+            background: 'linear-gradient(135deg, hsl(38 42% 55% / 0.4), hsl(38 42% 55% / 0.1), hsl(38 42% 55% / 0.3))',
+            boxShadow: '0 0 20px hsl(38 42% 55% / 0.15), inset 0 0 20px hsl(38 42% 55% / 0.05)',
+          }}
+        />
+        
+        {/* Image Container */}
+        <div className="relative w-full h-full overflow-hidden rounded-sm">
+          {/* Interior Image */}
+          <img 
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80"
+            alt="Luxury interior detail"
+            className="w-full h-full object-cover"
+            style={{
+              transform: `scale(1.1) translateY(${scrollY * 0.02}px)`,
+              transition: 'transform 0.6s ease-out',
+            }}
+          />
+          
+          {/* Heavy Dark Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/65 to-black/80" />
+          
+          {/* Blueprint Wireframe Overlay */}
+          <svg 
+            className="absolute inset-0 w-full h-full opacity-[0.08]"
+            style={{
+              transform: `translateY(${scrollY * 0.015}px)`,
+              transition: 'transform 0.5s ease-out',
+            }}
+          >
+            <defs>
+              <pattern id="stripBlueprint" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="hsl(38 42% 70%)" strokeWidth="0.5" />
+                <path d="M 20 0 L 20 40 M 0 20 L 40 20" fill="none" stroke="hsl(38 42% 70%)" strokeWidth="0.25" opacity="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#stripBlueprint)" />
+            
+            {/* Abstract construction lines */}
+            <line x1="10%" y1="25%" x2="90%" y2="25%" stroke="hsl(38 42% 60%)" strokeWidth="0.3" opacity="0.6" />
+            <line x1="10%" y1="50%" x2="70%" y2="50%" stroke="hsl(38 42% 60%)" strokeWidth="0.3" opacity="0.4" />
+            <line x1="30%" y1="75%" x2="90%" y2="75%" stroke="hsl(38 42% 60%)" strokeWidth="0.3" opacity="0.5" />
+            <rect x="20%" y="35%" width="60%" height="20%" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.4" opacity="0.3" />
+          </svg>
+          
+          {/* Inner Gold Edge */}
+          <div className="absolute inset-0 border border-primary/20 rounded-sm pointer-events-none" />
+          
+          {/* Corner Accents */}
+          <div className="absolute top-3 left-3 w-4 h-4 border-l border-t border-primary/30" />
+          <div className="absolute bottom-3 right-3 w-4 h-4 border-r border-b border-primary/30" />
+        </div>
+      </div>
+
       {/* Main Content - Asymmetrical Layout */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-12 gap-6 items-center min-h-screen py-32">
