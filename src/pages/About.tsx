@@ -1075,34 +1075,85 @@ const FoundersSection = () => {
           </p>
         </div>
 
-        {/* Studio Illustration Section */}
-        <div className={`mb-20 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="relative max-w-4xl mx-auto">
-            {/* Image Container with elegant frame */}
-            <div className="relative rounded-2xl overflow-hidden border border-primary/10 shadow-2xl">
-              {/* Corner label */}
-              <div className="absolute top-4 left-4 z-10 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-primary/20">
-                <span className="text-foreground/80 text-sm tracking-wider">Day Zero with EdgeHomes</span>
-              </div>
-              
-              <img 
-                src={studioSketch} 
-                alt="EdgeHomes Design Studio" 
-                className="w-full h-auto object-cover"
-              />
-              
-              {/* Subtle overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background/20 via-transparent to-transparent pointer-events-none" />
+        {/* Studio Illustration Section - Unique Artistic Frame */}
+        <div className={`mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="relative max-w-2xl mx-auto">
+            {/* Floating decorative elements */}
+            <div className="absolute -top-8 -left-8 w-24 h-24 border border-primary/20 rounded-full animate-pulse" style={{ animationDuration: '4s' }} />
+            <div className="absolute -bottom-6 -right-6 w-16 h-16 border border-primary/30 rotate-45" />
+            <div className="absolute top-1/2 -left-12 w-1 h-24 bg-gradient-to-b from-transparent via-primary/40 to-transparent" />
+            <div className="absolute top-1/2 -right-12 w-1 h-24 bg-gradient-to-b from-transparent via-primary/40 to-transparent" />
+            
+            {/* Geometric corner accents */}
+            <div className="absolute -top-4 -left-4 w-12 h-12">
+              <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary to-transparent" />
+              <div className="absolute top-0 left-0 h-full w-[2px] bg-gradient-to-b from-primary to-transparent" />
+            </div>
+            <div className="absolute -top-4 -right-4 w-12 h-12">
+              <div className="absolute top-0 right-0 w-full h-[2px] bg-gradient-to-l from-primary to-transparent" />
+              <div className="absolute top-0 right-0 h-full w-[2px] bg-gradient-to-b from-primary to-transparent" />
+            </div>
+            <div className="absolute -bottom-4 -left-4 w-12 h-12">
+              <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary to-transparent" />
+              <div className="absolute bottom-0 left-0 h-full w-[2px] bg-gradient-to-t from-primary to-transparent" />
+            </div>
+            <div className="absolute -bottom-4 -right-4 w-12 h-12">
+              <div className="absolute bottom-0 right-0 w-full h-[2px] bg-gradient-to-l from-primary to-transparent" />
+              <div className="absolute bottom-0 right-0 h-full w-[2px] bg-gradient-to-t from-primary to-transparent" />
+            </div>
+
+            {/* Floating dots pattern */}
+            <div className="absolute -top-6 left-1/4 flex gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
+              <div className="w-1 h-1 rounded-full bg-primary/40" />
+              <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
+            </div>
+            <div className="absolute -bottom-6 right-1/4 flex gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-primary/20" />
+              <div className="w-1 h-1 rounded-full bg-primary/40" />
+              <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
             </div>
             
-            {/* Quote below image */}
-            <div className="text-center mt-10 max-w-2xl mx-auto">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-heading text-foreground leading-snug mb-4">
-                "Join Us For A '<span className="text-primary">Day Zero</span>' And Experience The Beginning Of Something Extraordinary."
-              </h3>
-              <p className="text-muted-foreground/70 text-base leading-relaxed">
-                In our company the "Day Zero" is about setting the stage for a successful partnership by ensuring everyone is on the same page and ready to embark on a new journey together.
-              </p>
+            {/* Main Image Container */}
+            <div className="relative group">
+              {/* Glow effect on hover */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              {/* Image frame */}
+              <div className="relative rounded-xl overflow-hidden border border-primary/20 shadow-2xl bg-card/5">
+                {/* Corner label */}
+                <div className="absolute top-3 left-3 z-10 bg-background/90 backdrop-blur-sm px-3 py-1.5 rounded-md border border-primary/30">
+                  <span className="text-primary text-xs tracking-[0.2em] uppercase font-medium">Our Studio</span>
+                </div>
+                
+                {/* Decorative corner brackets */}
+                <div className="absolute top-2 right-2 w-8 h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-lg" />
+                <div className="absolute bottom-2 left-2 w-8 h-8 border-b-2 border-l-2 border-primary/40 rounded-bl-lg" />
+                
+                <img 
+                  src={studioSketch} 
+                  alt="EdgeHomes Design Studio" 
+                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+                
+                {/* Artistic overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 pointer-events-none" />
+                
+                {/* Film grain effect */}
+                <div 
+                  className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Signature line below */}
+            <div className="flex items-center justify-center mt-6 gap-4">
+              <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-primary/50" />
+              <span className="text-primary/50 text-xs tracking-[0.3em] uppercase">Where Ideas Take Form</span>
+              <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-primary/50" />
             </div>
           </div>
         </div>
