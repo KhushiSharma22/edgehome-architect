@@ -1,37 +1,105 @@
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Footer = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
-    <footer className="bg-gradient-to-b from-background to-[hsl(25,20%,8%)] border-t border-primary/20 py-20 texture-linen relative">
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-12 mb-16 relative">
-          {/* Gold borders between columns (desktop) */}
-          <div className="hidden md:block absolute top-0 bottom-0 left-1/4 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent"></div>
-          <div className="hidden md:block absolute top-0 bottom-0 left-2/4 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent"></div>
-          <div className="hidden md:block absolute top-0 bottom-0 left-3/4 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent"></div>
+    <footer ref={ref} id="contact" className="relative bg-card overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[150px] animate-morph" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/3 rounded-full blur-[120px] animate-morph" style={{ animationDelay: '-8s' }} />
+      </div>
+      
+      {/* Top decorative border */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      
+      <div className="container mx-auto px-6 py-24 relative z-10">
+        {/* Main CTA Section */}
+        <div className={`text-center mb-24 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <span className="text-primary text-xs tracking-[0.5em] uppercase mb-6 block">
+            Start Your Journey
+          </span>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading text-foreground mb-8 leading-[0.9]">
+            Let's Create
+            <br />
+            <span className="text-shimmer italic">Something Beautiful</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-md mx-auto mb-10">
+            Ready to transform your space? Get in touch for a free consultation.
+          </p>
           
-          {/* About */}
-          <div>
-            <h3 className="text-2xl font-heading font-bold text-primary mb-4">
+          {/* Contact buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a 
+              href="tel:+919999999999"
+              className="group relative px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(199,163,107,0.4)]"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                <Phone className="w-5 h-5" />
+                Call Now
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </span>
+            </a>
+            <a 
+              href="https://wa.me/919999999999"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative px-8 py-4 rounded-full border border-primary/50 text-primary font-semibold overflow-hidden transition-all duration-500 hover:bg-primary/10"
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                WhatsApp Us
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </span>
+            </a>
+          </div>
+        </div>
+
+        {/* Footer grid */}
+        <div className={`grid md:grid-cols-4 gap-12 mb-16 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <h3 className="text-3xl font-heading font-bold text-primary mb-4">
               EdgeHomes
             </h3>
-            <p className="text-muted-foreground/90 font-body text-sm leading-relaxed">
-              Pitampura, Delhi's trusted architects and construction company, delivering quality projects with professionalism and expertise.
+            <p className="text-muted-foreground leading-relaxed mb-6 max-w-md">
+              Delhi NCR's trusted architects and interior designers, crafting exceptional spaces with precision, passion, and professionalism.
             </p>
+            
+            {/* Social Icons */}
+            <div className="flex gap-3">
+              {[
+                { Icon: Instagram, label: 'Instagram' },
+                { Icon: Facebook, label: 'Facebook' },
+                { Icon: Linkedin, label: 'LinkedIn' },
+              ].map(({ Icon, label }, index) => (
+                <a
+                  key={label}
+                  href="#"
+                  className="w-12 h-12 rounded-xl bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-500 hover:scale-110 hover:-translate-y-1"
+                  aria-label={label}
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-heading font-semibold text-foreground mb-5">
+            <h4 className="text-sm font-semibold text-foreground mb-6 tracking-wider uppercase">
               Quick Links
             </h4>
             <ul className="space-y-3">
-              {["Home", "About", "Services", "Projects", "Contact"].map((link) => (
+              {["Home", "Process", "Materials", "Contact"].map((link, index) => (
                 <li key={link}>
                   <a
                     href={`#${link.toLowerCase()}`}
-                    className="text-muted-foreground/90 hover:text-primary smooth-transition font-body text-sm inline-block hover:translate-x-1"
+                    className="text-muted-foreground hover:text-primary transition-all duration-300 flex items-center gap-2 group"
                   >
+                    <span className="w-0 h-px bg-primary group-hover:w-4 transition-all duration-300" />
                     {link}
                   </a>
                 </li>
@@ -39,61 +107,36 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Contact */}
           <div>
-            <h4 className="text-lg font-heading font-semibold text-foreground mb-5">
-              Our Services
-            </h4>
-            <ul className="space-y-3 text-muted-foreground/90 font-body text-sm">
-              <li>Architectural Design</li>
-              <li>Interior Design</li>
-              <li>Renovation</li>
-              <li>Turnkey Solutions</li>
-              <li>Project Management</li>
-            </ul>
-          </div>
-
-          {/* Contact Details */}
-          <div>
-            <h4 className="text-lg font-heading font-semibold text-foreground mb-5">
-              Contact Us
+            <h4 className="text-sm font-semibold text-foreground mb-6 tracking-wider uppercase">
+              Get in Touch
             </h4>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-muted-foreground/90 font-body text-sm">
-                <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                <span>Pitampura, Delhi, India</span>
+              <li className="flex items-start gap-3 text-muted-foreground group">
+                <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="group-hover:text-foreground transition-colors">Pitampura, Delhi, India</span>
               </li>
-              <li className="flex items-center gap-3 text-muted-foreground/90 font-body text-sm">
-                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                <span>+91 XXXXX XXXXX</span>
+              <li className="flex items-center gap-3 text-muted-foreground group">
+                <Phone className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="group-hover:text-foreground transition-colors">+91 XXXXX XXXXX</span>
               </li>
-              <li className="flex items-center gap-3 text-muted-foreground/90 font-body text-sm">
-                 <Mail className="w-5 h-5 text-primary flex-shrink-0" />
-                <span>info@edgehomes.com</span>
+              <li className="flex items-center gap-3 text-muted-foreground group">
+                <Mail className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="group-hover:text-foreground transition-colors">info@edgehomes.com</span>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-primary/20 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-muted-foreground/80 font-body text-sm">
-            © 2024 EdgeHomes Architects and Construction. All rights reserved.
+        {/* Bottom bar */}
+        <div className={`pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <p className="text-sm text-muted-foreground">
+            © 2024 EdgeHomes Architects & Construction. All rights reserved.
           </p>
-          
-          {/* Social Icons with Gold Styling */}
-          <div className="flex gap-4">
-            {[Facebook, Instagram, Linkedin].map((Icon, index) => (
-              <a
-                key={index}
-                href="#"
-                className="w-11 h-11 rounded-full border border-primary/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary smooth-transition hover:scale-110"
-                aria-label={`Social link ${index + 1}`}
-              >
-                <Icon className="w-5 h-5" />
-              </a>
-            ))}
-          </div>
+          <p className="text-xs text-muted-foreground/60">
+            Crafted with passion in Delhi
+          </p>
         </div>
       </div>
     </footer>

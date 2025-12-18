@@ -6,7 +6,6 @@ import PartnerLogos from "@/components/PartnerLogos";
 import EdgeHomesMethod from "@/components/EdgeHomesMethod";
 import MaterialsCraft from "@/components/MaterialsCraft";
 import TrustProofWall from "@/components/TrustProofWall";
-import InstantEstimate from "@/components/InstantEstimate";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
@@ -22,7 +21,6 @@ const Index = () => {
         <EdgeHomesMethod />
         <MaterialsCraft />
         <TrustProofWall />
-        <InstantEstimate />
       </main>
       <Footer />
       <FloatingWhatsApp />
