@@ -104,42 +104,57 @@ const HeroAbout = () => {
       </div>
 
       {/* Subtle gradient on left side */}
-      <div className="absolute left-0 top-0 bottom-0 w-[40%] bg-gradient-to-r from-black/25 to-transparent" />
+      <div className="absolute left-0 top-0 bottom-0 w-[50%] bg-gradient-to-r from-black/30 to-transparent" />
 
-      {/* Left Side Architectural Margin Line - Drawing guide */}
+      {/* Left Side - Architectural Visual Element */}
       <div 
-        className={`absolute left-[12%] top-[20%] bottom-[20%] hidden lg:flex flex-col items-center transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-[0.04]' : 'opacity-0'}`}
-        style={{ transitionDelay: '2000ms' }}
-      >
-        {/* Vertical guideline */}
-        <div className="w-px h-full bg-gradient-to-b from-transparent via-primary to-transparent" />
-        {/* Measurement dot */}
-        <div className="absolute top-1/3 -left-1 w-2 h-px bg-primary/60" />
-        <div className="absolute top-1/3 left-1 w-1 h-1 rounded-full bg-primary/40" />
-      </div>
-
-      {/* Designer Easter Egg - Thin Vertical Gold Line */}
-      <div 
-        className={`absolute left-[38%] top-[18%] bottom-[18%] w-px hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ transitionDelay: '1800ms' }}
-      >
-        <div className="w-full h-full bg-gradient-to-b from-transparent via-primary/25 to-transparent" />
-      </div>
-
-      {/* Small Diamond Accent - Floating */}
-      <div 
-        className={`absolute left-[28%] top-[28%] hidden lg:block transition-all duration-[1800ms] ${isLoaded ? 'opacity-[0.03]' : 'opacity-0'}`}
+        className={`absolute left-[5%] top-[15%] bottom-[15%] w-[18%] hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
-          transitionDelay: '2400ms',
-          transform: `translateY(${scrollY * 0.04}px)`,
+          transitionDelay: '1200ms',
+          transform: `translateY(${scrollY * 0.02}px)`,
         }}
       >
-        <div className="w-4 h-4 border border-primary rotate-45" />
+        {/* Subtle architectural frame */}
+        <div className="relative w-full h-full">
+          {/* Blueprint grid background */}
+          <svg className="absolute inset-0 w-full h-full opacity-[0.03]">
+            <defs>
+              <pattern id="leftGrid" width="50" height="50" patternUnits="userSpaceOnUse">
+                <path d="M 50 0 L 0 0 0 50" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#leftGrid)" />
+          </svg>
+          
+          {/* Architectural outline */}
+          <div className="absolute inset-4 border border-primary/[0.06]" />
+          
+          {/* Corner accents */}
+          <div className="absolute top-8 left-8 w-8 h-8 border-l border-t border-primary/10" />
+          <div className="absolute bottom-8 right-8 w-8 h-8 border-r border-b border-primary/10" />
+          
+          {/* Center measurement cross */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.06]">
+            <div className="w-12 h-px bg-primary" />
+            <div className="w-px h-12 bg-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+          </div>
+          
+          {/* Floating diamond */}
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-3 h-3 border border-primary/10 rotate-45" />
+        </div>
       </div>
 
-      {/* Cinematic Vertical Image Strip - Architectural Signature */}
+      {/* Designer Easter Egg - Thin Vertical Gold Line (center divider) */}
       <div 
-        className={`absolute right-[6%] top-[10%] bottom-[10%] w-[15%] hidden lg:block transition-all duration-[2800ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        className={`absolute left-[42%] top-[20%] bottom-[20%] w-px hidden lg:block transition-all duration-[2500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transitionDelay: '1800ms' }}
+      >
+        <div className="w-full h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent" />
+      </div>
+
+      {/* Cinematic Vertical Image Strip - moved further right */}
+      <div 
+        className={`absolute right-[3%] top-[12%] bottom-[12%] w-[12%] hidden xl:block transition-all duration-[2800ms] ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
         style={{ 
           transitionDelay: '1500ms',
           transform: `translateY(${scrollY * -0.025}px)`,
@@ -149,8 +164,8 @@ const HeroAbout = () => {
         <div 
           className="absolute -inset-px"
           style={{
-            background: 'linear-gradient(180deg, hsl(38 42% 55% / 0.25), hsl(38 42% 55% / 0.15), hsl(38 42% 55% / 0.25))',
-            boxShadow: '0 0 30px hsl(38 42% 55% / 0.1)',
+            background: 'linear-gradient(180deg, hsl(38 42% 55% / 0.2), hsl(38 42% 55% / 0.1), hsl(38 42% 55% / 0.2))',
+            boxShadow: '0 0 25px hsl(38 42% 55% / 0.08)',
           }}
         />
         
@@ -172,7 +187,7 @@ const HeroAbout = () => {
           
           {/* Blueprint Wireframe Overlay */}
           <svg 
-            className="absolute inset-0 w-full h-full opacity-[0.09]"
+            className="absolute inset-0 w-full h-full opacity-[0.08]"
             style={{
               transform: `translateY(${scrollY * 0.01}px)`,
               transition: 'transform 0.6s ease-out',
@@ -190,38 +205,32 @@ const HeroAbout = () => {
           {/* Inner Gold Edge */}
           <div className="absolute inset-[1px] border border-primary/15 pointer-events-none" />
           
-          {/* Corner Crop Marks - Top Left */}
+          {/* Corner Crop Marks */}
           <div className="absolute top-3 left-3">
-            <div className="w-5 h-px bg-primary/40" />
-            <div className="w-px h-5 bg-primary/40" />
+            <div className="w-4 h-px bg-primary/35" />
+            <div className="w-px h-4 bg-primary/35" />
           </div>
-          
-          {/* Corner Crop Marks - Top Right */}
-          <div className="absolute top-3 right-3">
-            <div className="w-5 h-px bg-primary/40 ml-auto" />
-            <div className="w-px h-5 bg-primary/40 ml-auto" />
+          <div className="absolute top-3 right-3 flex flex-col items-end">
+            <div className="w-4 h-px bg-primary/35" />
+            <div className="w-px h-4 bg-primary/35 ml-auto" />
           </div>
-          
-          {/* Corner Crop Marks - Bottom Left */}
-          <div className="absolute bottom-3 left-3 flex flex-col items-start">
-            <div className="w-px h-5 bg-primary/40" />
-            <div className="w-5 h-px bg-primary/40" />
+          <div className="absolute bottom-3 left-3 flex flex-col justify-end">
+            <div className="w-px h-4 bg-primary/35" />
+            <div className="w-4 h-px bg-primary/35" />
           </div>
-          
-          {/* Corner Crop Marks - Bottom Right */}
-          <div className="absolute bottom-3 right-3 flex flex-col items-end">
-            <div className="w-px h-5 bg-primary/40" />
-            <div className="w-5 h-px bg-primary/40" />
+          <div className="absolute bottom-3 right-3 flex flex-col items-end justify-end">
+            <div className="w-px h-4 bg-primary/35 ml-auto" />
+            <div className="w-4 h-px bg-primary/35" />
           </div>
           
           {/* Micro Label - Project Snapshot */}
-          <div className="absolute bottom-6 left-0 right-0 px-4">
+          <div className="absolute bottom-5 left-0 right-0 px-3">
             <div className="text-center">
-              <p className="text-primary/50 text-[8px] tracking-[0.25em] uppercase mb-1">
+              <p className="text-primary/45 text-[7px] tracking-[0.2em] uppercase mb-0.5">
                 Project Snapshot
               </p>
-              <p className="text-foreground/30 text-[7px] tracking-[0.15em]">
-                Residential Interior · Delhi NCR
+              <p className="text-foreground/25 text-[6px] tracking-[0.1em]">
+                Residential · Delhi
               </p>
             </div>
           </div>
