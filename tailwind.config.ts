@@ -59,6 +59,12 @@ export default {
         stone: "hsl(var(--stone))",
         charcoal: "hsl(var(--charcoal))",
         cream: "hsl(var(--cream))",
+        ivory: {
+          DEFAULT: "hsl(var(--ivory))",
+          dark: "hsl(var(--ivory-dark))",
+        },
+        graphite: "hsl(var(--graphite))",
+        "muted-gold": "hsl(var(--muted-gold))",
       },
       borderRadius: {
         lg: "var(--radius)",

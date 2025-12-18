@@ -46,6 +46,12 @@
     --charcoal: 0 0% 7%;
     --cream: 40 20% 95%;
     
+    /* Architecture page tokens */
+    --ivory: 38 30% 94%; /* #F4EFE7 warm ivory */
+    --ivory-dark: 38 20% 88%;
+    --graphite: 0 0% 45%;
+    --muted-gold: 38 35% 55%; /* #B79A63-ish */
+    
     /* Glassmorphism */
     --glass-bg: 0 0% 100% / 0.03;
     --glass-border: 0 0% 100% / 0.08;
