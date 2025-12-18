@@ -4,302 +4,195 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
-// Magnetic Cursor Effect Component
-const MagneticCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      setIsVisible(true);
-    };
-    const handleMouseLeave = () => setIsVisible(false);
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
-  return (
-    <div 
-      className={`fixed pointer-events-none z-50 mix-blend-difference transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-      style={{ 
-        left: position.x - 150, 
-        top: position.y - 150,
-      }}
-    >
-      <div className="w-[300px] h-[300px] rounded-full bg-gradient-radial from-primary/10 via-transparent to-transparent blur-2xl" />
-    </div>
-  );
-};
-
-// Floating Particles Background
-const FloatingParticles = () => {
+// Architectural Blueprint Background - Refined & Subtle
+const ArchitecturalBackground = ({ scrollY = 0 }: { scrollY?: number }) => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(30)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-1 h-1 bg-primary/30 rounded-full"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animation: `floatParticle ${15 + Math.random() * 20}s linear infinite`,
-            animationDelay: `${Math.random() * -20}s`,
-          }}
+      {/* Blueprint Grid - Very Subtle */}
+      <svg 
+        className="absolute inset-0 w-full h-full opacity-[0.03]"
+        style={{ 
+          transform: `translate(${scrollY * 0.015}px, ${scrollY * 0.01}px)`,
+          transition: 'transform 0.5s ease-out',
+        }}
+      >
+        <defs>
+          <pattern id="blueprintGrid" width="100" height="100" patternUnits="userSpaceOnUse">
+            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+            <path d="M 50 0 L 50 100 M 0 50 L 100 50" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.15" opacity="0.5" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#blueprintGrid)" />
+      </svg>
+
+      {/* Interior Wall Outlines - Abstract */}
+      <svg 
+        className="absolute inset-0 w-full h-full opacity-[0.04]"
+        style={{ 
+          transform: `translate(${scrollY * 0.02}px, ${scrollY * 0.015}px)`,
+          transition: 'transform 0.6s ease-out',
+        }}
+      >
+        {/* Wall frame suggestion - left side */}
+        <path 
+          d="M 8% 35% L 8% 75% L 28% 75% L 28% 55% L 18% 55% L 18% 35% Z" 
+          fill="none" 
+          stroke="hsl(38 42% 55%)" 
+          strokeWidth="0.4"
+          opacity="0.6"
         />
-      ))}
+        
+        {/* Ceiling grid hints */}
+        <line x1="15%" y1="20%" x2="45%" y2="20%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.4" />
+        <line x1="18%" y1="24%" x2="42%" y2="24%" stroke="hsl(30 8% 60%)" strokeWidth="0.2" opacity="0.3" />
+        
+        {/* Furniture geometry - table silhouette */}
+        <rect x="20%" y="60%" width="15%" height="8%" fill="none" stroke="hsl(30 8% 55%)" strokeWidth="0.3" opacity="0.4" />
+        
+        {/* Construction framing - corner joint */}
+        <path d="M 5% 30% L 5% 35% L 10% 35%" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.5" />
+        
+        {/* Measurement marker */}
+        <g opacity="0.3">
+          <line x1="12%" y1="85%" x2="12%" y2="88%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+          <line x1="12%" y1="86.5%" x2="25%" y2="86.5%" stroke="hsl(38 42% 55%)" strokeWidth="0.2" strokeDasharray="2,4" />
+          <line x1="25%" y1="85%" x2="25%" y2="88%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+        </g>
+      </svg>
+
+      {/* Diagonal drift lines - very faint */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          background: `
+            linear-gradient(135deg, transparent 48%, hsl(38 42% 55% / 0.3) 49%, hsl(38 42% 55% / 0.3) 51%, transparent 52%),
+            linear-gradient(135deg, transparent 58%, hsl(30 8% 55% / 0.2) 59%, hsl(30 8% 55% / 0.2) 61%, transparent 62%)
+          `,
+          backgroundSize: '200px 200px',
+          transform: `translate(${scrollY * 0.03}px, ${scrollY * 0.02}px)`,
+          transition: 'transform 0.8s ease-out',
+        }}
+      />
     </div>
   );
 };
 
-// Cinematic Hero with Split Screen Reveal
+// Hero Section - Asymmetrical Editorial Composition
 const HeroAbout = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
-    setIsLoaded(true);
+    const timer = setTimeout(() => setIsLoaded(true), 100);
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: (e.clientX - rect.left) / rect.width,
-      y: (e.clientY - rect.top) / rect.height,
-    });
-  };
-
   return (
-    <section 
-      className="relative min-h-[150vh] flex items-start justify-center overflow-hidden"
-      onMouseMove={handleMouseMove}
-    >
-      {/* Morphing Background Gradient */}
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Base Background */}
+      <div className="absolute inset-0 bg-background" />
+      
+      {/* Architectural Blueprint Layer */}
+      <ArchitecturalBackground scrollY={scrollY} />
+
+      {/* Subtle gradient on left side */}
+      <div className="absolute left-0 top-0 bottom-0 w-[40%] bg-gradient-to-r from-black/20 to-transparent" />
+
+      {/* Designer Easter Egg - Thin Vertical Gold Line */}
       <div 
-        className="absolute inset-0 transition-all duration-1000"
-        style={{
-          background: `
-            radial-gradient(ellipse 80% 60% at ${mousePos.x * 100}% ${mousePos.y * 100}%, hsl(38 42% 60% / 0.08), transparent),
-            radial-gradient(ellipse 60% 80% at ${100 - mousePos.x * 100}% ${100 - mousePos.y * 100}%, hsl(30 8% 70% / 0.05), transparent),
-            linear-gradient(to bottom, hsl(0 0% 4%), hsl(0 0% 3%))
-          `,
-        }}
-      />
-
-      {/* Animated Grid Lines */}
-      <div className="absolute inset-0 overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]">
-          <defs>
-            <pattern id="heroGrid" width="120" height="120" patternUnits="userSpaceOnUse">
-              <path d="M 120 0 L 0 0 0 120" fill="none" stroke="hsl(38 42% 60%)" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect 
-            width="200%" height="200%" fill="url(#heroGrid)" 
-            style={{ 
-              transform: `translate(${(mousePos.x - 0.5) * -50}px, ${(mousePos.y - 0.5) * -50 + scrollY * 0.1}px)`,
-              transition: 'transform 0.3s ease-out',
-            }}
-          />
-        </svg>
-      </div>
-
-      {/* Diagonal Light Beams */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] opacity-[0.03]"
-          style={{
-            background: `
-              linear-gradient(45deg, transparent 40%, hsl(38 42% 60% / 0.3) 50%, transparent 60%),
-              linear-gradient(135deg, transparent 40%, hsl(38 42% 60% / 0.2) 50%, transparent 60%)
-            `,
-            transform: `rotate(${scrollY * 0.02}deg) scale(${1 + scrollY * 0.0005})`,
-          }}
-        />
-      </div>
-
-      {/* 3D Floating Geometric Shapes */}
-      <div className="absolute inset-0 perspective-[1000px]">
-        <div 
-          className="absolute top-[20%] left-[10%] w-40 h-40 border border-primary/10"
-          style={{
-            transform: `
-              rotateX(${(mousePos.y - 0.5) * 30}deg) 
-              rotateY(${(mousePos.x - 0.5) * 30}deg) 
-              rotate(45deg)
-              translateZ(${scrollY * 0.1}px)
-            `,
-            transition: 'transform 0.3s ease-out',
-          }}
-        />
-        <div 
-          className="absolute top-[40%] right-[15%] w-32 h-32 border border-primary/5 rounded-full"
-          style={{
-            transform: `
-              rotateX(${(mousePos.y - 0.5) * -20}deg) 
-              rotateY(${(mousePos.x - 0.5) * -20}deg)
-              translateZ(${scrollY * 0.15}px)
-            `,
-            transition: 'transform 0.4s ease-out',
-          }}
-        />
-        <div 
-          className="absolute bottom-[30%] left-[20%] w-24 h-24 border border-muted-foreground/10"
-          style={{
-            transform: `
-              rotateX(${(mousePos.y - 0.5) * 25}deg) 
-              rotateY(${(mousePos.x - 0.5) * -25}deg) 
-              rotate(12deg)
-            `,
-            transition: 'transform 0.5s ease-out',
-          }}
-        />
-      </div>
-
-      <FloatingParticles />
-
-      {/* Content Container */}
-      <div className="relative z-10 w-full min-h-screen flex items-center justify-center pt-20">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          {/* Animated Pre-headline with Line Drawing */}
-          <div className={`relative inline-block mb-12 transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="flex items-center gap-8">
-              <div className={`h-px bg-gradient-to-r from-transparent to-primary/60 transition-all duration-1500 delay-700 ${isLoaded ? 'w-24' : 'w-0'}`} />
-              <span className="text-primary/70 text-[10px] md:text-xs tracking-[0.6em] uppercase font-light">
-                The EdgeHomes Story
-              </span>
-              <div className={`h-px bg-gradient-to-l from-transparent to-primary/60 transition-all duration-1500 delay-700 ${isLoaded ? 'w-24' : 'w-0'}`} />
-            </div>
-          </div>
-
-          {/* Main Headline with Character Reveal */}
-          <div className="relative mb-16">
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl xl:text-[10rem] leading-[0.85] tracking-tight">
-              {['Design', 'is', 'not'].map((word, wordIdx) => (
-                <span key={wordIdx} className="inline-block overflow-hidden mr-[0.3em]">
-                  {word.split('').map((char, charIdx) => (
-                    <span 
-                      key={charIdx}
-                      className={`inline-block text-foreground/90 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                      style={{ transitionDelay: `${600 + wordIdx * 100 + charIdx * 40}ms` }}
-                    >
-                      {char}
-                    </span>
-                  ))}
-                </span>
-              ))}
-              <br />
-              <span className="inline-block overflow-hidden mr-[0.3em]">
-                {'what'.split('').map((char, charIdx) => (
-                  <span 
-                    key={charIdx}
-                    className={`inline-block text-foreground/90 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                    style={{ transitionDelay: `${900 + charIdx * 40}ms` }}
-                  >
-                    {char}
-                  </span>
-                ))}
-              </span>
-              <span className="inline-block overflow-hidden mr-[0.3em]">
-                {'we'.split('').map((char, charIdx) => (
-                  <span 
-                    key={charIdx}
-                    className={`inline-block text-foreground/90 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                    style={{ transitionDelay: `${1050 + charIdx * 40}ms` }}
-                  >
-                    {char}
-                  </span>
-                ))}
-              </span>
-              <span className="inline-block overflow-hidden">
-                <span 
-                  className={`inline-block text-gradient-gold transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                  style={{ transitionDelay: '1150ms' }}
-                >
-                  do.
-                </span>
-              </span>
-              <br />
-              <span className="inline-block overflow-hidden mr-[0.3em]">
-                {"It's".split('').map((char, charIdx) => (
-                  <span 
-                    key={charIdx}
-                    className={`inline-block text-foreground/70 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                    style={{ transitionDelay: `${1250 + charIdx * 40}ms` }}
-                  >
-                    {char}
-                  </span>
-                ))}
-              </span>
-              <span className="inline-block overflow-hidden mr-[0.3em]">
-                {'how'.split('').map((char, charIdx) => (
-                  <span 
-                    key={charIdx}
-                    className={`inline-block text-foreground/70 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                    style={{ transitionDelay: `${1350 + charIdx * 40}ms` }}
-                  >
-                    {char}
-                  </span>
-                ))}
-              </span>
-              <span className="inline-block overflow-hidden mr-[0.3em]">
-                {'we'.split('').map((char, charIdx) => (
-                  <span 
-                    key={charIdx}
-                    className={`inline-block text-foreground/70 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                    style={{ transitionDelay: `${1450 + charIdx * 40}ms` }}
-                  >
-                    {char}
-                  </span>
-                ))}
-              </span>
-              <span className="inline-block overflow-hidden">
-                <span 
-                  className={`inline-block italic text-primary transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}
-                  style={{ transitionDelay: '1550ms' }}
-                >
-                  think.
-                </span>
-              </span>
-            </h1>
-
-            {/* Animated Underline */}
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4">
-              <div className={`h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent transition-all duration-2000 delay-1800 ${isLoaded ? 'w-64' : 'w-0'}`} />
-            </div>
-          </div>
-
-          {/* Subtext with Fade */}
-          <p 
-            className={`text-lg md:text-xl lg:text-2xl text-muted-foreground/60 max-w-3xl mx-auto leading-relaxed font-light transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-            style={{ transitionDelay: '2000ms' }}
-          >
-            EdgeHomes is a design & build studio shaping spaces that feel 
-            <span className="text-primary/80"> lived in</span>, 
-            <span className="text-foreground/70"> timeless</span>, and 
-            <span className="text-primary/60"> intentional</span>.
-          </p>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div 
-        className={`absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-6 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ transitionDelay: '2500ms' }}
+        className={`absolute left-[38%] top-[15%] bottom-[15%] w-px transition-all duration-[2000ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transitionDelay: '1800ms' }}
       >
-        <span className="text-[9px] text-muted-foreground/40 tracking-[0.5em] uppercase">Scroll to Discover</span>
-        <div className="relative w-6 h-12 border border-primary/20 rounded-full overflow-hidden">
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-3 bg-primary/50 rounded-full animate-scrollDown" />
+        <div className="w-full h-full bg-gradient-to-b from-transparent via-primary/30 to-transparent" />
+      </div>
+
+      {/* Small Diamond Accent - Floating */}
+      <div 
+        className={`absolute left-[32%] top-[25%] transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ 
+          transitionDelay: '2200ms',
+          transform: `translateY(${scrollY * 0.05}px)`,
+        }}
+      >
+        <div className="w-3 h-3 border border-primary/20 rotate-45" />
+      </div>
+
+      {/* Main Content - Asymmetrical Layout */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="grid grid-cols-12 gap-6 items-center min-h-screen py-32">
+          
+          {/* Left Side - Empty Space with subtle element */}
+          <div className="col-span-12 lg:col-span-5 hidden lg:block">
+            {/* Intentional negative space */}
+          </div>
+
+          {/* Right Side - Text Content */}
+          <div className="col-span-12 lg:col-span-7 lg:pl-8">
+            
+            {/* Philosophy Label - Micro Story */}
+            <div 
+              className={`mb-10 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              style={{ transitionDelay: '300ms' }}
+            >
+              <span className="text-primary/50 text-[10px] tracking-[0.4em] uppercase font-light">
+                The EdgeHomes Philosophy
+              </span>
+            </div>
+
+            {/* Headline - Refined Editorial Scale */}
+            <div className="mb-10">
+              <h1 className="font-heading leading-[1.15] tracking-tight">
+                {/* Line 1 */}
+                <span 
+                  className={`block text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl text-foreground/90 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                  style={{ transitionDelay: '500ms' }}
+                >
+                  Design is not what we do.
+                </span>
+                
+                {/* Line 2 */}
+                <span 
+                  className={`block text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl mt-2 transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                  style={{ transitionDelay: '700ms' }}
+                >
+                  <span className="text-foreground/70">It's how we </span>
+                  <span className="italic text-primary">think.</span>
+                </span>
+              </h1>
+            </div>
+
+            {/* Subtle Divider Line */}
+            <div 
+              className={`mb-8 transition-all duration-[1500ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+              style={{ transitionDelay: '1000ms' }}
+            >
+              <div className={`h-px bg-gradient-to-r from-primary/40 to-transparent transition-all duration-[1500ms] ease-out ${isLoaded ? 'w-24' : 'w-0'}`} style={{ transitionDelay: '1200ms' }} />
+            </div>
+
+            {/* Subtext - Single Line */}
+            <p 
+              className={`text-muted-foreground/60 text-sm md:text-base max-w-md leading-relaxed font-light transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              style={{ transitionDelay: '1100ms' }}
+            >
+              A design & build studio shaping spaces that feel lived in, timeless, and intentional.
+            </p>
+
+          </div>
         </div>
+      </div>
+
+      {/* Scroll Hint - Minimal */}
+      <div 
+        className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 transition-all duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transitionDelay: '2000ms' }}
+      >
+        <div className="w-px h-8 bg-gradient-to-b from-primary/30 to-transparent" />
       </div>
     </section>
   );
@@ -899,7 +792,6 @@ const FoundersSection = () => {
 const About = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <MagneticCursor />
       <Header />
       <main>
         <HeroAbout />
