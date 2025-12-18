@@ -309,170 +309,304 @@ const HeroAbout = () => {
   );
 };
 
-// Immersive Manifesto Section - Architectural Path
-const ManifestoSection = () => {
+// Immersive Architectural Philosophy Section - Exploded Sectional View
+const ArchitecturalPhilosophySection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [lineHeight, setLineHeight] = useState(0);
-  const { ref: beliefRef, isVisible: beliefVisible } = useScrollAnimation({ threshold: 0.3 });
-  const { ref: pathRef, isVisible: pathVisible } = useScrollAnimation({ threshold: 0.1 });
+  const [scrollY, setScrollY] = useState(0);
+  const [sectionVisible, setSectionVisible] = useState(false);
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
 
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const sectionHeight = rect.height;
-      
-      // Calculate progress through section
-      const progress = Math.max(0, Math.min(1, 
-        (viewportHeight - rect.top) / (viewportHeight + sectionHeight * 0.5)
-      ));
-      setScrollProgress(progress);
-      setLineHeight(progress * 100);
+      const progress = Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height));
+      setScrollY(progress * 100);
+      setSectionVisible(rect.top < window.innerHeight * 0.8);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const philosophies = [
-    {
-      index: '01',
-      title: 'Simplicity as Luxury',
-      thought: 'The most powerful design is invisible.',
-      continuation: 'It earns attention through restraint.',
-      align: 'left',
-      geometry: '◇',
-    },
-    {
-      index: '02', 
-      title: 'Execution Over Promises',
-      thought: 'Ideas are abundant.',
-      continuation: 'What separates us is obsessive focus on bringing every detail to life—no compromises.',
-      align: 'right',
-      geometry: '△',
-    },
-    {
-      index: '03',
-      title: 'Timeless Over Trendy',
-      thought: 'Trends fade in seasons.',
-      continuation: 'We build for decades.',
-      align: 'left',
-      geometry: '○',
-    },
-  ];
-
   return (
-    <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
-      {/* Dark Background */}
-      <div className="absolute inset-0 bg-[#040404]" />
+    <section ref={sectionRef} className="relative min-h-screen py-32 md:py-40 overflow-hidden">
+      {/* === LAYER 1: Base Dark Background === */}
+      <div className="absolute inset-0 bg-[#030303]" />
       
-      {/* Subtle ambient glow */}
+      {/* === LAYER 2: Structural Blueprint Grid === */}
+      <svg 
+        className="absolute inset-0 w-full h-full"
+        style={{ 
+          transform: `translate(${scrollY * 0.08}px, ${scrollY * 0.05}px)`,
+          transition: 'transform 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
+        }}
+      >
+        <defs>
+          <pattern id="structuralGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+            <path d="M 120 0 L 0 0 0 120" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.04" />
+            <path d="M 60 0 L 60 120 M 0 60 L 120 60" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.2" opacity="0.02" />
+            {/* Measurement ticks */}
+            <line x1="0" y1="0" x2="6" y2="0" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.06" />
+            <line x1="0" y1="0" x2="0" y2="6" stroke="hsl(38 42% 55%)" strokeWidth="0.4" opacity="0.06" />
+            <circle cx="60" cy="60" r="1" fill="hsl(38 42% 55%)" opacity="0.03" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#structuralGrid)" />
+      </svg>
+
+      {/* === LAYER 3: Abstract Architectural Forms (Wall/Ceiling Volumes) === */}
+      <svg 
+        className="absolute inset-0 w-full h-full"
+        style={{ 
+          transform: `translate(${scrollY * -0.03}px, ${scrollY * -0.02}px)`,
+          transition: 'transform 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        }}
+      >
+        {/* Large rectangular volume - top left */}
+        <rect x="5%" y="8%" width="28%" height="35%" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.5" opacity="0.04" />
+        <rect x="7%" y="12%" width="22%" height="26%" fill="hsl(38 42% 55%)" opacity="0.008" />
+        
+        {/* Ceiling edge planes - right */}
+        <path d="M 70% 5% L 95% 5% L 95% 25% L 85% 25% L 85% 15% L 70% 15% Z" fill="none" stroke="hsl(30 8% 55%)" strokeWidth="0.4" opacity="0.03" />
+        <path d="M 72% 7% L 93% 7% L 93% 23% L 87% 23% L 87% 13% L 72% 13% Z" fill="hsl(30 8% 55%)" opacity="0.006" />
+        
+        {/* Wall outline - bottom right */}
+        <path d="M 60% 65% L 92% 65% L 92% 95% L 75% 95% L 75% 80% L 60% 80% Z" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.5" opacity="0.035" />
+        
+        {/* Floating volume - center */}
+        <rect x="40%" y="40%" width="20%" height="18%" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.025" />
+        
+        {/* Overlapping planes - bottom left */}
+        <rect x="3%" y="70%" width="32%" height="25%" fill="none" stroke="hsl(30 8% 55%)" strokeWidth="0.4" opacity="0.03" />
+        <rect x="8%" y="75%" width="25%" height="17%" fill="hsl(38 42% 55%)" opacity="0.01" />
+      </svg>
+
+      {/* === LAYER 4: Light & Material Texture Gradients === */}
       <div 
-        className="absolute inset-0 transition-opacity duration-[2000ms]"
-        style={{
-          background: 'radial-gradient(ellipse 60% 40% at 50% 50%, hsl(38 42% 55% / 0.015) 0%, transparent 70%)',
-          opacity: scrollProgress > 0.1 ? 1 : 0,
+        className="absolute inset-0"
+        style={{ 
+          background: `
+            radial-gradient(ellipse 80% 50% at 20% 30%, hsl(38 42% 55% / 0.02) 0%, transparent 50%),
+            radial-gradient(ellipse 60% 40% at 80% 70%, hsl(30 15% 50% / 0.015) 0%, transparent 45%),
+            radial-gradient(ellipse 50% 60% at 50% 50%, hsl(38 42% 55% / 0.008) 0%, transparent 60%)
+          `,
+          transform: `translateY(${scrollY * 0.15}px)`,
+          transition: 'transform 1s ease-out',
         }}
       />
 
-      {/* PART 1 - THE BELIEF */}
-      <div ref={beliefRef} className="relative z-10 max-w-3xl mx-auto px-6 mb-20 md:mb-28">
-        {/* Small Label */}
-        <div className={`text-center mb-8 transition-all duration-1000 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <span className="text-primary/35 text-[8px] tracking-[0.5em] uppercase">Our Belief</span>
-        </div>
-        
-        {/* Main Belief Statement */}
-        <div className="text-center">
-          <p className={`font-heading text-xl sm:text-2xl md:text-3xl leading-[1.4] tracking-tight transition-all duration-1000 delay-200 ${beliefVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-            <span className="text-foreground/75">A space should feel </span>
-            <span className="text-primary/60">calm</span>
-            <span className="text-foreground/45"> before it looks beautiful.</span>
-          </p>
-        </div>
-        
-        {/* Subtle line */}
-        <div className={`flex justify-center mt-10 transition-all duration-1500 delay-500 ${beliefVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <div className={`h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent transition-all duration-[1500ms] delay-700 ${beliefVisible ? 'w-20' : 'w-0'}`} />
-        </div>
-      </div>
+      {/* Subtle stone/concrete texture overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.015]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }}
+      />
 
-      {/* PART 2 - PHILOSOPHY PATH */}
-      <div ref={pathRef} className="relative z-10 max-w-5xl mx-auto px-6">
+      {/* === LAYER 5: Architectural Micro-Details === */}
+      <svg 
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        style={{ 
+          opacity: sectionVisible ? 1 : 0,
+          transition: 'opacity 1.5s ease-out',
+        }}
+      >
+        {/* Corner crop marks - top left */}
+        <g opacity="0.08">
+          <line x1="3%" y1="5%" x2="6%" y2="5%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+          <line x1="3%" y1="5%" x2="3%" y2="8%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+        </g>
         
-        {/* Central Vertical Line */}
-        <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px hidden md:block">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.05] to-transparent" />
+        {/* Corner crop marks - top right */}
+        <g opacity="0.08">
+          <line x1="94%" y1="5%" x2="97%" y2="5%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+          <line x1="97%" y1="5%" x2="97%" y2="8%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+        </g>
+        
+        {/* Corner crop marks - bottom left */}
+        <g opacity="0.08">
+          <line x1="3%" y1="95%" x2="6%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+          <line x1="3%" y1="92%" x2="3%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+        </g>
+        
+        {/* Corner crop marks - bottom right */}
+        <g opacity="0.08">
+          <line x1="94%" y1="95%" x2="97%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+          <line x1="97%" y1="92%" x2="97%" y2="95%" stroke="hsl(38 42% 55%)" strokeWidth="0.5" />
+        </g>
+        
+        {/* Measurement dots scattered */}
+        <circle cx="15%" cy="25%" r="1.5" fill="hsl(38 42% 55%)" opacity="0.05" />
+        <circle cx="85%" cy="35%" r="1.5" fill="hsl(38 42% 55%)" opacity="0.04" />
+        <circle cx="50%" cy="75%" r="1.5" fill="hsl(38 42% 55%)" opacity="0.05" />
+        <circle cx="25%" cy="85%" r="1.5" fill="hsl(30 8% 55%)" opacity="0.04" />
+        
+        {/* Alignment crosses */}
+        <g opacity="0.04">
+          <line x1="47%" y1="15%" x2="53%" y2="15%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+          <line x1="50%" y1="12%" x2="50%" y2="18%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+        </g>
+        <g opacity="0.035">
+          <line x1="12%" y1="55%" x2="18%" y2="55%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+          <line x1="15%" y1="52%" x2="15%" y2="58%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" />
+        </g>
+        
+        {/* Thin gold construction rules */}
+        <line x1="10%" y1="45%" x2="35%" y2="45%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.06" />
+        <line x1="65%" y1="55%" x2="90%" y2="55%" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.05" />
+        
+        {/* Tiny labels */}
+        <text x="3.5%" y="9%" fill="hsl(38 42% 55%)" fontSize="6" opacity="0.06" fontFamily="monospace">A-01</text>
+        <text x="93%" y="9%" fill="hsl(38 42% 55%)" fontSize="6" opacity="0.05" fontFamily="monospace">SEC</text>
+        <text x="3.5%" y="91%" fill="hsl(30 8% 55%)" fontSize="6" opacity="0.05" fontFamily="monospace">PL-1</text>
+        
+        {/* Faint geometry accents near zones */}
+        <rect x="8%" y="18%" width="8" height="8" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.04" transform="rotate(45, 12%, 22%)" />
+        <polygon points="82,200 88,192 94,200" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.035" />
+        <circle cx="18%" cy="78%" r="4" fill="none" stroke="hsl(38 42% 55%)" strokeWidth="0.3" opacity="0.04" />
+      </svg>
+
+      {/* === CONTENT: Three Spatial Philosophy Zones === */}
+      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
+        
+        {/* Layout grid for three visible zones */}
+        <div className="grid grid-cols-12 gap-6 min-h-[70vh] items-start">
+          
+          {/* === ZONE A: Left Upper - Simplicity as Luxury === */}
           <div 
-            className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary/25 via-primary/15 to-transparent transition-all duration-500"
-            style={{ height: `${lineHeight}%` }}
-          />
-          {/* Ticks */}
-          <div className="absolute top-[20%] left-0 w-2 h-px bg-primary/10 -translate-x-1/2" />
-          <div className="absolute top-[50%] left-0 w-2 h-px bg-primary/10 -translate-x-1/2" />
-          <div className="absolute top-[80%] left-0 w-2 h-px bg-primary/10 -translate-x-1/2" />
-        </div>
+            className={`col-span-12 md:col-span-5 lg:col-span-4 pt-8 md:pt-0 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
+            style={{ transitionDelay: '200ms' }}
+          >
+            <div className="relative">
+              {/* Attached to structural edge - vertical gold rule */}
+              <div className="absolute -left-4 top-0 bottom-0 w-px bg-gradient-to-b from-primary/25 via-primary/10 to-transparent hidden lg:block" />
+              
+              {/* Defined architectural plane background */}
+              <div className="absolute -inset-6 border-l border-t border-primary/[0.04] -z-10" />
+              <div className="absolute -inset-6 bg-gradient-to-br from-primary/[0.015] to-transparent -z-10" />
+              
+              {/* Tiny index label */}
+              <span className="text-primary/15 text-[9px] tracking-[0.3em] uppercase font-mono mb-6 block">
+                Philosophy
+              </span>
+              
+              {/* Title - serif, left aligned */}
+              <h3 className="font-heading text-lg md:text-xl lg:text-2xl text-foreground/85 mb-4 tracking-tight text-left">
+                Simplicity as <span className="text-primary/70">Luxury</span>
+              </h3>
+              
+              {/* Thought - 1-2 lines */}
+              <p className="text-foreground/50 text-[13px] md:text-sm leading-[1.7] font-light text-left max-w-xs">
+                The most powerful design is invisible. It earns attention through <span className="text-primary/50">restraint</span>, not noise.
+              </p>
+              
+              {/* Corner accent */}
+              <div className="absolute -top-3 -right-3 w-5 h-5 border-r border-b border-primary/10 hidden md:block" />
+            </div>
+          </div>
 
-        {/* Philosophy Points */}
-        <div className="relative space-y-16 md:space-y-24">
-          {philosophies.map((philosophy, index) => {
-            const isVisible = pathVisible && scrollProgress > (index * 0.15 + 0.15);
-            const alignLeft = philosophy.align === 'left';
-            
-            return (
-              <div 
-                key={philosophy.index}
-                className={`relative flex ${alignLeft ? 'md:justify-start' : 'md:justify-end'} justify-center`}
-              >
-                {/* Geometry accent */}
-                <div 
-                  className={`absolute top-0 hidden md:block transition-all duration-1000 ${isVisible ? 'opacity-[0.04]' : 'opacity-0'}`}
-                  style={{ left: alignLeft ? '48%' : 'auto', right: alignLeft ? 'auto' : '48%' }}
-                >
-                  <span className="text-3xl text-primary">{philosophy.geometry}</span>
+          {/* Middle spacer */}
+          <div className="hidden lg:block lg:col-span-4" />
+
+          {/* === ZONE B: Right Center - Execution Over Promises === */}
+          <div 
+            className={`col-span-12 md:col-span-6 lg:col-span-4 md:col-start-7 lg:col-start-auto self-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
+            style={{ transitionDelay: '500ms' }}
+          >
+            <div className="relative md:pl-8">
+              {/* Anchored to vertical structural line */}
+              <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/20 to-transparent hidden md:block" />
+              
+              {/* Slightly more prominent glow */}
+              <div className="absolute -inset-8 bg-gradient-to-l from-primary/[0.02] to-transparent rounded-lg -z-10" />
+              
+              {/* Geometry hint */}
+              <div className="absolute -top-4 left-8 w-3 h-3 border border-primary/10 rotate-45 hidden md:block" />
+              
+              <span className="text-primary/15 text-[9px] tracking-[0.3em] uppercase font-mono mb-6 block">
+                Commitment
+              </span>
+              
+              <h3 className="font-heading text-lg md:text-xl lg:text-2xl text-foreground/90 mb-4 tracking-tight text-left">
+                Execution Over <span className="text-primary/75">Promises</span>
+              </h3>
+              
+              <p className="text-foreground/55 text-[13px] md:text-sm leading-[1.7] font-light text-left max-w-sm">
+                Ideas are abundant. What separates us is obsessive focus on bringing every <span className="text-primary/55">detail</span> to life—without compromise.
+              </p>
+              
+              {/* Thin gold rule attached */}
+              <div className="mt-6 h-px w-24 bg-gradient-to-r from-primary/25 to-transparent" />
+            </div>
+          </div>
+
+          {/* === ZONE C: Lower Left - Timeless Over Trendy === */}
+          <div 
+            className={`col-span-12 md:col-span-5 lg:col-span-5 mt-16 md:mt-24 lg:mt-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            style={{ transitionDelay: '800ms' }}
+          >
+            <div className="relative">
+              {/* Embedded inside a darker material block */}
+              <div className="absolute -inset-8 bg-gradient-to-t from-black/40 via-black/20 to-transparent rounded-lg -z-10" />
+              <div className="absolute -inset-8 border border-primary/[0.03] rounded-lg -z-10" />
+              
+              {/* Softer ambient light */}
+              <div className="absolute -inset-12 bg-radial-gradient opacity-30 -z-20" style={{
+                background: 'radial-gradient(ellipse at center, hsl(38 42% 55% / 0.02) 0%, transparent 70%)'
+              }} />
+              
+              <span className="text-primary/12 text-[9px] tracking-[0.3em] uppercase font-mono mb-6 block">
+                Permanence
+              </span>
+              
+              <h3 className="font-heading text-lg md:text-xl text-foreground/75 mb-4 tracking-tight text-left">
+                Timeless Over <span className="text-primary/60">Trendy</span>
+              </h3>
+              
+              <p className="text-foreground/40 text-[13px] leading-[1.7] font-light text-left max-w-xs">
+                Trends fade in seasons. We build for <span className="text-primary/45">decades</span>.
+              </p>
+              
+              {/* Bottom crop marks */}
+              <div className="absolute -bottom-4 -left-4 flex items-end gap-px opacity-60">
+                <div className="w-4 h-px bg-primary/15" />
+                <div className="w-px h-4 bg-primary/15 -mb-[3px]" />
+              </div>
+            </div>
+          </div>
+
+          {/* Right side closing element */}
+          <div 
+            className={`hidden lg:block lg:col-span-6 lg:col-start-7 mt-16 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+            style={{ transitionDelay: '1100ms' }}
+          >
+            <div className="relative h-full flex items-end justify-end pr-8 pb-8">
+              {/* Closing architectural notation */}
+              <div className="text-right">
+                <div className="flex items-center justify-end gap-3 mb-3">
+                  <div className="w-12 h-px bg-gradient-to-l from-primary/20 to-transparent" />
+                  <span className="text-primary/15 text-[8px] tracking-[0.4em] uppercase font-mono">These guide us</span>
                 </div>
-
-                {/* Content */}
-                <div 
-                  className={`relative max-w-sm ${alignLeft ? 'md:pr-20 md:text-right' : 'md:pl-20 md:text-left'} text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <span className="text-primary/20 text-[10px] tracking-[0.25em] font-light block mb-4">
-                    {philosophy.index}
-                  </span>
-                  <h3 className="font-heading text-lg md:text-xl text-foreground/80 mb-3 tracking-tight">
-                    {philosophy.title}
-                  </h3>
-                  <p className="text-foreground/50 text-[13px] leading-relaxed font-light">
-                    {philosophy.thought} <span className="text-muted-foreground/40">{philosophy.continuation}</span>
-                  </p>
-                  
-                  {/* Connection line */}
-                  <div 
-                    className={`hidden md:block absolute top-6 h-px bg-gradient-to-r transition-all duration-700 delay-200 ${
-                      alignLeft ? 'right-0 from-transparent to-primary/10' : 'left-0 from-primary/10 to-transparent'
-                    } ${isVisible ? 'w-16' : 'w-0'}`}
-                    style={{ right: alignLeft ? '-80px' : 'auto', left: alignLeft ? 'auto' : '-80px' }}
-                  />
-                  <div 
-                    className={`hidden md:block absolute top-[22px] w-1 h-1 rounded-full bg-primary/15 transition-all duration-500 delay-400 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-                    style={{ right: alignLeft ? '-84px' : 'auto', left: alignLeft ? 'auto' : '-84px' }}
-                  />
+                <div className="flex items-center justify-end gap-2">
+                  <div className="w-1.5 h-1.5 border border-primary/20 rotate-45" />
+                  <div className="w-1 h-1 bg-primary/15 rounded-full" />
+                  <div className="w-1.5 h-1.5 border border-primary/15" />
                 </div>
               </div>
-            );
-          })}
-        </div>
-
-        {/* Bottom closure */}
-        <div className={`flex flex-col items-center mt-20 transition-all duration-1000 ${pathVisible && scrollProgress > 0.7 ? 'opacity-100' : 'opacity-0'}`}>
-          <div className="w-1.5 h-1.5 bg-primary/15 rotate-45 mb-5" />
-          <p className="text-muted-foreground/25 text-[9px] tracking-[0.35em] uppercase">These guide everything we create</p>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Section viewport glow effect */}
+      <div 
+        className="absolute inset-0 pointer-events-none transition-opacity duration-[2000ms]"
+        style={{
+          background: 'radial-gradient(ellipse 100% 60% at 50% 100%, hsl(38 42% 55% / 0.012) 0%, transparent 50%)',
+          opacity: sectionVisible ? 1 : 0,
+        }}
+      />
     </section>
   );
 };
@@ -776,7 +910,7 @@ const About = () => {
       <Header />
       <main>
         <HeroAbout />
-        <ManifestoSection />
+        <ArchitecturalPhilosophySection />
         <ProcessSection />
         <FoundersSection />
       </main>
