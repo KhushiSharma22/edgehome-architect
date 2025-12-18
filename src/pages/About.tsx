@@ -245,68 +245,286 @@ const HeroAbout = () => {
   );
 };
 
-// Philosophy Section
+// Philosophy Section - Ultra Cinematic Museum Experience
 const PhilosophySection = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const [activePhilosophy, setActivePhilosophy] = useState<number | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    setMousePos({
+      x: (e.clientX - rect.left) / rect.width,
+      y: (e.clientY - rect.top) / rect.height,
+    });
+  };
+
+  const philosophies = [
+    {
+      number: '01',
+      title: 'Simplicity as Luxury',
+      subtitle: 'The Art of Restraint',
+      text: 'We believe the most powerful design is invisible. It doesn\'t demand attention—it earns it through quiet confidence and intentional restraint.',
+      accent: 'from-primary/20',
+      icon: '◇',
+    },
+    {
+      number: '02', 
+      title: 'Execution Over Promises',
+      subtitle: 'Where Vision Meets Reality',
+      text: 'Ideas are abundant. What separates us is our obsessive focus on bringing every detail to life exactly as envisioned—no compromises, no excuses.',
+      accent: 'from-amber-400/20',
+      icon: '△',
+    },
+    {
+      number: '03',
+      title: 'Timeless Over Trendy',
+      subtitle: 'Designing for Decades',
+      text: 'We design spaces meant to age gracefully. Trends fade in seasons. We build for decades.',
+      accent: 'from-stone-400/20',
+      icon: '○',
+    },
+  ];
 
   return (
-    <section ref={ref} className="relative py-32 md:py-48 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+    <section 
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      className="relative min-h-screen py-32 md:py-48 overflow-hidden"
+    >
+      {/* Dynamic Background Layers */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-[#060606] to-background" />
       
-      {/* Gold accent line */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-px h-[40%] bg-gradient-to-b from-transparent via-primary/30 to-transparent" />
+      {/* Animated Light Beam following mouse */}
+      <div 
+        className="absolute inset-0 opacity-30 pointer-events-none transition-all duration-1000 ease-out"
+        style={{
+          background: `radial-gradient(ellipse 600px 400px at ${mousePos.x * 100}% ${mousePos.y * 100}%, hsl(38 42% 60% / 0.08), transparent)`,
+        }}
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* Left - Big Quote */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-            <div className="relative">
-              <span className="absolute -top-8 -left-4 text-8xl text-primary/10 font-heading">"</span>
-              <blockquote className="font-heading text-3xl md:text-4xl lg:text-5xl leading-tight text-foreground/90">
-                A space should feel 
-                <span className="text-primary"> calm </span>
-                before it looks beautiful.
+      {/* Floating Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(90deg, hsl(38 42% 60% / 0.3) 1px, transparent 1px),
+              linear-gradient(hsl(38 42% 60% / 0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '100px 100px',
+            transform: `translate(${(mousePos.x - 0.5) * 20}px, ${(mousePos.y - 0.5) * 20}px)`,
+            transition: 'transform 0.5s ease-out',
+          }}
+        />
+      </div>
+
+      <div ref={ref} className="relative z-10 max-w-7xl mx-auto px-6">
+        
+        {/* Giant Quote - Cinematic Reveal */}
+        <div className={`relative mb-32 md:mb-48 transition-all duration-1500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Massive decorative quote mark */}
+          <div className="absolute -top-20 -left-10 md:-top-32 md:-left-20 text-[200px] md:text-[400px] font-heading text-primary/[0.03] leading-none select-none pointer-events-none">
+            "
+          </div>
+          
+          {/* Quote Container with glass effect */}
+          <div className="relative max-w-5xl mx-auto">
+            <div className="relative p-8 md:p-16 rounded-3xl overflow-hidden">
+              {/* Animated border glow */}
+              <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-[shimmer_3s_linear_infinite]" />
+              
+              {/* Inner glass */}
+              <div className="absolute inset-[1px] rounded-3xl bg-card/30 backdrop-blur-sm" />
+              
+              <blockquote className="relative z-10 font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.15] text-center">
+                <span className={`block transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                  A space should feel
+                </span>
+                <span className={`block mt-2 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                  <span className="relative inline-block">
+                    <span className="text-gradient-gold">calm</span>
+                    <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent animate-pulse" />
+                  </span>
+                </span>
+                <span className={`block mt-2 text-foreground/70 transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                  before it looks beautiful.
+                </span>
               </blockquote>
-              <div className="mt-8 w-24 h-px bg-gradient-to-r from-primary/50 to-transparent" />
             </div>
           </div>
+        </div>
 
-          {/* Right - Philosophy Points */}
-          <div className={`space-y-10 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
-            {[
-              {
-                title: 'Simplicity as Luxury',
-                text: 'We believe the most powerful design is invisible. It doesn\'t demand attention—it earns it through quiet confidence and intentional restraint.'
-              },
-              {
-                title: 'Execution Over Promises',
-                text: 'Ideas are abundant. What separates us is our obsessive focus on bringing every detail to life exactly as envisioned—no compromises, no excuses.'
-              },
-              {
-                title: 'Timeless Over Trendy',
-                text: 'We design spaces meant to age gracefully. Trends fade in seasons. We build for decades.'
-              }
-            ].map((item, index) => (
-              <div 
-                key={item.title}
-                className={`group transition-all duration-700 delay-${(index + 1) * 200}`}
-                style={{ transitionDelay: `${(index + 1) * 200}ms` }}
-              >
-                <h3 className="text-sm text-primary tracking-[0.2em] uppercase mb-3 group-hover:tracking-[0.3em] transition-all duration-500">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {item.text}
-                </p>
-              </div>
-            ))}
+        {/* Philosophy Cards - Staggered Bento Grid */}
+        <div className="relative">
+          {/* Section Label */}
+          <div className={`flex items-center justify-center gap-6 mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="h-px flex-1 max-w-32 bg-gradient-to-r from-transparent to-primary/30" />
+            <span className="text-xs text-primary/60 tracking-[0.5em] uppercase">Our Philosophy</span>
+            <div className="h-px flex-1 max-w-32 bg-gradient-to-l from-transparent to-primary/30" />
+          </div>
+
+          {/* Unique Asymmetric Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+            {philosophies.map((philosophy, index) => {
+              const gridClass = index === 0 
+                ? 'lg:col-span-7 lg:row-span-2' 
+                : index === 1 
+                  ? 'lg:col-span-5' 
+                  : 'lg:col-span-5';
+              
+              const isActive = activePhilosophy === index;
+              
+              return (
+                <div
+                  key={philosophy.number}
+                  className={`
+                    group relative ${gridClass}
+                    transition-all duration-700
+                    ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}
+                  `}
+                  style={{ 
+                    transitionDelay: `${800 + index * 200}ms`,
+                    transform: isActive ? 'scale(1.02)' : 'scale(1)',
+                  }}
+                  onMouseEnter={() => setActivePhilosophy(index)}
+                  onMouseLeave={() => setActivePhilosophy(null)}
+                >
+                  {/* Card Container */}
+                  <div className={`
+                    relative h-full min-h-[300px] ${index === 0 ? 'lg:min-h-[500px]' : 'min-h-[240px]'}
+                    rounded-3xl overflow-hidden cursor-default
+                    border border-border/20 
+                    transition-all duration-700
+                    ${isActive ? 'border-primary/40 shadow-2xl shadow-primary/10' : 'hover:border-border/40'}
+                  `}>
+                    {/* Gradient Background Layer */}
+                    <div className={`
+                      absolute inset-0 bg-gradient-to-br ${philosophy.accent} to-transparent
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-700
+                    `} />
+                    
+                    {/* Glass Layer */}
+                    <div className="absolute inset-0 bg-card/40 backdrop-blur-sm" />
+                    
+                    {/* Animated Corner Lines */}
+                    <div className="absolute top-0 left-0 w-20 h-20 pointer-events-none">
+                      <div className={`absolute top-4 left-4 w-12 h-px bg-primary/40 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
+                      <div className={`absolute top-4 left-4 w-px h-12 bg-primary/40 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+                    </div>
+                    <div className="absolute bottom-0 right-0 w-20 h-20 pointer-events-none">
+                      <div className={`absolute bottom-4 right-4 w-12 h-px bg-primary/40 transition-all duration-500 ${isActive ? 'w-16' : ''}`} />
+                      <div className={`absolute bottom-4 right-4 w-px h-12 bg-primary/40 transition-all duration-500 ${isActive ? 'h-16' : ''}`} />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-10 h-full flex flex-col justify-between p-8 lg:p-10">
+                      {/* Top Section */}
+                      <div>
+                        {/* Number + Icon Row */}
+                        <div className="flex items-start justify-between mb-6">
+                          <span className={`
+                            text-6xl md:text-7xl ${index === 0 ? 'lg:text-9xl' : 'lg:text-8xl'}
+                            font-heading text-primary/10 leading-none
+                            transition-all duration-500
+                            ${isActive ? 'text-primary/20 scale-110' : ''}
+                          `}>
+                            {philosophy.number}
+                          </span>
+                          <span className={`
+                            text-3xl text-primary/30 
+                            transition-all duration-500
+                            ${isActive ? 'text-primary/50 rotate-12 scale-110' : ''}
+                          `}>
+                            {philosophy.icon}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className={`
+                          font-heading text-2xl md:text-3xl ${index === 0 ? 'lg:text-4xl' : 'lg:text-3xl'}
+                          text-foreground/90 mb-2
+                          transition-all duration-500
+                          ${isActive ? 'text-foreground' : ''}
+                        `}>
+                          {philosophy.title}
+                        </h3>
+                        
+                        {/* Subtitle */}
+                        <p className="text-primary/60 text-sm tracking-wide mb-6">
+                          {philosophy.subtitle}
+                        </p>
+                        
+                        {/* Animated Divider */}
+                        <div className={`
+                          h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent
+                          transition-all duration-700
+                          ${isActive ? 'w-full' : 'w-16'}
+                        `} />
+                      </div>
+
+                      {/* Bottom Section - Description */}
+                      <div className={`
+                        mt-auto pt-6
+                        transition-all duration-500
+                        ${isActive ? 'opacity-100 translate-y-0' : 'opacity-70'}
+                      `}>
+                        <p className={`
+                          text-muted-foreground leading-relaxed
+                          ${index === 0 ? 'text-base lg:text-lg' : 'text-sm lg:text-base'}
+                        `}>
+                          "{philosophy.text}"
+                        </p>
+                      </div>
+
+                      {/* Hover Reveal - Hidden insight */}
+                      <div className={`
+                        absolute bottom-0 left-0 right-0 p-8 pt-16
+                        bg-gradient-to-t from-card via-card/80 to-transparent
+                        translate-y-full group-hover:translate-y-0
+                        transition-transform duration-700 ease-out
+                        pointer-events-none
+                      `}>
+                        <div className="flex items-center gap-3 text-xs text-primary/70">
+                          <div className="w-8 h-px bg-primary/50" />
+                          <span className="tracking-wider uppercase">Core Belief #{philosophy.number}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Shimmer Effect on Hover */}
+                    <div className={`
+                      absolute inset-0 opacity-0 group-hover:opacity-100
+                      bg-gradient-to-r from-transparent via-white/[0.03] to-transparent
+                      -translate-x-full group-hover:translate-x-full
+                      transition-all duration-1000 ease-out
+                      pointer-events-none
+                    `} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom Accent */}
+        <div className={`
+          flex items-center justify-center mt-24
+          transition-all duration-1000 delay-1000
+          ${isVisible ? 'opacity-100' : 'opacity-0'}
+        `}>
+          <div className="flex items-center gap-4">
+            <div className="w-2 h-2 bg-primary/30 rotate-45" />
+            <span className="text-muted-foreground/40 text-xs tracking-[0.3em] uppercase">These guide everything we create</span>
+            <div className="w-2 h-2 bg-primary/30 rotate-45" />
           </div>
         </div>
       </div>
     </section>
   );
 };
-
 
 // Cinematic Process Section
 const CinematicProcess = () => {
