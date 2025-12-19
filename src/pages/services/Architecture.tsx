@@ -230,10 +230,10 @@ const Architecture = () => {
         </div>
       </section>
 
-      {/* ===== SECTION 2: CORE PRINCIPLES - OVERLAPPING SLABS ===== */}
-      <section className="relative py-16 lg:py-20 bg-ivory overflow-hidden">
+      {/* ===== SECTION 2: CORE PRINCIPLES - CLEAN GRID ===== */}
+      <section className="relative py-14 lg:py-16 bg-ivory overflow-hidden">
         {/* Section header */}
-        <div className="container mx-auto px-6 lg:px-12 mb-10">
+        <div className="container mx-auto px-6 lg:px-12 mb-8">
           <div 
             className="flex items-center gap-4"
             style={{
@@ -249,92 +249,56 @@ const Architecture = () => {
           </div>
         </div>
 
-        {/* Overlapping architectural slabs */}
-        <div className="container mx-auto px-6 lg:px-12 relative">
-          <div className="relative max-w-5xl ml-auto">
+        {/* Principles Grid */}
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
             {principles.map((principle, index) => {
-              const scrollThreshold = 500 + index * 150;
+              const scrollThreshold = 500 + index * 100;
               const isVisible = scrollY > scrollThreshold;
-              
-              // Offset positions for overlapping effect
-              const offsetX = index * 60; // Diagonal offset
-              const offsetY = index * 80;
               
               return (
                 <div 
                   key={index}
-                  className="relative group"
+                  className="group cursor-pointer"
                   style={{
-                    marginLeft: `${offsetX}px`,
-                    marginTop: index === 0 ? 0 : `-40px`,
-                    zIndex: 10 - index,
                     opacity: isVisible ? 1 : 0,
-                    transform: isVisible 
-                      ? "translateY(0) translateX(0)" 
-                      : `translateY(60px) translateX(-30px)`,
-                    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s`
+                    transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                    transition: `all 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`
                   }}
                   onMouseEnter={() => setActivePrinciple(index)}
                   onMouseLeave={() => setActivePrinciple(null)}
                 >
                   <div 
-                    className={`relative bg-[#F5F3EF] p-10 lg:p-14 transition-all duration-700 ${
-                      activePrinciple === index ? "bg-[#EBE8E2]" : ""
+                    className={`relative bg-[#F8F6F2] p-6 lg:p-8 h-full border border-[#E8E4DC] transition-all duration-500 ${
+                      activePrinciple === index ? "bg-[#0E0E0E] border-[#0E0E0E]" : "hover:border-[#C6A46A]/30"
                     }`}
-                    style={{
-                      boxShadow: `${20 + index * 10}px ${20 + index * 10}px ${40 + index * 15}px rgba(0,0,0,${0.08 + index * 0.02})`
-                    }}
                   >
-                    {/* Gold edge stroke - top and left only for slab effect */}
-                    <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-[#C6A46A]/40 via-[#C6A46A]/20 to-transparent" />
-                    <div className="absolute top-0 left-0 w-[1px] h-full bg-gradient-to-b from-[#C6A46A]/40 via-[#C6A46A]/20 to-transparent" />
-                    
-                    {/* Engraved number - large scale, low opacity */}
+                    {/* Number */}
                     <span 
-                      className={`absolute top-6 right-8 text-[8rem] lg:text-[12rem] font-heading leading-none transition-all duration-500 ${
-                        activePrinciple === index ? "text-[#C6A46A]/20" : "text-[#0E0E0E]/[0.04]"
+                      className={`text-4xl lg:text-5xl font-heading leading-none transition-all duration-500 ${
+                        activePrinciple === index ? "text-[#C6A46A]" : "text-[#C6A46A]/30"
                       }`}
-                      style={{
-                        fontWeight: 200,
-                        letterSpacing: "-0.05em"
-                      }}
                     >
                       {principle.num}
                     </span>
 
-                    {/* Content - slides up on hover */}
-                    <div className="relative z-10 max-w-md">
-                      <h3 
-                        className={`text-2xl md:text-3xl font-heading mb-4 transition-all duration-500 ${
-                          activePrinciple === index 
-                            ? "text-[#C6A46A] transform -translate-y-1" 
-                            : "text-[#0E0E0E]"
-                        }`}
-                      >
-                        {principle.title}
-                      </h3>
-                      <p 
-                        className={`text-sm leading-relaxed transition-all duration-500 overflow-hidden ${
-                          activePrinciple === index 
-                            ? "max-h-20 opacity-100 text-[#0E0E0E]/70" 
-                            : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        {principle.desc}
-                      </p>
-                    </div>
-
-                    {/* Hover indicator */}
-                    <div 
-                      className={`absolute bottom-6 right-8 flex items-center gap-2 text-[10px] tracking-wider transition-all duration-500 ${
-                        activePrinciple === index 
-                          ? "opacity-100 translate-x-0" 
-                          : "opacity-0 translate-x-4"
+                    {/* Title */}
+                    <h3 
+                      className={`text-lg lg:text-xl font-heading mt-4 mb-2 transition-all duration-500 ${
+                        activePrinciple === index ? "text-ivory" : "text-[#0E0E0E]"
                       }`}
                     >
-                      <span className="text-[#C6A46A]">EXPLORE</span>
-                      <ArrowRight className="w-3 h-3 text-[#C6A46A]" />
-                    </div>
+                      {principle.title}
+                    </h3>
+                    
+                    {/* Description */}
+                    <p 
+                      className={`text-xs leading-relaxed transition-all duration-500 ${
+                        activePrinciple === index ? "text-ivory/60" : "text-[#0E0E0E]/50"
+                      }`}
+                    >
+                      {principle.desc}
+                    </p>
                   </div>
                 </div>
               );
@@ -342,7 +306,6 @@ const Architecture = () => {
           </div>
         </div>
       </section>
-
       {/* ===== SECTION 3: DESIGN DNA - COMPACT ===== */}
       <section className="relative py-20 lg:py-28 bg-[#0E0E0E] overflow-hidden">
         {/* Subtle divider */}
