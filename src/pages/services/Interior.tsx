@@ -6,7 +6,7 @@ import portfolioBathroom from "@/assets/portfolio-bathroom.jpg";
 import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
 import portfolioDining from "@/assets/portfolio-dining.jpg";
 import portfolioKitchen from "@/assets/portfolio-kitchen.jpg";
-import heroInterior from "@/assets/hero-luxury-interior.jpg";
+import heroInterior from "@/assets/interior-hero-luxury.jpg";
 import { Link } from "react-router-dom";
 
 const Interior = () => {
