@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import constructionHero from "@/assets/construction-hero-texture.jpg";
 
 // Floating Blueprint Fragments
 const BlueprintFragments = () => {
@@ -70,31 +71,36 @@ const Construction = () => {
       name: "Foundation", 
       depth: "0m to -3m",
       principle: "What holds everything must be perfect first.",
-      metric: "Load tested to 3× design capacity"
+      metric: "Load tested to 3× design capacity",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop"
     },
     { 
       name: "Structure", 
       depth: "Primary Frame",
       principle: "Steel and concrete don't negotiate.",
-      metric: "±2mm column alignment tolerance"
+      metric: "±2mm column alignment tolerance",
+      image: "https://images.unsplash.com/photo-1590274853856-f22d5ee3d228?w=400&h=300&fit=crop"
     },
     { 
       name: "Envelope", 
       depth: "Building Skin",
       principle: "Protection before appearance.",
-      metric: "Zero water ingress warranty"
+      metric: "Zero water ingress warranty",
+      image: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&h=300&fit=crop"
     },
     { 
       name: "Services", 
       depth: "MEP Systems",
       principle: "The invisible makes the visible work.",
-      metric: "BIM-coordinated routing"
+      metric: "BIM-coordinated routing",
+      image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=300&fit=crop"
     },
     { 
       name: "Finish", 
       depth: "Final Layer",
       principle: "Details reveal discipline.",
-      metric: "±0.5mm edge tolerance"
+      metric: "±0.5mm edge tolerance",
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop"
     },
   ];
 
@@ -122,12 +128,8 @@ const Construction = () => {
           style={{
             background: `
               radial-gradient(circle at ${50 + mousePos.x * 15}% ${50 + mousePos.y * 15}%, 
-                hsl(var(--primary) / 0.1) 0%, 
+                hsl(var(--primary) / 0.08) 0%, 
                 transparent 40%
-              ),
-              radial-gradient(circle at ${30 - mousePos.x * 10}% ${70 - mousePos.y * 10}%, 
-                hsl(var(--primary) / 0.06) 0%, 
-                transparent 35%
               )
             `
           }}
@@ -138,7 +140,7 @@ const Construction = () => {
 
         {/* 3D Grid */}
         <div 
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             perspective: '1000px',
             perspectiveOrigin: `${50 + mousePos.x * 15}% ${50 + mousePos.y * 15}%`,
@@ -171,7 +173,7 @@ const Construction = () => {
           <div className="grid grid-cols-12 gap-8 items-center">
             
             {/* Left: Typography */}
-            <div className="col-span-12 lg:col-span-7">
+            <div className="col-span-12 lg:col-span-6">
               {/* Label */}
               <div className="mb-8 flex items-center gap-4">
                 <span className="h-px w-12 bg-gradient-to-r from-transparent to-primary" />
@@ -214,93 +216,38 @@ const Construction = () => {
               </div>
             </div>
 
-            {/* Right: Glowing 3D Construction Cube */}
-            <div className="col-span-12 lg:col-span-5 hidden lg:flex items-center justify-center">
+            {/* Right: Real Construction Image Collage */}
+            <div className="col-span-12 lg:col-span-6 hidden lg:block">
               <div 
-                className="relative w-80 h-80"
+                className="relative"
                 style={{ 
-                  transform: `perspective(1000px) rotateY(${mousePos.x * 8}deg) rotateX(${mousePos.y * -8}deg)`,
-                  transition: 'transform 0.3s ease-out',
+                  transform: `perspective(1000px) rotateY(${mousePos.x * 3}deg) rotateX(${mousePos.y * -3}deg)`,
+                  transition: 'transform 0.4s ease-out',
                 }}
               >
-                {/* Glowing orb background */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div 
-                    className="w-48 h-48 rounded-full blur-3xl animate-pulse"
-                    style={{
-                      background: `radial-gradient(circle, hsl(45 80% 55% / 0.4) 0%, hsl(35 70% 50% / 0.2) 40%, transparent 70%)`,
-                    }}
+                {/* Main Image */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm">
+                  <img 
+                    src={constructionHero}
+                    alt="Precision construction"
+                    className="w-full h-full object-cover"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
+                  
+                  {/* Overlay accent lines */}
+                  <div className="absolute top-4 left-4 w-16 h-16 border-l-2 border-t-2 border-primary/60" />
+                  <div className="absolute bottom-4 right-4 w-16 h-16 border-r-2 border-b-2 border-primary/60" />
                 </div>
 
-                {/* Rotating rings */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div 
-                    className="w-56 h-56 border border-primary/30 rounded-full"
-                    style={{ animation: 'spin 20s linear infinite' }}
-                  />
-                  <div 
-                    className="absolute w-44 h-44 border border-primary/40 rounded-full"
-                    style={{ animation: 'spin 15s linear infinite reverse' }}
-                  />
-                  <div 
-                    className="absolute w-32 h-32 border-2 border-primary/50 rounded-full"
-                    style={{ animation: 'spin 10s linear infinite' }}
-                  />
+                {/* Floating stat cards */}
+                <div className="absolute -bottom-6 -left-6 bg-background/90 backdrop-blur-md border border-border/50 p-4 rounded-sm">
+                  <div className="text-2xl font-heading text-primary">150+</div>
+                  <div className="text-[10px] tracking-widest uppercase text-muted-foreground">Projects Delivered</div>
                 </div>
 
-                {/* Central glowing cube structure */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative w-28 h-28" style={{ transformStyle: 'preserve-3d' }}>
-                    {/* Cube faces with gradient */}
-                    <div 
-                      className="absolute inset-0 border-2 border-primary/60"
-                      style={{
-                        background: `linear-gradient(135deg, hsl(45 80% 55% / 0.15) 0%, hsl(35 70% 45% / 0.08) 50%, transparent 100%)`,
-                        boxShadow: `0 0 40px hsl(45 80% 55% / 0.3), inset 0 0 30px hsl(45 80% 55% / 0.1)`,
-                      }}
-                    />
-                    
-                    {/* Floating particles */}
-                    {[...Array(6)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute w-2 h-2 bg-primary rounded-full"
-                        style={{
-                          left: `${20 + i * 12}%`,
-                          top: `${15 + (i % 3) * 25}%`,
-                          animation: `float ${2 + i * 0.3}s ease-in-out infinite`,
-                          animationDelay: `${i * 0.2}s`,
-                          boxShadow: `0 0 10px hsl(45 80% 55% / 0.8)`,
-                        }}
-                      />
-                    ))}
-
-                    {/* Corner accent lights */}
-                    <div className="absolute -top-1 -left-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
-                    <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
-                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
-                  </div>
-                </div>
-
-                {/* Orbiting elements */}
-                <div 
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ animation: 'spin 8s linear infinite' }}
-                >
-                  <div className="absolute w-4 h-4 bg-gradient-to-br from-primary to-primary/50 rounded-sm" style={{ transform: 'translateX(90px)', boxShadow: '0 0 20px hsl(45 80% 55% / 0.6)' }} />
-                </div>
-                <div 
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ animation: 'spin 12s linear infinite reverse' }}
-                >
-                  <div className="absolute w-3 h-3 bg-gradient-to-br from-primary to-primary/50 rounded-sm" style={{ transform: 'translateY(-85px)', boxShadow: '0 0 15px hsl(45 80% 55% / 0.5)' }} />
-                </div>
-
-                {/* Text label */}
-                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[9px] tracking-[0.3em] uppercase text-primary/70">
-                  Precision Built
+                <div className="absolute -top-4 -right-4 bg-background/90 backdrop-blur-md border border-border/50 p-3 rounded-sm">
+                  <div className="text-[9px] tracking-[0.3em] uppercase text-primary">Since 2015</div>
                 </div>
               </div>
             </div>
@@ -319,82 +266,19 @@ const Construction = () => {
         {/* Background */}
         <div className="absolute inset-0 bg-[#060605]" />
         
-        {/* Animated floating construction icons */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Floating crane icon */}
-          <div 
-            className="absolute top-[15%] right-[10%] w-24 h-24 opacity-20"
-            style={{ animation: 'float 6s ease-in-out infinite' }}
-          >
-            <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
-              <rect x="45" y="20" width="10" height="70" fill="currentColor" />
-              <rect x="20" y="20" width="60" height="8" fill="currentColor" />
-              <line x1="30" y1="28" x2="30" y2="60" stroke="currentColor" strokeWidth="2" />
-              <circle cx="30" cy="65" r="5" fill="currentColor" />
-            </svg>
-          </div>
-          
-          {/* Floating beam icon */}
-          <div 
-            className="absolute top-[40%] left-[5%] w-32 h-32 opacity-15"
-            style={{ animation: 'float 8s ease-in-out infinite', animationDelay: '1s' }}
-          >
-            <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
-              <polygon points="10,80 50,20 90,80" fill="none" stroke="currentColor" strokeWidth="2" />
-              <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor" strokeWidth="2" />
-              <line x1="30" y1="50" x2="70" y2="50" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </div>
-
-          {/* Floating gear */}
-          <div 
-            className="absolute bottom-[25%] right-[15%] w-20 h-20 opacity-20"
-            style={{ animation: 'spin 20s linear infinite' }}
-          >
-            <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
-              <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="3" />
-              <circle cx="50" cy="50" r="8" fill="currentColor" />
-              {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
-                <rect 
-                  key={i}
-                  x="47" y="25" width="6" height="15" fill="currentColor"
-                  transform={`rotate(${angle} 50 50)`}
-                />
-              ))}
-            </svg>
-          </div>
-
-          {/* Glowing orbs */}
-          <div 
-            className="absolute top-[60%] left-[20%] w-40 h-40 rounded-full blur-3xl"
-            style={{
-              background: 'radial-gradient(circle, hsl(45 80% 55% / 0.08) 0%, transparent 70%)',
-              animation: 'pulse 4s ease-in-out infinite',
-            }}
-          />
-          <div 
-            className="absolute top-[30%] right-[25%] w-32 h-32 rounded-full blur-2xl"
-            style={{
-              background: 'radial-gradient(circle, hsl(40 70% 50% / 0.06) 0%, transparent 60%)',
-              animation: 'pulse 5s ease-in-out infinite',
-              animationDelay: '2s',
-            }}
-          />
-        </div>
-        
         {/* Subtle Grid */}
         <div 
-          className="absolute inset-0 opacity-[0.025]"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
             backgroundImage: `
-              linear-gradient(to right, hsl(var(--primary)) 1px, transparent 1px),
-              linear-gradient(to bottom, hsl(var(--primary)) 1px, transparent 1px)
+              linear-gradient(to right, hsl(var(--foreground)) 1px, transparent 1px),
+              linear-gradient(to bottom, hsl(var(--foreground)) 1px, transparent 1px)
             `,
-            backgroundSize: '60px 60px',
+            backgroundSize: '80px 80px',
           }}
         />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-12">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
           <div className="mb-20">
             <span className="text-xs tracking-[0.35em] uppercase text-primary/50 block mb-4">
@@ -409,215 +293,127 @@ const Construction = () => {
             </p>
           </div>
 
-          {/* Animated Gradient Strip */}
-          <div className="relative w-full overflow-hidden py-6 mb-16">
-            {/* Glowing background */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(90deg, 
-                  transparent 0%, 
-                  hsl(45 85% 55% / 0.15) 20%, 
-                  hsl(40 80% 50% / 0.25) 50%, 
-                  hsl(45 85% 55% / 0.15) 80%, 
-                  transparent 100%
-                )`,
-              }}
-            />
+          {/* Elegant Moving Strip */}
+          <div className="relative w-full overflow-hidden py-4 mb-20">
+            {/* Subtle gradient background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent" />
             
-            {/* Moving gradient overlay */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(90deg, 
-                  transparent 0%,
-                  hsl(50 90% 60% / 0.3) 25%,
-                  hsl(45 85% 55% / 0.5) 50%,
-                  hsl(50 90% 60% / 0.3) 75%,
-                  transparent 100%
-                )`,
-                animation: 'shimmer 3s ease-in-out infinite',
-              }}
-            />
-
-            {/* Border lines */}
-            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+            {/* Top & bottom lines */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
             {/* Scrolling text */}
             <div className="relative flex whitespace-nowrap">
-              <div className="animate-marquee flex items-center gap-12">
+              <div className="animate-marquee flex items-center gap-16">
                 {[...Array(4)].map((_, i) => (
-                  <span key={i} className="flex items-center gap-12">
-                    <span className="text-sm md:text-base font-heading tracking-[0.4em] uppercase text-primary drop-shadow-[0_0_10px_hsl(45_80%_55%/0.5)]">
-                      EdgeHomes Construction Service
+                  <span key={i} className="flex items-center gap-16">
+                    <span className="text-sm md:text-base font-heading tracking-[0.5em] uppercase text-foreground/80">
+                      EdgeHomes Construction
                     </span>
-                    <span className="w-3 h-3 bg-primary/80 rotate-45" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.8)' }} />
-                    <span className="text-sm md:text-base tracking-[0.3em] uppercase text-primary/70">
-                      Built with Precision
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <span className="text-sm md:text-base tracking-[0.3em] uppercase text-muted-foreground">
+                      Precision Built
                     </span>
-                    <span className="w-2 h-2 rounded-full bg-primary" style={{ boxShadow: '0 0 12px hsl(45 80% 55%)' }} />
+                    <span className="w-px h-4 bg-border" />
                   </span>
                 ))}
               </div>
-              <div className="animate-marquee2 flex items-center gap-12 absolute left-0">
+              <div className="animate-marquee2 flex items-center gap-16 absolute left-0">
                 {[...Array(4)].map((_, i) => (
-                  <span key={i} className="flex items-center gap-12">
-                    <span className="text-sm md:text-base font-heading tracking-[0.4em] uppercase text-primary drop-shadow-[0_0_10px_hsl(45_80%_55%/0.5)]">
-                      EdgeHomes Construction Service
+                  <span key={i} className="flex items-center gap-16">
+                    <span className="text-sm md:text-base font-heading tracking-[0.5em] uppercase text-foreground/80">
+                      EdgeHomes Construction
                     </span>
-                    <span className="w-3 h-3 bg-primary/80 rotate-45" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.8)' }} />
-                    <span className="text-sm md:text-base tracking-[0.3em] uppercase text-primary/70">
-                      Built with Precision
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <span className="text-sm md:text-base tracking-[0.3em] uppercase text-muted-foreground">
+                      Precision Built
                     </span>
-                    <span className="w-2 h-2 rounded-full bg-primary" style={{ boxShadow: '0 0 12px hsl(45 80% 55%)' }} />
+                    <span className="w-px h-4 bg-border" />
                   </span>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Construction Layers - Timeline with Visual Icons */}
+          {/* Construction Layers with Real Images */}
           <div className="relative">
             {/* Vertical Line */}
-            <div className="absolute left-0 md:left-6 top-0 bottom-0 w-px bg-border/50">
+            <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-border/40">
               <div 
-                className="absolute top-0 left-0 w-full bg-primary/80 transition-all duration-500"
+                className="absolute top-0 left-0 w-full bg-primary transition-all duration-500"
                 style={{ height: `${Math.min(100, (activeLayer + 1) * 20)}%` }}
               />
             </div>
 
             {/* Layers */}
-            <div className="space-y-10 md:space-y-12 pl-6 md:pl-16">
-              {constructionLayers.map((layer, index) => {
-                // Unique visual for each layer
-                const layerVisuals = [
-                  // Foundation - Stacked layers
-                  <div key="foundation" className="relative w-20 h-20">
-                    <div className="absolute bottom-0 w-full h-4 bg-primary/30 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.3)' }} />
-                    <div className="absolute bottom-5 w-full h-4 bg-primary/40 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.4)' }} />
-                    <div className="absolute bottom-10 w-full h-4 bg-primary/50 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.5)' }} />
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full border-l border-dashed border-primary/30" />
-                  </div>,
-                  // Structure - Frame
-                  <div key="structure" className="relative w-20 h-20">
-                    <div className="absolute inset-2 border-2 border-primary/50" style={{ boxShadow: 'inset 0 0 20px hsl(45 80% 55% / 0.2)' }} />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-px h-full bg-primary/40" />
-                      <div className="absolute w-full h-px bg-primary/40" />
-                    </div>
-                    <div className="absolute top-1 left-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
-                    <div className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
-                    <div className="absolute bottom-1 left-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
-                    <div className="absolute bottom-1 right-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
-                  </div>,
-                  // Envelope - Shield
-                  <div key="envelope" className="relative w-20 h-20">
-                    <svg viewBox="0 0 80 80" className="w-full h-full">
-                      <path 
-                        d="M40 10 L70 25 L70 45 C70 60 55 75 40 75 C25 75 10 60 10 45 L10 25 Z" 
-                        fill="none" 
-                        stroke="hsl(45 80% 55%)" 
-                        strokeWidth="2"
-                        style={{ filter: 'drop-shadow(0 0 8px hsl(45 80% 55% / 0.5))' }}
-                      />
-                      <path 
-                        d="M40 25 L55 35 L55 48 C55 55 48 62 40 62 C32 62 25 55 25 48 L25 35 Z" 
-                        fill="hsl(45 80% 55% / 0.2)" 
-                        stroke="hsl(45 80% 55% / 0.5)" 
-                        strokeWidth="1"
-                      />
-                    </svg>
-                  </div>,
-                  // Services - Circuit
-                  <div key="services" className="relative w-20 h-20">
-                    <div className="absolute inset-0">
-                      <div className="absolute top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary" style={{ boxShadow: '0 0 12px hsl(45 80% 55%)' }} />
-                      <div className="absolute bottom-2 left-2 w-3 h-3 rounded-full bg-primary/70" style={{ boxShadow: '0 0 10px hsl(45 80% 55% / 0.7)' }} />
-                      <div className="absolute bottom-2 right-2 w-3 h-3 rounded-full bg-primary/70" style={{ boxShadow: '0 0 10px hsl(45 80% 55% / 0.7)' }} />
-                      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 80 80">
-                        <path d="M40 18 L40 35 L18 55" stroke="hsl(45 80% 55% / 0.5)" strokeWidth="2" fill="none" />
-                        <path d="M40 35 L62 55" stroke="hsl(45 80% 55% / 0.5)" strokeWidth="2" fill="none" />
-                      </svg>
-                    </div>
-                  </div>,
-                  // Finish - Polish star
-                  <div key="finish" className="relative w-20 h-20 flex items-center justify-center">
-                    <div 
-                      className="w-12 h-12 bg-primary/20 rotate-45"
-                      style={{ boxShadow: '0 0 25px hsl(45 80% 55% / 0.4)' }}
-                    />
-                    <div 
-                      className="absolute w-10 h-10 bg-primary/30 rotate-[22.5deg]"
-                      style={{ boxShadow: '0 0 20px hsl(45 80% 55% / 0.5)' }}
-                    />
-                    <div 
-                      className="absolute w-4 h-4 bg-primary rounded-full"
-                      style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }}
-                    />
-                  </div>,
-                ];
-
-                return (
+            <div className="space-y-16 pl-8 md:pl-20">
+              {constructionLayers.map((layer, index) => (
+                <div 
+                  key={layer.name}
+                  className={`relative transition-all duration-500 ${activeLayer >= index ? 'opacity-100' : 'opacity-40'}`}
+                >
+                  {/* Layer Marker */}
                   <div 
-                    key={layer.name}
-                    className={`relative transition-all duration-500 ${activeLayer >= index ? 'opacity-100' : 'opacity-40'}`}
+                    className={`absolute -left-8 md:-left-20 top-2 w-3 h-3 rounded-full border-2 transition-all duration-400 ${
+                      activeLayer >= index 
+                        ? 'border-primary bg-primary' 
+                        : 'border-border/60 bg-background'
+                    }`}
                   >
-                    {/* Layer Marker */}
-                    <div 
-                      className={`absolute -left-6 md:-left-16 top-0 w-3 h-3 rounded-full border-2 transition-all duration-400 ${
-                        activeLayer >= index 
-                          ? 'border-primary bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]' 
-                          : 'border-border/60 bg-background'
-                      }`}
-                    >
-                      <span className="absolute -left-5 top-1/2 -translate-y-1/2 text-[8px] font-mono text-muted-foreground/70">
-                        0{index + 1}
-                      </span>
+                    <span className="absolute -left-6 top-1/2 -translate-y-1/2 text-[8px] font-mono text-muted-foreground/70">
+                      0{index + 1}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="group grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                    {/* Image */}
+                    <div className="md:col-span-4">
+                      <div className="relative overflow-hidden rounded-sm aspect-[4/3]">
+                        <img 
+                          src={layer.image}
+                          alt={layer.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+                        
+                        {/* Corner accent */}
+                        <div className="absolute top-2 left-2 w-4 h-4 border-l border-t border-primary/50" />
+                        <div className="absolute bottom-2 right-2 w-4 h-4 border-r border-b border-primary/50" />
+                      </div>
                     </div>
 
-                    {/* Content */}
-                    <div className="group">
-                      <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
-                        {/* Visual Icon */}
-                        <div className={`shrink-0 transition-all duration-500 ${activeLayer >= index ? 'scale-100 opacity-100' : 'scale-90 opacity-50'}`}>
-                          {layerVisuals[index]}
-                        </div>
-
-                        {/* Name & Depth */}
-                        <div className="md:w-36 shrink-0">
-                          <h3 className="text-xl md:text-2xl font-heading text-foreground group-hover:text-primary transition-colors duration-300">
-                            {layer.name}
-                          </h3>
-                          <span className="text-xs tracking-[0.12em] uppercase text-muted-foreground/70">
-                            {layer.depth}
-                          </span>
-                        </div>
-
-                        {/* Principle */}
-                        <div className="flex-1">
-                          <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-3">
-                            {layer.principle}
-                          </p>
-                          
-                          {/* Metric Badge */}
-                          <span 
-                            className={`inline-flex items-center gap-1.5 px-2 py-1 bg-primary/5 border border-primary/15 text-[9px] tracking-wide text-primary/80 transition-all duration-400 ${
-                              activeLayer >= index ? 'opacity-100' : 'opacity-0'
-                            }`}
-                          >
-                            <span className="w-1 h-1 rounded-full bg-primary/80" />
-                            {layer.metric}
-                          </span>
-                        </div>
+                    {/* Text Content */}
+                    <div className="md:col-span-8 flex flex-col justify-center">
+                      <div className="flex items-baseline gap-4 mb-3">
+                        <h3 className="text-2xl md:text-3xl font-heading text-foreground group-hover:text-primary transition-colors duration-300">
+                          {layer.name}
+                        </h3>
+                        <span className="text-xs tracking-[0.15em] uppercase text-primary/60">
+                          {layer.depth}
+                        </span>
                       </div>
 
-                      {/* Separator */}
-                      <div className="mt-6 h-px bg-border/30" />
+                      <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+                        {layer.principle}
+                      </p>
+                      
+                      {/* Metric Badge */}
+                      <span 
+                        className={`inline-flex items-center gap-2 text-xs tracking-wide text-muted-foreground/80 transition-all duration-400 ${
+                          activeLayer >= index ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        {layer.metric}
+                      </span>
                     </div>
                   </div>
-                );
-              })}
+
+                  {/* Separator */}
+                  <div className="mt-10 h-px bg-border/20" />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -625,71 +421,31 @@ const Construction = () => {
 
       {/* === SECTION 3: THE PROMISE === */}
       <section className="relative py-20 md:py-28 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-[#040403]" />
-        
-        {/* Animated glowing background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Large central glow */}
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl"
-            style={{
-              background: 'radial-gradient(circle, hsl(45 80% 55% / 0.08) 0%, hsl(40 70% 50% / 0.04) 40%, transparent 70%)',
-              animation: 'pulse 6s ease-in-out infinite',
-            }}
+        {/* Background with image */}
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80"
+            alt="Architecture detail"
+            className="w-full h-full object-cover opacity-15"
           />
-          
-          {/* Floating geometric shapes */}
-          <div 
-            className="absolute top-[20%] left-[15%] w-16 h-16 border border-primary/20 rotate-45"
-            style={{ animation: 'float 7s ease-in-out infinite', boxShadow: '0 0 20px hsl(45 80% 55% / 0.1)' }}
-          />
-          <div 
-            className="absolute bottom-[25%] right-[10%] w-12 h-12 border border-primary/15 rotate-12"
-            style={{ animation: 'float 5s ease-in-out infinite', animationDelay: '1s', boxShadow: '0 0 15px hsl(45 80% 55% / 0.1)' }}
-          />
-          <div 
-            className="absolute top-[35%] right-[20%] w-8 h-8 bg-primary/10 rounded-full blur-sm"
-            style={{ animation: 'float 8s ease-in-out infinite', animationDelay: '2s' }}
-          />
-          <div 
-            className="absolute bottom-[35%] left-[12%] w-6 h-6 bg-primary/15 rounded-full blur-sm"
-            style={{ animation: 'float 6s ease-in-out infinite', animationDelay: '3s' }}
-          />
-
-          {/* Connecting lines */}
-          <svg className="absolute inset-0 w-full h-full opacity-10">
-            <line x1="15%" y1="20%" x2="50%" y2="50%" stroke="hsl(45 80% 55%)" strokeWidth="0.5" strokeDasharray="4,4">
-              <animate attributeName="stroke-dashoffset" from="0" to="8" dur="2s" repeatCount="indefinite" />
-            </line>
-            <line x1="85%" y1="30%" x2="50%" y2="50%" stroke="hsl(45 80% 55%)" strokeWidth="0.5" strokeDasharray="4,4">
-              <animate attributeName="stroke-dashoffset" from="0" to="8" dur="2.5s" repeatCount="indefinite" />
-            </line>
-            <line x1="12%" y1="70%" x2="50%" y2="50%" stroke="hsl(45 80% 55%)" strokeWidth="0.5" strokeDasharray="4,4">
-              <animate attributeName="stroke-dashoffset" from="0" to="8" dur="3s" repeatCount="indefinite" />
-            </line>
-          </svg>
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
         </div>
         
         {/* Diagonal accent */}
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `linear-gradient(135deg, transparent 35%, hsl(var(--primary) / 0.03) 50%, transparent 65%)`,
+            background: `linear-gradient(135deg, transparent 35%, hsl(var(--primary) / 0.02) 50%, transparent 65%)`,
           }}
         />
 
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
-          {/* Decorative top element */}
-          <div className="flex justify-center mb-8">
-            <div className="relative">
-              <div className="w-20 h-20 border border-primary/30 rotate-45" style={{ boxShadow: '0 0 30px hsl(45 80% 55% / 0.2)' }} />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-10 h-10 bg-primary/20 rotate-45" style={{ boxShadow: '0 0 20px hsl(45 80% 55% / 0.3)' }} />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-3 h-3 bg-primary rounded-full" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
-              </div>
+          {/* Decorative element */}
+          <div className="flex justify-center mb-10">
+            <div className="flex items-center gap-4">
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-primary/50" />
+              <div className="w-2 h-2 rotate-45 border border-primary/50" />
+              <span className="h-px w-12 bg-gradient-to-l from-transparent to-primary/50" />
             </div>
           </div>
 
@@ -702,66 +458,49 @@ const Construction = () => {
             <blockquote className="text-2xl md:text-3xl lg:text-4xl font-heading text-foreground leading-relaxed mb-8">
               "We measure twice not because we might be wrong,
               <span className="text-muted-foreground"> but because our clients deserve </span>
-              <span className="text-primary italic">certainty.</span>"
+              <span className="text-primary">certainty.</span>"
             </blockquote>
 
             <div className="flex items-center justify-center gap-4 text-muted-foreground/60">
-              <span className="h-px w-10 bg-gradient-to-r from-transparent to-primary/40" />
+              <span className="h-px w-10 bg-border" />
               <span className="text-xs tracking-[0.15em] uppercase">EdgeHomes Construction</span>
-              <span className="h-px w-10 bg-gradient-to-l from-transparent to-primary/40" />
+              <span className="h-px w-10 bg-border" />
             </div>
           </div>
 
-          {/* Key Points with visual icons */}
+          {/* Key Points */}
           <div className="grid grid-cols-3 gap-8 mt-16 mb-16">
             {[
-              { stat: "Zero", desc: "Material compromise", icon: (
-                <div className="w-12 h-12 mx-auto mb-4 relative">
-                  <div className="absolute inset-0 border-2 border-primary/40 rounded-full" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.2)' }} />
-                  <div className="absolute inset-2 border border-primary/60 rounded-full" />
-                  <div className="absolute inset-0 flex items-center justify-center text-primary font-bold text-lg">∅</div>
-                </div>
-              )},
-              { stat: "Daily", desc: "Progress updates", icon: (
-                <div className="w-12 h-12 mx-auto mb-4 relative flex items-center justify-center">
-                  <div className="w-10 h-10 border-2 border-primary/40 rounded-lg" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.2)' }} />
-                  <div className="absolute w-6 h-1 bg-primary/60 rounded top-4" />
-                  <div className="absolute w-4 h-1 bg-primary/40 rounded top-6" />
-                  <div className="absolute w-5 h-1 bg-primary/50 rounded top-8" />
-                </div>
-              )},
-              { stat: "Full", desc: "Cost transparency", icon: (
-                <div className="w-12 h-12 mx-auto mb-4 relative flex items-center justify-center">
-                  <div className="w-8 h-10 border-2 border-primary/40 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.2)' }} />
-                  <div className="absolute text-primary text-lg font-bold">$</div>
-                  <div className="absolute -bottom-1 w-6 h-6 bg-primary/20 rounded-full blur-sm" />
-                </div>
-              )},
+              { stat: "Zero", desc: "Material compromise" },
+              { stat: "Daily", desc: "Progress updates" },
+              { stat: "Full", desc: "Cost transparency" },
             ].map((item, i) => (
               <div key={i} className="text-center group">
-                {item.icon}
-                <div className="text-xl md:text-2xl font-heading text-primary mb-2 group-hover:scale-105 transition-transform duration-200">
+                <div className="text-2xl md:text-3xl font-heading text-primary mb-2 group-hover:scale-105 transition-transform duration-200">
                   {item.stat}
                 </div>
-                <div className="text-xs text-muted-foreground/70 tracking-wider">
+                <div className="text-xs text-muted-foreground/70 tracking-wider uppercase">
                   {item.desc}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* CTA with glow */}
-          <div className="relative inline-block">
-            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-lg" />
-            <a 
-              href="/contact"
-              className="relative inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border border-primary/30 text-primary text-sm tracking-wider uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-400 group"
-              style={{ boxShadow: '0 0 30px hsl(45 80% 55% / 0.15)' }}
+          {/* CTA */}
+          <a 
+            href="/contact"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground text-sm tracking-[0.2em] uppercase hover:bg-primary/90 transition-all duration-300 group"
+          >
+            <span>Discuss Your Project</span>
+            <svg 
+              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
             >
-              <span>Discuss Your Project</span>
-              <span className="w-4 h-px bg-current transition-all duration-200 group-hover:w-6" />
-            </a>
-          </div>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
         </div>
       </section>
 
