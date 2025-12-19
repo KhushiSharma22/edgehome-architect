@@ -114,6 +114,12 @@ export default {
           "0%": { transform: "translateX(-100%)" },
           "100%": { transform: "translateX(100%)" },
         },
+        "grain-drift": {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "25%": { transform: "translate(1px, 1px)" },
+          "50%": { transform: "translate(-1px, 0.5px)" },
+          "75%": { transform: "translate(0.5px, -1px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -126,6 +132,7 @@ export default {
         "spin": "spin 1s linear infinite",
         "float": "float 3s ease-in-out infinite",
         "shimmer": "shimmer 3s ease-in-out infinite",
+        "grain-drift": "grain-drift 8s ease-in-out infinite",
       },
       spacing: {
         '18': '4.5rem',

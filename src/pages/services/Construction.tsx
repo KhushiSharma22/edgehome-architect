@@ -7,7 +7,6 @@ import constructionHero from "@/assets/construction-hero-texture.jpg";
 
 const Construction = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
   const [activeLayer, setActiveLayer] = useState(-1);
   const layersRef = useRef<HTMLDivElement>(null);
 
@@ -17,8 +16,6 @@ const Construction = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
-      
       if (layersRef.current) {
         const rect = layersRef.current.getBoundingClientRect();
         const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.5 - rect.top) / (rect.height * 0.8)));
@@ -30,10 +27,6 @@ const Construction = () => {
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Calculate light shift based on scroll
-  const lightShiftX = Math.sin(scrollY * 0.002) * 15;
-  const lightShiftY = Math.cos(scrollY * 0.002) * 10;
 
   const constructionLayers = [
     { 
@@ -77,35 +70,29 @@ const Construction = () => {
     <div className="min-h-screen bg-[#0E0E0E] text-ivory overflow-x-hidden">
       <Header />
 
-      {/* ===== SECTION 1: HERO - CINEMATIC WITH TEMPORAL TYPOGRAPHY ===== */}
+      {/* ===== SECTION 1: HERO - RAZOR SHARP, CALM, AUTHORITATIVE ===== */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Full background image with scroll-reactive light */}
+        {/* Background - Stone behind glass effect */}
         <div className="absolute inset-0">
           <img 
             src={constructionHero}
             alt="Construction precision"
             className="w-full h-full object-cover"
             style={{
-              transform: `scale(1.1)`,
-              filter: `brightness(${0.6 + scrollY * 0.0002})`
+              filter: 'blur(1px) brightness(0.5)'
             }}
           />
-          {/* Scroll-reactive light gradient overlay */}
-          <div 
-            className="absolute inset-0 transition-all duration-1000 ease-out"
-            style={{
-              background: `radial-gradient(ellipse at ${50 + lightShiftX}% ${40 + lightShiftY}%, transparent 0%, rgba(14,14,14,0.4) 40%, rgba(14,14,14,0.9) 100%)`
-            }}
-          />
+          {/* Solid dark overlay - 75% */}
+          <div className="absolute inset-0 bg-[#0E0E0E]/75" />
           {/* Heavy vignette */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0E0E0E_80%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#0E0E0E_90%)]" />
           {/* Bottom fade */}
           <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#0E0E0E] to-transparent" />
         </div>
 
-        {/* Subtle grain texture */}
+        {/* Very subtle grain - almost imperceptible slow movement */}
         <div 
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          className="absolute inset-0 opacity-[0.02] pointer-events-none animate-grain-drift"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
           }}
@@ -113,129 +100,72 @@ const Construction = () => {
 
         {/* Main content */}
         <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28">
-          {/* Breadcrumb */}
+          {/* Breadcrumb - ultra subtle, 30% opacity */}
           <nav 
-            className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/40 mb-20"
+            className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/30 mb-24"
             style={{
-              opacity: isLoaded ? 1 : 0,
+              opacity: isLoaded ? 0.3 : 0,
               transform: isLoaded ? "translateY(0)" : "translateY(20px)",
               transition: "all 0.8s ease-out 0.3s"
             }}
           >
-            <Link to="/" className="hover:text-ivory transition-colors">HOME</Link>
+            <Link to="/" className="hover:text-ivory/50 transition-colors">HOME</Link>
             <ChevronRight className="w-3 h-3" />
             <span>SERVICES</span>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-[#C6A46A]">CONSTRUCTION</span>
+            <span className="text-[#C6A46A]/60">CONSTRUCTION</span>
           </nav>
 
-          <div className="relative max-w-6xl">
-            {/* Oversized "precision" watermark - positioned behind */}
-            <div 
-              className="absolute -top-20 right-0 lg:right-10 pointer-events-none select-none"
+          <div className="relative max-w-5xl">
+            {/* Main headline - SINGLE LINE for clarity + authority */}
+            <h1 
+              className="relative z-10"
               style={{
-                opacity: isLoaded ? 0.06 : 0,
-                transform: isLoaded ? "translateY(0)" : "translateY(50px)",
-                transition: "all 2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s"
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? "translateY(0)" : "translateY(40px)",
+                transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s"
               }}
             >
-              <span 
-                className="text-[10rem] md:text-[14rem] lg:text-[18rem] font-heading italic text-[#C6A46A] leading-none"
-                style={{
-                  animation: "breathe 8s ease-in-out infinite"
-                }}
-              >
-                precision
-              </span>
-            </div>
-
-            {/* Main headline - temporal typography */}
-            <h1 className="relative z-10">
-              {/* Line 1: Construction - solid serif white */}
-              <span className="block overflow-hidden">
+              <span className="block text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-ivory/90 tracking-tight leading-tight">
+                Construction, executed with{' '}
                 <span 
-                  className="block text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-heading text-ivory tracking-tight"
+                  className="text-[#C6A46A]"
                   style={{
                     opacity: isLoaded ? 1 : 0,
-                    transform: isLoaded ? "translateY(0)" : "translateY(100%)",
-                    transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s"
+                    transition: "opacity 0.4s ease-out 0.6s"
                   }}
                 >
-                  Construction
-                </span>
-              </span>
-              
-              {/* Line 2: built with - ultra light, letter spaced */}
-              <span className="block overflow-hidden mt-2">
-                <span 
-                  className="block text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light text-ivory/60 tracking-[0.15em] pl-2 lg:pl-4"
-                  style={{
-                    opacity: isLoaded ? 1 : 0,
-                    transform: isLoaded ? "translateY(0)" : "translateY(100%)",
-                    transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s"
-                  }}
-                >
-                  built with
-                </span>
-              </span>
-              
-              {/* Line 3: precision - gold italic, appears last with fade */}
-              <span className="block overflow-hidden mt-4 lg:mt-6 pl-8 lg:pl-20">
-                <span 
-                  className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading italic text-[#C6A46A]"
-                  style={{
-                    opacity: isLoaded ? 1 : 0,
-                    transform: isLoaded ? "translateY(0) scale(1)" : "translateY(100%) scale(0.95)",
-                    transition: "all 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.9s"
-                  }}
-                >
-                  precision
+                  precision.
                 </span>
               </span>
             </h1>
 
-            {/* Subcopy */}
+            {/* Sub-headline - quiet confidence, no italics, no fancy stuff */}
             <p 
-              className="text-base md:text-lg text-ivory/50 leading-relaxed max-w-md mt-12 lg:mt-16"
+              className="text-base md:text-lg text-ivory/45 leading-relaxed max-w-lg mt-10"
               style={{
                 opacity: isLoaded ? 1 : 0,
                 transform: isLoaded ? "translateY(0)" : "translateY(30px)",
-                transition: "all 1s ease-out 1.4s"
+                transition: "all 1s ease-out 0.8s"
               }}
             >
-              Every joint, every pour, every weld — executed with the accuracy 
-              of instruments, not the approximation of trades.
+              Every joint, every pour, every weld —<br />
+              measured, verified, and executed without compromise.
             </p>
 
-            {/* CTA */}
-            <div 
-              className="mt-10"
-              style={{
-                opacity: isLoaded ? 1 : 0,
-                transform: isLoaded ? "translateY(0)" : "translateY(30px)",
-                transition: "all 1s ease-out 1.6s"
-              }}
-            >
-              <Link 
-                to="/contact"
-                className="group inline-flex items-center gap-4 border border-[#C6A46A]/60 text-[#C6A46A] px-8 py-4 text-sm tracking-wider font-medium hover:bg-[#C6A46A] hover:text-[#0E0E0E] transition-all duration-500"
-              >
-                Start Your Build
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-              </Link>
-            </div>
+            {/* NO CTA HERE - Authority first, action later */}
           </div>
 
-          {/* Scroll indicator */}
+          {/* Scroll indicator - ultra minimal: thin line + tiny dot only */}
           <div 
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center"
             style={{
-              opacity: isLoaded ? 1 : 0,
-              transition: "opacity 1s ease-out 2s"
+              opacity: isLoaded ? 0.4 : 0,
+              transition: "opacity 1s ease-out 1.5s"
             }}
           >
-            <span className="text-[9px] tracking-[0.3em] text-ivory/30">SCROLL</span>
-            <div className="w-[1px] h-12 bg-gradient-to-b from-[#C6A46A]/50 to-transparent animate-pulse" />
+            <div className="w-1 h-1 rounded-full bg-ivory/50 mb-2" />
+            <div className="w-[1px] h-16 bg-gradient-to-b from-ivory/30 to-transparent" />
           </div>
         </div>
       </section>
