@@ -269,14 +269,23 @@ const Architecture = () => {
                   onMouseLeave={() => setActivePrinciple(null)}
                 >
                   <div 
-                    className={`relative bg-[#F8F6F2] p-6 lg:p-8 h-full border border-[#E8E4DC] transition-all duration-500 ${
-                      activePrinciple === index ? "bg-[#0E0E0E] border-[#0E0E0E]" : "hover:border-[#C6A46A]/30"
+                    className={`relative p-6 lg:p-8 h-full border transition-all duration-400 ${
+                      activePrinciple === index 
+                        ? "bg-[#1A1A1A] border-[#C6A46A] shadow-xl shadow-[#C6A46A]/10" 
+                        : "bg-[#FDFCFA] border-[#E5E0D8] hover:border-[#C6A46A]/50 hover:shadow-lg"
                     }`}
                   >
+                    {/* Gold top accent line on hover */}
+                    <div 
+                      className={`absolute top-0 left-0 right-0 h-[2px] bg-[#C6A46A] transition-all duration-400 ${
+                        activePrinciple === index ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                    
                     {/* Number */}
                     <span 
-                      className={`text-4xl lg:text-5xl font-heading leading-none transition-all duration-500 ${
-                        activePrinciple === index ? "text-[#C6A46A]" : "text-[#C6A46A]/30"
+                      className={`text-4xl lg:text-5xl font-heading leading-none transition-all duration-400 ${
+                        activePrinciple === index ? "text-[#C6A46A]" : "text-[#C6A46A]/50"
                       }`}
                     >
                       {principle.num}
@@ -284,8 +293,8 @@ const Architecture = () => {
 
                     {/* Title */}
                     <h3 
-                      className={`text-lg lg:text-xl font-heading mt-4 mb-2 transition-all duration-500 ${
-                        activePrinciple === index ? "text-ivory" : "text-[#0E0E0E]"
+                      className={`text-lg lg:text-xl font-heading mt-4 mb-2 transition-all duration-400 ${
+                        activePrinciple === index ? "text-ivory" : "text-[#2A2520]"
                       }`}
                     >
                       {principle.title}
@@ -293,8 +302,8 @@ const Architecture = () => {
                     
                     {/* Description */}
                     <p 
-                      className={`text-xs leading-relaxed transition-all duration-500 ${
-                        activePrinciple === index ? "text-ivory/60" : "text-[#0E0E0E]/50"
+                      className={`text-sm leading-relaxed transition-all duration-400 ${
+                        activePrinciple === index ? "text-ivory/70" : "text-[#5A544A]"
                       }`}
                     >
                       {principle.desc}
