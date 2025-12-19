@@ -319,7 +319,7 @@ const Interior = () => {
           PORTFOLIO: STAGGERED MASONRY WITH HOVER REVEAL
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1815] via-[#1E1C18] to-[#1A1815]" />
         
         <div className="relative z-10 container mx-auto px-6 lg:px-12">
           {/* Section header */}
