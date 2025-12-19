@@ -214,44 +214,93 @@ const Construction = () => {
               </div>
             </div>
 
-            {/* Right: Floating Isometric Layers */}
+            {/* Right: Glowing 3D Construction Cube */}
             <div className="col-span-12 lg:col-span-5 hidden lg:flex items-center justify-center">
               <div 
-                className="relative w-64 h-72"
+                className="relative w-80 h-80"
                 style={{ 
-                  transform: `perspective(1000px) rotateY(${mousePos.x * 6}deg) rotateX(${mousePos.y * -6}deg)`,
-                  transition: 'transform 0.2s ease-out',
+                  transform: `perspective(1000px) rotateY(${mousePos.x * 8}deg) rotateX(${mousePos.y * -8}deg)`,
+                  transition: 'transform 0.3s ease-out',
                 }}
               >
-                {/* Stacked Layers */}
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="absolute inset-0 border border-primary/25 bg-primary/[0.03]"
+                {/* Glowing orb background */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div 
+                    className="w-48 h-48 rounded-full blur-3xl animate-pulse"
                     style={{
-                      transform: `translateY(${i * -12}px) translateZ(${i * 8}px) scale(${1 - i * 0.025})`,
-                      opacity: 1 - i * 0.12,
+                      background: `radial-gradient(circle, hsl(45 80% 55% / 0.4) 0%, hsl(35 70% 50% / 0.2) 40%, transparent 70%)`,
                     }}
-                  >
-                    {/* Corner markers */}
-                    <div className="absolute top-0 left-0 w-2.5 h-2.5 border-l border-t border-primary/50" />
-                    <div className="absolute top-0 right-0 w-2.5 h-2.5 border-r border-t border-primary/50" />
-                    <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-l border-b border-primary/50" />
-                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-r border-b border-primary/50" />
-                    
-                    {/* Layer label */}
-                    <span className="absolute bottom-1.5 left-2 text-[7px] tracking-[0.15em] text-primary/50 uppercase font-mono">
-                      L{i + 1}
-                    </span>
-                  </div>
-                ))}
-
-                {/* Center crosshair */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-full h-px bg-primary/15" />
+                  />
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-px h-full bg-primary/15" />
+
+                {/* Rotating rings */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div 
+                    className="w-56 h-56 border border-primary/30 rounded-full"
+                    style={{ animation: 'spin 20s linear infinite' }}
+                  />
+                  <div 
+                    className="absolute w-44 h-44 border border-primary/40 rounded-full"
+                    style={{ animation: 'spin 15s linear infinite reverse' }}
+                  />
+                  <div 
+                    className="absolute w-32 h-32 border-2 border-primary/50 rounded-full"
+                    style={{ animation: 'spin 10s linear infinite' }}
+                  />
+                </div>
+
+                {/* Central glowing cube structure */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative w-28 h-28" style={{ transformStyle: 'preserve-3d' }}>
+                    {/* Cube faces with gradient */}
+                    <div 
+                      className="absolute inset-0 border-2 border-primary/60"
+                      style={{
+                        background: `linear-gradient(135deg, hsl(45 80% 55% / 0.15) 0%, hsl(35 70% 45% / 0.08) 50%, transparent 100%)`,
+                        boxShadow: `0 0 40px hsl(45 80% 55% / 0.3), inset 0 0 30px hsl(45 80% 55% / 0.1)`,
+                      }}
+                    />
+                    
+                    {/* Floating particles */}
+                    {[...Array(6)].map((_, i) => (
+                      <div
+                        key={i}
+                        className="absolute w-2 h-2 bg-primary rounded-full"
+                        style={{
+                          left: `${20 + i * 12}%`,
+                          top: `${15 + (i % 3) * 25}%`,
+                          animation: `float ${2 + i * 0.3}s ease-in-out infinite`,
+                          animationDelay: `${i * 0.2}s`,
+                          boxShadow: `0 0 10px hsl(45 80% 55% / 0.8)`,
+                        }}
+                      />
+                    ))}
+
+                    {/* Corner accent lights */}
+                    <div className="absolute -top-1 -left-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
+                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
+                    <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
+                    <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-primary rounded-full blur-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
+                  </div>
+                </div>
+
+                {/* Orbiting elements */}
+                <div 
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ animation: 'spin 8s linear infinite' }}
+                >
+                  <div className="absolute w-4 h-4 bg-gradient-to-br from-primary to-primary/50 rounded-sm" style={{ transform: 'translateX(90px)', boxShadow: '0 0 20px hsl(45 80% 55% / 0.6)' }} />
+                </div>
+                <div 
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ animation: 'spin 12s linear infinite reverse' }}
+                >
+                  <div className="absolute w-3 h-3 bg-gradient-to-br from-primary to-primary/50 rounded-sm" style={{ transform: 'translateY(-85px)', boxShadow: '0 0 15px hsl(45 80% 55% / 0.5)' }} />
+                </div>
+
+                {/* Text label */}
+                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[9px] tracking-[0.3em] uppercase text-primary/70">
+                  Precision Built
                 </div>
               </div>
             </div>
@@ -295,6 +344,74 @@ const Construction = () => {
             <p className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed">
               Construction is not sequential steps. It's interlocking systems where each depends on every other.
             </p>
+          </div>
+
+          {/* Animated Gradient Strip */}
+          <div className="relative w-full overflow-hidden py-6 mb-16">
+            {/* Glowing background */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(90deg, 
+                  transparent 0%, 
+                  hsl(45 85% 55% / 0.15) 20%, 
+                  hsl(40 80% 50% / 0.25) 50%, 
+                  hsl(45 85% 55% / 0.15) 80%, 
+                  transparent 100%
+                )`,
+              }}
+            />
+            
+            {/* Moving gradient overlay */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(90deg, 
+                  transparent 0%,
+                  hsl(50 90% 60% / 0.3) 25%,
+                  hsl(45 85% 55% / 0.5) 50%,
+                  hsl(50 90% 60% / 0.3) 75%,
+                  transparent 100%
+                )`,
+                animation: 'shimmer 3s ease-in-out infinite',
+              }}
+            />
+
+            {/* Border lines */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
+            {/* Scrolling text */}
+            <div className="relative flex whitespace-nowrap">
+              <div className="animate-marquee flex items-center gap-12">
+                {[...Array(4)].map((_, i) => (
+                  <span key={i} className="flex items-center gap-12">
+                    <span className="text-sm md:text-base font-heading tracking-[0.4em] uppercase text-primary drop-shadow-[0_0_10px_hsl(45_80%_55%/0.5)]">
+                      EdgeHomes Construction Service
+                    </span>
+                    <span className="w-3 h-3 bg-primary/80 rotate-45" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.8)' }} />
+                    <span className="text-sm md:text-base tracking-[0.3em] uppercase text-primary/70">
+                      Built with Precision
+                    </span>
+                    <span className="w-2 h-2 rounded-full bg-primary" style={{ boxShadow: '0 0 12px hsl(45 80% 55%)' }} />
+                  </span>
+                ))}
+              </div>
+              <div className="animate-marquee2 flex items-center gap-12 absolute left-0">
+                {[...Array(4)].map((_, i) => (
+                  <span key={i} className="flex items-center gap-12">
+                    <span className="text-sm md:text-base font-heading tracking-[0.4em] uppercase text-primary drop-shadow-[0_0_10px_hsl(45_80%_55%/0.5)]">
+                      EdgeHomes Construction Service
+                    </span>
+                    <span className="w-3 h-3 bg-primary/80 rotate-45" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.8)' }} />
+                    <span className="text-sm md:text-base tracking-[0.3em] uppercase text-primary/70">
+                      Built with Precision
+                    </span>
+                    <span className="w-2 h-2 rounded-full bg-primary" style={{ boxShadow: '0 0 12px hsl(45 80% 55%)' }} />
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Construction Layers - Timeline */}
