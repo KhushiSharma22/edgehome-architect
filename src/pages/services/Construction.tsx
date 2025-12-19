@@ -319,6 +319,69 @@ const Construction = () => {
         {/* Background */}
         <div className="absolute inset-0 bg-[#060605]" />
         
+        {/* Animated floating construction icons */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Floating crane icon */}
+          <div 
+            className="absolute top-[15%] right-[10%] w-24 h-24 opacity-20"
+            style={{ animation: 'float 6s ease-in-out infinite' }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
+              <rect x="45" y="20" width="10" height="70" fill="currentColor" />
+              <rect x="20" y="20" width="60" height="8" fill="currentColor" />
+              <line x1="30" y1="28" x2="30" y2="60" stroke="currentColor" strokeWidth="2" />
+              <circle cx="30" cy="65" r="5" fill="currentColor" />
+            </svg>
+          </div>
+          
+          {/* Floating beam icon */}
+          <div 
+            className="absolute top-[40%] left-[5%] w-32 h-32 opacity-15"
+            style={{ animation: 'float 8s ease-in-out infinite', animationDelay: '1s' }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
+              <polygon points="10,80 50,20 90,80" fill="none" stroke="currentColor" strokeWidth="2" />
+              <line x1="50" y1="20" x2="50" y2="80" stroke="currentColor" strokeWidth="2" />
+              <line x1="30" y1="50" x2="70" y2="50" stroke="currentColor" strokeWidth="2" />
+            </svg>
+          </div>
+
+          {/* Floating gear */}
+          <div 
+            className="absolute bottom-[25%] right-[15%] w-20 h-20 opacity-20"
+            style={{ animation: 'spin 20s linear infinite' }}
+          >
+            <svg viewBox="0 0 100 100" className="w-full h-full text-primary">
+              <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="3" />
+              <circle cx="50" cy="50" r="8" fill="currentColor" />
+              {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+                <rect 
+                  key={i}
+                  x="47" y="25" width="6" height="15" fill="currentColor"
+                  transform={`rotate(${angle} 50 50)`}
+                />
+              ))}
+            </svg>
+          </div>
+
+          {/* Glowing orbs */}
+          <div 
+            className="absolute top-[60%] left-[20%] w-40 h-40 rounded-full blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, hsl(45 80% 55% / 0.08) 0%, transparent 70%)',
+              animation: 'pulse 4s ease-in-out infinite',
+            }}
+          />
+          <div 
+            className="absolute top-[30%] right-[25%] w-32 h-32 rounded-full blur-2xl"
+            style={{
+              background: 'radial-gradient(circle, hsl(40 70% 50% / 0.06) 0%, transparent 60%)',
+              animation: 'pulse 5s ease-in-out infinite',
+              animationDelay: '2s',
+            }}
+          />
+        </div>
+        
         {/* Subtle Grid */}
         <div 
           className="absolute inset-0 opacity-[0.025]"
@@ -414,7 +477,7 @@ const Construction = () => {
             </div>
           </div>
 
-          {/* Construction Layers - Timeline */}
+          {/* Construction Layers - Timeline with Visual Icons */}
           <div className="relative">
             {/* Vertical Line */}
             <div className="absolute left-0 md:left-6 top-0 bottom-0 w-px bg-border/50">
@@ -426,60 +489,135 @@ const Construction = () => {
 
             {/* Layers */}
             <div className="space-y-10 md:space-y-12 pl-6 md:pl-16">
-              {constructionLayers.map((layer, index) => (
-                <div 
-                  key={layer.name}
-                  className={`relative transition-all duration-500 ${activeLayer >= index ? 'opacity-100' : 'opacity-40'}`}
-                >
-                  {/* Layer Marker */}
+              {constructionLayers.map((layer, index) => {
+                // Unique visual for each layer
+                const layerVisuals = [
+                  // Foundation - Stacked layers
+                  <div key="foundation" className="relative w-20 h-20">
+                    <div className="absolute bottom-0 w-full h-4 bg-primary/30 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.3)' }} />
+                    <div className="absolute bottom-5 w-full h-4 bg-primary/40 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.4)' }} />
+                    <div className="absolute bottom-10 w-full h-4 bg-primary/50 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.5)' }} />
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1 h-full border-l border-dashed border-primary/30" />
+                  </div>,
+                  // Structure - Frame
+                  <div key="structure" className="relative w-20 h-20">
+                    <div className="absolute inset-2 border-2 border-primary/50" style={{ boxShadow: 'inset 0 0 20px hsl(45 80% 55% / 0.2)' }} />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-px h-full bg-primary/40" />
+                      <div className="absolute w-full h-px bg-primary/40" />
+                    </div>
+                    <div className="absolute top-1 left-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
+                    <div className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
+                    <div className="absolute bottom-1 left-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
+                    <div className="absolute bottom-1 right-1 w-2 h-2 bg-primary rounded-full" style={{ boxShadow: '0 0 8px hsl(45 80% 55%)' }} />
+                  </div>,
+                  // Envelope - Shield
+                  <div key="envelope" className="relative w-20 h-20">
+                    <svg viewBox="0 0 80 80" className="w-full h-full">
+                      <path 
+                        d="M40 10 L70 25 L70 45 C70 60 55 75 40 75 C25 75 10 60 10 45 L10 25 Z" 
+                        fill="none" 
+                        stroke="hsl(45 80% 55%)" 
+                        strokeWidth="2"
+                        style={{ filter: 'drop-shadow(0 0 8px hsl(45 80% 55% / 0.5))' }}
+                      />
+                      <path 
+                        d="M40 25 L55 35 L55 48 C55 55 48 62 40 62 C32 62 25 55 25 48 L25 35 Z" 
+                        fill="hsl(45 80% 55% / 0.2)" 
+                        stroke="hsl(45 80% 55% / 0.5)" 
+                        strokeWidth="1"
+                      />
+                    </svg>
+                  </div>,
+                  // Services - Circuit
+                  <div key="services" className="relative w-20 h-20">
+                    <div className="absolute inset-0">
+                      <div className="absolute top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary" style={{ boxShadow: '0 0 12px hsl(45 80% 55%)' }} />
+                      <div className="absolute bottom-2 left-2 w-3 h-3 rounded-full bg-primary/70" style={{ boxShadow: '0 0 10px hsl(45 80% 55% / 0.7)' }} />
+                      <div className="absolute bottom-2 right-2 w-3 h-3 rounded-full bg-primary/70" style={{ boxShadow: '0 0 10px hsl(45 80% 55% / 0.7)' }} />
+                      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 80 80">
+                        <path d="M40 18 L40 35 L18 55" stroke="hsl(45 80% 55% / 0.5)" strokeWidth="2" fill="none" />
+                        <path d="M40 35 L62 55" stroke="hsl(45 80% 55% / 0.5)" strokeWidth="2" fill="none" />
+                      </svg>
+                    </div>
+                  </div>,
+                  // Finish - Polish star
+                  <div key="finish" className="relative w-20 h-20 flex items-center justify-center">
+                    <div 
+                      className="w-12 h-12 bg-primary/20 rotate-45"
+                      style={{ boxShadow: '0 0 25px hsl(45 80% 55% / 0.4)' }}
+                    />
+                    <div 
+                      className="absolute w-10 h-10 bg-primary/30 rotate-[22.5deg]"
+                      style={{ boxShadow: '0 0 20px hsl(45 80% 55% / 0.5)' }}
+                    />
+                    <div 
+                      className="absolute w-4 h-4 bg-primary rounded-full"
+                      style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }}
+                    />
+                  </div>,
+                ];
+
+                return (
                   <div 
-                    className={`absolute -left-6 md:-left-16 top-0 w-3 h-3 rounded-full border-2 transition-all duration-400 ${
-                      activeLayer >= index 
-                        ? 'border-primary bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]' 
-                        : 'border-border/60 bg-background'
-                    }`}
+                    key={layer.name}
+                    className={`relative transition-all duration-500 ${activeLayer >= index ? 'opacity-100' : 'opacity-40'}`}
                   >
-                    <span className="absolute -left-5 top-1/2 -translate-y-1/2 text-[8px] font-mono text-muted-foreground/70">
-                      0{index + 1}
-                    </span>
-                  </div>
-
-                  {/* Content */}
-                  <div className="group">
-                    <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
-                      {/* Name & Depth */}
-                      <div className="md:w-40 shrink-0">
-                        <h3 className="text-xl md:text-2xl font-heading text-foreground group-hover:text-primary transition-colors duration-300">
-                          {layer.name}
-                        </h3>
-                        <span className="text-xs tracking-[0.12em] uppercase text-muted-foreground/70">
-                          {layer.depth}
-                        </span>
-                      </div>
-
-                      {/* Principle */}
-                      <div className="flex-1">
-                        <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-3">
-                          {layer.principle}
-                        </p>
-                        
-                        {/* Metric Badge */}
-                        <span 
-                          className={`inline-flex items-center gap-1.5 px-2 py-1 bg-primary/5 border border-primary/15 text-[9px] tracking-wide text-primary/80 transition-all duration-400 ${
-                            activeLayer >= index ? 'opacity-100' : 'opacity-0'
-                          }`}
-                        >
-                          <span className="w-1 h-1 rounded-full bg-primary/80" />
-                          {layer.metric}
-                        </span>
-                      </div>
+                    {/* Layer Marker */}
+                    <div 
+                      className={`absolute -left-6 md:-left-16 top-0 w-3 h-3 rounded-full border-2 transition-all duration-400 ${
+                        activeLayer >= index 
+                          ? 'border-primary bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]' 
+                          : 'border-border/60 bg-background'
+                      }`}
+                    >
+                      <span className="absolute -left-5 top-1/2 -translate-y-1/2 text-[8px] font-mono text-muted-foreground/70">
+                        0{index + 1}
+                      </span>
                     </div>
 
-                    {/* Separator */}
-                    <div className="mt-6 h-px bg-border/30" />
+                    {/* Content */}
+                    <div className="group">
+                      <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
+                        {/* Visual Icon */}
+                        <div className={`shrink-0 transition-all duration-500 ${activeLayer >= index ? 'scale-100 opacity-100' : 'scale-90 opacity-50'}`}>
+                          {layerVisuals[index]}
+                        </div>
+
+                        {/* Name & Depth */}
+                        <div className="md:w-36 shrink-0">
+                          <h3 className="text-xl md:text-2xl font-heading text-foreground group-hover:text-primary transition-colors duration-300">
+                            {layer.name}
+                          </h3>
+                          <span className="text-xs tracking-[0.12em] uppercase text-muted-foreground/70">
+                            {layer.depth}
+                          </span>
+                        </div>
+
+                        {/* Principle */}
+                        <div className="flex-1">
+                          <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-3">
+                            {layer.principle}
+                          </p>
+                          
+                          {/* Metric Badge */}
+                          <span 
+                            className={`inline-flex items-center gap-1.5 px-2 py-1 bg-primary/5 border border-primary/15 text-[9px] tracking-wide text-primary/80 transition-all duration-400 ${
+                              activeLayer >= index ? 'opacity-100' : 'opacity-0'
+                            }`}
+                          >
+                            <span className="w-1 h-1 rounded-full bg-primary/80" />
+                            {layer.metric}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Separator */}
+                      <div className="mt-6 h-px bg-border/30" />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -490,6 +628,49 @@ const Construction = () => {
         {/* Background */}
         <div className="absolute inset-0 bg-[#040403]" />
         
+        {/* Animated glowing background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Large central glow */}
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl"
+            style={{
+              background: 'radial-gradient(circle, hsl(45 80% 55% / 0.08) 0%, hsl(40 70% 50% / 0.04) 40%, transparent 70%)',
+              animation: 'pulse 6s ease-in-out infinite',
+            }}
+          />
+          
+          {/* Floating geometric shapes */}
+          <div 
+            className="absolute top-[20%] left-[15%] w-16 h-16 border border-primary/20 rotate-45"
+            style={{ animation: 'float 7s ease-in-out infinite', boxShadow: '0 0 20px hsl(45 80% 55% / 0.1)' }}
+          />
+          <div 
+            className="absolute bottom-[25%] right-[10%] w-12 h-12 border border-primary/15 rotate-12"
+            style={{ animation: 'float 5s ease-in-out infinite', animationDelay: '1s', boxShadow: '0 0 15px hsl(45 80% 55% / 0.1)' }}
+          />
+          <div 
+            className="absolute top-[35%] right-[20%] w-8 h-8 bg-primary/10 rounded-full blur-sm"
+            style={{ animation: 'float 8s ease-in-out infinite', animationDelay: '2s' }}
+          />
+          <div 
+            className="absolute bottom-[35%] left-[12%] w-6 h-6 bg-primary/15 rounded-full blur-sm"
+            style={{ animation: 'float 6s ease-in-out infinite', animationDelay: '3s' }}
+          />
+
+          {/* Connecting lines */}
+          <svg className="absolute inset-0 w-full h-full opacity-10">
+            <line x1="15%" y1="20%" x2="50%" y2="50%" stroke="hsl(45 80% 55%)" strokeWidth="0.5" strokeDasharray="4,4">
+              <animate attributeName="stroke-dashoffset" from="0" to="8" dur="2s" repeatCount="indefinite" />
+            </line>
+            <line x1="85%" y1="30%" x2="50%" y2="50%" stroke="hsl(45 80% 55%)" strokeWidth="0.5" strokeDasharray="4,4">
+              <animate attributeName="stroke-dashoffset" from="0" to="8" dur="2.5s" repeatCount="indefinite" />
+            </line>
+            <line x1="12%" y1="70%" x2="50%" y2="50%" stroke="hsl(45 80% 55%)" strokeWidth="0.5" strokeDasharray="4,4">
+              <animate attributeName="stroke-dashoffset" from="0" to="8" dur="3s" repeatCount="indefinite" />
+            </line>
+          </svg>
+        </div>
+        
         {/* Diagonal accent */}
         <div 
           className="absolute inset-0 pointer-events-none"
@@ -499,6 +680,19 @@ const Construction = () => {
         />
 
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          {/* Decorative top element */}
+          <div className="flex justify-center mb-8">
+            <div className="relative">
+              <div className="w-20 h-20 border border-primary/30 rotate-45" style={{ boxShadow: '0 0 30px hsl(45 80% 55% / 0.2)' }} />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-10 h-10 bg-primary/20 rotate-45" style={{ boxShadow: '0 0 20px hsl(45 80% 55% / 0.3)' }} />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-3 h-3 bg-primary rounded-full" style={{ boxShadow: '0 0 15px hsl(45 80% 55%)' }} />
+              </div>
+            </div>
+          </div>
+
           {/* Quote */}
           <div className="mb-12">
             <span className="text-xs tracking-[0.35em] uppercase text-primary/50 block mb-8">
@@ -512,20 +706,40 @@ const Construction = () => {
             </blockquote>
 
             <div className="flex items-center justify-center gap-4 text-muted-foreground/60">
-              <span className="h-px w-10 bg-border/50" />
+              <span className="h-px w-10 bg-gradient-to-r from-transparent to-primary/40" />
               <span className="text-xs tracking-[0.15em] uppercase">EdgeHomes Construction</span>
-              <span className="h-px w-10 bg-border/50" />
+              <span className="h-px w-10 bg-gradient-to-l from-transparent to-primary/40" />
             </div>
           </div>
 
-          {/* Key Points */}
+          {/* Key Points with visual icons */}
           <div className="grid grid-cols-3 gap-8 mt-16 mb-16">
             {[
-              { stat: "Zero", desc: "Material compromise" },
-              { stat: "Daily", desc: "Progress updates" },
-              { stat: "Full", desc: "Cost transparency" },
+              { stat: "Zero", desc: "Material compromise", icon: (
+                <div className="w-12 h-12 mx-auto mb-4 relative">
+                  <div className="absolute inset-0 border-2 border-primary/40 rounded-full" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.2)' }} />
+                  <div className="absolute inset-2 border border-primary/60 rounded-full" />
+                  <div className="absolute inset-0 flex items-center justify-center text-primary font-bold text-lg">∅</div>
+                </div>
+              )},
+              { stat: "Daily", desc: "Progress updates", icon: (
+                <div className="w-12 h-12 mx-auto mb-4 relative flex items-center justify-center">
+                  <div className="w-10 h-10 border-2 border-primary/40 rounded-lg" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.2)' }} />
+                  <div className="absolute w-6 h-1 bg-primary/60 rounded top-4" />
+                  <div className="absolute w-4 h-1 bg-primary/40 rounded top-6" />
+                  <div className="absolute w-5 h-1 bg-primary/50 rounded top-8" />
+                </div>
+              )},
+              { stat: "Full", desc: "Cost transparency", icon: (
+                <div className="w-12 h-12 mx-auto mb-4 relative flex items-center justify-center">
+                  <div className="w-8 h-10 border-2 border-primary/40 rounded-sm" style={{ boxShadow: '0 0 15px hsl(45 80% 55% / 0.2)' }} />
+                  <div className="absolute text-primary text-lg font-bold">$</div>
+                  <div className="absolute -bottom-1 w-6 h-6 bg-primary/20 rounded-full blur-sm" />
+                </div>
+              )},
             ].map((item, i) => (
               <div key={i} className="text-center group">
+                {item.icon}
                 <div className="text-xl md:text-2xl font-heading text-primary mb-2 group-hover:scale-105 transition-transform duration-200">
                   {item.stat}
                 </div>
@@ -536,14 +750,18 @@ const Construction = () => {
             ))}
           </div>
 
-          {/* CTA */}
-          <a 
-            href="/contact"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border border-primary/30 text-primary text-sm tracking-wider uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-400 group"
-          >
-            <span>Discuss Your Project</span>
-            <span className="w-4 h-px bg-current transition-all duration-200 group-hover:w-6" />
-          </a>
+          {/* CTA with glow */}
+          <div className="relative inline-block">
+            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-lg" />
+            <a 
+              href="/contact"
+              className="relative inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border border-primary/30 text-primary text-sm tracking-wider uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-400 group"
+              style={{ boxShadow: '0 0 30px hsl(45 80% 55% / 0.15)' }}
+            >
+              <span>Discuss Your Project</span>
+              <span className="w-4 h-px bg-current transition-all duration-200 group-hover:w-6" />
+            </a>
+          </div>
         </div>
       </section>
 
