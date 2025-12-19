@@ -378,18 +378,18 @@ const Interior = () => {
           </div>
 
           {/* Staggered grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {portfolioItems.map((item, index) => (
               <div 
                 key={index}
-                className={`group relative overflow-hidden ${index % 3 === 0 ? 'md:row-span-2' : ''}`}
+                className="group relative overflow-hidden"
                 style={{
                   opacity: scrollY > 900 + index * 80 ? 1 : 0,
                   transform: scrollY > 900 + index * 80 ? 'translateY(0)' : 'translateY(50px)',
                   transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`
                 }}
               >
-                <div className={`relative overflow-hidden ${index % 3 === 0 ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
+                <div className="relative overflow-hidden aspect-[3/4]">
                   {/* Image */}
                   <img 
                     src={item.image}
@@ -543,44 +543,6 @@ const Interior = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          CTA: CINEMATIC CLOSING
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 md:py-40 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0A0A0A]" />
-        
-        {/* Ambient light */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(198,164,106,0.05) 0%, transparent 60%)'
-          }}
-        />
-        
-        <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">
-          <div 
-            style={{
-              opacity: scrollY > 2000 ? 1 : 0,
-              transform: scrollY > 2000 ? 'translateY(0)' : 'translateY(40px)',
-              transition: 'all 1s ease-out'
-            }}
-          >
-            <p className="text-sm tracking-[0.3em] text-[#C6A46A] uppercase mb-6">Ready to Begin?</p>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading text-ivory mb-8 leading-tight">
-              Let's create something
-              <span className="block text-ivory/30">extraordinary together.</span>
-            </h2>
-            <Link
-              to="/contact"
-              className="group relative inline-flex items-center gap-4 px-10 py-5 bg-[#C6A46A] text-[#0E0E0E] text-sm tracking-[0.2em] uppercase font-medium hover:bg-ivory transition-colors duration-500"
-            >
-              <span>Start Your Project</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
           </div>
         </div>
       </section>
