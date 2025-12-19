@@ -406,48 +406,7 @@ const Interior = () => {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════════════════════════
-          CTA SECTION
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
-        {/* Background image */}
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80"
-            alt="Interior showcase"
-            className="w-full h-full object-cover opacity-10"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E0E] via-[#0E0E0E]/95 to-[#0E0E0E]" />
-        </div>
-
-        <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
-          {/* Decorative element */}
-          <div className="flex justify-center mb-10">
-            <div className="flex items-center gap-4">
-              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#C6A46A]/50" />
-              <div className="w-2 h-2 rotate-45 border border-[#C6A46A]/50" />
-              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#C6A46A]/50" />
-            </div>
-          </div>
-
-          <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono block mb-8">
-            BEGIN YOUR JOURNEY
-          </span>
-
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading text-ivory leading-relaxed mb-8">
-            Ready to transform your space into
-            <span className="text-ivory/50"> something extraordinary?</span>
-          </h2>
-
-          <Link 
-            to="/contact"
-            className="group inline-flex items-center gap-4 bg-[#C6A46A] text-[#0E0E0E] px-8 py-4 text-sm tracking-wider font-medium hover:bg-[#C6A46A]/90 transition-all duration-500"
-          >
-            Start Your Project
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-          </Link>
-        </div>
-      </section>
+      {/* Navigation to other services */}
 
       {/* Navigation to other services */}
       <section className="relative py-12 border-t border-ivory/10">
