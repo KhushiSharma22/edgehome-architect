@@ -1,11 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import portfolioBathroom from "@/assets/portfolio-bathroom.jpg";
 import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
 import portfolioDining from "@/assets/portfolio-dining.jpg";
 import portfolioKitchen from "@/assets/portfolio-kitchen.jpg";
+import heroInterior from "@/assets/hero-luxury-interior.jpg";
 import { Link } from "react-router-dom";
 
 const Interior = () => {
@@ -36,6 +37,10 @@ const Interior = () => {
     };
   }, []);
 
+  // Calculate light shift based on scroll
+  const lightShiftX = Math.sin(scrollY * 0.002) * 15;
+  const lightShiftY = Math.cos(scrollY * 0.002) * 10;
+
   const portfolioItems = [
     { title: "Penthouse Noir", location: "South Delhi", image: portfolioBathroom, year: "2024", category: "Luxury" },
     { title: "Minimalist Haven", location: "Gurgaon", image: portfolioBedroom, year: "2024", category: "Modern" },
@@ -55,139 +60,125 @@ const Interior = () => {
       <Header />
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          HERO: CINEMATIC REVEAL WITH MORPHING TEXT
+          HERO: CINEMATIC WITH BACKGROUND IMAGE
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated gradient mesh background */}
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Full background image with scroll-reactive light */}
         <div className="absolute inset-0">
-          <div 
-            className="absolute inset-0 transition-all duration-1000"
+          <img 
+            src={heroInterior}
+            alt="Luxury interior design"
+            className="w-full h-full object-cover"
             style={{
-              background: `
-                radial-gradient(ellipse 80% 50% at ${30 + mousePos.x * 20}% ${40 + mousePos.y * 20}%, rgba(198,164,106,0.08) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 40% at ${70 - mousePos.x * 10}% ${60 - mousePos.y * 10}%, rgba(255,255,255,0.03) 0%, transparent 40%),
-                linear-gradient(180deg, #0E0E0E 0%, #121212 50%, #0E0E0E 100%)
-              `
+              transform: `scale(1.1)`,
+              filter: `brightness(${0.6 + scrollY * 0.0002})`
             }}
           />
-        </div>
-        
-        {/* Floating geometric shapes */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Large rotating ring */}
+          {/* Scroll-reactive light gradient overlay */}
           <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-[#C6A46A]/[0.08] rounded-full"
+            className="absolute inset-0 transition-all duration-1000 ease-out"
             style={{
-              transform: `translate(-50%, -50%) rotate(${scrollY * 0.02}deg)`,
-              opacity: isLoaded ? 1 : 0,
-              transition: 'opacity 1.5s ease-out'
+              background: `radial-gradient(ellipse at ${50 + lightShiftX}% ${40 + lightShiftY}%, transparent 0%, rgba(14,14,14,0.5) 40%, rgba(14,14,14,0.9) 100%)`
             }}
           />
-          {/* Inner ring */}
-          <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-ivory/[0.04] rounded-full"
-            style={{
-              transform: `translate(-50%, -50%) rotate(${-scrollY * 0.03}deg)`,
-              opacity: isLoaded ? 1 : 0,
-              transition: 'opacity 1.5s ease-out 0.3s'
-            }}
-          />
-          
-          {/* Floating accent lines */}
-          <div 
-            className="absolute top-[20%] left-[10%] w-32 h-px bg-gradient-to-r from-[#C6A46A]/40 to-transparent"
-            style={{
-              transform: `translateX(${mousePos.x * 30}px) rotate(${15 + mousePos.y * 5}deg)`,
-              opacity: isLoaded ? 0.6 : 0,
-              transition: 'opacity 1s ease-out 0.5s'
-            }}
-          />
-          <div 
-            className="absolute bottom-[25%] right-[15%] w-24 h-px bg-gradient-to-l from-[#C6A46A]/30 to-transparent"
-            style={{
-              transform: `translateX(${-mousePos.x * 20}px) rotate(${-20 + mousePos.y * 10}deg)`,
-              opacity: isLoaded ? 0.5 : 0,
-              transition: 'opacity 1s ease-out 0.7s'
-            }}
-          />
-          
-          {/* Corner diamonds */}
-          <div 
-            className="absolute top-[15%] right-[20%] w-3 h-3 border border-[#C6A46A]/30 rotate-45"
-            style={{
-              opacity: isLoaded ? 1 : 0,
-              transform: `rotate(${45 + scrollY * 0.1}deg)`,
-              transition: 'opacity 1s ease-out 0.8s'
-            }}
-          />
-          <div 
-            className="absolute bottom-[20%] left-[18%] w-2 h-2 border border-ivory/20 rotate-45"
-            style={{
-              opacity: isLoaded ? 1 : 0,
-              transform: `rotate(${45 - scrollY * 0.1}deg)`,
-              transition: 'opacity 1s ease-out 1s'
-            }}
-          />
+          {/* Heavy vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0E0E0E_80%)]" />
+          {/* Bottom fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#0E0E0E] to-transparent" />
         </div>
 
-        {/* Main typography */}
-        <div className="relative z-10 text-center px-6">
-          {/* Overline */}
-          <div 
-            className="mb-8 flex items-center justify-center gap-6"
+        {/* Subtle grain texture */}
+        <div 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          }}
+        />
+
+        {/* Main content */}
+        <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28">
+          {/* Breadcrumb */}
+          <nav 
+            className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/40 mb-20"
             style={{
               opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? 'translateY(0)' : 'translateY(-20px)',
-              transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s'
+              transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+              transition: "all 0.8s ease-out 0.3s"
             }}
           >
-            <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C6A46A]/50 to-transparent" />
-            <span className="text-[10px] tracking-[0.4em] text-[#C6A46A]/70 font-mono uppercase">Design Studio</span>
-            <div className="w-12 h-px bg-gradient-to-r from-transparent via-[#C6A46A]/50 to-transparent" />
-          </div>
+            <Link to="/" className="hover:text-ivory transition-colors">HOME</Link>
+            <ChevronRight className="w-3 h-3" />
+            <span>SERVICES</span>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-[#C6A46A]">INTERIOR DESIGN</span>
+          </nav>
 
-          {/* Main headline with staggered reveal */}
-          <h1 className="relative">
-            <span 
-              className="block text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] font-heading font-normal tracking-tight text-transparent bg-clip-text leading-[0.85]"
+          <div className="relative max-w-6xl">
+            {/* Oversized watermark - positioned behind */}
+            <div 
+              className="absolute -top-20 right-0 lg:right-10 pointer-events-none select-none"
               style={{
-                backgroundImage: 'linear-gradient(135deg, #F5F5DC 0%, #C6A46A 50%, #F5F5DC 100%)',
-                backgroundSize: '200% 200%',
-                animation: isLoaded ? 'shimmerText 8s ease-in-out infinite' : 'none',
-                opacity: isLoaded ? 1 : 0,
-                transform: isLoaded ? 'translateY(0) scale(1)' : 'translateY(40px) scale(0.95)',
-                transition: 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s'
+                opacity: isLoaded ? 0.06 : 0,
+                transform: isLoaded ? "translateY(0)" : "translateY(50px)",
+                transition: "all 2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s"
               }}
             >
-              INTERIOR
-            </span>
-            <span 
-              className="block text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] font-heading font-normal tracking-tight text-ivory/20 leading-[0.85] mt-2"
-              style={{
-                opacity: isLoaded ? 1 : 0,
-                transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
-                transition: 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s'
-              }}
-            >
-              DESIGN
-            </span>
-          </h1>
+              <span 
+                className="text-[10rem] md:text-[16rem] lg:text-[22rem] font-heading italic text-[#C6A46A] leading-none"
+                style={{
+                  animation: "breathe 8s ease-in-out infinite"
+                }}
+              >
+                luxe
+              </span>
+            </div>
 
-          {/* Tagline */}
-          <p 
-            className="mt-10 text-lg md:text-xl text-ivory/40 max-w-md mx-auto font-light tracking-wide"
+            {/* Main headline */}
+            <h1 className="relative z-10">
+              {/* Line 1 */}
+              <span className="block overflow-hidden">
+                <span 
+                  className="block text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-heading text-ivory tracking-tight"
+                  style={{
+                    opacity: isLoaded ? 1 : 0,
+                    transform: isLoaded ? "translateY(0)" : "translateY(100%)",
+                    transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s"
+                  }}
+                >
+                  Interior Design,
+                </span>
+              </span>
+              {/* Line 2 */}
+              <span className="block overflow-hidden mt-2">
+                <span 
+                  className="block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading italic text-ivory/30 tracking-tight"
+                  style={{
+                    opacity: isLoaded ? 1 : 0,
+                    transform: isLoaded ? "translateY(0)" : "translateY(100%)",
+                    transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s"
+                  }}
+                >
+                  crafted with{' '}
+                  <span className="text-[#C6A46A] not-italic">soul.</span>
+                </span>
+              </span>
+            </h1>
+
+            {/* Sub-headline */}
+            <p 
+              className="text-base md:text-lg text-ivory/50 leading-relaxed max-w-lg mt-12"
             style={{
               opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 1s ease-out 0.9s'
+              transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+              transition: "all 1s ease-out 0.9s"
             }}
           >
-            Where space becomes <span className="text-[#C6A46A]">emotion</span>
+            Spaces that whisper elegance and speak your story. We transform interiors into experiences that resonate.
           </p>
 
           {/* CTA Button */}
           <div 
-            className="mt-12"
+            className="mt-10"
             style={{
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
@@ -196,12 +187,12 @@ const Interior = () => {
           >
             <Link
               to="/contact"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 border border-[#C6A46A]/30 text-sm tracking-[0.2em] uppercase text-ivory/80 hover:text-ivory transition-all duration-500 overflow-hidden"
+              className="group relative inline-flex items-center gap-4 px-10 py-5 bg-[#C6A46A] text-[#0E0E0E] text-sm tracking-[0.2em] uppercase font-medium hover:bg-ivory transition-colors duration-500"
             >
-              <span className="relative z-10">Start Project</span>
-              <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-              <div className="absolute inset-0 bg-[#C6A46A]/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+              <span>Begin Your Journey</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
+          </div>
           </div>
         </div>
 
