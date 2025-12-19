@@ -48,7 +48,7 @@ const Construction = () => {
       depth: "Building Skin",
       principle: "Protection before appearance.",
       metric: "Zero water ingress warranty",
-      image: "https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
     },
     { 
       name: "Services", 
