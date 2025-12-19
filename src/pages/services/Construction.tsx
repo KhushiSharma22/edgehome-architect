@@ -181,7 +181,7 @@ const Construction = () => {
               </div>
 
               {/* Headline */}
-              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading text-foreground mb-6 leading-[1.1]">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading text-foreground mb-8 leading-[1.1]">
                 We don't build
                 <br />
                 <span className="text-muted-foreground">structures.</span>
@@ -189,24 +189,24 @@ const Construction = () => {
                 We build{' '}
                 <span className="text-primary relative">
                   certainty.
-                  <span className="absolute -bottom-1 left-0 w-full h-px bg-primary/40" />
+                  <span className="absolute -bottom-2 left-0 w-full h-px bg-primary/40" />
                 </span>
               </h1>
 
               {/* Subtext */}
-              <p className="text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-12 leading-relaxed">
                 Every joint, every pour, every weld — executed with the precision 
                 of instruments, not the approximation of trades.
               </p>
 
               {/* Metrics Row */}
-              <div className="grid grid-cols-3 gap-6 border-t border-border/30 pt-8">
+              <div className="grid grid-cols-3 gap-8 border-t border-border/30 pt-10">
                 {metrics.map((metric, i) => (
                   <div key={i} className="text-center lg:text-left">
-                    <div className="text-2xl md:text-3xl font-heading text-primary mb-1">
+                    <div className="text-3xl md:text-4xl font-heading text-primary mb-2">
                       {metric.value}
                     </div>
-                    <div className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground">
+                    <div className="text-xs tracking-[0.15em] uppercase text-muted-foreground">
                       {metric.label}
                     </div>
                   </div>
@@ -284,15 +284,15 @@ const Construction = () => {
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-12">
           {/* Section Header */}
-          <div className="mb-16">
-            <span className="text-[10px] tracking-[0.35em] uppercase text-primary/50 block mb-3">
+          <div className="mb-20">
+            <span className="text-xs tracking-[0.35em] uppercase text-primary/50 block mb-4">
               The Anatomy
             </span>
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-heading text-foreground mb-3">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-foreground mb-4">
               Every layer carries
               <span className="text-muted-foreground"> responsibility.</span>
             </h2>
-            <p className="text-xs md:text-sm text-muted-foreground max-w-md">
+            <p className="text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed">
               Construction is not sequential steps. It's interlocking systems where each depends on every other.
             </p>
           </div>
@@ -329,20 +329,20 @@ const Construction = () => {
 
                   {/* Content */}
                   <div className="group">
-                    <div className="flex flex-col md:flex-row md:items-start gap-3 md:gap-6">
+                    <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
                       {/* Name & Depth */}
-                      <div className="md:w-32 shrink-0">
-                        <h3 className="text-base md:text-lg font-heading text-foreground group-hover:text-primary transition-colors duration-300">
+                      <div className="md:w-40 shrink-0">
+                        <h3 className="text-xl md:text-2xl font-heading text-foreground group-hover:text-primary transition-colors duration-300">
                           {layer.name}
                         </h3>
-                        <span className="text-[9px] tracking-[0.12em] uppercase text-muted-foreground/70">
+                        <span className="text-xs tracking-[0.12em] uppercase text-muted-foreground/70">
                           {layer.depth}
                         </span>
                       </div>
 
                       {/* Principle */}
                       <div className="flex-1">
-                        <p className="text-xs md:text-sm text-muted-foreground leading-relaxed mb-2">
+                        <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-3">
                           {layer.principle}
                         </p>
                         
@@ -383,36 +383,36 @@ const Construction = () => {
 
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
           {/* Quote */}
-          <div className="mb-10">
-            <span className="text-[9px] tracking-[0.35em] uppercase text-primary/50 block mb-6">
+          <div className="mb-12">
+            <span className="text-xs tracking-[0.35em] uppercase text-primary/50 block mb-8">
               Our Commitment
             </span>
             
-            <blockquote className="text-lg md:text-xl lg:text-2xl font-heading text-foreground leading-relaxed mb-6">
+            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-heading text-foreground leading-relaxed mb-8">
               "We measure twice not because we might be wrong,
               <span className="text-muted-foreground"> but because our clients deserve </span>
               <span className="text-primary italic">certainty.</span>"
             </blockquote>
 
-            <div className="flex items-center justify-center gap-3 text-muted-foreground/60">
-              <span className="h-px w-8 bg-border/50" />
-              <span className="text-[9px] tracking-[0.15em] uppercase">EdgeHomes Construction</span>
-              <span className="h-px w-8 bg-border/50" />
+            <div className="flex items-center justify-center gap-4 text-muted-foreground/60">
+              <span className="h-px w-10 bg-border/50" />
+              <span className="text-xs tracking-[0.15em] uppercase">EdgeHomes Construction</span>
+              <span className="h-px w-10 bg-border/50" />
             </div>
           </div>
 
           {/* Key Points */}
-          <div className="grid grid-cols-3 gap-6 mt-12 mb-12">
+          <div className="grid grid-cols-3 gap-8 mt-16 mb-16">
             {[
               { stat: "Zero", desc: "Material compromise" },
               { stat: "Daily", desc: "Progress updates" },
               { stat: "Full", desc: "Cost transparency" },
             ].map((item, i) => (
               <div key={i} className="text-center group">
-                <div className="text-base md:text-lg font-heading text-primary mb-1 group-hover:scale-105 transition-transform duration-200">
+                <div className="text-xl md:text-2xl font-heading text-primary mb-2 group-hover:scale-105 transition-transform duration-200">
                   {item.stat}
                 </div>
-                <div className="text-[9px] text-muted-foreground/70 tracking-wider">
+                <div className="text-xs text-muted-foreground/70 tracking-wider">
                   {item.desc}
                 </div>
               </div>
@@ -422,10 +422,10 @@ const Construction = () => {
           {/* CTA */}
           <a 
             href="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 border border-primary/30 text-primary text-xs tracking-wider uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-400 group"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-primary/10 border border-primary/30 text-primary text-sm tracking-wider uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-400 group"
           >
             <span>Discuss Your Project</span>
-            <span className="w-3 h-px bg-current transition-all duration-200 group-hover:w-5" />
+            <span className="w-4 h-px bg-current transition-all duration-200 group-hover:w-6" />
           </a>
         </div>
       </section>
