@@ -319,7 +319,7 @@ const Interior = () => {
           PORTFOLIO: STAGGERED MASONRY WITH HOVER REVEAL
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1A1815] via-[#1E1C18] to-[#1A1815]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F5F3EF] via-[#EBE8E2] to-[#F5F3EF]" />
         
         <div className="relative z-10 container mx-auto px-6 lg:px-12">
           {/* Section header */}
@@ -336,13 +336,13 @@ const Interior = () => {
                 <div className="w-8 h-px bg-[#C6A46A]" />
                 <span className="text-[10px] tracking-[0.4em] text-[#C6A46A] font-mono uppercase">Selected Works</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-heading text-ivory">
+              <h2 className="text-4xl md:text-5xl font-heading text-[#0E0E0E]">
                 Portfolio
               </h2>
             </div>
             <Link 
               to="/portfolio"
-              className="group flex items-center gap-3 text-sm text-ivory/40 hover:text-[#C6A46A] transition-colors duration-500"
+              className="group flex items-center gap-3 text-sm text-[#0E0E0E]/50 hover:text-[#C6A46A] transition-colors duration-500"
             >
               View All Projects
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
