@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { MapPin, Mail, Phone, Clock } from 'lucide-react';
 import contactHero from '@/assets/contact-hero.jpg';
-import contactProperty from '@/assets/contact-property.jpg';
+import studioConsultation from '@/assets/studio-consultation.jpg';
 
 // ═══════════════════════════════════════════════════════════════
 // FORM COMPONENTS
@@ -350,13 +350,13 @@ const Contact = () => {
                 {/* Property Image with Enhanced Design */}
                 <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-[#0E0E0E]/10 group">
                   <img 
-                    src={contactProperty} 
-                    alt="EdgeHomes Luxury Project" 
+                    src={studioConsultation} 
+                    alt="EdgeHomes Design Studio" 
                     className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/20 to-transparent" />
                   
-                  {/* Location Overlay */}
+                  {/* Studio Overlay */}
                   <div className="absolute inset-0 flex items-end p-6">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-[#C7A56A]/20 backdrop-blur-sm border border-[#C7A56A]/40 
@@ -364,7 +364,7 @@ const Contact = () => {
                         <MapPin className="w-4 h-4 text-[#C7A56A]" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-mono tracking-[0.2em] text-white/60 uppercase mb-0.5">Our Projects</p>
+                        <p className="text-[10px] font-mono tracking-[0.2em] text-white/60 uppercase mb-0.5">Visit Our Studio</p>
                         <p className="text-sm font-body text-white">Faridabad, Haryana</p>
                       </div>
                     </div>
