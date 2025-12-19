@@ -2,350 +2,431 @@ import { useEffect, useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+// Floating Blueprint Fragments
+const BlueprintFragments = () => {
+  const fragments = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 50 + 25,
+    rotation: Math.random() * 360,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {fragments.map((f) => (
+        <div
+          key={f.id}
+          className="absolute opacity-[0.04]"
+          style={{
+            left: `${f.x}%`,
+            top: `${f.y}%`,
+            width: f.size,
+            height: f.size,
+          }}
+        >
+          <svg viewBox="0 0 100 100" className="w-full h-full" style={{ transform: `rotate(${f.rotation}deg)` }}>
+            <rect x="10" y="10" width="80" height="80" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-primary" />
+            <line x1="10" y1="50" x2="90" y2="50" stroke="currentColor" strokeWidth="0.3" className="text-primary" />
+            <line x1="50" y1="10" x2="50" y2="90" stroke="currentColor" strokeWidth="0.3" className="text-primary" />
+          </svg>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const Construction = () => {
   const [scrollY, setScrollY] = useState(0);
-  const [slabCrackLevel, setSlabCrackLevel] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [activeLayer, setActiveLayer] = useState(-1);
+  const layersRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
       
-      // Calculate slab crack level based on scroll in first section
-      const viewportHeight = window.innerHeight;
-      const crackProgress = Math.min(1, scrollY / (viewportHeight * 0.6));
-      setSlabCrackLevel(crackProgress);
+      if (layersRef.current) {
+        const rect = layersRef.current.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, (window.innerHeight * 0.5 - rect.top) / (rect.height * 0.8)));
+        setActiveLayer(Math.floor(progress * 5) - 1);
+      }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrollY]);
+  }, []);
 
-  const layers = [
-    {
-      id: "foundation",
-      label: "FOUNDATION LAYER",
-      text: "If this fails,\nnothing above matters.",
-      offset: 0,
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePos({
+      x: (e.clientX / window.innerWidth - 0.5) * 2,
+      y: (e.clientY / window.innerHeight - 0.5) * 2,
+    });
+  };
+
+  const constructionLayers = [
+    { 
+      name: "Foundation", 
+      depth: "0m to -3m",
+      principle: "What holds everything must be perfect first.",
+      metric: "Load tested to 3× design capacity"
     },
-    {
-      id: "structure",
-      label: "STRUCTURE LAYER",
-      text: "Columns don't forgive shortcuts.",
-      offset: 1,
+    { 
+      name: "Structure", 
+      depth: "Primary Frame",
+      principle: "Steel and concrete don't negotiate.",
+      metric: "±2mm column alignment tolerance"
     },
-    {
-      id: "services",
-      label: "SERVICES LAYER",
-      text: "Most mistakes are hidden here.\nWe expose them early.",
-      offset: 2,
+    { 
+      name: "Envelope", 
+      depth: "Building Skin",
+      principle: "Protection before appearance.",
+      metric: "Zero water ingress warranty"
     },
-    {
-      id: "tolerance",
-      label: "TOLERANCE LAYER",
-      text: "We build for years, not handovers.",
-      offset: 3,
+    { 
+      name: "Services", 
+      depth: "MEP Systems",
+      principle: "The invisible makes the visible work.",
+      metric: "BIM-coordinated routing"
+    },
+    { 
+      name: "Finish", 
+      depth: "Final Layer",
+      principle: "Details reveal discipline.",
+      metric: "±0.5mm edge tolerance"
     },
   ];
 
+  const metrics = [
+    { value: "98%", label: "Quality Score" },
+    { value: "47", label: "Avg Weeks" },
+    { value: "0%", label: "Rework Rate" },
+  ];
+
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#0A0A0A] text-[#F4EFE8]">
+    <div 
+      className="min-h-screen bg-background text-foreground"
+      onMouseMove={handleMouseMove}
+    >
       <Header />
-      
-      {/* Grain overlay */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-50 opacity-[0.03]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
 
-      {/* SECTION 1 — THE WEIGHT OF BUILDING */}
-      <section className="relative h-[200vh]">
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          {/* Vignette */}
-          <div 
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: "radial-gradient(ellipse at center, transparent 30%, #0A0A0A 90%)",
-            }}
-          />
-
-          {/* Label */}
-          <div className="absolute top-24 left-8 md:left-16">
-            <span 
-              className="text-[10px] tracking-[0.3em] text-[#A7A7A7] opacity-50"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              EDGEHOMES / CONSTRUCTION
-            </span>
-          </div>
-
-          {/* Concrete Slab */}
-          <div className="relative">
-            {/* The slab itself */}
-            <div 
-              className="relative w-20 md:w-32 h-[60vh] md:h-[70vh]"
-              style={{
-                background: `linear-gradient(180deg, #1A1A1A 0%, #0E0E0E 50%, #1A1A1A 100%)`,
-                opacity: 1 - slabCrackLevel * 0.7,
-                transform: `scaleX(${1 - slabCrackLevel * 0.3})`,
-                transition: "transform 0.1s ease-out",
-              }}
-            >
-              {/* Grain texture on slab */}
-              <div 
-                className="absolute inset-0 opacity-20"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-                }}
-              />
-
-              {/* Hairline cracks */}
-              <svg 
-                className="absolute inset-0 w-full h-full"
-                style={{ opacity: slabCrackLevel }}
-              >
-                <line 
-                  x1="30%" y1="20%" x2="45%" y2="35%" 
-                  stroke="#C6A46A" strokeWidth="0.5" opacity="0.3"
-                />
-                <line 
-                  x1="45%" y1="35%" x2="40%" y2="55%" 
-                  stroke="#C6A46A" strokeWidth="0.5" opacity="0.3"
-                />
-                <line 
-                  x1="60%" y1="40%" x2="55%" y2="65%" 
-                  stroke="#C6A46A" strokeWidth="0.5" opacity="0.3"
-                />
-                <line 
-                  x1="50%" y1="60%" x2="65%" y2="80%" 
-                  stroke="#C6A46A" strokeWidth="0.5" opacity="0.3"
-                />
-              </svg>
-            </div>
-
-            {/* Text revealed behind slab */}
-            <div 
-              className="absolute inset-0 flex flex-col items-center justify-center text-center px-8"
-              style={{
-                opacity: slabCrackLevel,
-                transform: `translateY(${20 - slabCrackLevel * 20}px)`,
-              }}
-            >
-              <h1 
-                className="text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-8"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                <span className="block">Construction</span>
-                <span className="block text-[#A7A7A7]">is not speed.</span>
-              </h1>
-              
-              <p 
-                className="text-2xl md:text-4xl font-light text-[#C6A46A] mb-12"
-                style={{ 
-                  fontFamily: "'Playfair Display', serif",
-                  opacity: Math.max(0, slabCrackLevel - 0.3) / 0.7,
-                }}
-              >
-                It is weight.
-              </p>
-
-              <p 
-                className="text-sm md:text-base text-[#A7A7A7] max-w-md leading-relaxed mb-8"
-                style={{ 
-                  fontFamily: "Inter, sans-serif",
-                  opacity: Math.max(0, slabCrackLevel - 0.5) / 0.5,
-                }}
-              >
-                Every structure carries responsibility —<br />
-                to people, to time, to failure.
-              </p>
-
-              <p 
-                className="text-[10px] md:text-xs tracking-[0.15em] text-[#A7A7A7] opacity-50"
-                style={{ 
-                  fontFamily: "Inter, sans-serif",
-                  opacity: Math.max(0, slabCrackLevel - 0.7) / 0.3 * 0.5,
-                }}
-              >
-                We build knowing nothing can be hidden later.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2 — THE UNSEEN WORK */}
-      <section className="relative min-h-screen py-32 md:py-48 overflow-hidden">
-        {/* Section label */}
-        <div className="absolute top-16 left-8 md:left-16">
-          <span 
-            className="text-[10px] tracking-[0.3em] text-[#A7A7A7] opacity-30"
-            style={{ fontFamily: "Inter, sans-serif" }}
-          >
-            THE UNSEEN WORK
-          </span>
-        </div>
-
-        {/* Layers */}
-        <div className="relative max-w-6xl mx-auto px-8 md:px-16">
-          {layers.map((layer, index) => {
-            const layerStart = window.innerHeight * 1.5 + index * 300;
-            const layerProgress = Math.min(1, Math.max(0, (scrollY - layerStart) / 400));
-            const parallaxOffset = (scrollY - layerStart) * 0.1 * (index % 2 === 0 ? 1 : -1);
-
-            return (
-              <div 
-                key={layer.id}
-                className="relative mb-32 md:mb-48"
-                style={{
-                  transform: `translateX(${parallaxOffset}px)`,
-                  opacity: 0.3 + layerProgress * 0.7,
-                }}
-              >
-                {/* Layer band */}
-                <div className="relative">
-                  {/* Thin brass line */}
-                  <div 
-                    className="absolute left-0 top-0 h-px bg-[#C6A46A] opacity-20"
-                    style={{
-                      width: `${30 + layerProgress * 40}%`,
-                      transition: "width 0.5s ease-out",
-                    }}
-                  />
-
-                  {/* Layer label */}
-                  <span 
-                    className="text-[9px] tracking-[0.4em] text-[#C6A46A] opacity-40 block pt-6 mb-8"
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                  >
-                    {layer.label}
-                  </span>
-
-                  {/* Layer text */}
-                  <p 
-                    className="text-xl md:text-3xl lg:text-4xl font-light leading-relaxed text-[#F4EFE8] whitespace-pre-line"
-                    style={{ 
-                      fontFamily: "'Playfair Display', serif",
-                      transform: `translateY(${20 - layerProgress * 20}px)`,
-                      transition: "transform 0.5s ease-out",
-                    }}
-                  >
-                    {layer.text}
-                  </p>
-
-                  {/* Bottom thin line */}
-                  <div 
-                    className="mt-12 h-px bg-[#1A1A1A]"
-                    style={{ width: "100%" }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* SECTION 3 — CONTROL IS THE DIFFERENCE */}
-      <section className="relative min-h-screen py-32 md:py-48 overflow-hidden">
-        {/* Blueprint grid overlay */}
+      {/* === SECTION 1: HERO === */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Base Background */}
+        <div className="absolute inset-0 bg-[#050403]" />
+        
+        {/* Dynamic Gradient following mouse */}
         <div 
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0 transition-all duration-500 ease-out"
           style={{
-            backgroundImage: `
-              linear-gradient(to right, #C6A46A 1px, transparent 1px),
-              linear-gradient(to bottom, #C6A46A 1px, transparent 1px)
-            `,
-            backgroundSize: "60px 60px",
+            background: `
+              radial-gradient(circle at ${50 + mousePos.x * 15}% ${50 + mousePos.y * 15}%, 
+                hsl(var(--primary) / 0.1) 0%, 
+                transparent 40%
+              ),
+              radial-gradient(circle at ${30 - mousePos.x * 10}% ${70 - mousePos.y * 10}%, 
+                hsl(var(--primary) / 0.06) 0%, 
+                transparent 35%
+              )
+            `
           }}
         />
 
-        {/* Horizontal brass line with subtle vibration */}
-        <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2">
+        {/* Blueprint Fragments */}
+        <BlueprintFragments />
+
+        {/* 3D Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            perspective: '1000px',
+            perspectiveOrigin: `${50 + mousePos.x * 15}% ${50 + mousePos.y * 15}%`,
+          }}
+        >
           <div 
-            className="h-px bg-[#C6A46A] opacity-30"
+            className="absolute inset-0"
             style={{
-              animation: "subtleVibrate 8s ease-in-out infinite",
+              backgroundImage: `
+                linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
+                linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
+              transform: `rotateX(${55 + mousePos.y * 5}deg) translateZ(-30px) scale(1.8)`,
+              transformOrigin: 'center center',
             }}
           />
         </div>
 
-        <style>{`
-          @keyframes subtleVibrate {
-            0%, 100% { transform: scaleX(1); opacity: 0.3; }
-            25% { transform: scaleX(1.001); opacity: 0.35; }
-            50% { transform: scaleX(0.999); opacity: 0.25; }
-            75% { transform: scaleX(1.002); opacity: 0.32; }
-          }
-        `}</style>
+        {/* Vignette */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(ellipse 100% 80% at 50% 50%, transparent 20%, hsl(0 0% 2% / 0.6) 100%)`
+          }}
+        />
 
-        <div className="relative max-w-4xl mx-auto px-8 md:px-16">
-          {/* Opening statement */}
-          <div className="mb-24 md:mb-32">
-            <h2 
-              className="text-3xl md:text-5xl lg:text-6xl font-light leading-tight mb-8"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              Control is not visible.
-            </h2>
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 py-32">
+          <div className="grid grid-cols-12 gap-8 items-center">
+            
+            {/* Left: Typography */}
+            <div className="col-span-12 lg:col-span-7">
+              {/* Label */}
+              <div className="mb-8 flex items-center gap-4">
+                <span className="h-px w-12 bg-gradient-to-r from-transparent to-primary" />
+                <span className="text-primary text-[10px] tracking-[0.4em] uppercase">
+                  Construction Studio
+                </span>
+              </div>
 
-            <p 
-              className="text-2xl md:text-4xl font-light text-[#A7A7A7]"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              But its absence is.
-            </p>
-          </div>
+              {/* Headline */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading text-foreground mb-6 leading-[1.1]">
+                We don't build
+                <br />
+                <span className="text-muted-foreground">structures.</span>
+                <br />
+                We build{' '}
+                <span className="text-primary relative">
+                  certainty.
+                  <span className="absolute -bottom-1 left-0 w-full h-px bg-primary/40" />
+                </span>
+              </h1>
 
-          {/* Manifesto paragraph */}
-          <div className="mb-24 md:mb-32">
-            <p 
-              className="text-sm md:text-base text-[#A7A7A7] leading-loose max-w-xl"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              Our construction approach is quiet, methodical,<br />
-              and intolerant of compromise.
-            </p>
-
-            <div className="mt-12 space-y-3">
-              <p 
-                className="text-sm md:text-base text-[#F4EFE8]"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                Materials are checked.
+              {/* Subtext */}
+              <p className="text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed">
+                Every joint, every pour, every weld — executed with the precision 
+                of instruments, not the approximation of trades.
               </p>
-              <p 
-                className="text-sm md:text-base text-[#F4EFE8]"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                Lines are aligned.
-              </p>
-              <p 
-                className="text-sm md:text-base text-[#F4EFE8]"
-                style={{ fontFamily: "Inter, sans-serif" }}
-              >
-                Decisions are documented.
-              </p>
+
+              {/* Metrics Row */}
+              <div className="grid grid-cols-3 gap-6 border-t border-border/30 pt-8">
+                {metrics.map((metric, i) => (
+                  <div key={i} className="text-center lg:text-left">
+                    <div className="text-2xl md:text-3xl font-heading text-primary mb-1">
+                      {metric.value}
+                    </div>
+                    <div className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground">
+                      {metric.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <p 
-              className="mt-12 text-xs md:text-sm text-[#C6A46A] tracking-wide"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              Nothing relies on luck.
+            {/* Right: Floating Isometric Layers */}
+            <div className="col-span-12 lg:col-span-5 hidden lg:flex items-center justify-center">
+              <div 
+                className="relative w-64 h-72"
+                style={{ 
+                  transform: `perspective(1000px) rotateY(${mousePos.x * 6}deg) rotateX(${mousePos.y * -6}deg)`,
+                  transition: 'transform 0.2s ease-out',
+                }}
+              >
+                {/* Stacked Layers */}
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="absolute inset-0 border border-primary/25 bg-primary/[0.03]"
+                    style={{
+                      transform: `translateY(${i * -12}px) translateZ(${i * 8}px) scale(${1 - i * 0.025})`,
+                      opacity: 1 - i * 0.12,
+                    }}
+                  >
+                    {/* Corner markers */}
+                    <div className="absolute top-0 left-0 w-2.5 h-2.5 border-l border-t border-primary/50" />
+                    <div className="absolute top-0 right-0 w-2.5 h-2.5 border-r border-t border-primary/50" />
+                    <div className="absolute bottom-0 left-0 w-2.5 h-2.5 border-l border-b border-primary/50" />
+                    <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-r border-b border-primary/50" />
+                    
+                    {/* Layer label */}
+                    <span className="absolute bottom-1.5 left-2 text-[7px] tracking-[0.15em] text-primary/50 uppercase font-mono">
+                      L{i + 1}
+                    </span>
+                  </div>
+                ))}
+
+                {/* Center crosshair */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-full h-px bg-primary/15" />
+                </div>
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-px h-full bg-primary/15" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <span className="text-[8px] tracking-[0.25em] uppercase text-muted-foreground/60">Scroll</span>
+          <div className="w-px h-6 bg-gradient-to-b from-primary/40 to-transparent" />
+        </div>
+      </section>
+
+      {/* === SECTION 2: THE ANATOMY === */}
+      <section ref={layersRef} className="relative py-20 md:py-28 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-[#060605]" />
+        
+        {/* Subtle Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, hsl(var(--primary)) 1px, transparent 1px),
+              linear-gradient(to bottom, hsl(var(--primary)) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-12">
+          {/* Section Header */}
+          <div className="mb-16">
+            <span className="text-[10px] tracking-[0.35em] uppercase text-primary/50 block mb-3">
+              The Anatomy
+            </span>
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-heading text-foreground mb-3">
+              Every layer carries
+              <span className="text-muted-foreground"> responsibility.</span>
+            </h2>
+            <p className="text-xs md:text-sm text-muted-foreground max-w-md">
+              Construction is not sequential steps. It's interlocking systems where each depends on every other.
             </p>
           </div>
 
-          {/* Signature */}
-          <div className="pt-16 border-t border-[#1A1A1A]">
-            <p 
-              className="text-xs tracking-[0.2em] text-[#A7A7A7] opacity-60"
-              style={{ fontFamily: "Inter, sans-serif" }}
-            >
-              — EdgeHomes, Faridabad
-            </p>
+          {/* Construction Layers - Timeline */}
+          <div className="relative">
+            {/* Vertical Line */}
+            <div className="absolute left-0 md:left-6 top-0 bottom-0 w-px bg-border/50">
+              <div 
+                className="absolute top-0 left-0 w-full bg-primary/80 transition-all duration-500"
+                style={{ height: `${Math.min(100, (activeLayer + 1) * 20)}%` }}
+              />
+            </div>
+
+            {/* Layers */}
+            <div className="space-y-10 md:space-y-12 pl-6 md:pl-16">
+              {constructionLayers.map((layer, index) => (
+                <div 
+                  key={layer.name}
+                  className={`relative transition-all duration-500 ${activeLayer >= index ? 'opacity-100' : 'opacity-40'}`}
+                >
+                  {/* Layer Marker */}
+                  <div 
+                    className={`absolute -left-6 md:-left-16 top-0 w-3 h-3 rounded-full border-2 transition-all duration-400 ${
+                      activeLayer >= index 
+                        ? 'border-primary bg-primary shadow-[0_0_12px_hsl(var(--primary)/0.5)]' 
+                        : 'border-border/60 bg-background'
+                    }`}
+                  >
+                    <span className="absolute -left-5 top-1/2 -translate-y-1/2 text-[8px] font-mono text-muted-foreground/70">
+                      0{index + 1}
+                    </span>
+                  </div>
+
+                  {/* Content */}
+                  <div className="group">
+                    <div className="flex flex-col md:flex-row md:items-start gap-3 md:gap-6">
+                      {/* Name & Depth */}
+                      <div className="md:w-32 shrink-0">
+                        <h3 className="text-base md:text-lg font-heading text-foreground group-hover:text-primary transition-colors duration-300">
+                          {layer.name}
+                        </h3>
+                        <span className="text-[9px] tracking-[0.12em] uppercase text-muted-foreground/70">
+                          {layer.depth}
+                        </span>
+                      </div>
+
+                      {/* Principle */}
+                      <div className="flex-1">
+                        <p className="text-xs md:text-sm text-muted-foreground leading-relaxed mb-2">
+                          {layer.principle}
+                        </p>
+                        
+                        {/* Metric Badge */}
+                        <span 
+                          className={`inline-flex items-center gap-1.5 px-2 py-1 bg-primary/5 border border-primary/15 text-[9px] tracking-wide text-primary/80 transition-all duration-400 ${
+                            activeLayer >= index ? 'opacity-100' : 'opacity-0'
+                          }`}
+                        >
+                          <span className="w-1 h-1 rounded-full bg-primary/80" />
+                          {layer.metric}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Separator */}
+                    <div className="mt-6 h-px bg-border/30" />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* === SECTION 3: THE PROMISE === */}
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-[#040403]" />
+        
+        {/* Diagonal accent */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `linear-gradient(135deg, transparent 35%, hsl(var(--primary) / 0.03) 50%, transparent 65%)`,
+          }}
+        />
+
+        <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
+          {/* Quote */}
+          <div className="mb-10">
+            <span className="text-[9px] tracking-[0.35em] uppercase text-primary/50 block mb-6">
+              Our Commitment
+            </span>
+            
+            <blockquote className="text-lg md:text-xl lg:text-2xl font-heading text-foreground leading-relaxed mb-6">
+              "We measure twice not because we might be wrong,
+              <span className="text-muted-foreground"> but because our clients deserve </span>
+              <span className="text-primary italic">certainty.</span>"
+            </blockquote>
+
+            <div className="flex items-center justify-center gap-3 text-muted-foreground/60">
+              <span className="h-px w-8 bg-border/50" />
+              <span className="text-[9px] tracking-[0.15em] uppercase">EdgeHomes Construction</span>
+              <span className="h-px w-8 bg-border/50" />
+            </div>
+          </div>
+
+          {/* Key Points */}
+          <div className="grid grid-cols-3 gap-6 mt-12 mb-12">
+            {[
+              { stat: "Zero", desc: "Material compromise" },
+              { stat: "Daily", desc: "Progress updates" },
+              { stat: "Full", desc: "Cost transparency" },
+            ].map((item, i) => (
+              <div key={i} className="text-center group">
+                <div className="text-base md:text-lg font-heading text-primary mb-1 group-hover:scale-105 transition-transform duration-200">
+                  {item.stat}
+                </div>
+                <div className="text-[9px] text-muted-foreground/70 tracking-wider">
+                  {item.desc}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <a 
+            href="/contact"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 border border-primary/30 text-primary text-xs tracking-wider uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-400 group"
+          >
+            <span>Discuss Your Project</span>
+            <span className="w-3 h-px bg-current transition-all duration-200 group-hover:w-5" />
+          </a>
         </div>
       </section>
 
