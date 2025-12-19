@@ -225,6 +225,34 @@ const Interior = () => {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
+          MARQUEE STRIP
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="relative py-6 bg-ivory overflow-hidden">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="flex items-center gap-8 mx-8">
+              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E] tracking-wide">
+                INTERIOR DESIGN
+              </span>
+              <span className="text-[#C6A46A] text-2xl">✦</span>
+              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E]/30 tracking-wide">
+                LUXURY SPACES
+              </span>
+              <span className="text-[#C6A46A] text-2xl">✦</span>
+              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E] tracking-wide">
+                BESPOKE INTERIORS
+              </span>
+              <span className="text-[#C6A46A] text-2xl">✦</span>
+              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E]/30 tracking-wide">
+                TIMELESS ELEGANCE
+              </span>
+              <span className="text-[#C6A46A] text-2xl">✦</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
           PHILOSOPHY: SPLIT SCREEN WITH REVEAL
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative py-32 md:py-40 overflow-hidden">
@@ -570,6 +598,13 @@ const Interior = () => {
           30% { opacity: 1; }
           70% { opacity: 1; }
           100% { transform: translateY(400%); opacity: 0; }
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
         }
       `}</style>
     </div>
