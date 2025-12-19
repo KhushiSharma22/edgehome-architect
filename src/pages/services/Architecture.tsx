@@ -231,7 +231,7 @@ const Architecture = () => {
       </section>
 
       {/* ===== SECTION 2: CORE PRINCIPLES - OVERLAPPING SLABS ===== */}
-      <section className="relative py-32 lg:py-40 bg-[#0E0E0E] overflow-hidden">
+      <section className="relative py-32 lg:py-40 bg-ivory overflow-hidden">
         {/* Section header */}
         <div className="container mx-auto px-6 lg:px-12 mb-20">
           <div 
@@ -243,7 +243,7 @@ const Architecture = () => {
             }}
           >
             <div className="w-8 h-[1px] bg-[#C6A46A]/50" />
-            <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono">
+            <span className="text-[10px] tracking-[0.3em] text-[#C6A46A] font-mono">
               CORE PRINCIPLES
             </span>
           </div>
@@ -278,11 +278,11 @@ const Architecture = () => {
                   onMouseLeave={() => setActivePrinciple(null)}
                 >
                   <div 
-                    className={`relative bg-[#1A1A1A] p-10 lg:p-14 transition-all duration-700 ${
-                      activePrinciple === index ? "bg-[#2A2A2A]" : ""
+                    className={`relative bg-[#F5F3EF] p-10 lg:p-14 transition-all duration-700 ${
+                      activePrinciple === index ? "bg-[#EBE8E2]" : ""
                     }`}
                     style={{
-                      boxShadow: `${20 + index * 10}px ${20 + index * 10}px ${40 + index * 15}px rgba(0,0,0,${0.4 + index * 0.1})`
+                      boxShadow: `${20 + index * 10}px ${20 + index * 10}px ${40 + index * 15}px rgba(0,0,0,${0.08 + index * 0.02})`
                     }}
                   >
                     {/* Gold edge stroke - top and left only for slab effect */}
@@ -292,7 +292,7 @@ const Architecture = () => {
                     {/* Engraved number - large scale, low opacity */}
                     <span 
                       className={`absolute top-6 right-8 text-[8rem] lg:text-[12rem] font-heading leading-none transition-all duration-500 ${
-                        activePrinciple === index ? "text-[#C6A46A]/15" : "text-ivory/[0.03]"
+                        activePrinciple === index ? "text-[#C6A46A]/20" : "text-[#0E0E0E]/[0.04]"
                       }`}
                       style={{
                         fontWeight: 200,
@@ -308,7 +308,7 @@ const Architecture = () => {
                         className={`text-2xl md:text-3xl font-heading mb-4 transition-all duration-500 ${
                           activePrinciple === index 
                             ? "text-[#C6A46A] transform -translate-y-1" 
-                            : "text-ivory"
+                            : "text-[#0E0E0E]"
                         }`}
                       >
                         {principle.title}
@@ -316,7 +316,7 @@ const Architecture = () => {
                       <p 
                         className={`text-sm leading-relaxed transition-all duration-500 overflow-hidden ${
                           activePrinciple === index 
-                            ? "max-h-20 opacity-100 text-ivory/70" 
+                            ? "max-h-20 opacity-100 text-[#0E0E0E]/70" 
                             : "max-h-0 opacity-0"
                         }`}
                       >
@@ -332,8 +332,8 @@ const Architecture = () => {
                           : "opacity-0 translate-x-4"
                       }`}
                     >
-                      <span className="text-[#C6A46A]/60">EXPLORE</span>
-                      <ArrowRight className="w-3 h-3 text-[#C6A46A]/60" />
+                      <span className="text-[#C6A46A]">EXPLORE</span>
+                      <ArrowRight className="w-3 h-3 text-[#C6A46A]" />
                     </div>
                   </div>
                 </div>
@@ -443,72 +443,6 @@ const Architecture = () => {
         </div>
       </section>
 
-      {/* ===== SECTION 4: FAQ ===== */}
-      <section id="faq-section" className="relative py-24 lg:py-32 bg-[#F4EFE8] overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="max-w-3xl mx-auto">
-            {/* Section header */}
-            <div 
-              className="text-center mb-14"
-              style={{
-                opacity: scrollY > 1400 ? 1 : 0,
-                transform: scrollY > 1400 ? "translateY(0)" : "translateY(30px)",
-                transition: "all 1s ease-out"
-              }}
-            >
-              <span className="text-[9px] tracking-[0.3em] text-[#2A2A2A]/40 font-mono">
-                QUESTIONS
-              </span>
-              <h2 className="text-3xl md:text-4xl font-heading text-[#0E0E0E] mt-4">
-                Common questions
-              </h2>
-            </div>
-
-            {/* FAQ accordion */}
-            <div 
-              className="space-y-0"
-              style={{
-                opacity: scrollY > 1500 ? 1 : 0,
-                transition: "opacity 1s ease-out"
-              }}
-            >
-              {faqs.map((faq, index) => (
-                <div 
-                  key={index}
-                  className="border-b border-[#0E0E0E]/10"
-                >
-                  <button
-                    className="w-full py-5 flex items-center justify-between text-left group"
-                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  >
-                    <span className={`text-base transition-colors duration-300 ${
-                      openFaq === index ? "text-[#C6A46A]" : "text-[#0E0E0E] group-hover:text-[#C6A46A]"
-                    }`}>
-                      {faq.q}
-                    </span>
-                    {openFaq === index ? (
-                      <Minus className="w-4 h-4 text-[#C6A46A] flex-shrink-0" />
-                    ) : (
-                      <Plus className="w-4 h-4 text-[#2A2A2A]/40 group-hover:text-[#C6A46A] flex-shrink-0" />
-                    )}
-                  </button>
-                  <div 
-                    className="overflow-hidden transition-all duration-500"
-                    style={{
-                      maxHeight: openFaq === index ? "200px" : "0",
-                      opacity: openFaq === index ? 1 : 0
-                    }}
-                  >
-                    <p className="pb-5 text-sm text-[#2A2A2A]/70 leading-relaxed pr-8">
-                      {faq.a}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Breathing animation keyframes */}
       <style>{`
