@@ -231,9 +231,9 @@ const Architecture = () => {
       </section>
 
       {/* ===== SECTION 2: CORE PRINCIPLES - OVERLAPPING SLABS ===== */}
-      <section className="relative py-32 lg:py-40 bg-ivory overflow-hidden">
+      <section className="relative py-16 lg:py-20 bg-ivory overflow-hidden">
         {/* Section header */}
-        <div className="container mx-auto px-6 lg:px-12 mb-20">
+        <div className="container mx-auto px-6 lg:px-12 mb-10">
           <div 
             className="flex items-center gap-4"
             style={{
