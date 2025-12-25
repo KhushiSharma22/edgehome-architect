@@ -324,7 +324,7 @@ const Contact = () => {
                   <ContactItem 
                     icon={MapPin}
                     label="Studio Address"
-                    value="SCO 8, 1st Floor, OMAXE WORLD STREET, Sec-79, Faridabad, Haryana 121004"
+                    value="SCO - 8, 1st Floor, OMAXE WORLD STREET, Sec-79, Faridabad, Haryana 121101"
                   />
                   
                   <ContactItem 
