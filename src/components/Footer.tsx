@@ -6,10 +6,10 @@ const Footer = () => {
 
   return (
     <footer ref={ref} id="contact" className="relative bg-card overflow-hidden">
-      {/* Animated background */}
+      {/* Static background */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[150px] animate-morph" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/3 rounded-full blur-[120px] animate-morph" style={{ animationDelay: '-8s' }} />
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-56 h-56 bg-primary/3 rounded-full blur-[80px]" />
       </div>
       
       {/* Top decorative border */}

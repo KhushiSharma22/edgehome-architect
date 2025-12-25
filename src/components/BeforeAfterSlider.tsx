@@ -50,12 +50,9 @@ const BeforeAfterSlider = () => {
 
   return (
     <section ref={ref} className="section-padding bg-card relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-morph" />
-      <div className="absolute bottom-20 right-10 w-80 h-80 bg-primary/3 rounded-full blur-3xl animate-morph" style={{ animationDelay: '-10s' }} />
-      
-      {/* Grain overlay */}
-      <div className="grain absolute inset-0" />
+      {/* Static background elements */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
+      <div className="absolute bottom-20 right-10 w-56 h-56 bg-primary/3 rounded-full blur-2xl" />
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section header with stagger animation */}
@@ -119,9 +116,6 @@ const BeforeAfterSlider = () => {
               <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-2xl transition-all duration-300 ${isDragging ? 'scale-110 shadow-[0_0_40px_rgba(199,163,107,0.6)]' : ''}`}>
                 <ArrowLeftRight className="w-6 h-6 text-primary-foreground" />
               </div>
-              
-              {/* Animated pulse rings */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full border-2 border-primary/50 animate-ping" style={{ animationDuration: '2s' }} />
             </div>
 
             {/* Project info overlay with slide-up animation */}

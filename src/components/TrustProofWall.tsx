@@ -83,18 +83,11 @@ const TrustProofWall = () => {
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-background">
-      {/* Dramatic background with animated gradient mesh */}
+      {/* Static background - no heavy animations */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] animate-morph" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] animate-morph" style={{ animationDelay: '-7s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/3 rounded-full blur-[200px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-primary/8 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-primary/5 rounded-full blur-[80px]" />
       </div>
-      
-      {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0)`,
-        backgroundSize: '40px 40px'
-      }} />
 
       <div className="container mx-auto px-6 py-32 md:py-40 relative z-10">
         
@@ -247,21 +240,17 @@ const TrustProofWall = () => {
                 
                 {/* Right: Quote content */}
                 <div className="md:col-span-3 relative">
-                  {/* Animated voice indicator */}
+                  {/* Voice indicator - simplified */}
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center animate-pulse-glow">
+                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
                       <Volume2 className="w-5 h-5 text-primary" />
                     </div>
                     <div className="flex items-center gap-1 h-8">
-                      {[...Array(30)].map((_, i) => (
+                      {[...Array(8)].map((_, i) => (
                         <div
                           key={i}
-                          className="w-1 bg-primary/40 rounded-full animate-pulse"
-                          style={{ 
-                            height: `${20 + Math.random() * 80}%`,
-                            animationDelay: `${i * 50}ms`,
-                            animationDuration: '1s'
-                          }}
+                          className="w-1 bg-primary/40 rounded-full"
+                          style={{ height: `${30 + (i % 3) * 25}%` }}
                         />
                       ))}
                     </div>

@@ -11,35 +11,12 @@ import { Link } from "react-router-dom";
 
 const Interior = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 });
   const [activeProcess, setActiveProcess] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  // Calculate light shift based on scroll
-  const lightShiftX = Math.sin(scrollY * 0.002) * 15;
-  const lightShiftY = Math.cos(scrollY * 0.002) * 10;
 
   const portfolioItems = [
     { title: "Penthouse Noir", location: "South Delhi", image: portfolioBathroom, year: "2024", category: "Luxury" },
@@ -63,24 +40,16 @@ const Interior = () => {
           HERO: CINEMATIC WITH BACKGROUND IMAGE
       ═══════════════════════════════════════════════════════════════════════ */}
       <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Full background image with scroll-reactive light */}
+        {/* Full background image - static for performance */}
         <div className="absolute inset-0">
           <img 
             src={heroInterior}
             alt="Luxury interior design"
-            className="w-full h-full object-cover"
-            style={{
-              transform: `scale(1.1)`,
-              filter: `brightness(${0.6 + scrollY * 0.0002})`
-            }}
+            className="w-full h-full object-cover brightness-[0.65]"
+            loading="eager"
           />
-          {/* Scroll-reactive light gradient overlay */}
-          <div 
-            className="absolute inset-0 transition-all duration-1000 ease-out"
-            style={{
-              background: `radial-gradient(ellipse at ${50 + lightShiftX}% ${40 + lightShiftY}%, transparent 0%, rgba(14,14,14,0.5) 40%, rgba(14,14,14,0.9) 100%)`
-            }}
-          />
+          {/* Static gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0E0E0E]/50 via-[#0E0E0E]/60 to-[#0E0E0E]/90" />
           {/* Heavy vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0E0E0E_80%)]" />
           {/* Bottom fade */}
