@@ -139,13 +139,13 @@ const MaterialsCraft = () => {
         }}
       />
       
-      {/* Animated grain */}
-      <div className="absolute inset-0 grain opacity-40" />
+      {/* Subtle grain */}
+      <div className="absolute inset-0 grain opacity-20" />
       
-      {/* Floating decorative elements */}
-      <div className="absolute top-20 left-20 w-2 h-2 bg-primary/40 rounded-full animate-float" />
-      <div className="absolute top-40 right-40 w-3 h-3 bg-primary/30 rounded-full animate-float" style={{ animationDelay: '-2s' }} />
-      <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-primary/50 rounded-full animate-float" style={{ animationDelay: '-4s' }} />
+      {/* Static decorative elements */}
+      <div className="absolute top-20 left-20 w-2 h-2 bg-primary/40 rounded-full" />
+      <div className="absolute top-40 right-40 w-3 h-3 bg-primary/30 rounded-full" />
+      <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-primary/50 rounded-full" />
       
       <div ref={containerRef} className="container mx-auto px-6 py-32 md:py-40 relative z-10">
         {/* Premium editorial header */}
@@ -154,7 +154,7 @@ const MaterialsCraft = () => {
             {/* Decorative line */}
             <div className="flex items-center gap-4 mb-6">
               <div className="w-16 h-px bg-gradient-to-r from-primary to-transparent" />
-              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
+              <Sparkles className="w-4 h-4 text-primary" />
             </div>
             
             <span className="text-primary text-xs tracking-[0.5em] uppercase mb-4 block font-medium">

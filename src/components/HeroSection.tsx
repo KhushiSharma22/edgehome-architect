@@ -58,18 +58,18 @@ const HeroSection = () => {
         background: 'radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.5) 70%, hsl(var(--background)) 100%)'
       }} />
       
-      {/* Animated grain texture */}
-      <div className="absolute inset-0 grain z-20 opacity-40" />
+      {/* Subtle grain texture - reduced opacity */}
+      <div className="absolute inset-0 grain z-20 opacity-20" />
       
-      {/* Light sweep animation */}
+      {/* Static accent lines instead of animated */}
       <div className="absolute inset-0 z-15 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/15 via-transparent to-transparent animate-pulse" style={{ animationDuration: '4s' }} />
-        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent animate-pulse" style={{ animationDuration: '5s', animationDelay: '1.5s' }} />
+        <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
+        <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
       </div>
       
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[120px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/8 rounded-full blur-[150px] animate-float" style={{ animationDelay: '-4s' }} />
+      {/* Static background orbs - no animation */}
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-primary/8 rounded-full blur-[120px]" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
 
       {/* Content */}
       <div className="relative z-30 container mx-auto px-6 text-center">

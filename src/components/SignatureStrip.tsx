@@ -52,12 +52,12 @@ const SignatureStrip = () => {
 
   return (
     <section id="signature" className="relative py-0 overflow-hidden border-y border-border/30">
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 animate-shimmer" />
+      {/* Static gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5" />
       
-      {/* Glow orbs */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-morph" />
-      <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-morph" style={{ animationDelay: '-7s' }} />
+      {/* Static glow orbs */}
+      <div className="absolute top-0 left-1/4 w-48 h-48 bg-primary/8 rounded-full blur-2xl" />
+      <div className="absolute bottom-0 right-1/4 w-48 h-48 bg-primary/5 rounded-full blur-2xl" />
       
       {/* Marquee container */}
       <div className="relative flex">

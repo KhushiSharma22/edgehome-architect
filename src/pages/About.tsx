@@ -11,68 +11,23 @@ import eggChair from "@/assets/egg-chair.png";
 import studioSketch from "@/assets/studio-sketch.jpg";
 
 
-// Particle System Component
-const ParticleField = () => {
-  const particles = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 3 + 1,
-    duration: Math.random() * 20 + 15,
-    delay: Math.random() * -20,
-  }));
-
+// Simple decorative dots - static for performance
+const DecorativeElements = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="absolute rounded-full bg-primary/30"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            animation: `float ${p.duration}s ease-in-out infinite`,
-            animationDelay: `${p.delay}s`,
-            filter: 'blur(0.5px)',
-          }}
-        />
-      ))}
+      <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-primary/20" />
+      <div className="absolute top-1/3 right-1/3 w-3 h-3 rounded-full bg-primary/15" />
+      <div className="absolute bottom-1/4 left-1/3 w-2 h-2 rounded-full bg-primary/25" />
+      <div className="absolute top-1/2 right-1/4 w-1.5 h-1.5 rounded-full bg-primary/20" />
     </div>
   );
 };
 
-// Morphing 3D Shape
-const MorphingShape = ({ className = "", delay = 0 }: { className?: string; delay?: number }) => {
+// Static decorative shape
+const DecorativeShape = ({ className = "" }: { className?: string }) => {
   return (
-    <div 
-      className={`absolute ${className}`}
-      style={{ animationDelay: `${delay}s` }}
-    >
-      <svg viewBox="0 0 200 200" className="w-full h-full">
-        <defs>
-          <linearGradient id="morphGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(38 42% 55% / 0.3)" />
-            <stop offset="50%" stopColor="hsl(38 50% 60% / 0.15)" />
-            <stop offset="100%" stopColor="hsl(30 40% 50% / 0.2)" />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-        <path 
-          fill="url(#morphGradient)" 
-          filter="url(#glow)"
-          className="animate-morph"
-          d="M47.5,-57.2C59.9,-45.8,67.5,-29.5,70.8,-12.1C74.1,5.4,73.1,24,64.3,37.6C55.5,51.2,38.9,59.8,21.5,65.2C4.1,70.6,-14.2,72.8,-30.3,67.2C-46.4,61.6,-60.4,48.2,-68.5,31.6C-76.6,15,-78.9,-4.8,-73.2,-22.1C-67.5,-39.4,-53.8,-54.2,-38.4,-65C-23,-75.8,-5.8,-82.6,9.4,-79.8C24.6,-77,35.1,-68.6,47.5,-57.2Z"
-          transform="translate(100 100)"
-        />
-      </svg>
+    <div className={`absolute ${className}`}>
+      <div className="w-full h-full rounded-full bg-gradient-to-br from-primary/10 to-primary/5 blur-2xl" />
     </div>
   );
 };
@@ -99,54 +54,37 @@ const RevealText = ({ text, className = "", delay = 0 }: { text: string; classNa
 // Hero Section - Unprecedented Cinematic Design
 const HeroAbout = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 100);
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => clearTimeout(timer);
   }, []);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!heroRef.current) return;
-    const rect = heroRef.current.getBoundingClientRect();
-    setMousePos({
-      x: (e.clientX - rect.left - rect.width / 2) / rect.width,
-      y: (e.clientY - rect.top - rect.height / 2) / rect.height,
-    });
-  };
 
   return (
     <section 
       ref={heroRef}
       className="relative min-h-screen flex items-center overflow-hidden"
-      onMouseMove={handleMouseMove}
     >
       {/* === LAYERED BACKGROUND SYSTEM === */}
       
       {/* Base - Deep Dark with Warmth */}
       <div className="absolute inset-0 bg-[#050403]" />
       
-      {/* Dynamic Gradient that follows mouse */}
+      {/* Static Gradient */}
       <div 
-        className="absolute inset-0 transition-all duration-1000 ease-out"
+        className="absolute inset-0"
         style={{
           background: `
-            radial-gradient(circle at ${50 + mousePos.x * 20}% ${50 + mousePos.y * 20}%, 
+            radial-gradient(circle at 50% 40%, 
               hsl(38 50% 50% / 0.12) 0%, 
               transparent 50%
             ),
-            radial-gradient(circle at ${30 - mousePos.x * 10}% ${70 - mousePos.y * 10}%, 
+            radial-gradient(circle at 30% 70%, 
               hsl(25 45% 45% / 0.08) 0%, 
               transparent 40%
             ),
-            radial-gradient(circle at ${70 + mousePos.x * 15}% ${30 + mousePos.y * 15}%, 
+            radial-gradient(circle at 70% 30%, 
               hsl(42 55% 55% / 0.06) 0%, 
               transparent 35%
             )
@@ -154,14 +92,8 @@ const HeroAbout = () => {
         }}
       />
 
-      {/* Animated Mesh Grid - 3D Perspective */}
-      <div 
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          perspective: '1000px',
-          perspectiveOrigin: `${50 + mousePos.x * 30}% ${50 + mousePos.y * 30}%`,
-        }}
-      >
+      {/* Static Mesh Grid */}
+      <div className="absolute inset-0 opacity-[0.03]">
         <div 
           className="absolute inset-0"
           style={{
@@ -170,39 +102,33 @@ const HeroAbout = () => {
               linear-gradient(90deg, hsl(38 42% 55%) 1px, transparent 1px)
             `,
             backgroundSize: '80px 80px',
-            transform: `rotateX(${60 + mousePos.y * 10}deg) translateZ(-100px) scale(2.5)`,
-            transformOrigin: 'center center',
-            transition: 'transform 0.3s ease-out',
           }}
         />
       </div>
 
-      {/* Morphing Shapes Layer - Reduced opacity */}
-      <MorphingShape className="w-[600px] h-[600px] -top-32 -left-32 opacity-20" delay={0} />
-      <MorphingShape className="w-[500px] h-[500px] -bottom-20 -right-20 opacity-15" delay={-5} />
-      <MorphingShape className="w-[300px] h-[300px] top-1/2 left-1/4 opacity-10" delay={-10} />
+      {/* Static Decorative Shapes */}
+      <DecorativeShape className="w-[400px] h-[400px] -top-32 -left-32 opacity-20" />
+      <DecorativeShape className="w-[350px] h-[350px] -bottom-20 -right-20 opacity-15" />
 
-      {/* Particle Field */}
-      <ParticleField />
+      {/* Subtle Decorative Elements */}
+      <DecorativeElements />
 
-      {/* Diagonal Light Beams - Reduced */}
+      {/* Static Light Beams */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div 
-          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/15 to-transparent"
-          style={{
-            top: '30%',
-            left: '-50%',
-            transform: `rotate(-15deg) translateX(${scrollY * 0.3}px)`,
-            transition: 'transform 0.1s ease-out',
-          }}
-        />
         <div 
           className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/10 to-transparent"
           style={{
+            top: '30%',
+            left: '-50%',
+            transform: 'rotate(-15deg)',
+          }}
+        />
+        <div 
+          className="absolute w-[200%] h-[1px] bg-gradient-to-r from-transparent via-primary/8 to-transparent"
+          style={{
             top: '60%',
             left: '-50%',
-            transform: `rotate(-15deg) translateX(${-scrollY * 0.2}px)`,
-            transition: 'transform 0.1s ease-out',
+            transform: 'rotate(-15deg)',
           }}
         />
       </div>
@@ -229,26 +155,21 @@ const HeroAbout = () => {
         ))}
       </div>
 
-      {/* Floating Orbs - Reduced glow */}
+      {/* Static Glow Orbs */}
       <div 
-        className="absolute w-80 h-80 rounded-full blur-[120px] animate-float"
+        className="absolute w-64 h-64 rounded-full blur-[100px]"
         style={{
           top: '10%',
           left: '20%',
           background: 'radial-gradient(circle, hsl(38 50% 55% / 0.08) 0%, transparent 70%)',
-          transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -30}px)`,
-          transition: 'transform 0.5s ease-out',
         }}
       />
       <div 
-        className="absolute w-96 h-96 rounded-full blur-[150px] animate-float"
+        className="absolute w-72 h-72 rounded-full blur-[120px]"
         style={{
           bottom: '10%',
           right: '15%',
           background: 'radial-gradient(circle, hsl(30 45% 50% / 0.06) 0%, transparent 70%)',
-          transform: `translate(${mousePos.x * 40}px, ${mousePos.y * 40}px)`,
-          transition: 'transform 0.7s ease-out',
-          animationDelay: '-7s',
         }}
       />
 
@@ -417,14 +338,8 @@ const HeroAbout = () => {
               className={`relative transition-all duration-[2000ms] ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
               style={{ transitionDelay: '2s' }}
             >
-              {/* Floating architectural frame */}
-              <div 
-                className="relative w-80 h-96"
-                style={{
-                  transform: `perspective(1000px) rotateY(${mousePos.x * 10}deg) rotateX(${mousePos.y * -10}deg)`,
-                  transition: 'transform 0.3s ease-out',
-                }}
-              >
+              {/* Static architectural frame */}
+              <div className="relative w-80 h-96">
                 {/* Outer frame */}
                 <div className="absolute inset-0 border border-primary/30">
                   {/* Corner accents */}
@@ -439,11 +354,8 @@ const HeroAbout = () => {
                   <img 
                     src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80"
                     alt="Luxury interior"
-                    className="w-full h-full object-cover"
-                    style={{
-                      transform: `scale(1.1) translate(${mousePos.x * -10}px, ${mousePos.y * -10}px)`,
-                      transition: 'transform 0.5s ease-out',
-                    }}
+                    className="w-full h-full object-cover scale-110"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/30 to-transparent" />
                   

@@ -7,7 +7,7 @@ import architectureHero from "@/assets/architecture-hero.jpg";
 
 const Architecture = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+  
   const [activePrinciple, setActivePrinciple] = useState<number | null>(null);
   const [activeBlueprint, setActiveBlueprint] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -16,17 +16,6 @@ const Architecture = () => {
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Calculate light shift based on scroll
-  const lightShiftX = Math.sin(scrollY * 0.002) * 15;
-  const lightShiftY = Math.cos(scrollY * 0.002) * 10;
 
   const principles = [
     {
@@ -69,24 +58,16 @@ const Architecture = () => {
 
       {/* ===== SECTION 1: HERO - CINEMATIC WITH TEMPORAL TYPOGRAPHY ===== */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Full background image with scroll-reactive light */}
+        {/* Full background image - static for performance */}
         <div className="absolute inset-0">
           <img 
             src={architectureHero}
             alt="Architectural mass study"
-            className="w-full h-full object-cover"
-            style={{
-              transform: `scale(1.1)`,
-              filter: `brightness(${0.7 + scrollY * 0.0002})`
-            }}
+            className="w-full h-full object-cover brightness-75"
+            loading="eager"
           />
-          {/* Scroll-reactive light gradient overlay */}
-          <div 
-            className="absolute inset-0 transition-all duration-1000 ease-out"
-            style={{
-              background: `radial-gradient(ellipse at ${50 + lightShiftX}% ${40 + lightShiftY}%, transparent 0%, rgba(14,14,14,0.4) 40%, rgba(14,14,14,0.85) 100%)`
-            }}
-          />
+          {/* Static gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0E0E0E]/40 via-[#0E0E0E]/60 to-[#0E0E0E]/85" />
           {/* Heavy vignette */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#0E0E0E_80%)]" />
           {/* Bottom fade */}
