@@ -85,23 +85,23 @@ const TrustProofWall = () => {
     <section ref={ref} className="relative overflow-hidden bg-background">
       {/* Static background - no heavy animations */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-primary/8 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-primary/5 rounded-full blur-[80px]" />
+        <div className="absolute top-0 left-1/4 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-primary/8 rounded-full blur-[80px] sm:blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-primary/5 rounded-full blur-[60px] sm:blur-[80px]" />
       </div>
 
-      <div className="container mx-auto px-6 py-32 md:py-40 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-20 sm:py-28 md:py-40 relative z-10">
         
         {/* Section 1: Dramatic Stats */}
-        <div className={`mb-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
+        <div className={`mb-20 sm:mb-28 md:mb-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           {/* Header with dramatic typography */}
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-12 h-px bg-gradient-to-r from-transparent to-primary" />
-              <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">Trust Metrics</span>
-              <div className="w-12 h-px bg-gradient-to-l from-transparent to-primary" />
+          <div className="text-center mb-12 sm:mb-16 md:mb-20">
+            <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <div className="w-8 sm:w-12 h-px bg-gradient-to-r from-transparent to-primary" />
+              <span className="text-primary text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.5em] uppercase font-medium">Trust Metrics</span>
+              <div className="w-8 sm:w-12 h-px bg-gradient-to-l from-transparent to-primary" />
             </div>
             
-            <h2 className="text-4xl md:text-6xl lg:text-8xl font-heading text-foreground leading-[0.9]">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-heading text-foreground leading-[0.9]">
               Numbers That
               <br />
               <span className="text-shimmer italic">Speak</span>
@@ -109,7 +109,7 @@ const TrustProofWall = () => {
           </div>
 
           {/* Stats grid - Cinematic cards */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-6xl mx-auto">
             {proofStats.map((stat, index) => (
               <div
                 key={stat.label}
@@ -119,7 +119,7 @@ const TrustProofWall = () => {
                 onMouseLeave={() => setHoveredStat(null)}
               >
                 {/* Card */}
-                <div className={`relative h-full p-8 md:p-10 rounded-3xl border transition-all duration-700 overflow-hidden ${
+                <div className={`relative h-full p-4 sm:p-6 md:p-8 lg:p-10 rounded-2xl sm:rounded-3xl border transition-all duration-700 overflow-hidden ${
                   hoveredStat === index 
                     ? 'bg-primary/10 border-primary/50 shadow-[0_0_60px_rgba(199,163,107,0.2)]' 
                     : 'bg-card/50 border-border/30 hover:border-primary/30'
@@ -129,29 +129,29 @@ const TrustProofWall = () => {
                     hoveredStat === index ? 'opacity-100' : 'opacity-0'
                   }`} />
                   
-                  {/* Decorative corner */}
-                  <div className={`absolute top-0 right-0 w-24 h-24 transition-all duration-700 ${
+                  {/* Decorative corner - hidden on mobile */}
+                  <div className={`hidden sm:block absolute top-0 right-0 w-20 sm:w-24 h-20 sm:h-24 transition-all duration-700 ${
                     hoveredStat === index ? 'opacity-100' : 'opacity-0'
                   }`}>
-                    <div className="absolute top-4 right-4 w-full h-full border-t-2 border-r-2 border-primary/40 rounded-tr-3xl" />
+                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4 w-full h-full border-t-2 border-r-2 border-primary/40 rounded-tr-2xl sm:rounded-tr-3xl" />
                   </div>
                   
                   <div className="relative z-10">
                     {/* Large number */}
-                    <div className={`text-5xl md:text-6xl lg:text-7xl font-heading mb-4 transition-all duration-500 ${
-                      hoveredStat === index ? 'text-primary scale-110' : 'text-foreground'
+                    <div className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading mb-2 sm:mb-4 transition-all duration-500 ${
+                      hoveredStat === index ? 'text-primary sm:scale-110' : 'text-foreground'
                     }`}>
                       <AnimatedCounter value={stat.value} suffix={stat.suffix} isVisible={isVisible} />
                     </div>
                     
                     {/* Label */}
-                    <h3 className="text-lg md:text-xl font-heading text-foreground mb-2">
+                    <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-heading text-foreground mb-1 sm:mb-2">
                       {stat.label}
                     </h3>
                     
-                    {/* Description - appears on hover */}
-                    <p className={`text-sm text-muted-foreground transition-all duration-500 ${
-                      hoveredStat === index ? 'opacity-100 max-h-20 mt-3' : 'opacity-0 max-h-0'
+                    {/* Description - appears on hover, hidden on mobile */}
+                    <p className={`hidden sm:block text-xs sm:text-sm text-muted-foreground transition-all duration-500 ${
+                      hoveredStat === index ? 'opacity-100 max-h-20 mt-2 sm:mt-3' : 'opacity-0 max-h-0'
                     }`}>
                       {stat.description}
                     </p>
@@ -165,30 +165,30 @@ const TrustProofWall = () => {
         {/* Section 2: Cinematic Testimonials */}
         <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           {/* Testimonial header */}
-          <div className="flex items-center justify-center gap-6 mb-16">
-            <div className="h-px flex-1 max-w-40 bg-gradient-to-r from-transparent via-border to-transparent" />
-            <div className="flex items-center gap-3">
-              <Quote className="w-5 h-5 text-primary rotate-180" />
-              <span className="text-xs text-muted-foreground tracking-[0.4em] uppercase">Client Stories</span>
-              <Quote className="w-5 h-5 text-primary" />
+          <div className="flex items-center justify-center gap-4 sm:gap-6 mb-10 sm:mb-16">
+            <div className="h-px flex-1 max-w-20 sm:max-w-40 bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-primary rotate-180" />
+              <span className="text-[10px] sm:text-xs text-muted-foreground tracking-[0.2em] sm:tracking-[0.4em] uppercase">Client Stories</span>
+              <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
             </div>
-            <div className="h-px flex-1 max-w-40 bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="h-px flex-1 max-w-20 sm:max-w-40 bg-gradient-to-r from-transparent via-border to-transparent" />
           </div>
 
           {/* Main testimonial showcase */}
           <div className="max-w-5xl mx-auto">
             <div className="relative" ref={testimonialRef}>
-              {/* Large quote background */}
-              <div className="absolute -top-10 -left-10 text-[200px] md:text-[300px] font-heading text-primary/5 leading-none select-none pointer-events-none">
+              {/* Large quote background - smaller on mobile */}
+              <div className="absolute -top-6 sm:-top-10 -left-4 sm:-left-10 text-[120px] sm:text-[200px] md:text-[300px] font-heading text-primary/5 leading-none select-none pointer-events-none">
                 "
               </div>
               
               {/* Testimonial content */}
-              <div className="relative grid md:grid-cols-5 gap-8 md:gap-12 items-center">
+              <div className="relative flex flex-col md:grid md:grid-cols-5 gap-6 md:gap-12 items-center">
                 {/* Left: Profile showcase */}
-                <div className="md:col-span-2 flex flex-col items-center md:items-start">
+                <div className="md:col-span-2 flex flex-col items-center md:items-start w-full">
                   {/* Testimonial navigation - Profile images */}
-                  <div className="flex gap-4 mb-8">
+                  <div className="flex gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center md:justify-start">
                     {testimonials.map((t, index) => (
                       <button
                         key={t.id}
@@ -199,7 +199,7 @@ const TrustProofWall = () => {
                             : 'opacity-50 hover:opacity-80 scale-90'
                         }`}
                       >
-                        <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl overflow-hidden border-2 transition-all duration-500 ${
+                        <div className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl overflow-hidden border-2 transition-all duration-500 ${
                           activeTestimonial === index 
                             ? 'border-primary shadow-[0_0_30px_rgba(199,163,107,0.4)]' 
                             : 'border-border/50'
@@ -213,7 +213,7 @@ const TrustProofWall = () => {
                         
                         {/* Active indicator */}
                         {activeTestimonial === index && (
-                          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-2 h-2 bg-primary rounded-full animate-pulse" />
+                          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full animate-pulse" />
                         )}
                       </button>
                     ))}
@@ -223,33 +223,33 @@ const TrustProofWall = () => {
                   <div className="text-center md:text-left">
                     <div className="flex items-center gap-1 mb-2 justify-center md:justify-start">
                       {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-primary text-primary" />
                       ))}
                     </div>
-                    <h4 className="text-xl md:text-2xl font-heading text-foreground mb-1">
+                    <h4 className="text-lg sm:text-xl md:text-2xl font-heading text-foreground mb-1">
                       {testimonials[activeTestimonial].name}
                     </h4>
-                    <p className="text-sm text-primary mb-1">
+                    <p className="text-xs sm:text-sm text-primary mb-1">
                       {testimonials[activeTestimonial].location}
                     </p>
-                    <span className="text-xs text-muted-foreground tracking-wider uppercase">
+                    <span className="text-[10px] sm:text-xs text-muted-foreground tracking-wider uppercase">
                       {testimonials[activeTestimonial].project}
                     </span>
                   </div>
                 </div>
                 
                 {/* Right: Quote content */}
-                <div className="md:col-span-3 relative">
+                <div className="md:col-span-3 relative w-full">
                   {/* Voice indicator - simplified */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Volume2 className="w-5 h-5 text-primary" />
+                  <div className="flex items-center gap-3 mb-4 sm:mb-6 justify-center md:justify-start">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                      <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                     </div>
-                    <div className="flex items-center gap-1 h-8">
+                    <div className="flex items-center gap-1 h-6 sm:h-8">
                       {[...Array(8)].map((_, i) => (
                         <div
                           key={i}
-                          className="w-1 bg-primary/40 rounded-full"
+                          className="w-0.5 sm:w-1 bg-primary/40 rounded-full"
                           style={{ height: `${30 + (i % 3) * 25}%` }}
                         />
                       ))}
@@ -257,11 +257,11 @@ const TrustProofWall = () => {
                   </div>
                   
                   {/* Quote text with animation */}
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden min-h-[100px] sm:min-h-[120px]">
                     {testimonials.map((t, index) => (
                       <p
                         key={t.id}
-                        className={`text-xl md:text-2xl lg:text-3xl font-heading text-foreground leading-relaxed transition-all duration-700 ${
+                        className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading text-foreground leading-relaxed text-center md:text-left transition-all duration-700 ${
                           activeTestimonial === index 
                             ? 'opacity-100 translate-y-0' 
                             : 'opacity-0 translate-y-8 absolute inset-0'
@@ -273,7 +273,7 @@ const TrustProofWall = () => {
                   </div>
                   
                   {/* Progress bar */}
-                  <div className="mt-8 flex gap-2">
+                  <div className="mt-6 sm:mt-8 flex gap-2">
                     {testimonials.map((_, index) => (
                       <div 
                         key={index}

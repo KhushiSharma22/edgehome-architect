@@ -92,10 +92,10 @@ const ServicesDNA = () => {
   return (
     <section 
       ref={sectionRef}
-      className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-card via-background to-card"
+      className="relative py-16 sm:py-24 md:py-32 overflow-hidden bg-gradient-to-b from-card via-background to-card"
     >
-      {/* Animated DNA Helix Line in Center */}
-      <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px">
+      {/* Animated DNA Helix Line in Center - Hidden on mobile */}
+      <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-px">
         <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
           <defs>
             <linearGradient id="dnaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -132,140 +132,225 @@ const ServicesDNA = () => {
         />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <span className="text-primary text-xs tracking-[0.4em] uppercase mb-4 block">
+        <div className={`text-center mb-12 sm:mb-16 md:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <span className="text-primary text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase mb-3 sm:mb-4 block">
             Complete Ecosystem
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading text-foreground mb-6">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-foreground mb-4 sm:mb-6 px-4">
             One Vision. <span className="text-primary">Four Disciplines.</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base md:text-lg px-4">
             From the first sketch to the final finish — everything under one roof, with one team, one commitment.
           </p>
         </div>
 
         {/* Services DNA Layout */}
         <div className="relative max-w-5xl mx-auto">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            const isActive = activeService >= index;
-            const isLeft = service.position === "left";
-            
-            return (
-              <div
-                key={service.id}
-                className={`relative flex items-center mb-24 last:mb-0 ${isLeft ? 'justify-start' : 'justify-end'}`}
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible 
-                    ? 'translateY(0)' 
-                    : `translateY(40px)`,
-                  transition: `all 0.8s ease-out ${index * 0.15}s`
-                }}
-              >
-                {/* Connection Node */}
-                <div 
-                  className={`absolute left-1/2 -translate-x-1/2 z-20 transition-all duration-500 ${
-                    isActive ? 'scale-100' : 'scale-75 opacity-50'
-                  }`}
-                >
-                  <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+          {/* Mobile Layout - Stacked Cards */}
+          <div className="lg:hidden space-y-6">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              const isActive = activeService >= index;
+              
+              return (
+                <Link
+                  key={service.id}
+                  to={service.link}
+                  className={`block relative rounded-2xl border transition-all duration-500 overflow-hidden ${
                     isActive 
-                      ? 'border-primary bg-primary/20 shadow-[0_0_30px_hsl(var(--primary)/0.4)]' 
+                      ? 'border-primary/30 bg-card shadow-[0_0_40px_hsl(var(--primary)/0.1)]' 
+                      : 'border-border/30 bg-card/50'
+                  }`}
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+                    transition: `all 0.8s ease-out ${index * 0.15}s`
+                  }}
+                >
+                  {/* Step number badge */}
+                  <div className={`absolute top-4 right-4 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                    isActive 
+                      ? 'border-primary bg-primary/20' 
                       : 'border-border bg-background'
                   }`}>
                     <span className="text-xs font-mono text-primary font-bold">0{index + 1}</span>
                   </div>
-                </div>
-
-                {/* Service Card */}
-                <div 
-                  className={`relative w-[calc(50%-60px)] group ${isLeft ? 'pr-8' : 'pl-8'}`}
-                >
-                  <Link 
-                    to={service.link}
-                    className={`block relative overflow-hidden rounded-2xl border transition-all duration-500 ${
-                      isActive 
-                        ? 'border-primary/30 bg-card shadow-[0_0_40px_hsl(var(--primary)/0.1)]' 
-                        : 'border-border/30 bg-card/50'
-                    }`}
-                  >
-                    {/* Gradient Border Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 transition-opacity duration-500 ${
-                      isActive ? 'opacity-100' : 'opacity-0'
-                    }`} />
-                    
-                    {/* Content */}
-                    <div className="relative p-8">
-                      {/* Header */}
-                      <div className="flex items-start justify-between mb-6">
-                        <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                          isActive 
-                            ? 'bg-primary/20 shadow-lg shadow-primary/20' 
-                            : 'bg-muted'
-                        }`}>
-                          <Icon className={`w-7 h-7 transition-colors duration-300 ${
-                            isActive ? 'text-primary' : 'text-muted-foreground'
-                          }`} />
-                        </div>
-                        
-                        <div className="text-right">
-                          <div className={`text-3xl font-heading transition-colors duration-300 ${
-                            isActive ? 'text-primary' : 'text-muted-foreground'
-                          }`}>
-                            {service.stat}
-                          </div>
-                          <div className="text-xs text-muted-foreground uppercase tracking-wider">
-                            {service.statLabel}
-                          </div>
-                        </div>
+                  
+                  <div className="p-5">
+                    <div className="flex items-start gap-4 mb-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-all duration-500 ${
+                        isActive 
+                          ? 'bg-primary/20 shadow-lg shadow-primary/20' 
+                          : 'bg-muted'
+                      }`}>
+                        <Icon className={`w-6 h-6 transition-colors duration-300 ${
+                          isActive ? 'text-primary' : 'text-muted-foreground'
+                        }`} />
                       </div>
                       
-                      {/* Title & Description */}
-                      <div className="mb-6">
-                        <span className="text-xs text-primary/70 uppercase tracking-widest block mb-2">
+                      <div className="flex-1">
+                        <span className="text-[10px] text-primary/70 uppercase tracking-widest block mb-1">
                           {service.subtitle}
                         </span>
-                        <h3 className="text-2xl font-heading text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                        <h3 className="text-lg font-heading text-foreground">
                           {service.title}
                         </h3>
-                        <p className="text-muted-foreground leading-relaxed">
-                          {service.description}
-                        </p>
                       </div>
                       
-                      {/* CTA */}
-                      <div className="flex items-center gap-2 text-sm text-primary group-hover:gap-4 transition-all duration-300">
-                        <span className="font-medium">Explore</span>
-                        <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
+                      <div className="text-right">
+                        <div className={`text-2xl font-heading transition-colors duration-300 ${
+                          isActive ? 'text-primary' : 'text-muted-foreground'
+                        }`}>
+                          {service.stat}
+                        </div>
+                        <div className="text-[9px] text-muted-foreground uppercase tracking-wider">
+                          {service.statLabel}
+                        </div>
                       </div>
                     </div>
                     
-                    {/* Hover Line */}
-                    <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary to-primary/50 transition-all duration-500 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
-                    }`} />
-                  </Link>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                      {service.description}
+                    </p>
+                    
+                    <div className="flex items-center gap-2 text-sm text-primary">
+                      <span className="font-medium">Explore</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </div>
                   
-                  {/* Connecting Arm */}
+                  {/* Bottom accent line */}
+                  <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary to-primary/50 transition-all duration-500 ${
+                    isActive ? 'w-full' : 'w-0'
+                  }`} />
+                </Link>
+              );
+            })}
+          </div>
+          
+          {/* Desktop Layout - DNA Helix */}
+          <div className="hidden lg:block">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              const isActive = activeService >= index;
+              const isLeft = service.position === "left";
+              
+              return (
+                <div
+                  key={service.id}
+                  className={`relative flex items-center mb-24 last:mb-0 ${isLeft ? 'justify-start' : 'justify-end'}`}
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible 
+                      ? 'translateY(0)' 
+                      : `translateY(40px)`,
+                    transition: `all 0.8s ease-out ${index * 0.15}s`
+                  }}
+                >
+                  {/* Connection Node */}
                   <div 
-                    className={`absolute top-1/2 -translate-y-1/2 h-px transition-all duration-500 ${
-                      isLeft ? 'right-0' : 'left-0'
-                    } ${isActive ? 'bg-primary w-8' : 'bg-border w-8'}`}
-                  />
+                    className={`absolute left-1/2 -translate-x-1/2 z-20 transition-all duration-500 ${
+                      isActive ? 'scale-100' : 'scale-75 opacity-50'
+                    }`}
+                  >
+                    <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                      isActive 
+                        ? 'border-primary bg-primary/20 shadow-[0_0_30px_hsl(var(--primary)/0.4)]' 
+                        : 'border-border bg-background'
+                    }`}>
+                      <span className="text-xs font-mono text-primary font-bold">0{index + 1}</span>
+                    </div>
+                  </div>
+
+                  {/* Service Card */}
+                  <div 
+                    className={`relative w-[calc(50%-60px)] group ${isLeft ? 'pr-8' : 'pl-8'}`}
+                  >
+                    <Link 
+                      to={service.link}
+                      className={`block relative overflow-hidden rounded-2xl border transition-all duration-500 ${
+                        isActive 
+                          ? 'border-primary/30 bg-card shadow-[0_0_40px_hsl(var(--primary)/0.1)]' 
+                          : 'border-border/30 bg-card/50'
+                      }`}
+                    >
+                      {/* Gradient Border Effect */}
+                      <div className={`absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/5 transition-opacity duration-500 ${
+                        isActive ? 'opacity-100' : 'opacity-0'
+                      }`} />
+                      
+                      {/* Content */}
+                      <div className="relative p-8">
+                        {/* Header */}
+                        <div className="flex items-start justify-between mb-6">
+                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500 ${
+                            isActive 
+                              ? 'bg-primary/20 shadow-lg shadow-primary/20' 
+                              : 'bg-muted'
+                          }`}>
+                            <Icon className={`w-7 h-7 transition-colors duration-300 ${
+                              isActive ? 'text-primary' : 'text-muted-foreground'
+                            }`} />
+                          </div>
+                          
+                          <div className="text-right">
+                            <div className={`text-3xl font-heading transition-colors duration-300 ${
+                              isActive ? 'text-primary' : 'text-muted-foreground'
+                            }`}>
+                              {service.stat}
+                            </div>
+                            <div className="text-xs text-muted-foreground uppercase tracking-wider">
+                              {service.statLabel}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Title & Description */}
+                        <div className="mb-6">
+                          <span className="text-xs text-primary/70 uppercase tracking-widest block mb-2">
+                            {service.subtitle}
+                          </span>
+                          <h3 className="text-2xl font-heading text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                            {service.title}
+                          </h3>
+                          <p className="text-muted-foreground leading-relaxed">
+                            {service.description}
+                          </p>
+                        </div>
+                        
+                        {/* CTA */}
+                        <div className="flex items-center gap-2 text-sm text-primary group-hover:gap-4 transition-all duration-300">
+                          <span className="font-medium">Explore</span>
+                          <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
+                        </div>
+                      </div>
+                      
+                      {/* Hover Line */}
+                      <div className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r from-primary to-primary/50 transition-all duration-500 ${
+                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`} />
+                    </Link>
+                    
+                    {/* Connecting Arm */}
+                    <div 
+                      className={`absolute top-1/2 -translate-y-1/2 h-px transition-all duration-500 ${
+                        isLeft ? 'right-0' : 'left-0'
+                      } ${isActive ? 'bg-primary w-8' : 'bg-border w-8'}`}
+                    />
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         {/* Bottom CTA */}
-        <div className={`text-center mt-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`text-center mt-12 sm:mt-16 md:mt-20 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Link 
             to="/contact"
-            className="group inline-flex items-center gap-4 bg-primary text-primary-foreground px-8 py-4 rounded-full text-sm font-medium tracking-wider hover:shadow-[0_0_40px_hsl(var(--primary)/0.4)] transition-all duration-500"
+            className="group inline-flex items-center gap-3 sm:gap-4 bg-primary text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-full text-xs sm:text-sm font-medium tracking-wider hover:shadow-[0_0_40px_hsl(var(--primary)/0.4)] transition-all duration-500"
           >
             Start Your Project
             <ArrowUpRight className="w-4 h-4 group-hover:rotate-45 transition-transform duration-300" />
