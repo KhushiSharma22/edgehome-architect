@@ -182,9 +182,9 @@ const Social = () => {
             }}
           >
             {[
-              { value: "500+", label: "Projects Shared" },
-              { value: "10K+", label: "Design Lovers" },
-              { value: "Daily", label: "Inspiration" },
+              { value: "150+", label: "Posts" },
+              { value: "2.5K+", label: "Followers" },
+              { value: "Weekly", label: "Updates" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-2xl md:text-3xl font-heading text-primary mb-1">{stat.value}</div>
@@ -427,9 +427,9 @@ const Social = () => {
                   {/* Stats row */}
                   <div className="flex items-center gap-8 mt-8 pt-8 border-t border-border/30">
                     {[
-                      { value: "500+", label: "Posts" },
-                      { value: "10K+", label: "Followers" },
-                      { value: "200+", label: "Projects" },
+                      { value: "150+", label: "Posts" },
+                      { value: "2.5K+", label: "Followers" },
+                      { value: "100+", label: "Projects" },
                     ].map((stat, i) => (
                       <div key={i} className="text-center">
                         <div className="text-xl md:text-2xl font-heading text-foreground">{stat.value}</div>
