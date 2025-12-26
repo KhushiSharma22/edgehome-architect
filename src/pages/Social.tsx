@@ -227,29 +227,29 @@ const Social = () => {
                     ? 'border-primary/40 shadow-lg' 
                     : 'border-border/40 hover:border-border'
                 }`}>
-                  {/* Reel embed */}
+                  {/* Reel preview (Instagram blocks iframes in many browsers) */}
                   <div className="relative aspect-[9/16] bg-muted">
-                    <iframe
-                      src={reel.embedUrl}
-                      className="absolute inset-0 w-full h-full"
-                      frameBorder="0"
-                      scrolling="no"
-                      allowFullScreen
-                      loading="lazy"
-                      title={reel.title}
-                    />
-                    
-                    {/* Subtle overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent pointer-events-none" />
-                    
-                    {/* Play overlay */}
-                    <div className={`absolute inset-0 flex items-center justify-center bg-background/30 backdrop-blur-[2px] transition-opacity duration-400 pointer-events-none ${
-                      hoveredReel === index ? 'opacity-0' : 'opacity-100'
-                    }`}>
-                      <div className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                        <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+                    <a
+                      href={reel.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center"
+                      aria-label={`Open ${reel.title} on Instagram`}
+                    >
+                      <div className="w-14 h-14 rounded-full bg-foreground/10 backdrop-blur-sm flex items-center justify-center border border-border/40">
+                        <Play className="w-5 h-5 text-foreground" />
                       </div>
-                    </div>
+                      <div className="space-y-1">
+                        <div className="text-sm font-medium text-foreground">{reel.title}</div>
+                        <div className="text-xs text-muted-foreground">Open on Instagram</div>
+                      </div>
+                      <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-primary">
+                        View reel <ArrowRight className="w-3 h-3" />
+                      </span>
+                    </a>
+
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
                   </div>
 
                   {/* Footer */}
