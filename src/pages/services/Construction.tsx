@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ChevronRight, ArrowRight } from "lucide-react";
-import constructionHero from "@/assets/construction-hero-texture.jpg";
+import constructionHero from "@/assets/indian-construction-hero.jpg";
 
 const Construction = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -34,35 +34,35 @@ const Construction = () => {
       depth: "0m to -3m",
       principle: "What holds everything must be perfect first.",
       metric: "Load tested to 3× design capacity",
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop"
     },
     { 
       name: "Structure", 
       depth: "Primary Frame",
       principle: "Steel and concrete don't negotiate.",
       metric: "±2mm column alignment tolerance",
-      image: "https://images.unsplash.com/photo-1590274853856-f22d5ee3d228?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop"
     },
     { 
       name: "Envelope", 
       depth: "Building Skin",
       principle: "Protection before appearance.",
       metric: "Zero water ingress warranty",
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"
     },
     { 
       name: "Services", 
       depth: "MEP Systems",
       principle: "The invisible makes the visible work.",
       metric: "BIM-coordinated routing",
-      image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=300&fit=crop"
     },
     { 
       name: "Finish", 
       depth: "Final Layer",
       principle: "Details reveal discipline.",
       metric: "±0.5mm edge tolerance",
-      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=400&h=300&fit=crop"
     },
   ];
 
