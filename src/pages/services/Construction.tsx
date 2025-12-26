@@ -62,7 +62,7 @@ const Construction = () => {
       depth: "Final Layer",
       principle: "Details reveal discipline.",
       metric: "±0.5mm edge tolerance",
-      image: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=400&h=300&fit=crop"
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop"
     },
   ];
 
