@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Instagram, Play, ExternalLink, Heart, MessageCircle, Share2, ArrowRight } from "lucide-react";
+import { Instagram, Play, ExternalLink, ArrowRight, Sparkles } from "lucide-react";
 
 // Instagram Reels data
 const reels = [
@@ -32,178 +32,134 @@ const reels = [
   },
 ];
 
-// Floating particles for background
-const FloatingParticle = ({ delay, size, duration, left, top }: { delay: number; size: number; duration: number; left: string; top: string }) => (
-  <div
-    className="absolute rounded-full bg-gradient-to-br from-primary/20 to-primary/5 blur-sm"
-    style={{
-      width: size,
-      height: size,
-      left,
-      top,
-      animation: `float ${duration}s ease-in-out infinite`,
-      animationDelay: `${delay}s`,
-    }}
-  />
-);
-
 const Social = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hoveredReel, setHoveredReel] = useState<number | null>(null);
-  const [activeReel, setActiveReel] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
   }, []);
 
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    delay: i * 0.5,
-    size: Math.random() * 80 + 40,
-    duration: Math.random() * 4 + 6,
-    left: `${Math.random() * 100}%`,
-    top: `${Math.random() * 100}%`,
-  }));
-
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <Header />
 
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Animated gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
+      {/* ===== HERO SECTION - Clean & Sophisticated ===== */}
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Subtle gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/50 to-background" />
         
-        {/* Floating particles */}
-        <div className="absolute inset-0 overflow-hidden">
-          {particles.map((p, i) => (
-            <FloatingParticle key={i} {...p} />
-          ))}
-        </div>
+        {/* Minimal accent glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[150px]" />
 
-        {/* Instagram gradient glow */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div 
-            className="w-[600px] h-[600px] rounded-full opacity-20 blur-[120px]"
-            style={{
-              background: 'linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
-            }}
-          />
-        </div>
-
-        {/* Grid pattern */}
+        {/* Subtle grid */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.015]"
           style={{
-            backgroundImage: `linear-gradient(hsl(var(--primary) / 0.5) 1px, transparent 1px),
-                              linear-gradient(90deg, hsl(var(--primary) / 0.5) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
+            backgroundImage: `linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
+                              linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px',
           }}
         />
 
+        {/* Corner accents */}
+        <div className="absolute top-32 left-12 w-24 h-24 border-l border-t border-primary/20" />
+        <div className="absolute bottom-32 right-12 w-24 h-24 border-r border-b border-primary/20" />
+
         {/* Content */}
         <div className="container mx-auto px-6 relative z-10 text-center pt-24">
-          {/* Instagram icon with glow */}
+          {/* Instagram icon - refined */}
           <div 
-            className="inline-flex items-center justify-center mb-8"
+            className="inline-flex items-center justify-center mb-10"
             style={{
               opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.8)',
-              transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s',
+              transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'all 0.8s ease-out 0.2s',
             }}
           >
             <div className="relative">
-              <div 
-                className="absolute inset-0 rounded-3xl blur-xl opacity-60"
-                style={{
-                  background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)',
-                }}
-              />
-              <div className="relative w-24 h-24 rounded-3xl flex items-center justify-center bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888]">
-                <Instagram className="w-12 h-12 text-white" />
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] shadow-lg">
+                <Instagram className="w-10 h-10 text-white" />
               </div>
             </div>
           </div>
 
-          {/* Handle */}
-          <div 
-            className="mb-6"
+          {/* Handle with subtle styling */}
+          <a 
+            href="https://www.instagram.com/edgehomes_architects/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mb-8 group"
             style={{
               opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 0.8s ease-out 0.4s',
+              transform: isLoaded ? 'translateY(0)' : 'translateY(15px)',
+              transition: 'all 0.8s ease-out 0.3s',
             }}
           >
-            <a 
-              href="https://www.instagram.com/edgehomes_architects/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-            >
-              <span className="text-lg md:text-xl font-medium">@edgehomes_architects</span>
-              <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
+            <span className="text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">@edgehomes_architects</span>
+            <ExternalLink className="w-4 h-4 text-primary/60" />
+          </a>
 
-          {/* Main heading */}
+          {/* Main heading - elegant typography */}
           <h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-heading text-foreground mb-6"
-            style={{
-              opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? 'translateY(0)' : 'translateY(40px)',
-              transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s',
-            }}
-          >
-            Behind the
-            <br />
-            <span className="text-shimmer italic">Design</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p 
-            className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-10"
+            className="text-4xl md:text-5xl lg:text-6xl font-heading text-foreground mb-6 leading-tight"
             style={{
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
-              transition: 'all 0.8s ease-out 0.7s',
+              transition: 'all 1s ease-out 0.4s',
             }}
           >
-            Follow our journey as we craft extraordinary spaces. 
-            Peek behind the scenes of luxury interior design.
-          </p>
+            Behind the <span className="text-primary italic">Design</span>
+          </h1>
 
-          {/* Stats */}
-          <div 
-            className="flex items-center justify-center gap-8 md:gap-16"
+          {/* Subtitle - clean */}
+          <p 
+            className="text-base md:text-lg text-muted-foreground max-w-lg mx-auto mb-12"
             style={{
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 0.8s ease-out 0.9s',
+              transition: 'all 0.8s ease-out 0.5s',
+            }}
+          >
+            Follow our journey crafting extraordinary spaces across Delhi NCR.
+          </p>
+
+          {/* Stats - refined with dividers */}
+          <div 
+            className="flex items-center justify-center gap-0 mb-12"
+            style={{
+              opacity: isLoaded ? 1 : 0,
+              transform: isLoaded ? 'translateY(0)' : 'translateY(15px)',
+              transition: 'all 0.8s ease-out 0.6s',
             }}
           >
             {[
-              { value: "150+", label: "Posts" },
-              { value: "2.5K+", label: "Followers" },
-              { value: "Weekly", label: "Updates" },
+              { value: "200+", label: "Posts" },
+              { value: "5K+", label: "Followers" },
+              { value: "100+", label: "Projects" },
             ].map((stat, i) => (
-              <div key={i} className="text-center">
-                <div className="text-2xl md:text-3xl font-heading text-primary mb-1">{stat.value}</div>
-                <div className="text-xs text-muted-foreground tracking-wider uppercase">{stat.label}</div>
+              <div key={i} className="flex items-center">
+                <div className="text-center px-8 md:px-12">
+                  <div className="text-2xl md:text-3xl font-heading text-foreground mb-1">{stat.value}</div>
+                  <div className="text-[10px] text-muted-foreground tracking-[0.2em] uppercase">{stat.label}</div>
+                </div>
+                {i < 2 && <div className="w-px h-10 bg-border" />}
               </div>
             ))}
           </div>
 
-          {/* Follow button */}
+          {/* Follow button - refined */}
           <a
             href="https://www.instagram.com/edgehomes_architects/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 mt-12 px-8 py-4 rounded-full text-white font-medium transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_rgba(220,39,67,0.3)]"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
             style={{
-              background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)',
+              background: 'linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)',
               opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
-              transition: 'all 0.8s ease-out 1.1s, transform 0.3s ease, box-shadow 0.3s ease',
+              transform: isLoaded ? 'translateY(0)' : 'translateY(15px)',
+              transition: 'all 0.8s ease-out 0.7s, transform 0.3s ease, box-shadow 0.3s ease',
             }}
           >
             <Instagram className="w-5 h-5" />
@@ -211,43 +167,48 @@ const Social = () => {
           </a>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll hint */}
         <div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
           style={{
-            opacity: isLoaded ? 0.5 : 0,
-            transition: 'opacity 1s ease-out 1.5s',
+            opacity: isLoaded ? 0.4 : 0,
+            transition: 'opacity 1s ease-out 1s',
           }}
         >
-          <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-muted-foreground to-transparent" />
+          <div className="w-px h-12 bg-gradient-to-b from-muted-foreground/50 to-transparent" />
         </div>
       </section>
 
-      {/* ===== REELS SECTION ===== */}
-      <section ref={sectionRef} className="relative py-24 md:py-32 overflow-hidden">
+      {/* ===== REELS SECTION - Clean Layout ===== */}
+      <section ref={sectionRef} className="relative py-20 md:py-28 overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-card via-background to-card" />
+        <div className="absolute inset-0 bg-card/30" />
 
         <div className="container mx-auto px-6 relative z-10">
-          {/* Section header */}
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="w-12 h-px bg-gradient-to-r from-transparent to-primary" />
-              <Play className="w-4 h-4 text-primary" />
-              <span className="text-xs tracking-[0.4em] uppercase text-primary">Featured Reels</span>
-              <div className="w-12 h-px bg-gradient-to-l from-transparent to-primary" />
+          {/* Section header - minimal */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <Play className="w-4 h-4 text-primary" />
+                <span className="text-xs tracking-[0.3em] uppercase text-primary">Featured Reels</span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading text-foreground">
+                Watch Our Story
+              </h2>
             </div>
-            <h2 className="text-3xl md:text-5xl font-heading text-foreground mb-4">
-              Watch Our <span className="text-shimmer">Story</span>
-            </h2>
-            <p className="text-muted-foreground max-w-md mx-auto">
-              Quick glimpses into our design process, project reveals, and the craftsmanship that defines EdgeHomes.
-            </p>
+            <a
+              href="https://www.instagram.com/edgehomes_architects/reels/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              <span>View all reels</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
           </div>
 
-          {/* Reels Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          {/* Reels Grid - Clean cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {reels.map((reel, index) => (
               <div
                 key={reel.id}
@@ -256,19 +217,18 @@ const Social = () => {
                 onMouseLeave={() => setHoveredReel(null)}
                 style={{
                   opacity: isLoaded ? 1 : 0,
-                  transform: isLoaded ? 'translateY(0)' : 'translateY(40px)',
-                  transition: `all 0.8s ease-out ${0.2 + index * 0.1}s`,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+                  transition: `all 0.6s ease-out ${0.1 + index * 0.08}s`,
                 }}
               >
-                {/* Card container */}
-                <div className={`relative overflow-hidden rounded-3xl border transition-all duration-500 ${
+                {/* Card */}
+                <div className={`relative overflow-hidden rounded-2xl border transition-all duration-400 ${
                   hoveredReel === index 
-                    ? 'border-primary/50 shadow-[0_0_60px_hsl(var(--primary)/0.2)]' 
-                    : 'border-border/30 hover:border-primary/30'
+                    ? 'border-primary/40 shadow-lg' 
+                    : 'border-border/40 hover:border-border'
                 }`}>
-                  {/* Aspect ratio container for reel */}
-                  <div className="relative aspect-[9/16] bg-card">
-                    {/* Instagram Embed iframe */}
+                  {/* Reel embed */}
+                  <div className="relative aspect-[9/16] bg-muted">
                     <iframe
                       src={reel.embedUrl}
                       className="absolute inset-0 w-full h-full"
@@ -279,144 +239,93 @@ const Social = () => {
                       title={reel.title}
                     />
                     
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60 pointer-events-none" />
+                    {/* Subtle overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent pointer-events-none" />
                     
-                    {/* Play button overlay - visible when not hovering */}
-                    <div className={`absolute inset-0 flex items-center justify-center bg-background/40 backdrop-blur-sm transition-all duration-500 pointer-events-none ${
+                    {/* Play overlay */}
+                    <div className={`absolute inset-0 flex items-center justify-center bg-background/30 backdrop-blur-[2px] transition-opacity duration-400 pointer-events-none ${
                       hoveredReel === index ? 'opacity-0' : 'opacity-100'
                     }`}>
-                      <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
-                        <Play className="w-6 h-6 text-white fill-white ml-1" />
+                      <div className="w-14 h-14 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                        <Play className="w-5 h-5 text-white fill-white ml-0.5" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Reel info footer */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background to-transparent">
+                  {/* Footer */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-foreground/90">{reel.title}</span>
+                      <span className="text-xs font-medium text-white/90">{reel.title}</span>
                       <a 
                         href={reel.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-xs text-primary hover:underline"
+                        className="text-[10px] text-white/60 hover:text-white transition-colors"
                       >
-                        View
-                        <ExternalLink className="w-3 h-3" />
+                        View →
                       </a>
                     </div>
                   </div>
-
-                  {/* Engagement icons */}
-                  <div className={`absolute right-3 bottom-20 flex flex-col items-center gap-4 transition-all duration-500 ${
-                    hoveredReel === index ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
-                  }`}>
-                    <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-colors">
-                      <Heart className="w-5 h-5 text-white" />
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-colors">
-                      <MessageCircle className="w-5 h-5 text-white" />
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center hover:bg-white/20 transition-colors">
-                      <Share2 className="w-5 h-5 text-white" />
-                    </button>
-                  </div>
                 </div>
-
-                {/* Glow effect on hover */}
-                <div className={`absolute -inset-1 rounded-3xl transition-opacity duration-500 -z-10 ${
-                  hoveredReel === index ? 'opacity-100' : 'opacity-0'
-                }`} style={{
-                  background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)',
-                  filter: 'blur(20px)',
-                  opacity: hoveredReel === index ? 0.3 : 0,
-                }} />
               </div>
             ))}
-          </div>
-
-          {/* View all CTA */}
-          <div className="text-center mt-16">
-            <a
-              href="https://www.instagram.com/edgehomes_architects/reels/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-primary/30 text-primary hover:bg-primary/10 hover:border-primary/60 transition-all duration-500"
-            >
-              <span className="font-medium tracking-wider">View All Reels</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-            </a>
           </div>
         </div>
       </section>
 
-      {/* ===== INSTAGRAM FEED EMBED ===== */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
-        
-        {/* Corner decorations */}
-        <div className="absolute top-20 left-10 w-32 h-32 border-l-2 border-t-2 border-primary/10" />
-        <div className="absolute bottom-20 right-10 w-32 h-32 border-r-2 border-b-2 border-primary/10" />
+      {/* ===== PROFILE SECTION - Refined Card ===== */}
+      <section className="relative py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
 
         <div className="container mx-auto px-6 relative z-10">
-          {/* Section header */}
-          <div className="text-center mb-16">
-            <span className="text-primary text-xs tracking-[0.4em] uppercase mb-4 block">
-              Stay Connected
-            </span>
-            <h2 className="text-3xl md:text-5xl font-heading text-foreground mb-4">
-              Join Our <span className="text-shimmer">Community</span>
+          {/* Section label */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-xs tracking-[0.3em] uppercase text-primary">Stay Connected</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-heading text-foreground">
+              Join Our Community
             </h2>
-            <p className="text-muted-foreground max-w-lg mx-auto">
-              Get daily design inspiration, behind-the-scenes content, and be the first to see our latest projects.
-            </p>
           </div>
 
-          {/* Large Instagram profile card */}
-          <div className="max-w-3xl mx-auto">
-            <div className="relative rounded-3xl border border-border/30 overflow-hidden bg-card/50 backdrop-blur-sm">
-              {/* Header gradient */}
+          {/* Profile Card - Clean design */}
+          <div className="max-w-2xl mx-auto">
+            <div className="relative rounded-2xl border border-border/40 overflow-hidden bg-card/80 backdrop-blur-sm">
+              {/* Header with gradient */}
               <div 
-                className="h-32 md:h-40"
+                className="h-24 md:h-28"
                 style={{
-                  background: 'linear-gradient(135deg, #f09433 0%, #e6683c 20%, #dc2743 40%, #cc2366 60%, #bc1888 80%, #8134af 100%)',
+                  background: 'linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)',
                 }}
               />
 
-              {/* Profile content */}
-              <div className="relative px-8 pb-8">
+              {/* Content */}
+              <div className="relative px-6 md:px-8 pb-8">
                 {/* Avatar */}
-                <div className="absolute -top-16 left-8">
-                  <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl border-4 border-card bg-card overflow-hidden shadow-2xl">
-                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                      <span className="text-4xl font-heading text-primary">EH</span>
+                <div className="absolute -top-12 left-6 md:left-8">
+                  <div className="w-24 h-24 rounded-xl border-4 border-card bg-card overflow-hidden shadow-lg">
+                    <div className="w-full h-full bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center">
+                      <span className="text-3xl font-heading text-primary">EH</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Info */}
-                <div className="pt-20 md:pt-16 md:pl-40">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                <div className="pt-16 md:pt-14">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
                     <div>
-                      <h3 className="text-2xl font-heading text-foreground mb-1">EdgeHomes Architects</h3>
-                      <p className="text-primary text-sm mb-4">@edgehomes_architects</p>
-                      <p className="text-muted-foreground max-w-md leading-relaxed">
-                        🏠 Premium Interior Design & Architecture
-                        <br />
-                        📍 Delhi NCR
-                        <br />
-                        ✨ Crafting dream spaces since 2015
-                      </p>
+                      <h3 className="text-xl font-heading text-foreground mb-0.5">EdgeHomes Architects</h3>
+                      <p className="text-sm text-primary">@edgehomes_architects</p>
                     </div>
 
                     <a
                       href="https://www.instagram.com/edgehomes_architects/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all duration-300 hover:scale-105 shrink-0"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-white text-sm font-medium transition-all duration-300 hover:scale-[1.02] shrink-0"
                       style={{
-                        background: 'linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)',
+                        background: 'linear-gradient(135deg, #f09433, #dc2743, #bc1888)',
                       }}
                     >
                       <Instagram className="w-4 h-4" />
@@ -424,16 +333,22 @@ const Social = () => {
                     </a>
                   </div>
 
-                  {/* Stats row */}
-                  <div className="flex items-center gap-8 mt-8 pt-8 border-t border-border/30">
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    🏠 Premium Interior Design & Architecture<br />
+                    📍 Delhi NCR | Pitampura<br />
+                    ✨ Crafting dream spaces since 2015
+                  </p>
+
+                  {/* Stats */}
+                  <div className="flex items-center gap-6 pt-6 border-t border-border/40">
                     {[
-                      { value: "150+", label: "Posts" },
-                      { value: "2.5K+", label: "Followers" },
+                      { value: "200+", label: "Posts" },
+                      { value: "5K+", label: "Followers" },
                       { value: "100+", label: "Projects" },
                     ].map((stat, i) => (
                       <div key={i} className="text-center">
-                        <div className="text-xl md:text-2xl font-heading text-foreground">{stat.value}</div>
-                        <div className="text-xs text-muted-foreground tracking-wider">{stat.label}</div>
+                        <div className="text-lg font-heading text-foreground">{stat.value}</div>
+                        <div className="text-[10px] text-muted-foreground tracking-wider uppercase">{stat.label}</div>
                       </div>
                     ))}
                   </div>
@@ -442,25 +357,24 @@ const Social = () => {
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className="text-center mt-20">
-            <div className="inline-flex flex-col md:flex-row items-center gap-4">
+          {/* CTA */}
+          <div className="text-center mt-12">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-primary text-primary-foreground font-medium hover:shadow-[0_0_40px_hsl(var(--primary)/0.4)] transition-all duration-500"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:shadow-lg transition-all duration-300"
               >
                 Start Your Project
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <span className="text-muted-foreground text-sm">or</span>
               <a
                 href="https://www.instagram.com/edgehomes_architects/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary hover:underline"
+                className="text-sm text-primary hover:underline"
               >
                 DM us on Instagram
-                <ExternalLink className="w-3 h-3" />
               </a>
             </div>
           </div>
@@ -468,14 +382,6 @@ const Social = () => {
       </section>
 
       <Footer />
-
-      {/* CSS for floating animation */}
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(5deg); }
-        }
-      `}</style>
     </div>
   );
 };
