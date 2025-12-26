@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import SignatureStrip from "@/components/SignatureStrip";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import PartnerLogos from "@/components/PartnerLogos";
+import ServicesDNA from "@/components/ServicesDNA";
 import EdgeHomesMethod from "@/components/EdgeHomesMethod";
 import MaterialsCraft from "@/components/MaterialsCraft";
 import TrustProofWall from "@/components/TrustProofWall";
@@ -17,6 +18,7 @@ const Index = () => {
         <HeroSection />
         <SignatureStrip />
         <BeforeAfterSlider />
+        <ServicesDNA />
         <PartnerLogos />
         <EdgeHomesMethod />
         <MaterialsCraft />

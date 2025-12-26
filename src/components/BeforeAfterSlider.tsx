@@ -1,28 +1,34 @@
 import { useState } from "react";
 import { ArrowLeftRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import indianLivingBefore from "@/assets/indian-living-before.jpg";
+import indianLivingAfter from "@/assets/indian-living-after.jpg";
+import indianKitchenBefore from "@/assets/indian-kitchen-before.jpg";
+import indianKitchenAfter from "@/assets/indian-kitchen-after.jpg";
+import indianBedroomBefore from "@/assets/indian-bedroom-before.jpg";
+import indianBedroomAfter from "@/assets/indian-bedroom-after.jpg";
 
 const transformations = [
   {
     id: 1,
-    before: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&h=800&fit=crop",
-    after: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop",
+    before: indianLivingBefore,
+    after: indianLivingAfter,
     title: "Living Room Transformation",
-    location: "Pitampura, Delhi",
+    location: "Faridabad, Haryana",
   },
   {
     id: 2,
-    before: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=1200&h=800&fit=crop",
-    after: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=800&fit=crop",
+    before: indianKitchenBefore,
+    after: indianKitchenAfter,
     title: "Kitchen Renovation",
-    location: "Model Town, Delhi",
+    location: "Greater Noida, UP",
   },
   {
     id: 3,
-    before: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=1200&h=800&fit=crop",
-    after: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop",
+    before: indianBedroomBefore,
+    after: indianBedroomAfter,
     title: "Master Bedroom",
-    location: "Rohini, Delhi",
+    location: "Gurgaon, Haryana",
   },
 ];
 
