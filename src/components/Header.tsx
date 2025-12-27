@@ -41,7 +41,6 @@ const Header = () => {
   const menuItems = [
     { label: "Home", href: "/", isRoute: true },
     { label: "About", href: "/about", isRoute: true },
-    { label: "Process", href: "/#method", isRoute: false },
     { label: "Social", href: "/social", isRoute: true },
     { label: "Contact", href: "/contact", isRoute: true },
   ];
@@ -57,11 +56,15 @@ const Header = () => {
       <nav className="container mx-auto px-6">
         <div className="flex items-center justify-between">
           {/* Logo with animated underline */}
-          <Link to="/" className="group relative">
-            <span className="text-2xl md:text-3xl font-heading font-bold text-primary transition-all duration-500 group-hover:text-shimmer">
-              EdgeHomes
+          <Link to="/" className="group relative flex items-baseline gap-1">
+            <span className="text-2xl md:text-3xl font-heading font-bold tracking-tight transition-all duration-500">
+              <span className="text-primary">Edge</span>
+              <span className="text-foreground">home</span>
             </span>
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-gold-light group-hover:w-full transition-all duration-500" />
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary/80 font-medium -translate-y-0.5">
+              Designs
+            </span>
+            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary via-primary/60 to-transparent group-hover:w-full transition-all duration-700 ease-out" />
           </Link>
 
           {/* Desktop Menu with active indicators */}
