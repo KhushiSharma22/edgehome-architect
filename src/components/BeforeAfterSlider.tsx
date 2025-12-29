@@ -1,33 +1,33 @@
 import { useState } from "react";
 import { ArrowLeftRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import indianLivingBefore from "@/assets/indian-living-before.jpg";
-import indianLivingAfter from "@/assets/indian-living-after.jpg";
-import indianKitchenBefore from "@/assets/indian-kitchen-before.jpg";
-import indianKitchenAfter from "@/assets/indian-kitchen-after.jpg";
-import indianBedroomBefore from "@/assets/indian-bedroom-before.jpg";
-import indianBedroomAfter from "@/assets/indian-bedroom-after.jpg";
+import livingBeforeNew from "@/assets/living-before-new.jpg";
+import livingAfterNew from "@/assets/living-after-new.jpg";
+import kitchenBeforeNew from "@/assets/kitchen-before-new.jpg";
+import kitchenAfterNew from "@/assets/kitchen-after-new.jpg";
+import bedroomBeforeNew from "@/assets/bedroom-before-new.jpg";
+import bedroomAfterNew from "@/assets/bedroom-after-new.jpg";
 
 const transformations = [
   {
     id: 1,
-    before: indianLivingBefore,
-    after: indianLivingAfter,
+    before: livingBeforeNew,
+    after: livingAfterNew,
     title: "Living Room Transformation",
     location: "Faridabad, Haryana",
   },
   {
     id: 2,
-    before: indianKitchenBefore,
-    after: indianKitchenAfter,
-    title: "Kitchen Renovation",
+    before: kitchenBeforeNew,
+    after: kitchenAfterNew,
+    title: "Modular Kitchen Makeover",
     location: "Greater Noida, UP",
   },
   {
     id: 3,
-    before: indianBedroomBefore,
-    after: indianBedroomAfter,
-    title: "Master Bedroom",
+    before: bedroomBeforeNew,
+    after: bedroomAfterNew,
+    title: "Master Bedroom Redesign",
     location: "Gurgaon, Haryana",
   },
 ];
