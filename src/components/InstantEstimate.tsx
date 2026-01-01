@@ -171,7 +171,7 @@ const InstantEstimate = () => {
                     estimate ? 'animate-pulse-glow' : ''
                   }`}
                   disabled={!estimate}
-                  onClick={() => window.open(buildWhatsAppLink('919871522556', 'Hi, I want a detailed quote for my project.'), '_blank')}
+                  onClick={() => { window.location.href = buildWhatsAppLink('919871522556', 'Hi, I want a detailed quote for my project.'); }}
                 >
                   <MessageCircle className="w-5 h-5" />
                   Get Detailed Quote

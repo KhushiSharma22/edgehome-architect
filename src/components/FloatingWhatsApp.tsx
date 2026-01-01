@@ -8,7 +8,7 @@ const FloatingWhatsApp = () => {
         "919871522556",
         "Hi, I'm interested in interior design services."
       )}
-      target="_blank"
+      target="_self"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 group"
     >
