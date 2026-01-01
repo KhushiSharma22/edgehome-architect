@@ -131,7 +131,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className={`pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <p className="text-sm text-muted-foreground">
-            © 2024 EdgeHomes Architects & Construction. All rights reserved.
+            © 2026 EdgeHomes Architects & Construction. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground/60">
             Crafted with passion in Delhi
