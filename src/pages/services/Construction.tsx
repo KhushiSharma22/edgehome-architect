@@ -307,17 +307,6 @@ const Construction = () => {
                 </Link>
               </div>
 
-              {/* Bottom decorative element */}
-              <div 
-                className="absolute -bottom-8 left-0 flex items-center gap-3"
-                style={{
-                  opacity: isLoaded ? 1 : 0,
-                  transition: "opacity 1s ease-out 1.6s"
-                }}
-              >
-                <div className="w-12 h-px bg-ivory/20" />
-                <span className="text-[9px] text-ivory/30 tracking-[0.3em] uppercase">Est. 2014</span>
-              </div>
             </div>
 
             {/* Right side - decorative elements for desktop (image is in background) */}
@@ -337,8 +326,32 @@ const Construction = () => {
             className="text-[10px] tracking-[0.4em] text-ivory/20 uppercase"
             style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
           >
-            EdgeHomes Construction • Since 2014
+            EdgeHomes Construction
           </span>
+        </div>
+
+        {/* Animated floating geometric shapes */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Rotating diamond */}
+          <div 
+            className="absolute top-1/4 right-[15%] w-4 h-4 border border-[#C6A46A]/30 animate-spin-slow hidden lg:block"
+            style={{ animationDuration: '20s' }}
+          />
+          {/* Pulsing circle */}
+          <div className="absolute bottom-1/3 right-[25%] w-3 h-3 rounded-full bg-[#C6A46A]/20 animate-pulse-glow hidden lg:block" />
+          {/* Floating bars */}
+          <div className="absolute top-1/3 right-[10%] flex flex-col gap-1 hidden lg:block">
+            {[...Array(3)].map((_, i) => (
+              <div 
+                key={i}
+                className="h-px bg-[#C6A46A]/30 animate-width-pulse"
+                style={{ 
+                  width: `${20 + i * 10}px`,
+                  animationDelay: `${i * 0.3}s`
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Scroll indicator - sleek */}
@@ -374,32 +387,36 @@ const Construction = () => {
 
       {/* ===== SECTION 2: THE ANATOMY ===== */}
       <section ref={layersRef} className="relative py-20 md:py-28 overflow-hidden bg-[#0E0E0E]">
-        {/* Subtle Grid */}
+        {/* Animated Grid with reveal effect */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03] animate-grid-reveal"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+              linear-gradient(to right, rgba(198,164,106,0.5) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(198,164,106,0.5) 1px, transparent 1px)
             `,
-            backgroundSize: '80px 80px',
+            backgroundSize: '60px 60px',
           }}
         />
 
+        {/* Floating orbs */}
+        <div className="absolute top-20 left-[10%] w-32 h-32 rounded-full bg-[#C6A46A]/5 blur-3xl animate-float-slow" />
+        <div className="absolute bottom-40 right-[15%] w-48 h-48 rounded-full bg-[#C6A46A]/3 blur-3xl animate-float-slow" style={{ animationDelay: '2s' }} />
+
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
-          {/* Section Header */}
-          <div className="mb-20">
+          {/* Section Header with animation */}
+          <div className="mb-20 animate-fade-in-section">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-8 h-[1px] bg-[#C6A46A]/50" />
-              <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono">
+              <div className="w-8 h-[1px] bg-[#C6A46A]/50 animate-expand-line" />
+              <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono animate-text-reveal">
                 THE ANATOMY
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-ivory mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-ivory mb-4 animate-slide-up-text">
               Every layer carries
-              <span className="text-ivory/50"> responsibility.</span>
+              <span className="text-ivory/50 animate-text-fade"> responsibility.</span>
             </h2>
-            <p className="text-base md:text-lg text-ivory/50 max-w-lg leading-relaxed">
+            <p className="text-base md:text-lg text-ivory/50 max-w-lg leading-relaxed animate-fade-in-delayed">
               Construction is not sequential steps. It's interlocking systems where each depends on every other.
             </p>
           </div>
@@ -456,18 +473,23 @@ const Construction = () => {
               />
             </div>
 
-            {/* Layers */}
+            {/* Layers with enhanced animations */}
             <div className="space-y-16 pl-8 md:pl-20">
               {constructionLayers.map((layer, index) => (
                 <div 
                   key={layer.name}
-                  className={`relative transition-all duration-500 ${activeLayer >= index ? 'opacity-100' : 'opacity-40'}`}
+                  className={`relative transition-all duration-700 transform ${
+                    activeLayer >= index 
+                      ? 'opacity-100 translate-x-0' 
+                      : 'opacity-30 translate-x-4'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  {/* Layer Marker */}
+                  {/* Layer Marker with pulse */}
                   <div 
-                    className={`absolute -left-8 md:-left-20 top-2 w-3 h-3 rounded-full border-2 transition-all duration-400 ${
+                    className={`absolute -left-8 md:-left-20 top-2 w-3 h-3 rounded-full border-2 transition-all duration-500 ${
                       activeLayer >= index 
-                        ? 'border-[#C6A46A] bg-[#C6A46A]' 
+                        ? 'border-[#C6A46A] bg-[#C6A46A] animate-marker-pulse shadow-[0_0_15px_rgba(198,164,106,0.5)]' 
                         : 'border-ivory/30 bg-[#0E0E0E]'
                     }`}
                   >
@@ -478,51 +500,80 @@ const Construction = () => {
 
                   {/* Content */}
                   <div className="group grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-                    {/* Image */}
+                    {/* Image with advanced hover */}
                     <div className="md:col-span-4">
-                      <div className="relative overflow-hidden aspect-[4/3]">
+                      <div className="relative overflow-hidden aspect-[4/3] group/image">
                         <img 
                           src={layer.image}
                           alt={layer.name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          className={`w-full h-full object-cover transition-all duration-1000 group-hover/image:scale-110 ${
+                            activeLayer >= index ? 'filter-none' : 'grayscale'
+                          }`}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E]/60 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E]/80 via-transparent to-transparent" />
                         
-                        {/* Corner accent */}
-                        <div className="absolute top-2 left-2 w-4 h-4 border-l border-t border-[#C6A46A]/50" />
-                        <div className="absolute bottom-2 right-2 w-4 h-4 border-r border-b border-[#C6A46A]/50" />
+                        {/* Animated corner accents */}
+                        <div className={`absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-[#C6A46A]/50 transition-all duration-500 ${
+                          activeLayer >= index ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                        }`} />
+                        <div className={`absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-[#C6A46A]/50 transition-all duration-500 ${
+                          activeLayer >= index ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
+                        }`} style={{ transitionDelay: '100ms' }} />
+                        
+                        {/* Shine effect on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover/image:translate-x-[200%] transition-transform duration-1000" />
+                        
+                        {/* Number overlay */}
+                        <div className={`absolute bottom-4 right-4 text-5xl font-heading text-[#C6A46A]/20 transition-all duration-500 ${
+                          activeLayer >= index ? 'opacity-100' : 'opacity-0'
+                        }`}>
+                          0{index + 1}
+                        </div>
                       </div>
                     </div>
 
-                    {/* Text Content */}
+                    {/* Text Content with stagger */}
                     <div className="md:col-span-8 flex flex-col justify-center">
                       <div className="flex items-baseline gap-4 mb-3">
-                        <h3 className="text-2xl md:text-3xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
+                        <h3 className={`text-2xl md:text-3xl font-heading text-ivory group-hover:text-[#C6A46A] transition-all duration-500 ${
+                          activeLayer >= index ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-50'
+                        }`}>
                           {layer.name}
                         </h3>
-                        <span className="text-xs tracking-[0.15em] uppercase text-[#C6A46A]/60">
+                        <span className={`text-xs tracking-[0.15em] uppercase text-[#C6A46A]/60 transition-all duration-500 ${
+                          activeLayer >= index ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
+                        }`} style={{ transitionDelay: '100ms' }}>
                           {layer.depth}
                         </span>
                       </div>
 
-                      <p className="text-lg text-ivory/60 leading-relaxed mb-4">
+                      <p className={`text-lg text-ivory/60 leading-relaxed mb-4 transition-all duration-500 ${
+                        activeLayer >= index ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-30'
+                      }`} style={{ transitionDelay: '150ms' }}>
                         {layer.principle}
                       </p>
                       
-                      {/* Metric Badge */}
+                      {/* Metric Badge with animation */}
                       <span 
-                        className={`inline-flex items-center gap-2 text-xs tracking-wide text-ivory/50 transition-all duration-400 ${
-                          activeLayer >= index ? 'opacity-100' : 'opacity-0'
+                        className={`inline-flex items-center gap-2 text-xs tracking-wide text-ivory/50 transition-all duration-500 ${
+                          activeLayer >= index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                         }`}
+                        style={{ transitionDelay: '200ms' }}
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C6A46A]" />
+                        <span className={`w-1.5 h-1.5 rounded-full bg-[#C6A46A] ${activeLayer >= index ? 'animate-pulse' : ''}`} />
                         {layer.metric}
                       </span>
                     </div>
                   </div>
 
-                  {/* Separator */}
-                  <div className="mt-10 h-px bg-ivory/10" />
+                  {/* Animated Separator */}
+                  <div className="mt-10 h-px bg-ivory/5 relative overflow-hidden">
+                    <div 
+                      className={`absolute left-0 top-0 h-full bg-gradient-to-r from-[#C6A46A]/50 to-transparent transition-all duration-1000 ${
+                        activeLayer >= index ? 'w-full' : 'w-0'
+                      }`}
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -531,71 +582,98 @@ const Construction = () => {
       </section>
 
       {/* ===== SECTION 3: THE PROMISE ===== */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
-        {/* Background with image */}
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Animated background */}
         <div className="absolute inset-0">
           <img 
             src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1920&q=80"
             alt="Architecture detail"
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-10 animate-slow-zoom"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E0E] via-[#0E0E0E]/95 to-[#0E0E0E]" />
+          
+          {/* Animated particles */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(12)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-[#C6A46A]/30 rounded-full animate-float-particle"
+                style={{
+                  left: `${8 + i * 8}%`,
+                  top: `${20 + (i % 4) * 20}%`,
+                  animationDuration: `${6 + i % 4}s`,
+                  animationDelay: `${i * 0.5}s`,
+                }}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
-          {/* Decorative element */}
+          {/* Animated decorative element */}
           <div className="flex justify-center mb-10">
             <div className="flex items-center gap-4">
-              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#C6A46A]/50" />
-              <div className="w-2 h-2 rotate-45 border border-[#C6A46A]/50" />
-              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#C6A46A]/50" />
+              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#C6A46A]/50 animate-expand-left" />
+              <div className="w-3 h-3 rotate-45 border border-[#C6A46A]/50 animate-spin-slow" style={{ animationDuration: '8s' }} />
+              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#C6A46A]/50 animate-expand-right" />
             </div>
           </div>
 
-          {/* Quote */}
+          {/* Quote with reveal */}
           <div className="mb-12">
-            <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono block mb-8">
+            <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono block mb-8 animate-fade-in-up">
               OUR COMMITMENT
             </span>
             
             <blockquote className="text-2xl md:text-3xl lg:text-4xl font-heading text-ivory leading-relaxed mb-8">
-              "We measure twice not because we might be wrong,
-              <span className="text-ivory/50"> but because our clients deserve </span>
-              <span className="text-[#C6A46A] italic">certainty.</span>"
+              <span className="inline-block animate-word-reveal" style={{ animationDelay: '0.1s' }}>"We measure twice </span>
+              <span className="inline-block animate-word-reveal" style={{ animationDelay: '0.3s' }}>not because we might be wrong,</span>
+              <span className="text-ivory/50 inline-block animate-word-reveal" style={{ animationDelay: '0.5s' }}> but because our clients deserve </span>
+              <span className="text-[#C6A46A] italic inline-block animate-word-reveal animate-glow-text" style={{ animationDelay: '0.7s' }}>certainty.</span>
+              <span className="inline-block animate-word-reveal" style={{ animationDelay: '0.9s' }}>"</span>
             </blockquote>
 
-            <div className="flex items-center justify-center gap-4 text-ivory/40">
+            <div className="flex items-center justify-center gap-4 text-ivory/40 animate-fade-in-up" style={{ animationDelay: '1s' }}>
               <span className="h-px w-10 bg-ivory/20" />
               <span className="text-xs tracking-[0.15em] uppercase">EdgeHomes Construction</span>
               <span className="h-px w-10 bg-ivory/20" />
             </div>
           </div>
 
-          {/* Key Points */}
+          {/* Key Points with stagger animation */}
           <div className="grid grid-cols-3 gap-8 mt-16 mb-16">
             {[
               { stat: "Zero", desc: "Material compromise" },
               { stat: "Daily", desc: "Progress updates" },
               { stat: "Full", desc: "Cost transparency" },
             ].map((item, i) => (
-              <div key={i} className="text-center group">
-                <div className="text-2xl md:text-3xl font-heading text-[#C6A46A] mb-2 group-hover:scale-105 transition-transform duration-200">
+              <div 
+                key={i} 
+                className="text-center group animate-scale-in-up"
+                style={{ animationDelay: `${1.2 + i * 0.2}s` }}
+              >
+                <div className="text-2xl md:text-3xl font-heading text-[#C6A46A] mb-2 group-hover:scale-110 group-hover:text-shadow-glow transition-all duration-300">
                   {item.stat}
                 </div>
-                <div className="text-xs text-ivory/50 tracking-wider uppercase">
+                <div className="text-xs text-ivory/50 tracking-wider uppercase group-hover:text-ivory/70 transition-colors duration-300">
                   {item.desc}
                 </div>
+                {/* Underline on hover */}
+                <div className="h-px w-0 bg-[#C6A46A]/50 mx-auto mt-2 group-hover:w-12 transition-all duration-300" />
               </div>
             ))}
           </div>
 
-          {/* CTA */}
+          {/* CTA with magnetic effect */}
           <Link 
             to="/contact"
-            className="group inline-flex items-center gap-4 bg-[#C6A46A] text-[#0E0E0E] px-8 py-4 text-sm tracking-wider font-medium hover:bg-[#C6A46A]/90 transition-all duration-500"
+            className="group relative inline-flex items-center gap-4 bg-[#C6A46A] text-[#0E0E0E] px-10 py-5 text-sm tracking-wider font-medium overflow-hidden animate-fade-in-up"
+            style={{ animationDelay: '1.8s' }}
           >
-            Discuss Your Project
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+            {/* Shine sweep */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <span className="relative z-10">Discuss Your Project</span>
+            <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
           </Link>
         </div>
       </section>
