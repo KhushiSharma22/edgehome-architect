@@ -11,23 +11,37 @@ import eggChair from "@/assets/egg-chair.png";
 import studioSketch from "@/assets/studio-sketch.jpg";
 
 
-// Simple decorative dots - static for performance
-const DecorativeElements = () => {
+// Animated floating particles - creates energy
+const FloatingParticles = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute top-1/4 left-1/4 w-2 h-2 rounded-full bg-primary/20" />
-      <div className="absolute top-1/3 right-1/3 w-3 h-3 rounded-full bg-primary/15" />
-      <div className="absolute bottom-1/4 left-1/3 w-2 h-2 rounded-full bg-primary/25" />
-      <div className="absolute top-1/2 right-1/4 w-1.5 h-1.5 rounded-full bg-primary/20" />
+      {/* Pulsing orbs */}
+      <div className="absolute top-[15%] left-[20%] w-3 h-3 rounded-full bg-primary/40 animate-pulse" style={{ animationDuration: '2s' }} />
+      <div className="absolute top-[25%] right-[25%] w-2 h-2 rounded-full bg-primary/30 animate-pulse" style={{ animationDuration: '3s', animationDelay: '0.5s' }} />
+      <div className="absolute top-[60%] left-[15%] w-4 h-4 rounded-full bg-primary/25 animate-pulse" style={{ animationDuration: '2.5s', animationDelay: '1s' }} />
+      <div className="absolute top-[45%] right-[18%] w-2.5 h-2.5 rounded-full bg-primary/35 animate-pulse" style={{ animationDuration: '3.5s', animationDelay: '0.3s' }} />
+      <div className="absolute bottom-[20%] left-[30%] w-2 h-2 rounded-full bg-primary/20 animate-pulse" style={{ animationDuration: '2.8s', animationDelay: '0.8s' }} />
+      <div className="absolute bottom-[35%] right-[35%] w-3 h-3 rounded-full bg-primary/30 animate-pulse" style={{ animationDuration: '2.2s', animationDelay: '1.2s' }} />
+      
+      {/* Floating diamonds */}
+      <div className="absolute top-[30%] left-[10%] w-2 h-2 bg-primary/25 rotate-45 animate-float" style={{ animationDuration: '6s' }} />
+      <div className="absolute top-[70%] right-[12%] w-3 h-3 bg-primary/20 rotate-45 animate-float" style={{ animationDuration: '8s', animationDelay: '-2s' }} />
+      <div className="absolute bottom-[25%] left-[45%] w-1.5 h-1.5 bg-primary/30 rotate-45 animate-float" style={{ animationDuration: '5s', animationDelay: '-1s' }} />
+      
+      {/* Rising lines */}
+      <div className="absolute bottom-0 left-[20%] w-px h-32 bg-gradient-to-t from-primary/30 to-transparent animate-pulse" style={{ animationDuration: '4s' }} />
+      <div className="absolute bottom-0 left-[40%] w-px h-48 bg-gradient-to-t from-primary/20 to-transparent animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
+      <div className="absolute bottom-0 right-[30%] w-px h-40 bg-gradient-to-t from-primary/25 to-transparent animate-pulse" style={{ animationDuration: '4.5s', animationDelay: '0.5s' }} />
+      <div className="absolute bottom-0 right-[15%] w-px h-36 bg-gradient-to-t from-primary/15 to-transparent animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }} />
     </div>
   );
 };
 
-// Static decorative shape
+// Animated decorative shape with glow
 const DecorativeShape = ({ className = "" }: { className?: string }) => {
   return (
     <div className={`absolute ${className}`}>
-      <div className="w-full h-full rounded-full bg-gradient-to-br from-primary/10 to-primary/5 blur-2xl" />
+      <div className="w-full h-full rounded-full bg-gradient-to-br from-primary/15 to-primary/5 blur-2xl animate-pulse" style={{ animationDuration: '4s' }} />
     </div>
   );
 };
@@ -106,12 +120,13 @@ const HeroAbout = () => {
         />
       </div>
 
-      {/* Static Decorative Shapes */}
-      <DecorativeShape className="w-[400px] h-[400px] -top-32 -left-32 opacity-20" />
-      <DecorativeShape className="w-[350px] h-[350px] -bottom-20 -right-20 opacity-15" />
+      {/* Animated Decorative Shapes */}
+      <DecorativeShape className="w-[500px] h-[500px] -top-32 -left-32 opacity-30" />
+      <DecorativeShape className="w-[450px] h-[450px] -bottom-20 -right-20 opacity-25" />
+      <DecorativeShape className="w-[300px] h-[300px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-15" />
 
-      {/* Subtle Decorative Elements */}
-      <DecorativeElements />
+      {/* Floating Particles */}
+      <FloatingParticles />
 
       {/* Static Light Beams */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -133,43 +148,66 @@ const HeroAbout = () => {
         />
       </div>
 
-      {/* Vertical Light Pillars - Reduced */}
+      {/* Animated Light Pillars */}
       <div className="absolute inset-0 pointer-events-none">
-        {[15, 35, 65, 85].map((pos, i) => (
+        {[15, 30, 50, 70, 85].map((pos, i) => (
           <div 
             key={i}
-            className="absolute top-0 bottom-0 w-px"
+            className="absolute top-0 bottom-0 w-px animate-pulse"
             style={{
               left: `${pos}%`,
               background: `linear-gradient(180deg, 
                 transparent 0%, 
-                hsl(38 42% 55% / ${0.04 + i * 0.01}) 30%, 
-                hsl(38 42% 55% / ${0.06 + i * 0.01}) 50%, 
-                hsl(38 42% 55% / ${0.04 + i * 0.01}) 70%, 
+                hsl(38 42% 55% / ${0.08 + i * 0.02}) 30%, 
+                hsl(38 42% 55% / ${0.12 + i * 0.02}) 50%, 
+                hsl(38 42% 55% / ${0.08 + i * 0.02}) 70%, 
                 transparent 100%
               )`,
               opacity: isLoaded ? 1 : 0,
               transition: `opacity 2s ease-out ${1 + i * 0.3}s`,
+              animationDuration: `${3 + i * 0.5}s`,
+              animationDelay: `${i * 0.3}s`,
             }}
           />
         ))}
       </div>
-
-      {/* Static Glow Orbs */}
+      
+      {/* Scanning light effect */}
       <div 
-        className="absolute w-64 h-64 rounded-full blur-[100px]"
+        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        style={{
+          animation: isLoaded ? 'scanDown 8s ease-in-out infinite' : 'none',
+        }}
+      />
+
+      {/* Animated Glow Orbs */}
+      <div 
+        className="absolute w-72 h-72 rounded-full blur-[100px] animate-float"
         style={{
           top: '10%',
           left: '20%',
-          background: 'radial-gradient(circle, hsl(38 50% 55% / 0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, hsl(38 50% 55% / 0.15) 0%, transparent 70%)',
+          animationDuration: '8s',
         }}
       />
       <div 
-        className="absolute w-72 h-72 rounded-full blur-[120px]"
+        className="absolute w-80 h-80 rounded-full blur-[120px] animate-float"
         style={{
           bottom: '10%',
           right: '15%',
-          background: 'radial-gradient(circle, hsl(30 45% 50% / 0.06) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, hsl(30 45% 50% / 0.12) 0%, transparent 70%)',
+          animationDuration: '10s',
+          animationDelay: '-3s',
+        }}
+      />
+      <div 
+        className="absolute w-96 h-96 rounded-full blur-[150px] animate-pulse"
+        style={{
+          top: '40%',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: 'radial-gradient(circle, hsl(38 55% 50% / 0.08) 0%, transparent 60%)',
+          animationDuration: '5s',
         }}
       />
 
