@@ -4,6 +4,11 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ChevronRight, ArrowRight } from "lucide-react";
 import constructionHero from "@/assets/indian-construction-hero.jpg";
+import foundationImg from "@/assets/construction-foundation.jpg";
+import structureImg from "@/assets/construction-structure.jpg";
+import envelopeImg from "@/assets/construction-envelope.jpg";
+import servicesImg from "@/assets/construction-services.jpg";
+import finishImg from "@/assets/construction-finish.jpg";
 
 const Construction = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -28,41 +33,42 @@ const Construction = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Real construction phases with accurate descriptions
   const constructionLayers = [
     { 
       name: "Foundation", 
-      depth: "0m to -3m",
-      principle: "What holds everything must be perfect first.",
-      metric: "Load tested to 3× design capacity",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop"
+      depth: "Base Level",
+      principle: "The unseen strength that holds everything above.",
+      metric: "PCC + RCC footing with rebar reinforcement",
+      image: foundationImg
     },
     { 
       name: "Structure", 
-      depth: "Primary Frame",
-      principle: "Steel and concrete don't negotiate.",
-      metric: "±2mm column alignment tolerance",
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=300&fit=crop"
+      depth: "RCC Framework",
+      principle: "Columns, beams, and slabs — the skeleton of your home.",
+      metric: "IS 456 compliant concrete & steel work",
+      image: structureImg
     },
     { 
       name: "Envelope", 
-      depth: "Building Skin",
-      principle: "Protection before appearance.",
-      metric: "Zero water ingress warranty",
-      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"
+      depth: "Brick & Plaster",
+      principle: "Walls that define space and protect from elements.",
+      metric: "AAC/Red brick masonry with cement plaster",
+      image: envelopeImg
     },
     { 
       name: "Services", 
       depth: "MEP Systems",
-      principle: "The invisible makes the visible work.",
-      metric: "BIM-coordinated routing",
-      image: "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=300&fit=crop"
+      principle: "Electrical, plumbing, and AC — making the home functional.",
+      metric: "Concealed wiring & CPVC/PPR plumbing",
+      image: servicesImg
     },
     { 
       name: "Finish", 
-      depth: "Final Layer",
-      principle: "Details reveal discipline.",
-      metric: "±0.5mm edge tolerance",
-      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&h=300&fit=crop"
+      depth: "Final Touches",
+      principle: "Flooring, painting, woodwork — what you see and touch daily.",
+      metric: "Vitrified tiles, POP ceiling, premium paints",
+      image: finishImg
     },
   ];
 
