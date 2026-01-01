@@ -336,7 +336,7 @@ const Contact = () => {
                   <ContactItem 
                     icon={Phone}
                     label="Phone"
-                    value="+91 11 4567 8900"
+                    value="+91 98715 22556 / +91 99710 22556"
                   />
                   
                   <ContactItem 
