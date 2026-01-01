@@ -5,15 +5,27 @@ import Footer from "@/components/Footer";
 import { ChevronRight, ArrowRight } from "lucide-react";
 import eggChair from "@/assets/egg-chair.png";
 import pelicanChair from "@/assets/pelican-chair.png";
+import furnitureHero from "@/assets/furniture-hero-luxury.jpg";
+import livingCrazy from "@/assets/furniture-living-crazy.jpg";
+import studyCrazy from "@/assets/furniture-study-crazy.jpg";
 
 const Furniture = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeCollection, setActiveCollection] = useState(0);
   const [hoveredPiece, setHoveredPiece] = useState<number | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const collectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   useEffect(() => {
@@ -34,7 +46,7 @@ const Furniture = () => {
       name: "Living",
       tagline: "Where life unfolds",
       pieces: ["Sofas", "Armchairs", "Coffee Tables", "Consoles"],
-      image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&h=600&fit=crop",
+      image: livingCrazy,
       stat: "50+",
       statLabel: "Pieces Crafted"
     },
@@ -58,7 +70,7 @@ const Furniture = () => {
       name: "Study",
       tagline: "Where ideas are born",
       pieces: ["Desks", "Bookcases", "Shelving", "Organizers"],
-      image: "https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=800&h=600&fit=crop",
+      image: studyCrazy,
       stat: "25+",
       statLabel: "Work Sanctuaries"
     },
@@ -101,128 +113,331 @@ const Furniture = () => {
     <div className="min-h-screen bg-[#0E0E0E] text-ivory overflow-x-hidden">
       <Header />
 
-      {/* ===== HERO SECTION ===== */}
-      <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Background with subtle texture */}
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1920&q=80"
-            alt="Custom furniture"
-            className="w-full h-full object-cover"
-            style={{ filter: 'blur(2px) brightness(0.35)' }}
-          />
-          <div className="absolute inset-0 bg-[#0E0E0E]/70" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#0E0E0E_85%)]" />
-          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#0E0E0E] to-transparent" />
-        </div>
-
-        {/* Subtle grain */}
+      {/* ===== HERO SECTION - CRAZY DRAMATIC ===== */}
+      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0A0A0A]">
+        {/* Dynamic cursor follower glow */}
         <div 
-          className="absolute inset-0 opacity-[0.02] pointer-events-none"
+          className="fixed w-96 h-96 rounded-full pointer-events-none z-0 transition-all duration-300 ease-out"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            left: mousePos.x - 192,
+            top: mousePos.y - 192,
+            background: 'radial-gradient(circle, rgba(198,164,106,0.08) 0%, transparent 70%)',
+            opacity: isLoaded ? 1 : 0,
           }}
         />
 
-        {/* Content */}
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28">
-          {/* Breadcrumb */}
-          <nav 
-            className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/30 mb-20"
-            style={{
-              opacity: isLoaded ? 0.3 : 0,
-              transform: isLoaded ? "translateY(0)" : "translateY(20px)",
-              transition: "all 0.8s ease-out 0.3s"
-            }}
-          >
-            <Link to="/" className="hover:text-ivory/50 transition-colors">HOME</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span>SERVICES</span>
-            <ChevronRight className="w-3 h-3" />
-            <span className="text-[#C6A46A]/60">FURNITURE</span>
-          </nav>
-
-          <div className="relative max-w-5xl">
-            {/* Watermark */}
-            <div 
-              className="absolute -top-16 right-0 lg:right-20 pointer-events-none select-none"
-              style={{
-                opacity: isLoaded ? 0.04 : 0,
-                transition: "opacity 2s ease-out 1s"
-              }}
-            >
-              <span className="text-[8rem] md:text-[14rem] lg:text-[18rem] font-heading italic text-[#C6A46A] leading-none">
-                craft
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1 
-              className="relative z-10"
-              style={{
-                opacity: isLoaded ? 1 : 0,
-                transform: isLoaded ? "translateY(0)" : "translateY(40px)",
-                transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s"
-              }}
-            >
-              <span className="block text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-ivory/90 tracking-tight leading-tight">
-                Custom Furniture,{' '}
-                <span 
-                  className="text-[#C6A46A]"
+        {/* Split layout */}
+        <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-5">
+          {/* Left dark section */}
+          <div className="lg:col-span-2 relative bg-[#0A0A0A]">
+            {/* Animated vertical lines */}
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute top-0 h-full w-px animate-line-grow"
                   style={{
-                    opacity: isLoaded ? 1 : 0,
-                    transition: "opacity 0.4s ease-out 0.8s"
+                    left: `${20 * (i + 1)}%`,
+                    background: `linear-gradient(to bottom, transparent, rgba(198,164,106,${0.05 + i * 0.02}) 50%, transparent)`,
+                    animationDelay: `${i * 0.2}s`,
                   }}
-                >
-                  built to endure.
-                </span>
-              </span>
-            </h1>
-
-            {/* Sub-headline */}
-            <p 
-              className="text-base md:text-lg text-ivory/45 leading-relaxed max-w-lg mt-10"
-              style={{
-                opacity: isLoaded ? 1 : 0,
-                transform: isLoaded ? "translateY(0)" : "translateY(30px)",
-                transition: "all 1s ease-out 0.8s"
-              }}
-            >
-              Handcrafted pieces that bridge function and art.<br />
-              Made for your space. Made to last generations.
-            </p>
-
-            {/* CTA */}
-            <div 
-              className="mt-10"
-              style={{
-                opacity: isLoaded ? 1 : 0,
-                transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 1s ease-out 1s'
-              }}
-            >
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-4 bg-[#C6A46A] text-[#0E0E0E] px-8 py-4 text-sm tracking-wider font-medium hover:bg-ivory transition-colors duration-500"
-              >
-                Commission a Piece
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
+                />
+              ))}
             </div>
+            
+            {/* Floating geometric accents */}
+            <div 
+              className="absolute top-1/4 left-1/4 w-16 h-16 border border-[#C6A46A]/20 animate-spin-slow"
+              style={{ animationDuration: '25s' }}
+            />
+            <div 
+              className="absolute bottom-1/3 right-1/4 w-8 h-8 bg-[#C6A46A]/10 animate-pulse-glow"
+            />
           </div>
-
-          {/* Scroll indicator */}
-          <div 
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center"
-            style={{
-              opacity: isLoaded ? 0.4 : 0,
-              transition: "opacity 1s ease-out 1.5s"
-            }}
-          >
-            <div className="w-1 h-1 rounded-full bg-ivory/50 mb-2" />
-            <div className="w-[1px] h-16 bg-gradient-to-b from-ivory/30 to-transparent" />
+          
+          {/* Right image section */}
+          <div className="lg:col-span-3 relative hidden lg:block">
+            <img 
+              src={furnitureHero}
+              alt="Luxury furniture showroom"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                filter: 'brightness(0.8) contrast(1.1)',
+                transform: isLoaded ? 'scale(1)' : 'scale(1.1)',
+                transition: 'transform 2s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+            />
+            {/* Dramatic overlays */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-[#0A0A0A]/30" />
+            
+            {/* Animated frame accents */}
+            <div 
+              className="absolute top-16 right-16 w-40 h-40 border border-[#C6A46A]/30"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? 'translate(0,0) rotate(0deg)' : 'translate(30px,-30px) rotate(10deg)',
+                transition: 'all 1.5s ease-out 1s',
+              }}
+            />
+            <div 
+              className="absolute bottom-24 right-24 w-24 h-24 border border-[#C6A46A]/20"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? 'rotate(45deg)' : 'rotate(0deg)',
+                transition: 'all 1.2s ease-out 1.3s',
+              }}
+            />
+            
+            {/* Spotlight beams effect */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div 
+                className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-[#C6A46A]/20 via-[#C6A46A]/5 to-transparent animate-beam"
+                style={{ animationDelay: '0s' }}
+              />
+              <div 
+                className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-[#C6A46A]/15 via-[#C6A46A]/5 to-transparent animate-beam"
+                style={{ animationDelay: '0.5s' }}
+              />
+              <div 
+                className="absolute top-0 left-3/4 w-px h-full bg-gradient-to-b from-[#C6A46A]/10 via-transparent to-transparent animate-beam"
+                style={{ animationDelay: '1s' }}
+              />
+            </div>
           </div>
         </div>
+
+        {/* Mobile background */}
+        <div className="absolute inset-0 lg:hidden">
+          <img 
+            src={furnitureHero}
+            alt="Luxury furniture"
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(0.3)' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/70 via-[#0A0A0A]/50 to-[#0A0A0A]" />
+        </div>
+
+        {/* Giant watermark text */}
+        <div 
+          className="absolute right-0 top-1/2 -translate-y-1/2 text-[25vw] font-heading text-[#C6A46A]/[0.02] leading-none tracking-tighter whitespace-nowrap pointer-events-none select-none hidden lg:block"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transform: isLoaded ? 'translateX(10%)' : 'translateX(20%)',
+            transition: 'all 2s ease-out 0.5s',
+          }}
+        >
+          CRAFT
+        </div>
+
+        {/* Main content */}
+        <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28 lg:pt-0">
+          <div className="grid grid-cols-1 lg:grid-cols-5 items-center min-h-screen">
+            <div className="lg:col-span-2 relative py-20">
+              {/* Animated accent bar */}
+              <div 
+                className="absolute -top-4 left-0 h-1 bg-[#C6A46A]"
+                style={{
+                  width: isLoaded ? '100px' : '0',
+                  transition: 'width 1s ease-out 0.5s',
+                }}
+              />
+              
+              {/* Breadcrumb with animation */}
+              <nav 
+                className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/30 mb-12"
+                style={{
+                  opacity: isLoaded ? 0.5 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+                  transition: "all 0.8s ease-out 0.3s"
+                }}
+              >
+                <Link to="/" className="hover:text-[#C6A46A] transition-colors">HOME</Link>
+                <ChevronRight className="w-3 h-3" />
+                <span>SERVICES</span>
+                <ChevronRight className="w-3 h-3" />
+                <span className="text-[#C6A46A]">FURNITURE</span>
+              </nav>
+
+              {/* Label with diamond */}
+              <div 
+                className="flex items-center gap-4 mb-8"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateX(0)" : "translateX(-30px)",
+                  transition: "all 1s ease-out 0.5s"
+                }}
+              >
+                <div className="w-2 h-2 bg-[#C6A46A] rotate-45 animate-pulse" />
+                <span className="text-[11px] tracking-[0.5em] text-[#C6A46A] uppercase font-medium">
+                  Bespoke Craftsmanship
+                </span>
+              </div>
+
+              {/* MASSIVE Headline with stagger */}
+              <h1 className="relative mb-10">
+                <span 
+                  className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory tracking-tight leading-[0.9]"
+                  style={{
+                    opacity: isLoaded ? 1 : 0,
+                    transform: isLoaded ? "translateY(0)" : "translateY(50px)",
+                    transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s"
+                  }}
+                >
+                  Furniture
+                </span>
+                <span 
+                  className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory/60 tracking-tight leading-[0.9] mt-2"
+                  style={{
+                    opacity: isLoaded ? 1 : 0,
+                    transform: isLoaded ? "translateY(0)" : "translateY(50px)",
+                    transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s"
+                  }}
+                >
+                  That Tells
+                </span>
+                <span 
+                  className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading tracking-tight leading-[0.9] mt-2"
+                  style={{
+                    opacity: isLoaded ? 1 : 0,
+                    transform: isLoaded ? "translateY(0)" : "translateY(50px)",
+                    transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1s"
+                  }}
+                >
+                  <span className="relative inline-block">
+                    <span className="text-[#C6A46A] italic animate-glow-text">Stories</span>
+                    <div 
+                      className="absolute -bottom-2 left-0 h-[3px] bg-[#C6A46A]"
+                      style={{
+                        width: isLoaded ? '100%' : '0',
+                        transition: 'width 0.8s ease-out 1.5s',
+                      }}
+                    />
+                  </span>
+                </span>
+              </h1>
+
+              {/* Tagline */}
+              <p 
+                className="text-lg md:text-xl text-ivory/50 max-w-md leading-relaxed mb-10"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(30px)",
+                  transition: "all 1s ease-out 1.2s"
+                }}
+              >
+                Handcrafted pieces that transcend trends. Made for your space. Made to last generations.
+              </p>
+
+              {/* Stats row */}
+              <div 
+                className="flex items-start gap-10 mb-12"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+                  transition: "all 1s ease-out 1.4s"
+                }}
+              >
+                {[
+                  { value: "150", suffix: "+", label: "Pieces Crafted" },
+                  { value: "100", suffix: "%", label: "Handmade" },
+                  { value: "25", suffix: "YRS", label: "Warranty" },
+                ].map((stat, i) => (
+                  <div key={i} className="relative group">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
+                        {stat.value}
+                      </span>
+                      <span className="text-lg text-[#C6A46A]">{stat.suffix}</span>
+                    </div>
+                    <div className="text-[10px] text-ivory/40 tracking-[0.15em] uppercase mt-1">
+                      {stat.label}
+                    </div>
+                    <div className="absolute -bottom-1 left-0 w-0 h-px bg-[#C6A46A] group-hover:w-full transition-all duration-300" />
+                  </div>
+                ))}
+              </div>
+
+              {/* CTA with shine effect */}
+              <div 
+                className="flex items-center gap-6"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? "translateY(0)" : "translateY(20px)",
+                  transition: "all 1s ease-out 1.6s"
+                }}
+              >
+                <Link
+                  to="/contact"
+                  className="group relative bg-[#C6A46A] text-[#0A0A0A] px-10 py-5 text-sm tracking-[0.2em] uppercase font-medium overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-3">
+                    Commission a Piece
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-ivory transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                </Link>
+                
+                <Link 
+                  to="/" 
+                  className="group flex items-center gap-3 text-ivory/60 hover:text-ivory transition-colors"
+                >
+                  <span className="text-sm tracking-wider">Our Portfolio</span>
+                  <div className="w-8 h-px bg-ivory/30 group-hover:w-12 group-hover:bg-[#C6A46A] transition-all duration-300" />
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-3 hidden lg:block" />
+          </div>
+        </div>
+
+        {/* Vertical text */}
+        <div 
+          className="absolute left-6 top-1/2 -translate-y-1/2 hidden lg:block"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: "opacity 1s ease-out 2s"
+          }}
+        >
+          <span 
+            className="text-[10px] tracking-[0.4em] text-ivory/20 uppercase"
+            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+          >
+            EdgeHomes Furniture
+          </span>
+        </div>
+
+        {/* Animated scroll indicator */}
+        <div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: "opacity 1s ease-out 2.2s"
+          }}
+        >
+          <div className="relative w-[1px] h-20 bg-ivory/10 overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-10 bg-[#C6A46A] animate-scroll-line" />
+          </div>
+          <span className="text-[8px] tracking-[0.4em] text-ivory/30 uppercase">Explore</span>
+        </div>
+
+        {/* Corner accents */}
+        <div 
+          className="absolute top-8 left-8 w-20 h-20 border-l border-t border-[#C6A46A]/30 hidden lg:block"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: 'opacity 1.5s ease-out 1s',
+          }}
+        />
+        <div 
+          className="absolute bottom-8 right-8 w-20 h-20 border-r border-b border-[#C6A46A]/30 hidden lg:block"
+          style={{
+            opacity: isLoaded ? 1 : 0,
+            transition: 'opacity 1.5s ease-out 1.2s',
+          }}
+        />
       </section>
 
       {/* ===== CRAFT PRINCIPLES STRIP ===== */}
@@ -243,25 +458,29 @@ const Furniture = () => {
         </div>
       </section>
 
-      {/* ===== COLLECTIONS SECTION ===== */}
+      {/* ===== COLLECTIONS SECTION - ENHANCED ===== */}
       <section ref={collectionRef} className="relative py-24 md:py-32 overflow-hidden">
-        {/* Subtle grid background */}
+        {/* Animated grid */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.03] animate-grid-reveal"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px)
+              linear-gradient(to right, rgba(198,164,106,0.5) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(198,164,106,0.5) 1px, transparent 1px)
             `,
-            backgroundSize: '80px 80px',
+            backgroundSize: '60px 60px',
           }}
         />
 
+        {/* Floating orbs */}
+        <div className="absolute top-20 right-[10%] w-40 h-40 rounded-full bg-[#C6A46A]/5 blur-3xl animate-float-slow" />
+        <div className="absolute bottom-32 left-[15%] w-56 h-56 rounded-full bg-[#C6A46A]/3 blur-3xl animate-float-slow" style={{ animationDelay: '3s' }} />
+
         <div className="container mx-auto px-6 lg:px-12 relative z-10">
-          {/* Section Header */}
+          {/* Section Header with animations */}
           <div className="mb-20">
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-8 h-[1px] bg-[#C6A46A]/50" />
+              <div className="w-8 h-[1px] bg-[#C6A46A]/50 animate-expand-line" />
               <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono uppercase">
                 Collections
               </span>
@@ -275,50 +494,79 @@ const Furniture = () => {
             </p>
           </div>
 
-          {/* Collections Grid */}
+          {/* Collections Grid with enhanced animations */}
           <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             {furnitureCollections.map((collection, index) => (
               <div
                 key={collection.name}
-                className={`group relative overflow-hidden rounded-sm transition-all duration-700 ${
-                  activeCollection >= index ? 'opacity-100 translate-y-0' : 'opacity-40 translate-y-8'
+                className={`group relative overflow-hidden rounded-sm transition-all duration-700 transform ${
+                  activeCollection >= index 
+                    ? 'opacity-100 translate-y-0 scale-100' 
+                    : 'opacity-30 translate-y-12 scale-98'
                 }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
-                {/* Image */}
+                {/* Image with enhanced effects */}
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img 
                     src={collection.image}
                     alt={collection.name}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 ${
+                      activeCollection >= index ? 'filter-none' : 'grayscale'
+                    }`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E] via-[#0E0E0E]/50 to-transparent" />
                   
-                  {/* Corner accents */}
-                  <div className="absolute top-4 left-4 w-6 h-6 border-l border-t border-[#C6A46A]/40 transition-all duration-500 group-hover:w-8 group-hover:h-8" />
-                  <div className="absolute bottom-4 right-4 w-6 h-6 border-r border-b border-[#C6A46A]/40 transition-all duration-500 group-hover:w-8 group-hover:h-8" />
+                  {/* Shine sweep on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  
+                  {/* Animated corner accents */}
+                  <div className={`absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C6A46A]/50 transition-all duration-500 group-hover:w-12 group-hover:h-12 ${
+                    activeCollection >= index ? 'opacity-100' : 'opacity-0'
+                  }`} />
+                  <div className={`absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#C6A46A]/50 transition-all duration-500 group-hover:w-12 group-hover:h-12 ${
+                    activeCollection >= index ? 'opacity-100' : 'opacity-0'
+                  }`} style={{ transitionDelay: '100ms' }} />
+                  
+                  {/* Large number overlay */}
+                  <div className={`absolute bottom-8 right-8 text-7xl font-heading text-[#C6A46A]/10 transition-all duration-500 group-hover:text-[#C6A46A]/20 ${
+                    activeCollection >= index ? 'opacity-100' : 'opacity-0'
+                  }`}>
+                    0{index + 1}
+                  </div>
                 </div>
 
-                {/* Content overlay */}
+                {/* Content overlay with stagger */}
                 <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
-                  {/* Stat */}
-                  <div className="absolute top-6 right-6 text-right">
-                    <div className="text-2xl md:text-3xl font-heading text-[#C6A46A]">{collection.stat}</div>
+                  {/* Stat with glow */}
+                  <div className={`absolute top-6 right-6 text-right transition-all duration-500 ${
+                    activeCollection >= index ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+                  }`}>
+                    <div className="text-2xl md:text-3xl font-heading text-[#C6A46A] group-hover:animate-glow-text">{collection.stat}</div>
                     <div className="text-[10px] text-ivory/50 tracking-wider uppercase">{collection.statLabel}</div>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-3xl md:text-4xl font-heading text-ivory mb-2 group-hover:text-[#C6A46A] transition-colors duration-300">
+                  {/* Title with animation */}
+                  <h3 className={`text-3xl md:text-4xl font-heading text-ivory mb-2 group-hover:text-[#C6A46A] transition-all duration-500 ${
+                    activeCollection >= index ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`}>
                     {collection.name}
                   </h3>
-                  <p className="text-sm text-ivory/50 italic mb-4">{collection.tagline}</p>
+                  <p className={`text-sm text-ivory/50 italic mb-4 transition-all duration-500 ${
+                    activeCollection >= index ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                  }`} style={{ transitionDelay: '100ms' }}>
+                    {collection.tagline}
+                  </p>
 
-                  {/* Pieces list */}
+                  {/* Pieces list with stagger */}
                   <div className="flex flex-wrap gap-2">
                     {collection.pieces.map((piece, i) => (
                       <span 
                         key={i}
-                        className="text-[10px] tracking-wider uppercase text-ivory/40 px-3 py-1 border border-ivory/10 rounded-full"
+                        className={`text-[10px] tracking-wider uppercase text-ivory/40 px-3 py-1 border border-ivory/10 rounded-full group-hover:border-[#C6A46A]/30 group-hover:text-ivory/60 transition-all duration-500 ${
+                          activeCollection >= index ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+                        }`}
+                        style={{ transitionDelay: `${150 + i * 50}ms` }}
                       >
                         {piece}
                       </span>
