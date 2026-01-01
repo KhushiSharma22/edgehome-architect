@@ -170,7 +170,7 @@ const InstantEstimate = () => {
                     estimate ? 'animate-pulse-glow' : ''
                   }`}
                   disabled={!estimate}
-                  onClick={() => window.open('https://wa.me/919999999999?text=Hi, I want a detailed quote for my project.', '_blank')}
+                  onClick={() => window.open('https://wa.me/919871522556?text=Hi, I want a detailed quote for my project.', '_blank')}
                 >
                   <MessageCircle className="w-5 h-5" />
                   Get Detailed Quote

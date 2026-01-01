@@ -33,7 +33,7 @@ const Footer = () => {
           {/* Contact buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
-              href="tel:+919999999999"
+              href="tel:+919871522556"
               className="group relative px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(199,163,107,0.4)]"
             >
               <span className="relative z-10 flex items-center gap-3">
@@ -43,7 +43,7 @@ const Footer = () => {
               </span>
             </a>
             <a 
-              href="https://wa.me/919999999999"
+              href="https://wa.me/919871522556"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-8 py-4 rounded-full border border-primary/50 text-primary font-semibold overflow-hidden transition-all duration-500 hover:bg-primary/10"
@@ -119,7 +119,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-muted-foreground group">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <span className="group-hover:text-foreground transition-colors">+91 XXXXX XXXXX</span>
+                <a href="tel:+919871522556" className="group-hover:text-foreground transition-colors">+91 98715 22556</a>
+              </li>
+              <li className="flex items-center gap-3 text-muted-foreground group">
+                <Phone className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <a href="tel:+919971022556" className="group-hover:text-foreground transition-colors">+91 99710 22556</a>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground group">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />

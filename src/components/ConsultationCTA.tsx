@@ -73,7 +73,7 @@ const ConsultationCTA = () => {
                 <Button
                   variant="outline"
                   className="btn-gold-outline gap-2"
-                  onClick={() => window.open('https://wa.me/919999999999', '_blank')}
+                  onClick={() => window.open('https://wa.me/919871522556', '_blank')}
                 >
                   <MessageCircle className="w-4 h-4" />
                   WhatsApp Us
@@ -81,7 +81,7 @@ const ConsultationCTA = () => {
                 <Button
                   variant="outline"
                   className="border-border text-muted-foreground hover:text-foreground gap-2"
-                  onClick={() => window.open('tel:+919999999999', '_blank')}
+                  onClick={() => window.open('tel:+919871522556', '_blank')}
                 >
                   <Phone className="w-4 h-4" />
                   Call Now
