@@ -3,6 +3,7 @@ import { Phone, MessageCircle, Send, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 const budgetRanges = [
   "₹3-5 Lakhs",
@@ -73,7 +74,7 @@ const ConsultationCTA = () => {
                 <Button
                   variant="outline"
                   className="btn-gold-outline gap-2"
-                  onClick={() => window.open('https://wa.me/919871522556', '_blank')}
+                  onClick={() => window.open(buildWhatsAppLink('919871522556'), '_blank')}
                 >
                   <MessageCircle className="w-4 h-4" />
                   WhatsApp Us

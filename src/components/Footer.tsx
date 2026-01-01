@@ -1,5 +1,6 @@
 import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 
 const Footer = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
@@ -43,7 +44,7 @@ const Footer = () => {
               </span>
             </a>
             <a 
-              href="https://wa.me/919871522556"
+              href={buildWhatsAppLink("919871522556")}
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-8 py-4 rounded-full border border-primary/50 text-primary font-semibold overflow-hidden transition-all duration-500 hover:bg-primary/10"
