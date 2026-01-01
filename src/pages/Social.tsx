@@ -214,15 +214,12 @@ const Social = () => {
             </a>
           </div>
 
-          {/* Reels Grid - Direct Instagram Links */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+          {/* Reels Grid - Embedded Player */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {reels.map((reel, index) => (
-              <a
+              <div
                 key={reel.id}
-                href={reel.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative block"
+                className="group relative"
                 onMouseEnter={() => setHoveredReel(index)}
                 onMouseLeave={() => setHoveredReel(null)}
                 style={{
@@ -231,86 +228,49 @@ const Social = () => {
                   transition: `all 0.6s ease-out ${0.1 + index * 0.1}s`,
                 }}
               >
-                {/* Card */}
                 <div className={`relative overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl border-2 transition-all duration-500 ${
                   hoveredReel === index 
                     ? 'border-primary/60 shadow-[0_20px_60px_-10px_rgba(0,0,0,0.5),0_0_40px_rgba(199,163,107,0.15)]' 
                     : 'border-border/30 hover:border-border/50'
                 }`}>
-                  
-                  {/* Reel preview card */}
-                  <div className="relative aspect-[9/16] bg-gradient-to-br from-card via-muted to-card overflow-hidden">
-                    {/* Animated background */}
-                    <div className="absolute inset-0 opacity-30">
-                      <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-                      <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-primary/10 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-                    </div>
-                    
-                    {/* Instagram branding strip */}
-                    <div className="absolute top-0 left-0 right-0 p-3 sm:p-4 flex items-center justify-between bg-gradient-to-b from-background/80 to-transparent z-10">
+                  <div className="relative aspect-[9/16] bg-card overflow-hidden">
+                    <iframe
+                      src={reel.embedUrl}
+                      title={reel.title}
+                      className="absolute inset-0 w-full h-full"
+                      loading="lazy"
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+
+                    {/* Top branding strip */}
+                    <div className="pointer-events-none absolute top-0 left-0 right-0 p-3 sm:p-4 flex items-center justify-between bg-gradient-to-b from-background/90 to-transparent z-10">
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-gradient-to-br from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center">
                           <Instagram className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" />
                         </div>
                         <span className="text-[9px] sm:text-[10px] text-foreground/80 font-medium tracking-wide">Reel</span>
                       </div>
-                      <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        hoveredReel === index ? 'bg-primary/30' : 'bg-white/10'
-                      }`}>
-                        <ExternalLink className="w-3 h-3 text-white" />
-                      </div>
                     </div>
-                    
-                    {/* Center play button */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className={`relative transition-all duration-500 ${
-                        hoveredReel === index ? 'scale-110' : 'scale-100'
-                      }`}>
-                        {/* Outer ring */}
-                        <div className={`absolute inset-0 rounded-full border-2 transition-all duration-700 ${
-                          hoveredReel === index 
-                            ? 'border-primary scale-150 opacity-0' 
-                            : 'border-primary/30 scale-100 opacity-100'
-                        }`} style={{ width: '60px', height: '60px', margin: '-10px' }} />
-                        
-                        {/* Main play button */}
-                        <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center backdrop-blur-xl transition-all duration-500 ${
-                          hoveredReel === index 
-                            ? 'bg-primary shadow-[0_0_40px_rgba(199,163,107,0.6)]' 
-                            : 'bg-foreground/20 border border-foreground/20'
-                        }`}>
-                          <Play className={`w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 ml-0.5 ${
-                            hoveredReel === index ? 'text-primary-foreground scale-110' : 'text-foreground'
-                          }`} fill={hoveredReel === index ? 'currentColor' : 'none'} />
-                        </div>
-                      </div>
+
+                    {/* Bottom content + open link */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-background via-background/90 to-transparent z-10">
+                      <h3 className="text-xs sm:text-sm font-heading text-foreground mb-1 line-clamp-1">
+                        {reel.title}
+                      </h3>
+                      <a
+                        href={reel.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-[9px] sm:text-[10px] text-primary tracking-wide uppercase hover:text-primary/80"
+                      >
+                        <span>Open in Instagram</span>
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
                     </div>
-                    
-                    {/* Bottom content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-background via-background/90 to-transparent">
-                      <div className={`transition-all duration-500 ${
-                        hoveredReel === index ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-80'
-                      }`}>
-                        <h3 className="text-xs sm:text-sm font-heading text-foreground mb-1 line-clamp-1">{reel.title}</h3>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[9px] sm:text-[10px] text-primary tracking-wide uppercase">Watch on Instagram</span>
-                          <ArrowRight className={`w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary transition-all duration-300 ${
-                            hoveredReel === index ? 'translate-x-1' : ''
-                          }`} />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Corner accents on hover */}
-                    <div className={`absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-primary/50 rounded-tr-lg transition-all duration-500 ${
-                      hoveredReel === index ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-                    }`} />
-                    <div className={`absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-primary/50 rounded-bl-lg transition-all duration-500 ${
-                      hoveredReel === index ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-                    }`} />
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
           

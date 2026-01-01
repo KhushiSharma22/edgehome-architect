@@ -9,6 +9,8 @@ import portfolioDining from "@/assets/portfolio-dining.jpg";
 import pelicanChair from "@/assets/pelican-chair.png";
 import eggChair from "@/assets/egg-chair.png";
 import studioSketch from "@/assets/studio-sketch.jpg";
+import founderPriya from "@/assets/founder-priya.png";
+import founderDeepak from "@/assets/founder-deepak.png";
 
 
 // Animated floating particles - creates energy
@@ -951,6 +953,7 @@ const FoundersSection = () => {
       role: 'Principal Architect',
       department: 'Design & Development',
       initial: 'B',
+      image: founderPriya,
       description: 'Her designs, effected by an intuitive sensitivity to client preferences and an obsessive attention to detail, synchronizes social and cultural nuances to exude a subtle, yet distinctive, individuality.',
       philosophy: 'Bringing the serenity of spiritualism to the design desk, she translates her own connection to nature and human interaction with space to compose ergonomic and responsive structural forms.',
     },
@@ -959,6 +962,7 @@ const FoundersSection = () => {
       role: 'Director',
       department: 'Constructions & Operations',
       initial: 'D',
+      image: founderDeepak,
       description: 'In the world of construction, where every brick laid and beam placed plays a pivotal role in shaping dreams into reality, there exists an unsung hero who embodies dedication, expertise, and relentless pursuit of excellence.',
       philosophy: 'In an industry where trust is paramount, his integrity and client-centric approach have set EdgeHomes apart as the benchmark for quality construction.',
     },
@@ -1160,16 +1164,25 @@ const FoundersSection = () => {
 
                   {/* Content */}
                   <div className="relative">
-                    {/* Role badge */}
-                    <div className={`inline-flex items-center gap-2 mb-4 px-4 py-1.5 rounded-full border transition-all duration-500 ${
-                      isActive 
-                        ? 'bg-primary/20 border-primary/40' 
-                        : 'bg-primary/10 border-primary/20'
-                    }`}>
-                      <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                      <span className="text-primary text-xs tracking-[0.2em] uppercase font-medium">
-                        {founder.role}
-                      </span>
+                    {/* Avatar + Role */}
+                    <div className="flex items-center gap-4 mb-4">
+                      <img
+                        src={founder.image}
+                        alt={`${founder.name} portrait`}
+                        loading="lazy"
+                        className="w-14 h-14 rounded-full object-cover border border-primary/30 shadow-lg"
+                      />
+
+                      <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all duration-500 ${
+                        isActive 
+                          ? 'bg-primary/20 border-primary/40' 
+                          : 'bg-primary/10 border-primary/20'
+                      }`}>
+                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                        <span className="text-primary text-xs tracking-[0.2em] uppercase font-medium">
+                          {founder.role}
+                        </span>
+                      </div>
                     </div>
                     
                     <h3 className={`

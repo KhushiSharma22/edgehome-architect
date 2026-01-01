@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { Home, Building2, Warehouse, Calculator, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -170,7 +171,7 @@ const InstantEstimate = () => {
                     estimate ? 'animate-pulse-glow' : ''
                   }`}
                   disabled={!estimate}
-                  onClick={() => window.open('https://wa.me/919871522556?text=Hi, I want a detailed quote for my project.', '_blank')}
+                  onClick={() => window.open(buildWhatsAppLink('919871522556', 'Hi, I want a detailed quote for my project.'), '_blank')}
                 >
                   <MessageCircle className="w-5 h-5" />
                   Get Detailed Quote
