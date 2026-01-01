@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Instagram, Play, ExternalLink, ArrowRight, Sparkles } from "lucide-react";
+import { buildInstagramProfileLink, buildInstagramWebLink } from "@/lib/instagram";
 
 // Instagram Reels data
 const reels = [
@@ -85,16 +86,11 @@ const Social = () => {
             </div>
           </div>
 
-          {/* Handle (Instagram can be blocked on some networks) */}
-          <button
-            type="button"
-            onClick={async () => {
-              try {
-                await navigator.clipboard.writeText("@edgehomes_architects");
-              } catch {
-                // ignore
-              }
-            }}
+          {/* Handle */}
+          <a 
+            href={buildInstagramProfileLink("edgehomes_architects")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 mb-6 sm:mb-8 group"
             style={{
               opacity: isLoaded ? 1 : 0,
@@ -103,10 +99,8 @@ const Social = () => {
             }}
           >
             <span className="text-base sm:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">@edgehomes_architects</span>
-            <span className="text-[10px] sm:text-xs text-muted-foreground border border-border/50 rounded-full px-2.5 py-1 group-hover:border-primary/40 transition-colors">
-              Tap to copy
-            </span>
-          </button>
+            <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary/60" />
+          </a>
 
           {/* Main heading - elegant typography */}
           <h1 
@@ -221,12 +215,15 @@ const Social = () => {
             </a>
           </div>
 
-          {/* Reels Grid - Local-safe cards (no instagram links) */}
+          {/* Reels Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {reels.map((reel, index) => (
-              <div
+              <a
                 key={reel.id}
-                className="group relative"
+                href={buildInstagramWebLink(reel.link)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative block"
                 onMouseEnter={() => setHoveredReel(index)}
                 onMouseLeave={() => setHoveredReel(null)}
                 style={{
@@ -255,6 +252,11 @@ const Social = () => {
                         </div>
                         <span className="text-[9px] sm:text-[10px] text-foreground/80 font-medium tracking-wide">Reel</span>
                       </div>
+                      <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+                        hoveredReel === index ? 'bg-primary/30' : 'bg-white/10'
+                      }`}>
+                        <ExternalLink className="w-3 h-3 text-white" />
+                      </div>
                     </div>
 
                     {/* Center play button */}
@@ -274,27 +276,19 @@ const Social = () => {
                       </div>
                     </div>
 
-                    {/* Bottom content + copy */}
+                    {/* Bottom content */}
                     <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 bg-gradient-to-t from-background via-background/90 to-transparent z-10">
                       <h3 className="text-xs sm:text-sm font-heading text-foreground mb-1 line-clamp-1">{reel.title}</h3>
-                      <button
-                        type="button"
-                        onClick={async () => {
-                          try {
-                            await navigator.clipboard.writeText(reel.link);
-                          } catch {
-                            // ignore
-                          }
-                        }}
-                        className="inline-flex items-center gap-2 text-[9px] sm:text-[10px] text-primary tracking-wide uppercase hover:text-primary/80"
-                      >
-                        <span>Copy Reel Link</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[9px] sm:text-[10px] text-primary tracking-wide uppercase">Watch on Instagram</span>
+                        <ArrowRight className={`w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary transition-all duration-300 ${
+                          hoveredReel === index ? 'translate-x-1' : ''
+                        }`} />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
           
