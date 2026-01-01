@@ -3,7 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { MapPin, Mail, Phone, Clock } from 'lucide-react';
 import contactHero from '@/assets/contact-hero.jpg';
-import studioConsultation from '@/assets/studio-consultation.jpg';
+import visitStudioImage from '@/assets/contact-visit-studio.png';
 
 // ═══════════════════════════════════════════════════════════════
 // FORM COMPONENTS
@@ -350,8 +350,8 @@ const Contact = () => {
                 {/* Property Image with Enhanced Design */}
                 <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-[#0E0E0E]/10 group">
                   <img 
-                    src={studioConsultation} 
-                    alt="EdgeHomes Design Studio" 
+                    src={visitStudioImage} 
+                    alt="EdgeHomes studio interior" 
                     className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/20 to-transparent" />

@@ -74,7 +74,7 @@ const ConsultationCTA = () => {
                 <Button
                   variant="outline"
                   className="btn-gold-outline gap-2"
-                  onClick={() => window.open(buildWhatsAppLink('919871522556'), '_blank')}
+                  onClick={() => window.location.href = buildWhatsAppLink('919871522556')}
                 >
                   <MessageCircle className="w-4 h-4" />
                   WhatsApp Us

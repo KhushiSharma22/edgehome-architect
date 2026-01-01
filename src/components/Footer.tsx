@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Instagram, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
@@ -45,7 +45,7 @@ const Footer = () => {
             </a>
             <a 
               href={buildWhatsAppLink("919871522556")}
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
               className="group relative px-8 py-4 rounded-full border border-primary/50 text-primary font-semibold overflow-hidden transition-all duration-500 hover:bg-primary/10"
             >
@@ -70,21 +70,15 @@ const Footer = () => {
             
             {/* Social Icons */}
             <div className="flex gap-3">
-              {[
-                { Icon: Instagram, label: 'Instagram' },
-                { Icon: Facebook, label: 'Facebook' },
-                { Icon: Linkedin, label: 'LinkedIn' },
-              ].map(({ Icon, label }, index) => (
-                <a
-                  key={label}
-                  href="#"
-                  className="w-12 h-12 rounded-xl bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-500 hover:scale-110 hover:-translate-y-1"
-                  aria-label={label}
-                  style={{ transitionDelay: `${index * 50}ms` }}
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
+              <a
+                href="https://www.instagram.com/edgehomes_architects/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-xl bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-500 hover:scale-110 hover:-translate-y-1"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
