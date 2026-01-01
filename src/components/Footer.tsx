@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Instagram, Mail, Phone, MapPin, ArrowUpRight, Copy } from "lucide-react";
+import { Instagram, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
+import { buildInstagramProfileLink } from "@/lib/instagram";
 
 const Footer = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-  const [igCopied, setIgCopied] = useState(false);
 
   return (
     <footer ref={ref} id="contact" className="relative bg-card overflow-hidden">
@@ -70,40 +69,17 @@ const Footer = () => {
               Delhi NCR's trusted architects and interior designers, crafting exceptional spaces with precision, passion, and professionalism.
             </p>
             
-            {/* Social (Instagram can be blocked on some networks) */}
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={async () => {
-                  try {
-                    await navigator.clipboard.writeText("@edgehomes_architects");
-                    setIgCopied(true);
-                    window.setTimeout(() => setIgCopied(false), 1200);
-                  } catch {
-                    // Fallback: at least show the text to the user
-                    setIgCopied(true);
-                    window.setTimeout(() => setIgCopied(false), 1200);
-                  }
-                }}
+            {/* Social */}
+            <div className="flex gap-3">
+              <a
+                href={buildInstagramProfileLink("edgehomes_architects")}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-xl bg-muted/50 border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 hover:border-primary/30 transition-all duration-500 hover:scale-110 hover:-translate-y-1"
-                aria-label="Copy Instagram ID"
-                title="Copy Instagram ID"
+                aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
-              </button>
-
-              <div className="min-w-0">
-                <p className="text-sm text-foreground/90 leading-none">@edgehomes_architects</p>
-                <p className="text-xs text-muted-foreground">
-                  {igCopied ? (
-                    <span className="inline-flex items-center gap-1 text-primary">
-                      <Copy className="w-3 h-3" /> Copied
-                    </span>
-                  ) : (
-                    "Instagram blocked? Tap to copy"
-                  )}
-                </p>
-              </div>
+              </a>
             </div>
           </div>
 
