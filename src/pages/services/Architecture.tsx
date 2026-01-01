@@ -711,50 +711,6 @@ const Architecture = () => {
         </div>
       </section>
 
-      {/* ===== CTA SECTION ===== */}
-      <section className="relative py-32 bg-[#0A0A0A] overflow-hidden">
-        {/* Animated background lines */}
-        <div className="absolute inset-0">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-[1px] bg-gradient-to-r from-transparent via-[#C6A46A]/20 to-transparent w-full"
-              style={{
-                top: `${20 + i * 15}%`,
-                animation: `expandLine ${3 + i}s ease-in-out infinite`,
-                animationDelay: `${i * 0.5}s`
-              }}
-            />
-          ))}
-        </div>
-
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 text-center">
-          <div 
-            style={{
-              opacity: scrollY > 2400 ? 1 : 0,
-              transform: scrollY > 2400 ? "scale(1)" : "scale(0.9)",
-              transition: "all 1s ease-out"
-            }}
-          >
-            <h2 className="text-4xl md:text-6xl lg:text-8xl font-heading text-ivory mb-8">
-              Ready to <span className="italic text-[#C6A46A]">Begin?</span>
-            </h2>
-            <p className="text-ivory/50 text-lg max-w-2xl mx-auto mb-12">
-              Every great space starts with a conversation. Let's discuss your vision and 
-              explore the possibilities together.
-            </p>
-            
-            <Link 
-              to="/contact"
-              className="group inline-flex items-center gap-4 bg-[#C6A46A] text-[#0A0A0A] px-12 py-6 text-sm tracking-widest font-semibold hover:bg-ivory transition-colors duration-500"
-            >
-              SCHEDULE A CONSULTATION
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* CSS Animations */}
       <style>{`
         @keyframes drawLine {
