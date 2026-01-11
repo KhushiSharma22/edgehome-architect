@@ -162,136 +162,114 @@ const TrustProofWall = () => {
           </div>
         </div>
 
-        {/* Section 2: Cinematic Testimonials */}
+        {/* Section 2: Cinematic Testimonials - No Photos, Pure Impact */}
         <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           {/* Testimonial header */}
-          <div className="flex items-center justify-center gap-4 sm:gap-6 mb-10 sm:mb-16">
-            <div className="h-px flex-1 max-w-20 sm:max-w-40 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <div className="flex items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-20">
+            <div className="h-px flex-1 max-w-20 sm:max-w-40 bg-gradient-to-r from-transparent via-primary to-transparent" />
             <div className="flex items-center gap-2 sm:gap-3">
-              <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-primary rotate-180" />
-              <span className="text-[10px] sm:text-xs text-muted-foreground tracking-[0.2em] sm:tracking-[0.4em] uppercase">Client Stories</span>
-              <Quote className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+              <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-primary rotate-180" />
+              <span className="text-xs sm:text-sm text-primary tracking-[0.2em] sm:tracking-[0.3em] uppercase font-semibold">Voices of Trust</span>
+              <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
             </div>
-            <div className="h-px flex-1 max-w-20 sm:max-w-40 bg-gradient-to-r from-transparent via-border to-transparent" />
+            <div className="h-px flex-1 max-w-20 sm:max-w-40 bg-gradient-to-r from-transparent via-primary to-transparent" />
           </div>
 
-          {/* Main testimonial showcase */}
-          <div className="max-w-5xl mx-auto">
-            <div className="relative" ref={testimonialRef}>
-              {/* Large quote background - smaller on mobile */}
-              <div className="absolute -top-6 sm:-top-10 -left-4 sm:-left-10 text-[120px] sm:text-[200px] md:text-[300px] font-heading text-primary/5 leading-none select-none pointer-events-none">
-                "
-              </div>
-              
-              {/* Testimonial content */}
-              <div className="relative flex flex-col md:grid md:grid-cols-5 gap-6 md:gap-12 items-center">
-                {/* Left: Profile showcase */}
-                <div className="md:col-span-2 flex flex-col items-center md:items-start w-full">
-                  {/* Testimonial navigation - Profile images */}
-                  <div className="flex gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center md:justify-start">
-                    {testimonials.map((t, index) => (
-                      <button
-                        key={t.id}
-                        onClick={() => setActiveTestimonial(index)}
-                        className={`relative transition-all duration-500 ${
-                          activeTestimonial === index 
-                            ? 'scale-110 z-10' 
-                            : 'opacity-50 hover:opacity-80 scale-90'
-                        }`}
-                      >
-                        <div className={`w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl overflow-hidden border-2 transition-all duration-500 ${
-                          activeTestimonial === index 
-                            ? 'border-primary shadow-[0_0_30px_rgba(199,163,107,0.4)]' 
-                            : 'border-border/50'
-                        }`}>
-                          <img 
-                            src={t.image} 
-                            alt={t.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        
-                        {/* Active indicator */}
-                        {activeTestimonial === index && (
-                          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary rounded-full animate-pulse" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                  
-                  {/* Client info */}
-                  <div className="text-center md:text-left">
-                    <div className="flex items-center gap-1 mb-2 justify-center md:justify-start">
-                      {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-primary text-primary" />
-                      ))}
-                    </div>
-                    <h4 className="text-lg sm:text-xl md:text-2xl font-heading text-foreground mb-1">
-                      {testimonials[activeTestimonial].name}
-                    </h4>
-                    <p className="text-xs sm:text-sm text-primary mb-1">
-                      {testimonials[activeTestimonial].location}
+          {/* Main testimonial showcase - Dramatic Typography Focus */}
+          <div className="max-w-5xl mx-auto relative">
+            {/* Giant decorative quote marks */}
+            <div className="absolute -top-8 sm:-top-16 left-0 sm:left-8 text-[150px] sm:text-[250px] md:text-[350px] font-heading text-primary/10 leading-none select-none pointer-events-none z-0">
+              "
+            </div>
+            <div className="absolute -bottom-20 sm:-bottom-32 right-0 sm:right-8 text-[150px] sm:text-[250px] md:text-[350px] font-heading text-primary/10 leading-none select-none pointer-events-none z-0 rotate-180">
+              "
+            </div>
+            
+            {/* Testimonial cards stack */}
+            <div className="relative z-10" ref={testimonialRef}>
+              {testimonials.map((t, index) => (
+                <div
+                  key={t.id}
+                  className={`transition-all duration-700 ${
+                    activeTestimonial === index 
+                      ? 'opacity-100 translate-y-0' 
+                      : 'opacity-0 translate-y-12 absolute inset-0 pointer-events-none'
+                  }`}
+                >
+                  {/* Quote content - Large, Bold, Center */}
+                  <div className="text-center px-4 sm:px-8 md:px-16">
+                    <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-heading text-foreground leading-relaxed mb-8 sm:mb-12">
+                      "{t.text}"
                     </p>
-                    <span className="text-[10px] sm:text-xs text-muted-foreground tracking-wider uppercase">
-                      {testimonials[activeTestimonial].project}
-                    </span>
-                  </div>
-                </div>
-                
-                {/* Right: Quote content */}
-                <div className="md:col-span-3 relative w-full">
-                  {/* Voice indicator - simplified */}
-                  <div className="flex items-center gap-3 mb-4 sm:mb-6 justify-center md:justify-start">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                      <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                    </div>
-                    <div className="flex items-center gap-1 h-6 sm:h-8">
-                      {[...Array(8)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="w-0.5 sm:w-1 bg-primary/40 rounded-full"
-                          style={{ height: `${30 + (i % 3) * 25}%` }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  
-                  {/* Quote text with animation */}
-                  <div className="relative overflow-hidden min-h-[100px] sm:min-h-[120px]">
-                    {testimonials.map((t, index) => (
-                      <p
-                        key={t.id}
-                        className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading text-foreground leading-relaxed text-center md:text-left transition-all duration-700 ${
-                          activeTestimonial === index 
-                            ? 'opacity-100 translate-y-0' 
-                            : 'opacity-0 translate-y-8 absolute inset-0'
-                        }`}
-                      >
-                        "{t.text}"
-                      </p>
-                    ))}
-                  </div>
-                  
-                  {/* Progress bar */}
-                  <div className="mt-6 sm:mt-8 flex gap-2">
-                    {testimonials.map((_, index) => (
-                      <div 
-                        key={index}
-                        className="h-1 flex-1 bg-border/30 rounded-full overflow-hidden cursor-pointer"
-                        onClick={() => setActiveTestimonial(index)}
-                      >
-                        <div 
-                          className={`h-full bg-primary rounded-full transition-all duration-500 ${
-                            activeTestimonial === index ? 'animate-progress' : 'w-0'
-                          }`}
-                          style={{
-                            animation: activeTestimonial === index ? 'progress 5s linear forwards' : 'none'
-                          }}
-                        />
+                    
+                    {/* Divider with star */}
+                    <div className="flex items-center justify-center gap-4 mb-6 sm:mb-8">
+                      <div className="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent to-primary" />
+                      <div className="flex items-center gap-1">
+                        {[...Array(t.rating)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-primary text-primary" />
+                        ))}
                       </div>
-                    ))}
+                      <div className="h-px w-16 sm:w-24 bg-gradient-to-l from-transparent to-primary" />
+                    </div>
+                    
+                    {/* Client info - Minimal & Elegant */}
+                    <div>
+                      <h4 className="text-lg sm:text-xl md:text-2xl font-heading text-primary mb-1">
+                        {t.name}
+                      </h4>
+                      <p className="text-sm sm:text-base text-muted-foreground">
+                        {t.location} • <span className="text-primary/80">{t.project}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+            
+            {/* Navigation dots - Sleek design */}
+            <div className="flex items-center justify-center gap-3 mt-12 sm:mt-16">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveTestimonial(index)}
+                  className={`relative transition-all duration-500 ${
+                    activeTestimonial === index ? 'scale-100' : 'scale-75 opacity-50 hover:opacity-80'
+                  }`}
+                >
+                  <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 transition-all duration-500 ${
+                    activeTestimonial === index 
+                      ? 'border-primary bg-primary shadow-[0_0_20px_rgba(199,163,107,0.6)]' 
+                      : 'border-muted-foreground/30 bg-transparent hover:border-primary/50'
+                  }`} />
+                  
+                  {/* Animated ring for active */}
+                  {activeTestimonial === index && (
+                    <div className="absolute inset-0 rounded-full border-2 border-primary animate-ping opacity-30" />
+                  )}
+                </button>
+              ))}
+            </div>
+            
+            {/* Progress bar - Premium style */}
+            <div className="mt-8 sm:mt-12 max-w-md mx-auto">
+              <div className="flex gap-2">
+                {testimonials.map((_, index) => (
+                  <div 
+                    key={index}
+                    className="h-1 flex-1 bg-muted/30 rounded-full overflow-hidden cursor-pointer"
+                    onClick={() => setActiveTestimonial(index)}
+                  >
+                    <div 
+                      className={`h-full bg-gradient-to-r from-primary to-primary/60 rounded-full transition-all duration-300 ${
+                        activeTestimonial === index ? 'animate-progress' : index < activeTestimonial ? 'w-full' : 'w-0'
+                      }`}
+                      style={{
+                        animation: activeTestimonial === index ? 'progress 5s linear forwards' : 'none'
+                      }}
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
