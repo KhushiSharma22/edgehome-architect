@@ -67,7 +67,7 @@ const EdgeHomesMethod = () => {
   }, []);
 
   return (
-    <section id="method" ref={sectionRef} className="section-padding relative overflow-hidden">
+    <section id="method" ref={sectionRef} className="py-16 md:py-24 relative overflow-hidden">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card to-background" />
       

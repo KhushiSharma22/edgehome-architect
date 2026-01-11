@@ -17,9 +17,9 @@ const Footer = () => {
       {/* Top decorative border */}
       <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       
-      <div className="container mx-auto px-6 py-24 relative z-10">
+      <div className="container mx-auto px-6 py-16 md:py-20 relative z-10">
         {/* Main CTA Section */}
-        <div className={`text-center mb-24 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <span className="text-primary text-xs tracking-[0.5em] uppercase mb-6 block">
             Start Your Journey
           </span>
@@ -63,7 +63,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="md:col-span-2">
             <h3 className="text-3xl font-heading font-bold text-primary mb-4">
-              EdgeHomes
+              Edgehomes Architects
             </h3>
             <p className="text-muted-foreground leading-relaxed mb-6 max-w-md">
               Delhi NCR's trusted architects and interior designers, crafting exceptional spaces with precision, passion, and professionalism.
@@ -123,7 +123,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3 text-muted-foreground group">
                 <Mail className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <span className="group-hover:text-foreground transition-colors">info@edgehomes.com</span>
+                <a href="mailto:edgehomes.architects@gmail.com" className="group-hover:text-foreground transition-colors">edgehomes.architects@gmail.com</a>
               </li>
             </ul>
           </div>

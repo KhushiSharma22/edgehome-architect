@@ -89,7 +89,7 @@ const TrustProofWall = () => {
         <div className="absolute bottom-0 right-1/4 w-[250px] sm:w-[350px] h-[250px] sm:h-[350px] bg-primary/5 rounded-full blur-[60px] sm:blur-[80px]" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 py-20 sm:py-28 md:py-40 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-16 md:py-24 relative z-10">
         
         {/* Section 1: Dramatic Stats */}
         <div className={`mb-20 sm:mb-28 md:mb-32 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>

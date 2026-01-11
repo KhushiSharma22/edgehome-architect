@@ -77,8 +77,8 @@ const HeroSection = () => {
         <div className={`mb-10 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <span className="inline-flex items-center gap-4">
             <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
-            <span className="text-primary text-xs tracking-[0.5em] uppercase font-medium">
-              Premium Interior Designers
+            <span className="text-primary text-xs tracking-[0.3em] uppercase font-medium text-center">
+              One Stop Solution For Construction & Designs
             </span>
             <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
           </span>

@@ -14,7 +14,7 @@ const PartnerLogos = () => {
   return (
     <section 
       ref={ref}
-      className={`py-20 bg-background relative overflow-hidden transition-all duration-1000 ${
+      className={`py-12 md:py-16 bg-background relative overflow-hidden transition-all duration-1000 ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
