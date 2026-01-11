@@ -59,10 +59,10 @@ const Header = () => {
           <Link to="/" className="group relative flex items-baseline gap-1">
             <span className="text-2xl md:text-3xl font-heading font-bold tracking-tight transition-all duration-500">
               <span className="text-primary">Edge</span>
-              <span className="text-foreground">home</span>
+              <span className="text-foreground">homes</span>
             </span>
             <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary/80 font-medium -translate-y-0.5">
-              Designs
+              Architects
             </span>
             <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-primary via-primary/60 to-transparent group-hover:w-full transition-all duration-700 ease-out" />
           </Link>

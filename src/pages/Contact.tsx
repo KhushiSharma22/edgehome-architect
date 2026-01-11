@@ -330,7 +330,7 @@ const Contact = () => {
                   <ContactItem 
                     icon={Mail}
                     label="Email"
-                    value="studio@edgehomesarchitects.com"
+                    value="edgehomes.architects@gmail.com"
                   />
                   
                   <ContactItem 

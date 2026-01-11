@@ -147,7 +147,7 @@ const MaterialsCraft = () => {
       <div className="absolute top-40 right-40 w-3 h-3 bg-primary/30 rounded-full" />
       <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-primary/50 rounded-full" />
       
-      <div ref={containerRef} className="container mx-auto px-6 py-32 md:py-40 relative z-10">
+      <div ref={containerRef} className="container mx-auto px-6 py-16 md:py-24 relative z-10">
         {/* Premium editorial header */}
         <div className={`flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           <div className="max-w-2xl">

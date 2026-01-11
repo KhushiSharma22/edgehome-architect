@@ -27,7 +27,7 @@ const BeforeAfterSlider = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <section ref={ref} className="section-padding bg-card relative overflow-hidden">
+    <section ref={ref} className="py-16 md:py-24 bg-card relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
       <div className="absolute bottom-20 right-10 w-56 h-56 bg-primary/3 rounded-full blur-2xl" />
