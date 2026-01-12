@@ -2,10 +2,17 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-import bedroomImg from "@/assets/portfolio-bedroom.jpg";
-import kitchenImg from "@/assets/portfolio-kitchen.jpg";
-import diningImg from "@/assets/portfolio-dining.jpg";
-import bathroomImg from "@/assets/portfolio-bathroom.jpg";
+// Main project images - matched to titles
+import minimalistHavenImg from "@/assets/project-minimalist-haven.jpg";
+import contemporaryKitchenImg from "@/assets/project-contemporary-kitchen.jpg";
+import elegantDiningImg from "@/assets/project-elegant-dining.jpg";
+import sereneSpaImg from "@/assets/project-serene-spa-bath.jpg";
+
+// Filmstrip project images - matched to locations
+import rohiniResidenceImg from "@/assets/project-rohini-residence.jpg";
+import modelTownVillaImg from "@/assets/project-model-town-villa.jpg";
+import shalimarBaghImg from "@/assets/project-shalimar-bagh.jpg";
+import paschimViharImg from "@/assets/project-paschim-vihar.jpg";
 
 const projects = [
   {
@@ -14,7 +21,7 @@ const projects = [
     location: "Greater Kailash, Delhi",
     style: "Modern Minimal",
     year: "2024",
-    image: bedroomImg,
+    image: minimalistHavenImg,
     featured: true,
   },
   {
@@ -23,7 +30,7 @@ const projects = [
     location: "Pitampura, Delhi",
     style: "Warm Luxury",
     year: "2024",
-    image: kitchenImg,
+    image: contemporaryKitchenImg,
     featured: false,
   },
   {
@@ -32,7 +39,7 @@ const projects = [
     location: "Vasant Kunj, Delhi",
     style: "Classic Modern",
     year: "2023",
-    image: diningImg,
+    image: elegantDiningImg,
     featured: false,
   },
   {
@@ -41,16 +48,16 @@ const projects = [
     location: "Golf Links, Delhi",
     style: "Minimal",
     year: "2023",
-    image: bathroomImg,
+    image: sereneSpaImg,
     featured: false,
   },
 ];
 
 const filmstripProjects = [
-  { id: 5, title: "Rohini Residence", year: "2023", image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=600&fit=crop" },
-  { id: 6, title: "Model Town Villa", year: "2023", image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=600&fit=crop" },
-  { id: 7, title: "Shalimar Bagh Home", year: "2022", image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=600&fit=crop" },
-  { id: 8, title: "Paschim Vihar", year: "2022", image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=400&h=600&fit=crop" },
+  { id: 5, title: "Rohini Residence", year: "2023", image: rohiniResidenceImg },
+  { id: 6, title: "Model Town Villa", year: "2023", image: modelTownVillaImg },
+  { id: 7, title: "Shalimar Bagh Home", year: "2022", image: shalimarBaghImg },
+  { id: 8, title: "Paschim Vihar", year: "2022", image: paschimViharImg },
 ];
 
 const ProjectsEditorial = () => {
