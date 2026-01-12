@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { MapPin, Mail, Phone, Clock } from 'lucide-react';
 import contactHero from '@/assets/contact-hero.jpg';
 import visitStudioImage from '@/assets/contact-visit-studio.png';
+import { useIntersectionAnimation } from '@/hooks/useIntersectionAnimation';
 
 // ═══════════════════════════════════════════════════════════════
 // FORM COMPONENTS
@@ -161,6 +162,7 @@ const ContactItem = ({
 // ═══════════════════════════════════════════════════════════════
 
 const Contact = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -169,6 +171,13 @@ const Contact = () => {
     budget: '',
     message: ''
   });
+
+  const [formRef, formVisible] = useIntersectionAnimation<HTMLDivElement>();
+  const [infoRef, infoVisible] = useIntersectionAnimation<HTMLDivElement>();
+
+  useEffect(() => {
+    setTimeout(() => setIsLoaded(true), 100);
+  }, []);
   
   const projectTypes = ['New Construction', 'Renovation', 'Interior Design', 'Architectural Design', 'Turnkey Project'];
   const budgetRanges = ['Under ₹25 Lakhs', '₹25L - ₹50 Lakhs', '₹50L - ₹1 Crore', '₹1Cr - ₹2 Crore', 'Above ₹2 Crore'];
@@ -179,56 +188,146 @@ const Contact = () => {
       
       <main>
         {/* ═══════════════════════════════════════════════════════════════
-            HERO SECTION - Dark with Background Image
+            HERO SECTION - Dark with Background Image + Animations
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative min-h-[75vh] flex items-center">
-          {/* Background Image */}
+        <section className="relative min-h-[75vh] flex items-center overflow-hidden">
+          {/* Background Image with parallax-like effect */}
           <div className="absolute inset-0">
             <img 
               src={contactHero} 
               alt="Modern Luxury Architecture" 
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-[2s]"
+              style={{
+                transform: isLoaded ? 'scale(1)' : 'scale(1.1)',
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/50 to-transparent" />
+          </div>
+
+          {/* Animated geometric accents */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div 
+              className="absolute top-20 right-20 w-32 h-32 border border-[#C7A56A]/20"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? 'rotate(0deg)' : 'rotate(45deg)',
+                transition: 'all 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s',
+              }}
+            />
+            <div 
+              className="absolute bottom-40 right-40 w-20 h-20 border border-[#C7A56A]/10 rotate-45"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transition: 'opacity 1s ease-out 0.8s',
+              }}
+            />
+            {/* Animated lines */}
+            <div 
+              className="absolute top-1/3 left-0 h-px bg-gradient-to-r from-[#C7A56A]/30 to-transparent"
+              style={{
+                width: isLoaded ? '40%' : '0',
+                transition: 'width 1.5s ease-out 0.3s',
+              }}
+            />
           </div>
           
           {/* Content */}
           <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10 pt-32 pb-24">
             {/* Eyebrow */}
-            <p className="text-[11px] font-mono tracking-[0.4em] text-[#C7A56A] uppercase mb-6">
+            <p 
+              className="text-[11px] font-mono tracking-[0.4em] text-[#C7A56A] uppercase mb-6"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'all 0.8s ease-out 0.3s',
+              }}
+            >
               Get in Touch
             </p>
             
-            {/* Main Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-[1.1] mb-8">
-              Let's Create<br />
-              <span className="text-[#C7A56A] italic">Together</span>
+            {/* Main Headline with stagger */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-[1.1] mb-8 overflow-hidden">
+              <span 
+                className="block"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(100%)',
+                  transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s',
+                }}
+              >
+                Let's Create
+              </span>
+              <span 
+                className="block text-[#C7A56A] italic"
+                style={{
+                  opacity: isLoaded ? 1 : 0,
+                  transform: isLoaded ? 'translateY(0)' : 'translateY(100%)',
+                  transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s',
+                }}
+              >
+                Together
+              </span>
             </h1>
             
             {/* Subtext */}
-            <p className="text-base md:text-lg text-white/55 font-body font-light max-w-xl leading-relaxed">
+            <p 
+              className="text-base md:text-lg text-white/55 font-body font-light max-w-xl leading-relaxed"
+              style={{
+                opacity: isLoaded ? 1 : 0,
+                transform: isLoaded ? 'translateY(0)' : 'translateY(30px)',
+                transition: 'all 0.8s ease-out 0.8s',
+              }}
+            >
               Every exceptional project begins with a conversation. Tell us about your vision, 
               and let's explore the possibilities together.
             </p>
           </div>
+
+          {/* Scroll indicator */}
+          <div 
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+            style={{
+              opacity: isLoaded ? 0.5 : 0,
+              transition: 'opacity 1s ease-out 1.2s',
+            }}
+          >
+            <div className="w-px h-12 bg-gradient-to-b from-[#C7A56A]/50 to-transparent relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-4 bg-[#C7A56A] animate-scroll-line" />
+            </div>
+          </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
-            FORM SECTION - Light Gradient Background
+            FORM SECTION - Light Gradient Background with Animations
         ═══════════════════════════════════════════════════════════════ */}
-        <section className="relative py-24 md:py-32 bg-gradient-to-br from-[#FAF8F5] via-[#F7F4F0] to-[#F3EFEA]">
-          {/* Decorative elements */}
+        <section className="relative py-24 md:py-32 bg-gradient-to-br from-[#FAF8F5] via-[#F7F4F0] to-[#F3EFEA] overflow-hidden">
+          {/* Decorative elements with animations */}
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-radial from-[#C7A56A]/5 to-transparent rounded-full blur-3xl" />
-            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-[#C7A56A]/3 to-transparent rounded-full blur-3xl" />
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-radial from-[#C7A56A]/5 to-transparent rounded-full blur-3xl animate-float-slow" />
+            <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-[#C7A56A]/3 to-transparent rounded-full blur-3xl animate-float-slow" style={{ animationDelay: '-5s' }} />
+            
+            {/* Animated grid lines */}
+            <div 
+              className="absolute inset-0 opacity-[0.02]"
+              style={{
+                backgroundImage: `
+                  linear-gradient(to right, #C7A56A 1px, transparent 1px),
+                  linear-gradient(to bottom, #C7A56A 1px, transparent 1px)
+                `,
+                backgroundSize: '80px 80px',
+              }}
+            />
           </div>
           
           <div className="container mx-auto px-6 md:px-12 lg:px-20 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-20">
               
-              {/* Left: Form */}
-              <div>
+              {/* Left: Form with reveal animation */}
+              <div 
+                ref={formRef}
+                className={`reveal-left ${formVisible ? 'visible' : ''}`}
+              >
                 <div className="mb-10">
                   <h2 className="text-2xl md:text-3xl font-heading font-light text-[#0E0E0E] mb-3">
                     Request a Consultation
@@ -293,22 +392,27 @@ const Contact = () => {
                     required
                   />
                   
-                  {/* Submit Button */}
+                  {/* Submit Button with shine effect */}
                   <button 
                     type="submit"
-                    className="group inline-flex items-center gap-3 px-10 py-4 bg-[#C7A56A] text-[#0A0A0A] 
-                             font-body text-xs tracking-[0.2em] uppercase rounded-sm
+                    className="group relative inline-flex items-center gap-3 px-10 py-4 bg-[#C7A56A] text-[#0A0A0A] 
+                             font-body text-xs tracking-[0.2em] uppercase rounded-sm overflow-hidden
                              transition-all duration-300 hover:bg-[#B8956A] hover:shadow-xl
                              hover:shadow-[#C7A56A]/20"
                   >
-                    <span className="font-medium">Submit Inquiry</span>
-                    <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    <span className="font-medium relative z-10">Submit Inquiry</span>
+                    <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    {/* Shine sweep */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                   </button>
                 </form>
               </div>
               
-              {/* Right: Contact Information - Enhanced Design */}
-              <div>
+              {/* Right: Contact Information with reveal animation */}
+              <div 
+                ref={infoRef}
+                className={`reveal-right ${infoVisible ? 'visible' : ''}`}
+              >
                 <div className="mb-8">
                   <h2 className="text-2xl md:text-3xl font-heading font-light text-[#0E0E0E] mb-3">
                     Contact Information
@@ -318,9 +422,10 @@ const Contact = () => {
                   </p>
                 </div>
                 
-                {/* Contact Cards */}
+                {/* Contact Cards with hover effects */}
                 <div className="bg-white/40 backdrop-blur-sm rounded-xl border border-white/60 shadow-lg 
-                               shadow-[#0E0E0E]/3 overflow-hidden mb-8">
+                               shadow-[#0E0E0E]/3 overflow-hidden mb-8 hover:shadow-xl hover:shadow-[#C7A56A]/10 
+                               transition-all duration-500">
                   <ContactItem 
                     icon={MapPin}
                     label="Studio Address"
@@ -347,20 +452,20 @@ const Contact = () => {
                   />
                 </div>
                 
-                {/* Property Image with Enhanced Design */}
-                <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-[#0E0E0E]/10 group">
+                {/* Property Image with Enhanced hover effect */}
+                <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-[#0E0E0E]/10 group image-zoom">
                   <img 
                     src={visitStudioImage} 
                     alt="EdgeHomes studio interior" 
-                    className="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="w-full h-72 object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/20 to-transparent" />
                   
                   {/* Studio Overlay */}
                   <div className="absolute inset-0 flex items-end p-6">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 transform group-hover:translate-x-2 transition-transform duration-500">
                       <div className="w-10 h-10 rounded-full bg-[#C7A56A]/20 backdrop-blur-sm border border-[#C7A56A]/40 
-                                      flex items-center justify-center">
+                                      flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                         <MapPin className="w-4 h-4 text-[#C7A56A]" />
                       </div>
                       <div>
