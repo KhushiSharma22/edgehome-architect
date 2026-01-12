@@ -2,6 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Layers, Compass, Building2, Paintbrush } from "lucide-react";
 
+// Import service background images
+import architectureBg from "@/assets/service-architecture-bg.jpg";
+import constructionBg from "@/assets/service-construction-bg.jpg";
+import interiorBg from "@/assets/service-interior-bg.jpg";
+import furnitureBg from "@/assets/service-furniture-bg.jpg";
+
 const services = [
   {
     id: "architecture",
@@ -12,7 +18,8 @@ const services = [
     stat: "50+",
     statLabel: "Projects Designed",
     link: "/services/architecture",
-    position: "left"
+    position: "left",
+    bgImage: architectureBg
   },
   {
     id: "construction",
@@ -23,7 +30,8 @@ const services = [
     stat: "100%",
     statLabel: "Precision Built",
     link: "/services/construction",
-    position: "right"
+    position: "right",
+    bgImage: constructionBg
   },
   {
     id: "interior",
@@ -34,7 +42,8 @@ const services = [
     stat: "200+",
     statLabel: "Interiors Delivered",
     link: "/services/interior",
-    position: "left"
+    position: "left",
+    bgImage: interiorBg
   },
   {
     id: "furniture",
@@ -45,7 +54,8 @@ const services = [
     stat: "500+",
     statLabel: "Pieces Crafted",
     link: "/services/furniture",
-    position: "right"
+    position: "right",
+    bgImage: furnitureBg
   },
 ];
 
@@ -179,14 +189,32 @@ const ServicesDNA = () => {
                   </div>
                   
                   <div className="p-5">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-all duration-500 ${
-                        isActive 
-                          ? 'bg-primary/20 shadow-lg shadow-primary/20' 
-                          : 'bg-muted'
-                      }`}>
-                        <Icon className={`w-6 h-6 transition-colors duration-300 ${
-                          isActive ? 'text-primary' : 'text-muted-foreground'
+                      <div className="flex items-start gap-4 mb-4">
+                      {/* Icon with Background Image */}
+                      <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 group/icon">
+                        {/* Background Image */}
+                        <img 
+                          src={service.bgImage} 
+                          alt=""
+                          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                            isActive ? 'scale-110 brightness-75' : 'scale-100 brightness-50'
+                          } group-hover/icon:scale-125`}
+                        />
+                        {/* Gradient Overlay */}
+                        <div className={`absolute inset-0 transition-all duration-500 ${
+                          isActive 
+                            ? 'bg-gradient-to-br from-primary/40 via-primary/20 to-transparent' 
+                            : 'bg-gradient-to-br from-background/60 to-background/30'
+                        }`} />
+                        {/* Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <Icon className={`w-7 h-7 transition-all duration-500 drop-shadow-lg ${
+                            isActive ? 'text-white scale-110' : 'text-white/80'
+                          }`} />
+                        </div>
+                        {/* Glow Effect */}
+                        <div className={`absolute inset-0 rounded-xl transition-all duration-500 ${
+                          isActive ? 'shadow-[inset_0_0_20px_hsl(var(--primary)/0.4)]' : ''
                         }`} />
                       </div>
                       
@@ -285,14 +313,40 @@ const ServicesDNA = () => {
                       <div className="relative p-8">
                         {/* Header */}
                         <div className="flex items-start justify-between mb-6">
-                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-500 ${
-                            isActive 
-                              ? 'bg-primary/20 shadow-lg shadow-primary/20' 
-                              : 'bg-muted'
-                          }`}>
-                            <Icon className={`w-7 h-7 transition-colors duration-300 ${
-                              isActive ? 'text-primary' : 'text-muted-foreground'
+                          {/* Icon with Background Image */}
+                          <div className="relative w-20 h-20 rounded-2xl overflow-hidden group/icon">
+                            {/* Background Image */}
+                            <img 
+                              src={service.bgImage} 
+                              alt=""
+                              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
+                                isActive ? 'scale-110 brightness-75' : 'scale-100 brightness-50'
+                              } group-hover:scale-125`}
+                            />
+                            {/* Gradient Overlay */}
+                            <div className={`absolute inset-0 transition-all duration-500 ${
+                              isActive 
+                                ? 'bg-gradient-to-br from-primary/50 via-primary/20 to-transparent' 
+                                : 'bg-gradient-to-br from-background/70 to-background/40'
                             }`} />
+                            {/* Icon */}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <Icon className={`w-9 h-9 transition-all duration-500 drop-shadow-lg ${
+                                isActive ? 'text-white scale-110' : 'text-white/80'
+                              }`} />
+                            </div>
+                            {/* Animated Border Glow */}
+                            <div className={`absolute inset-0 rounded-2xl transition-all duration-500 ${
+                              isActive 
+                                ? 'shadow-[inset_0_0_30px_hsl(var(--primary)/0.5),0_0_20px_hsl(var(--primary)/0.3)]' 
+                                : ''
+                            }`} />
+                            {/* Corner Accent */}
+                            <div className={`absolute -bottom-1 -right-1 w-6 h-6 transition-all duration-500 ${
+                              isActive ? 'opacity-100' : 'opacity-0'
+                            }`}>
+                              <div className="w-full h-full border-b-2 border-r-2 border-primary rounded-br-xl" />
+                            </div>
                           </div>
                           
                           <div className="text-right">
