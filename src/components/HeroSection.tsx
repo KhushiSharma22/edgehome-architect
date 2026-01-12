@@ -141,6 +141,19 @@ const HeroSection = () => {
       </div>
 
 
+      {/* Scroll indicator - Cinematic */}
+      <div 
+        className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 cursor-pointer transition-all duration-1000 delay-[2000ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        onClick={scrollToNext}
+      >
+        <span className="text-[9px] tracking-[0.4em] text-muted-foreground/50 uppercase">Explore</span>
+        <div className="relative w-6 h-12 border border-primary/30 rounded-full flex justify-center overflow-hidden">
+          <div 
+            className="w-1.5 h-1.5 bg-primary rounded-full mt-2 animate-scroll-line"
+          />
+        </div>
+      </div>
+
       {/* Corner accents */}
       <div className={`absolute top-8 left-8 transition-all duration-1000 delay-[2200ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
         <div className="w-16 h-16 border-l border-t border-primary/20" />
