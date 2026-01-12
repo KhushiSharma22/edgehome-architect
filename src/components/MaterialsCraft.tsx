@@ -119,18 +119,18 @@ const MaterialsCraft = () => {
   }, []);
 
   const getCardStyle = (index: number) => {
-    // Unique bento grid positions
+    // Mobile: simple 2-column grid, Desktop: bento
     const positions = [
-      'col-span-2 row-span-2', // Large feature
-      'col-span-1 row-span-1', // Small
-      'col-span-1 row-span-2', // Tall
-      'col-span-1 row-span-1', // Small
-      'col-span-2 row-span-1', // Wide
-      'col-span-1 row-span-1', // Small
-      'col-span-1 row-span-2', // Tall
-      'col-span-1 row-span-1', // Small
+      'col-span-1 sm:col-span-2 sm:row-span-2', // Large feature
+      'col-span-1 sm:col-span-1 sm:row-span-1', // Small
+      'col-span-1 sm:col-span-1 sm:row-span-2', // Tall
+      'col-span-1 sm:col-span-1 sm:row-span-1', // Small
+      'col-span-1 sm:col-span-2 sm:row-span-1', // Wide
+      'col-span-1 sm:col-span-1 sm:row-span-1', // Small
+      'col-span-1 sm:col-span-1 sm:row-span-2', // Tall
+      'col-span-1 sm:col-span-1 sm:row-span-1', // Small
     ];
-    return positions[index] || 'col-span-1 row-span-1';
+    return positions[index] || 'col-span-1';
   };
 
   return (
@@ -157,42 +157,42 @@ const MaterialsCraft = () => {
       <div className="absolute top-40 right-40 w-3 h-3 bg-primary/30 rounded-full" />
       <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-primary/50 rounded-full" />
       
-      <div ref={containerRef} className="container mx-auto px-6 py-16 md:py-24 relative z-10">
+      <div ref={containerRef} className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-24 relative z-10">
         {/* Premium editorial header */}
-        <div className={`flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
+        <div className={`flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16 md:mb-20 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'}`}>
           <div className="max-w-2xl">
             {/* Decorative line */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-px bg-gradient-to-r from-primary to-transparent" />
-              <Sparkles className="w-4 h-4 text-primary" />
+            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="w-10 sm:w-16 h-px bg-gradient-to-r from-primary to-transparent" />
+              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
             </div>
             
-            <span className="text-primary text-xs tracking-[0.5em] uppercase mb-4 block font-medium">
+            <span className="text-primary text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.5em] uppercase mb-3 sm:mb-4 block font-medium">
               Chapter III
             </span>
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading text-foreground leading-[0.9] mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading text-foreground leading-[0.9] mb-4 sm:mb-6">
               The Art of
               <br />
               <span className="text-shimmer italic">Materials</span>
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
+            <p className="text-sm sm:text-lg text-muted-foreground leading-relaxed max-w-md">
               Every surface tells a story. We curate materials that transform spaces into experiences.
             </p>
           </div>
           
-          {/* Material count indicator */}
-          <div className={`flex items-end gap-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
-            <div className="text-8xl md:text-9xl font-heading text-primary/10 leading-none">
+          {/* Material count indicator - hidden on mobile */}
+          <div className={`hidden sm:flex items-end gap-4 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
+            <div className="text-6xl md:text-8xl lg:text-9xl font-heading text-primary/10 leading-none">
               08
             </div>
-            <span className="text-xs text-muted-foreground tracking-widest uppercase mb-4">
+            <span className="text-[10px] sm:text-xs text-muted-foreground tracking-widest uppercase mb-4">
               Curated<br />Materials
             </span>
           </div>
         </div>
 
         {/* Unique asymmetric bento grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 auto-rows-[200px] md:auto-rows-[220px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5 auto-rows-[140px] sm:auto-rows-[180px] md:auto-rows-[220px]">
           {materials.map((material, index) => (
             <div
               key={material.id}
@@ -233,19 +233,19 @@ const MaterialsCraft = () => {
                 }`} />
                 
                 {/* Content */}
-                <div className="absolute inset-0 p-5 md:p-6 flex flex-col justify-between">
+                <div className="absolute inset-0 p-3 sm:p-5 md:p-6 flex flex-col justify-between">
                   {/* Top row - Material swatch */}
                   <div className="flex items-start justify-between">
                     <div 
-                      className={`w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white/30 transition-all duration-500 ${
+                      className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full border-2 border-white/30 transition-all duration-500 ${
                         hoveredId === material.id ? 'scale-125 shadow-[0_0_20px_rgba(255,255,255,0.3)]' : ''
                       }`}
                       style={{ backgroundColor: material.color }}
                     />
-                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${
+                    <div className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center transition-all duration-500 ${
                       hoveredId === material.id ? 'bg-primary/30 rotate-45' : ''
                     }`}>
-                      <ArrowUpRight className={`w-4 h-4 text-white transition-all duration-500 ${
+                      <ArrowUpRight className={`w-3 h-3 sm:w-4 sm:h-4 text-white transition-all duration-500 ${
                         hoveredId === material.id ? 'scale-110' : ''
                       }`} />
                     </div>
@@ -253,26 +253,26 @@ const MaterialsCraft = () => {
                   
                   {/* Bottom content */}
                   <div>
-                    {/* Animated line */}
-                    <div className={`h-px bg-gradient-to-r from-primary to-transparent mb-4 transition-all duration-700 origin-left ${
+                    {/* Animated line - hidden on small mobile */}
+                    <div className={`hidden sm:block h-px bg-gradient-to-r from-primary to-transparent mb-3 sm:mb-4 transition-all duration-700 origin-left ${
                       hoveredId === material.id ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'
                     }`} />
                     
                     <div className={`transition-all duration-500 ${
-                      hoveredId === material.id ? 'translate-y-0' : 'translate-y-2'
+                      hoveredId === material.id ? 'translate-y-0' : 'translate-y-1 sm:translate-y-2'
                     }`}>
-                      <span className="text-primary/80 text-2xs tracking-[0.3em] uppercase block mb-1">
+                      <span className="text-primary/80 text-[9px] sm:text-2xs tracking-[0.2em] sm:tracking-[0.3em] uppercase block mb-0.5 sm:mb-1">
                         {material.vibe}
                       </span>
-                      <h3 className="text-lg md:text-xl lg:text-2xl font-heading text-white leading-tight">
+                      <h3 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-heading text-white leading-tight">
                         {material.name}
                       </h3>
                       
-                      {/* Extended info on hover */}
-                      <div className={`overflow-hidden transition-all duration-700 ${
-                        hoveredId === material.id ? 'max-h-20 opacity-100 mt-3' : 'max-h-0 opacity-0'
+                      {/* Extended info on hover - hidden on mobile */}
+                      <div className={`hidden sm:block overflow-hidden transition-all duration-700 ${
+                        hoveredId === material.id ? 'max-h-20 opacity-100 mt-2 sm:mt-3' : 'max-h-0 opacity-0'
                       }`}>
-                        <p className="text-xs text-white/70 line-clamp-2">
+                        <p className="text-[10px] sm:text-xs text-white/70 line-clamp-2">
                           {material.description}
                         </p>
                       </div>
@@ -299,12 +299,12 @@ const MaterialsCraft = () => {
         </div>
 
         {/* Bottom CTA strip */}
-        <div className={`mt-16 flex items-center justify-center gap-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '1400ms' }}>
-          <div className="h-px flex-1 max-w-32 bg-gradient-to-r from-transparent to-border" />
-          <span className="text-xs text-muted-foreground tracking-[0.4em] uppercase">
-            Click any material to explore
+        <div className={`mt-10 sm:mt-16 flex items-center justify-center gap-4 sm:gap-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '1400ms' }}>
+          <div className="h-px flex-1 max-w-16 sm:max-w-32 bg-gradient-to-r from-transparent to-border" />
+          <span className="text-[10px] sm:text-xs text-muted-foreground tracking-[0.2em] sm:tracking-[0.4em] uppercase text-center">
+            Tap any material to explore
           </span>
-          <div className="h-px flex-1 max-w-32 bg-gradient-to-l from-transparent to-border" />
+          <div className="h-px flex-1 max-w-16 sm:max-w-32 bg-gradient-to-l from-transparent to-border" />
         </div>
       </div>
 
