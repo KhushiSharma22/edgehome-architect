@@ -72,21 +72,21 @@ const HeroSection = () => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[150px]" />
 
       {/* Content */}
-      <div className="relative z-30 container mx-auto px-6 text-center">
+      <div className="relative z-30 container mx-auto px-4 sm:px-6 text-center">
         {/* Premium tag with line animation */}
-        <div className={`mb-10 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-flex items-center gap-4">
-            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
-            <span className="text-primary text-xs tracking-[0.3em] uppercase font-medium text-center">
+        <div className={`mb-6 sm:mb-10 transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <span className="inline-flex items-center gap-2 sm:gap-4">
+            <span className={`h-px bg-gradient-to-r from-transparent to-primary transition-all duration-1000 delay-500 hidden sm:block ${isLoaded ? 'w-8 sm:w-16' : 'w-0'}`} />
+            <span className="text-primary text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium text-center px-2">
               One Stop Solution For Construction & Designs
             </span>
-            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 delay-500 ${isLoaded ? 'w-16' : 'w-0'}`} />
+            <span className={`h-px bg-gradient-to-l from-transparent to-primary transition-all duration-1000 delay-500 hidden sm:block ${isLoaded ? 'w-8 sm:w-16' : 'w-0'}`} />
           </span>
         </div>
 
         {/* Main headline with character animation */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-heading text-foreground mb-8 leading-[0.9]">
-          <span className="block overflow-hidden mb-2">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-heading text-foreground mb-4 sm:mb-8 leading-[0.9]">
+          <span className="block overflow-hidden mb-1 sm:mb-2">
             {isLoaded && <SplitText text="Design That" delay={600} />}
           </span>
           <span className="block overflow-hidden">
@@ -98,22 +98,22 @@ const HeroSection = () => {
 
         {/* Subheadline with fade */}
         <p 
-          className={`text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed transition-all duration-1000 delay-[1400ms] ${isLoaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
+          className={`text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground max-w-xs sm:max-w-lg md:max-w-2xl mx-auto mb-8 sm:mb-12 leading-relaxed px-2 transition-all duration-1000 delay-[1400ms] ${isLoaded ? 'opacity-100 translate-y-0 blur-0' : 'opacity-0 translate-y-8 blur-sm'}`}
         >
           Where architectural vision meets exceptional craftsmanship
         </p>
 
         {/* CTA Button */}
         <div 
-          className={`mb-16 transition-all duration-1000 delay-[1600ms] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          className={`mb-10 sm:mb-16 transition-all duration-1000 delay-[1600ms] ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <Button 
             onClick={scrollToContact}
-            className="group relative btn-gold text-lg px-12 py-7 overflow-hidden"
+            className="group relative btn-gold text-sm sm:text-lg px-6 sm:px-12 py-4 sm:py-7 overflow-hidden"
           >
-            <span className="relative z-10 flex items-center gap-3">
+            <span className="relative z-10 flex items-center gap-2 sm:gap-3">
               Get Free Consultation
-              <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 group-hover:translate-x-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </span>
@@ -122,7 +122,7 @@ const HeroSection = () => {
 
         {/* Trust badges */}
         <div 
-          className={`flex flex-wrap items-center justify-center gap-8 transition-all duration-1000 delay-[1800ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`flex flex-wrap items-center justify-center gap-4 sm:gap-8 transition-all duration-1000 delay-[1800ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         >
           {[
             'Design + Build',
@@ -131,9 +131,9 @@ const HeroSection = () => {
           ].map((label) => (
             <span 
               key={label} 
-              className="flex items-center gap-3 text-sm text-muted-foreground group cursor-default"
+              className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground group cursor-default"
             >
-              <span className="w-1.5 h-1.5 bg-primary/60 rotate-45 group-hover:bg-primary group-hover:scale-125 transition-all duration-300" />
+              <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-primary/60 rotate-45 group-hover:bg-primary group-hover:scale-125 transition-all duration-300" />
               <span className="group-hover:text-foreground transition-colors duration-300">{label}</span>
             </span>
           ))}
@@ -143,29 +143,29 @@ const HeroSection = () => {
 
       {/* Scroll indicator - Cinematic */}
       <div 
-        className={`absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 cursor-pointer transition-all duration-1000 delay-[2000ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`absolute bottom-6 sm:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 sm:gap-4 cursor-pointer transition-all duration-1000 delay-[2000ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         onClick={scrollToNext}
       >
-        <span className="text-[9px] tracking-[0.4em] text-muted-foreground/50 uppercase">Explore</span>
-        <div className="relative w-6 h-12 border border-primary/30 rounded-full flex justify-center overflow-hidden">
+        <span className="text-[8px] sm:text-[9px] tracking-[0.3em] sm:tracking-[0.4em] text-muted-foreground/50 uppercase">Explore</span>
+        <div className="relative w-5 h-10 sm:w-6 sm:h-12 border border-primary/30 rounded-full flex justify-center overflow-hidden">
           <div 
-            className="w-1.5 h-1.5 bg-primary rounded-full mt-2 animate-scroll-line"
+            className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-primary rounded-full mt-2 animate-scroll-line"
           />
         </div>
       </div>
 
-      {/* Corner accents */}
-      <div className={`absolute top-8 left-8 transition-all duration-1000 delay-[2200ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-l border-t border-primary/20" />
+      {/* Corner accents - Hidden on mobile */}
+      <div className={`absolute top-4 left-4 sm:top-8 sm:left-8 transition-all duration-1000 delay-[2200ms] hidden sm:block ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-10 h-10 sm:w-16 sm:h-16 border-l border-t border-primary/20" />
       </div>
-      <div className={`absolute top-8 right-8 transition-all duration-1000 delay-[2300ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-r border-t border-primary/20" />
+      <div className={`absolute top-4 right-4 sm:top-8 sm:right-8 transition-all duration-1000 delay-[2300ms] hidden sm:block ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-10 h-10 sm:w-16 sm:h-16 border-r border-t border-primary/20" />
       </div>
-      <div className={`absolute bottom-8 left-8 transition-all duration-1000 delay-[2400ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-l border-b border-primary/20" />
+      <div className={`absolute bottom-4 left-4 sm:bottom-8 sm:left-8 transition-all duration-1000 delay-[2400ms] hidden sm:block ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-10 h-10 sm:w-16 sm:h-16 border-l border-b border-primary/20" />
       </div>
-      <div className={`absolute bottom-8 right-8 transition-all duration-1000 delay-[2500ms] ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="w-16 h-16 border-r border-b border-primary/20" />
+      <div className={`absolute bottom-4 right-4 sm:bottom-8 sm:right-8 transition-all duration-1000 delay-[2500ms] hidden sm:block ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+        <div className="w-10 h-10 sm:w-16 sm:h-16 border-r border-b border-primary/20" />
       </div>
     </section>
   );
