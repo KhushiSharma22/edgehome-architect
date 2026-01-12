@@ -960,11 +960,11 @@ const FoundersSection = () => {
     {
       name: 'Deepak Manchanda',
       role: 'Director',
-      department: 'Constructions & Operations',
+      department: 'Construction & Interior Execution',
       initial: 'D',
       image: founderDeepak,
-      description: 'In the world of construction, where every brick laid and beam placed plays a pivotal role in shaping dreams into reality, there exists an unsung hero who embodies dedication, expertise, and relentless pursuit of excellence.',
-      philosophy: 'In an industry where trust is paramount, his integrity and client-centric approach have set EdgeHomes apart as the benchmark for quality construction.',
+      description: 'From laying the first foundation to crafting the finest interior details, Deepak brings dreams to life with precision. His expertise spans structural excellence and luxurious interior finishes — every beam, every texture, every element perfected.',
+      philosophy: 'In an industry where trust is paramount, his integrity and client-centric approach have set EdgeHomes apart as the benchmark for quality construction and impeccable interior execution.',
     },
   ];
 
