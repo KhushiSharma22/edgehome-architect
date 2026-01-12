@@ -119,9 +119,9 @@ const Furniture = () => {
 
       {/* ===== HERO SECTION - CRAZY DRAMATIC ===== */}
       <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0A0A0A]">
-        {/* Dynamic cursor follower glow */}
+        {/* Dynamic cursor follower glow - desktop only */}
         <div 
-          className="fixed w-96 h-96 rounded-full pointer-events-none z-0 transition-all duration-300 ease-out"
+          className="fixed w-96 h-96 rounded-full pointer-events-none z-0 transition-all duration-300 ease-out hidden lg:block"
           style={{
             left: mousePos.x - 192,
             top: mousePos.y - 192,
@@ -133,7 +133,7 @@ const Furniture = () => {
         {/* Split layout */}
         <div className="absolute inset-0 grid grid-cols-1 lg:grid-cols-5">
           {/* Left dark section */}
-          <div className="lg:col-span-2 relative bg-[#0A0A0A]">
+          <div className="lg:col-span-2 relative bg-[#0A0A0A] hidden lg:block">
             {/* Animated vertical lines */}
             <div className="absolute inset-0 overflow-hidden">
               {[...Array(5)].map((_, i) => (
@@ -235,12 +235,12 @@ const Furniture = () => {
         </div>
 
         {/* Main content */}
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28 lg:pt-0">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pt-24 sm:pt-28 lg:pt-0">
           <div className="grid grid-cols-1 lg:grid-cols-5 items-center min-h-screen">
-            <div className="lg:col-span-2 relative py-20">
+            <div className="lg:col-span-2 relative py-12 sm:py-16 lg:py-20">
               {/* Animated accent bar */}
               <div 
-                className="absolute -top-4 left-0 h-1 bg-[#C6A46A]"
+                className="absolute -top-4 left-0 h-1 bg-[#C6A46A] hidden sm:block"
                 style={{
                   width: isLoaded ? '100px' : '0',
                   transition: 'width 1s ease-out 0.5s',
@@ -249,7 +249,7 @@ const Furniture = () => {
               
               {/* Breadcrumb with animation */}
               <nav 
-                className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/30 mb-12"
+                className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-ivory/30 mb-8 sm:mb-10 lg:mb-12"
                 style={{
                   opacity: isLoaded ? 0.5 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(20px)",
@@ -257,31 +257,31 @@ const Furniture = () => {
                 }}
               >
                 <Link to="/" className="hover:text-[#C6A46A] transition-colors">HOME</Link>
-                <ChevronRight className="w-3 h-3" />
+                <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                 <span>SERVICES</span>
-                <ChevronRight className="w-3 h-3" />
+                <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                 <span className="text-[#C6A46A]">FURNITURE</span>
               </nav>
 
               {/* Label with diamond */}
               <div 
-                className="flex items-center gap-4 mb-8"
+                className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateX(0)" : "translateX(-30px)",
                   transition: "all 1s ease-out 0.5s"
                 }}
               >
-                <div className="w-2 h-2 bg-[#C6A46A] rotate-45 animate-pulse" />
-                <span className="text-[11px] tracking-[0.5em] text-[#C6A46A] uppercase font-medium">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[#C6A46A] rotate-45 animate-pulse" />
+                <span className="text-[9px] sm:text-[10px] md:text-[11px] tracking-[0.3em] sm:tracking-[0.5em] text-[#C6A46A] uppercase font-medium">
                   Bespoke Craftsmanship
                 </span>
               </div>
 
               {/* MASSIVE Headline with stagger */}
-              <h1 className="relative mb-10">
+              <h1 className="relative mb-6 sm:mb-8 lg:mb-10">
                 <span 
-                  className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory tracking-tight leading-[0.9]"
+                  className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-ivory tracking-tight leading-[0.9]"
                   style={{
                     opacity: isLoaded ? 1 : 0,
                     transform: isLoaded ? "translateY(0)" : "translateY(50px)",
@@ -291,7 +291,7 @@ const Furniture = () => {
                   Furniture
                 </span>
                 <span 
-                  className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory/60 tracking-tight leading-[0.9] mt-2"
+                  className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-ivory/60 tracking-tight leading-[0.9] mt-1 sm:mt-2"
                   style={{
                     opacity: isLoaded ? 1 : 0,
                     transform: isLoaded ? "translateY(0)" : "translateY(50px)",
@@ -301,7 +301,7 @@ const Furniture = () => {
                   That Tells
                 </span>
                 <span 
-                  className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading tracking-tight leading-[0.9] mt-2"
+                  className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading tracking-tight leading-[0.9] mt-1 sm:mt-2"
                   style={{
                     opacity: isLoaded ? 1 : 0,
                     transform: isLoaded ? "translateY(0)" : "translateY(50px)",
@@ -311,7 +311,7 @@ const Furniture = () => {
                   <span className="relative inline-block">
                     <span className="text-[#C6A46A] italic animate-glow-text">Stories</span>
                     <div 
-                      className="absolute -bottom-2 left-0 h-[3px] bg-[#C6A46A]"
+                      className="absolute -bottom-1 sm:-bottom-2 left-0 h-[2px] sm:h-[3px] bg-[#C6A46A]"
                       style={{
                         width: isLoaded ? '100%' : '0',
                         transition: 'width 0.8s ease-out 1.5s',
@@ -323,7 +323,7 @@ const Furniture = () => {
 
               {/* Tagline */}
               <p 
-                className="text-lg md:text-xl text-ivory/50 max-w-md leading-relaxed mb-10"
+                className="text-sm sm:text-base md:text-lg lg:text-xl text-ivory/50 max-w-md leading-relaxed mb-6 sm:mb-8 lg:mb-10"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(30px)",
@@ -335,7 +335,7 @@ const Furniture = () => {
 
               {/* Stats row */}
               <div 
-                className="flex items-start gap-10 mb-12"
+                className="flex items-start gap-5 sm:gap-8 lg:gap-10 mb-8 sm:mb-10 lg:mb-12 flex-wrap"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(20px)",
@@ -348,13 +348,13 @@ const Furniture = () => {
                   { value: "25", suffix: "YRS", label: "Warranty" },
                 ].map((stat, i) => (
                   <div key={i} className="relative group">
-                    <div className="flex items-baseline gap-1">
-                      <span className="text-4xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
+                    <div className="flex items-baseline gap-0.5 sm:gap-1">
+                      <span className="text-2xl sm:text-3xl lg:text-4xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
                         {stat.value}
                       </span>
-                      <span className="text-lg text-[#C6A46A]">{stat.suffix}</span>
+                      <span className="text-sm sm:text-base lg:text-lg text-[#C6A46A]">{stat.suffix}</span>
                     </div>
-                    <div className="text-[10px] text-ivory/40 tracking-[0.15em] uppercase mt-1">
+                    <div className="text-[8px] sm:text-[9px] lg:text-[10px] text-ivory/40 tracking-[0.1em] sm:tracking-[0.15em] uppercase mt-1">
                       {stat.label}
                     </div>
                     <div className="absolute -bottom-1 left-0 w-0 h-px bg-[#C6A46A] group-hover:w-full transition-all duration-300" />
@@ -364,7 +364,7 @@ const Furniture = () => {
 
               {/* CTA with shine effect */}
               <div 
-                className="flex items-center gap-6"
+                className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(20px)",
@@ -373,11 +373,11 @@ const Furniture = () => {
               >
                 <Link
                   to="/contact"
-                  className="group relative bg-[#C6A46A] text-[#0A0A0A] px-10 py-5 text-sm tracking-[0.2em] uppercase font-medium overflow-hidden"
+                  className="group relative bg-[#C6A46A] text-[#0A0A0A] px-6 sm:px-8 lg:px-10 py-4 sm:py-5 text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase font-medium overflow-hidden"
                 >
-                  <span className="relative z-10 flex items-center gap-3">
+                  <span className="relative z-10 flex items-center gap-2 sm:gap-3">
                     Commission a Piece
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                   <div className="absolute inset-0 bg-ivory transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -387,8 +387,8 @@ const Furniture = () => {
                   to="/" 
                   className="group flex items-center gap-3 text-ivory/60 hover:text-ivory transition-colors"
                 >
-                  <span className="text-sm tracking-wider">Our Portfolio</span>
-                  <div className="w-8 h-px bg-ivory/30 group-hover:w-12 group-hover:bg-[#C6A46A] transition-all duration-300" />
+                  <span className="text-xs sm:text-sm tracking-wider">Our Portfolio</span>
+                  <div className="w-6 sm:w-8 h-px bg-ivory/30 group-hover:w-10 sm:group-hover:w-12 group-hover:bg-[#C6A46A] transition-all duration-300" />
                 </Link>
               </div>
             </div>
@@ -415,28 +415,28 @@ const Furniture = () => {
 
         {/* Animated scroll indicator */}
         <div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 hidden sm:flex"
           style={{
             opacity: isLoaded ? 1 : 0,
             transition: "opacity 1s ease-out 2.2s"
           }}
         >
-          <div className="relative w-[1px] h-20 bg-ivory/10 overflow-hidden">
+          <div className="relative w-[1px] h-16 sm:h-20 bg-ivory/10 overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-10 bg-[#C6A46A] animate-scroll-line" />
           </div>
-          <span className="text-[8px] tracking-[0.4em] text-ivory/30 uppercase">Explore</span>
+          <span className="text-[7px] sm:text-[8px] tracking-[0.3em] sm:tracking-[0.4em] text-ivory/30 uppercase">Explore</span>
         </div>
 
         {/* Corner accents */}
         <div 
-          className="absolute top-8 left-8 w-20 h-20 border-l border-t border-[#C6A46A]/30 hidden lg:block"
+          className="absolute top-8 left-8 w-12 sm:w-16 lg:w-20 h-12 sm:h-16 lg:h-20 border-l border-t border-[#C6A46A]/30 hidden md:block"
           style={{
             opacity: isLoaded ? 1 : 0,
             transition: 'opacity 1.5s ease-out 1s',
           }}
         />
         <div 
-          className="absolute bottom-8 right-8 w-20 h-20 border-r border-b border-[#C6A46A]/30 hidden lg:block"
+          className="absolute bottom-8 right-8 w-12 sm:w-16 lg:w-20 h-12 sm:h-16 lg:h-20 border-r border-b border-[#C6A46A]/30 hidden md:block"
           style={{
             opacity: isLoaded ? 1 : 0,
             transition: 'opacity 1.5s ease-out 1.2s',
@@ -445,16 +445,16 @@ const Furniture = () => {
       </section>
 
       {/* ===== CRAFT PRINCIPLES STRIP ===== */}
-      <section className="relative py-8 bg-ivory overflow-hidden">
+      <section className="relative py-4 sm:py-6 lg:py-8 bg-ivory overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="flex items-center gap-12 mx-12">
+            <div key={i} className="flex items-center gap-6 sm:gap-8 lg:gap-12 mx-6 sm:mx-8 lg:mx-12">
               {craftPrinciples.map((principle, j) => (
-                <span key={j} className="flex items-center gap-8">
-                  <span className="text-lg md:text-xl font-heading text-[#0E0E0E] tracking-wide">
+                <span key={j} className="flex items-center gap-4 sm:gap-6 lg:gap-8">
+                  <span className="text-sm sm:text-base md:text-lg lg:text-xl font-heading text-[#0E0E0E] tracking-wide">
                     {principle.title}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C6A46A]" />
+                  <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#C6A46A]" />
                 </span>
               ))}
             </div>
@@ -463,10 +463,10 @@ const Furniture = () => {
       </section>
 
       {/* ===== COLLECTIONS SECTION - ENHANCED ===== */}
-      <section ref={collectionRef} className="relative py-24 md:py-32 overflow-hidden">
-        {/* Animated grid */}
+      <section ref={collectionRef} className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
+        {/* Animated grid - desktop only */}
         <div 
-          className="absolute inset-0 opacity-[0.03] animate-grid-reveal"
+          className="absolute inset-0 opacity-[0.03] animate-grid-reveal hidden md:block"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgba(198,164,106,0.5) 1px, transparent 1px),
@@ -476,30 +476,30 @@ const Furniture = () => {
           }}
         />
 
-        {/* Floating orbs */}
-        <div className="absolute top-20 right-[10%] w-40 h-40 rounded-full bg-[#C6A46A]/5 blur-3xl animate-float-slow" />
-        <div className="absolute bottom-32 left-[15%] w-56 h-56 rounded-full bg-[#C6A46A]/3 blur-3xl animate-float-slow" style={{ animationDelay: '3s' }} />
+        {/* Floating orbs - hidden on mobile */}
+        <div className="absolute top-20 right-[10%] w-40 h-40 rounded-full bg-[#C6A46A]/5 blur-3xl animate-float-slow hidden md:block" />
+        <div className="absolute bottom-32 left-[15%] w-56 h-56 rounded-full bg-[#C6A46A]/3 blur-3xl animate-float-slow hidden md:block" style={{ animationDelay: '3s' }} />
 
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           {/* Section Header with animations */}
-          <div className="mb-20">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-8 h-[1px] bg-[#C6A46A]/50 animate-expand-line" />
-              <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono uppercase">
+          <div className="mb-10 sm:mb-14 lg:mb-20">
+            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="w-6 sm:w-8 h-[1px] bg-[#C6A46A]/50 animate-expand-line" />
+              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] text-[#C6A46A]/70 font-mono uppercase">
                 Collections
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-ivory mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-ivory mb-3 sm:mb-4">
               Furniture for every
               <span className="text-ivory/40"> room.</span>
             </h2>
-            <p className="text-base md:text-lg text-ivory/50 max-w-lg">
+            <p className="text-sm sm:text-base md:text-lg text-ivory/50 max-w-lg">
               Each piece thoughtfully designed to complement your space and lifestyle.
             </p>
           </div>
 
           {/* Collections Grid with enhanced animations */}
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {furnitureCollections.map((collection, index) => (
               <div
                 key={collection.name}
@@ -524,16 +524,16 @@ const Furniture = () => {
                   {/* Shine sweep on hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   
-                  {/* Animated corner accents */}
-                  <div className={`absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-[#C6A46A]/50 transition-all duration-500 group-hover:w-12 group-hover:h-12 ${
+                  {/* Animated corner accents - hidden on small mobile */}
+                  <div className={`absolute top-3 sm:top-4 left-3 sm:left-4 w-6 h-6 sm:w-8 sm:h-8 border-l-2 border-t-2 border-[#C6A46A]/50 transition-all duration-500 group-hover:w-8 group-hover:h-8 sm:group-hover:w-12 sm:group-hover:h-12 ${
                     activeCollection >= index ? 'opacity-100' : 'opacity-0'
                   }`} />
-                  <div className={`absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-[#C6A46A]/50 transition-all duration-500 group-hover:w-12 group-hover:h-12 ${
+                  <div className={`absolute bottom-3 sm:bottom-4 right-3 sm:right-4 w-6 h-6 sm:w-8 sm:h-8 border-r-2 border-b-2 border-[#C6A46A]/50 transition-all duration-500 group-hover:w-8 group-hover:h-8 sm:group-hover:w-12 sm:group-hover:h-12 ${
                     activeCollection >= index ? 'opacity-100' : 'opacity-0'
                   }`} style={{ transitionDelay: '100ms' }} />
                   
-                  {/* Large number overlay */}
-                  <div className={`absolute bottom-8 right-8 text-7xl font-heading text-[#C6A46A]/10 transition-all duration-500 group-hover:text-[#C6A46A]/20 ${
+                  {/* Large number overlay - hidden on mobile */}
+                  <div className={`absolute bottom-6 sm:bottom-8 right-6 sm:right-8 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-[#C6A46A]/10 transition-all duration-500 group-hover:text-[#C6A46A]/20 hidden sm:block ${
                     activeCollection >= index ? 'opacity-100' : 'opacity-0'
                   }`}>
                     0{index + 1}
@@ -541,33 +541,33 @@ const Furniture = () => {
                 </div>
 
                 {/* Content overlay with stagger */}
-                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                <div className="absolute inset-0 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col justify-end">
                   {/* Stat with glow */}
-                  <div className={`absolute top-6 right-6 text-right transition-all duration-500 ${
+                  <div className={`absolute top-4 sm:top-6 right-4 sm:right-6 text-right transition-all duration-500 ${
                     activeCollection >= index ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
                   }`}>
-                    <div className="text-2xl md:text-3xl font-heading text-[#C6A46A] group-hover:animate-glow-text">{collection.stat}</div>
-                    <div className="text-[10px] text-ivory/50 tracking-wider uppercase">{collection.statLabel}</div>
+                    <div className="text-xl sm:text-2xl md:text-3xl font-heading text-[#C6A46A] group-hover:animate-glow-text">{collection.stat}</div>
+                    <div className="text-[8px] sm:text-[9px] md:text-[10px] text-ivory/50 tracking-wider uppercase">{collection.statLabel}</div>
                   </div>
 
                   {/* Title with animation */}
-                  <h3 className={`text-3xl md:text-4xl font-heading text-ivory mb-2 group-hover:text-[#C6A46A] transition-all duration-500 ${
+                  <h3 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading text-ivory mb-1 sm:mb-2 group-hover:text-[#C6A46A] transition-all duration-500 ${
                     activeCollection >= index ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                   }`}>
                     {collection.name}
                   </h3>
-                  <p className={`text-sm text-ivory/50 italic mb-4 transition-all duration-500 ${
+                  <p className={`text-xs sm:text-sm text-ivory/50 italic mb-2 sm:mb-3 md:mb-4 transition-all duration-500 ${
                     activeCollection >= index ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                   }`} style={{ transitionDelay: '100ms' }}>
                     {collection.tagline}
                   </p>
 
                   {/* Pieces list with stagger */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {collection.pieces.map((piece, i) => (
                       <span 
                         key={i}
-                        className={`text-[10px] tracking-wider uppercase text-ivory/40 px-3 py-1 border border-ivory/10 rounded-full group-hover:border-[#C6A46A]/30 group-hover:text-ivory/60 transition-all duration-500 ${
+                        className={`text-[8px] sm:text-[9px] md:text-[10px] tracking-wider uppercase text-ivory/40 px-2 sm:px-3 py-0.5 sm:py-1 border border-ivory/10 rounded-full group-hover:border-[#C6A46A]/30 group-hover:text-ivory/60 transition-all duration-500 ${
                           activeCollection >= index ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
                         }`}
                         style={{ transitionDelay: `${150 + i * 50}ms` }}
@@ -584,32 +584,32 @@ const Furniture = () => {
       </section>
 
       {/* ===== SIGNATURE PIECES ===== */}
-      <section className="relative py-24 md:py-32 overflow-hidden bg-[#0A0A0A]">
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden bg-[#0A0A0A]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-10 sm:mb-12 lg:mb-16">
             <div>
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-8 h-[1px] bg-[#C6A46A]/50" />
-                <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono uppercase">
+              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div className="w-6 sm:w-8 h-[1px] bg-[#C6A46A]/50" />
+                <span className="text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] text-[#C6A46A]/70 font-mono uppercase">
                   Signature Pieces
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-ivory">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-ivory">
                 Objects of <span className="italic text-[#C6A46A]">permanence.</span>
               </h2>
             </div>
             <Link 
               to="/contact"
-              className="group flex items-center gap-3 text-sm text-ivory/50 hover:text-[#C6A46A] transition-colors"
+              className="group flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-ivory/50 hover:text-[#C6A46A] transition-colors"
             >
               Request Custom Design
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
 
           {/* Pieces Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {signaturePieces.map((piece, index) => (
               <div
                 key={piece.name}
@@ -633,24 +633,24 @@ const Furniture = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E] via-[#0E0E0E]/40 to-transparent" />
 
                   {/* Content */}
-                  <div className="absolute inset-0 p-5 flex flex-col justify-end">
-                    <span className="text-[10px] tracking-[0.2em] uppercase text-[#C6A46A]/80 mb-2">
+                  <div className="absolute inset-0 p-3 sm:p-4 md:p-5 flex flex-col justify-end">
+                    <span className="text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#C6A46A]/80 mb-1 sm:mb-2 line-clamp-1">
                       {piece.material}
                     </span>
-                    <h3 className="text-xl md:text-2xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
+                    <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
                       {piece.name}
                     </h3>
                     
-                    {/* Description - appears on hover */}
-                    <p className={`text-xs text-ivory/50 mt-2 transition-all duration-500 ${
+                    {/* Description - appears on hover, hidden on mobile */}
+                    <p className={`text-[10px] sm:text-xs text-ivory/50 mt-1 sm:mt-2 transition-all duration-500 hidden sm:block ${
                       hoveredPiece === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                     }`}>
                       {piece.description}
                     </p>
                   </div>
 
-                  {/* Corner accent on hover */}
-                  <div className={`absolute top-3 right-3 w-5 h-5 border-t border-r border-[#C6A46A]/50 transition-all duration-500 ${
+                  {/* Corner accent on hover - hidden on small mobile */}
+                  <div className={`absolute top-2 sm:top-3 right-2 sm:right-3 w-4 h-4 sm:w-5 sm:h-5 border-t border-r border-[#C6A46A]/50 transition-all duration-500 hidden sm:block ${
                     hoveredPiece === index ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
                   }`} />
                 </div>
@@ -661,35 +661,35 @@ const Furniture = () => {
       </section>
 
       {/* ===== CRAFT PHILOSOPHY ===== */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
         {/* Background accent */}
         <div className="absolute inset-0">
-          <div className="absolute right-0 top-1/4 w-1/2 h-1/2 bg-[#C6A46A]/3 blur-[150px]" />
+          <div className="absolute right-0 top-1/4 w-1/2 h-1/2 bg-[#C6A46A]/3 blur-[150px] hidden md:block" />
         </div>
 
-        <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
           <div className="max-w-4xl mx-auto">
             {/* Section Label */}
-            <div className="flex items-center justify-center gap-4 mb-12">
-              <div className="w-12 h-px bg-gradient-to-r from-transparent to-[#C6A46A]/50" />
-              <span className="text-[10px] tracking-[0.4em] text-[#C6A46A]/70 font-mono uppercase">
+            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10 lg:mb-12">
+              <div className="w-8 sm:w-12 h-px bg-gradient-to-r from-transparent to-[#C6A46A]/50" />
+              <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] text-[#C6A46A]/70 font-mono uppercase">
                 Our Approach
               </span>
-              <div className="w-12 h-px bg-gradient-to-l from-transparent to-[#C6A46A]/50" />
+              <div className="w-8 sm:w-12 h-px bg-gradient-to-l from-transparent to-[#C6A46A]/50" />
             </div>
 
             {/* Principles */}
-            <div className="space-y-12">
+            <div className="space-y-6 sm:space-y-8 lg:space-y-12">
               {craftPrinciples.map((principle, index) => (
                 <div 
                   key={principle.title}
-                  className="group flex flex-col md:flex-row md:items-center gap-4 md:gap-12 py-8 border-b border-ivory/10 hover:border-[#C6A46A]/30 transition-colors duration-500"
+                  className="group flex flex-col md:flex-row md:items-center gap-2 sm:gap-3 md:gap-8 lg:gap-12 py-4 sm:py-6 lg:py-8 border-b border-ivory/10 hover:border-[#C6A46A]/30 transition-colors duration-500"
                 >
-                  <span className="text-xs font-mono text-[#C6A46A]/50">0{index + 1}</span>
-                  <h3 className="text-2xl md:text-3xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
+                  <span className="text-[10px] sm:text-xs font-mono text-[#C6A46A]/50">0{index + 1}</span>
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
                     {principle.title}
                   </h3>
-                  <p className="text-ivory/50 md:ml-auto md:text-right max-w-xs">
+                  <p className="text-xs sm:text-sm text-ivory/50 md:ml-auto md:text-right max-w-xs">
                     {principle.desc}
                   </p>
                 </div>
