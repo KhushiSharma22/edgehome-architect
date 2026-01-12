@@ -12,10 +12,18 @@ import { Link } from "react-router-dom";
 const Interior = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeProcess, setActiveProcess] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setTimeout(() => setIsLoaded(true), 100);
+    
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const portfolioItems = [
