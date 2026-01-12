@@ -2,12 +2,14 @@ import { useEffect, useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import portfolioBathroom from "@/assets/portfolio-bathroom.jpg";
-import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
-import portfolioDining from "@/assets/portfolio-dining.jpg";
-import portfolioKitchen from "@/assets/portfolio-kitchen.jpg";
 import heroInterior from "@/assets/interior-hero-luxury.jpg";
 import { Link } from "react-router-dom";
+
+// Portfolio images - matching titles
+import drawingDiningImg from "@/assets/interior-drawing-dining.jpg";
+import penthouseBedroomImg from "@/assets/interior-penthouse-bedroom.jpg";
+import kitchenLuxuryImg from "@/assets/interior-kitchen-luxury.jpg";
+import washroomLuxuryImg from "@/assets/interior-washroom-luxury.jpg";
 
 const Interior = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -27,10 +29,10 @@ const Interior = () => {
   }, []);
 
   const portfolioItems = [
-    { title: "Penthouse Noir", location: "South Delhi", image: portfolioBathroom, year: "2024", category: "Luxury" },
-    { title: "Minimalist Haven", location: "Gurgaon", image: portfolioBedroom, year: "2024", category: "Modern" },
-    { title: "Urban Sanctuary", location: "Noida", image: portfolioDining, year: "2023", category: "Contemporary" },
-    { title: "Serene Escape", location: "Greater Noida", image: portfolioKitchen, year: "2023", category: "Minimal" },
+    { title: "Drawing & Dining", location: "South Delhi", image: drawingDiningImg, year: "2024", category: "Classic Luxury" },
+    { title: "Penthouse Bedroom", location: "Gurgaon", image: penthouseBedroomImg, year: "2024", category: "Modern" },
+    { title: "Modular Kitchen", location: "Noida", image: kitchenLuxuryImg, year: "2023", category: "Contemporary" },
+    { title: "Luxury Washroom", location: "Greater Noida", image: washroomLuxuryImg, year: "2023", category: "Spa Style" },
   ];
 
   const processSteps = [
