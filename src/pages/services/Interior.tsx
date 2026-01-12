@@ -75,10 +75,10 @@ const Interior = () => {
         />
 
         {/* Main content */}
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pt-24 sm:pt-28">
           {/* Breadcrumb */}
           <nav 
-            className="flex items-center gap-2 text-[10px] tracking-[0.2em] text-ivory/40 mb-20"
+            className="flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-ivory/40 mb-10 sm:mb-16 lg:mb-20"
             style={{
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? "translateY(0)" : "translateY(20px)",
@@ -86,16 +86,16 @@ const Interior = () => {
             }}
           >
             <Link to="/" className="hover:text-ivory transition-colors">HOME</Link>
-            <ChevronRight className="w-3 h-3" />
+            <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
             <span>SERVICES</span>
-            <ChevronRight className="w-3 h-3" />
+            <ChevronRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
             <span className="text-[#C6A46A]">INTERIOR DESIGN</span>
           </nav>
 
           <div className="relative max-w-6xl">
             {/* Oversized watermark - positioned behind */}
             <div 
-              className="absolute -top-20 right-0 lg:right-10 pointer-events-none select-none"
+              className="absolute -top-10 sm:-top-20 right-0 lg:right-10 pointer-events-none select-none hidden sm:block"
               style={{
                 opacity: isLoaded ? 0.06 : 0,
                 transform: isLoaded ? "translateY(0)" : "translateY(50px)",
@@ -103,7 +103,7 @@ const Interior = () => {
               }}
             >
               <span 
-                className="text-[10rem] md:text-[16rem] lg:text-[22rem] font-heading italic text-[#C6A46A] leading-none"
+                className="text-[8rem] sm:text-[10rem] md:text-[16rem] lg:text-[22rem] font-heading italic text-[#C6A46A] leading-none"
                 style={{
                   animation: "breathe 8s ease-in-out infinite"
                 }}
@@ -117,7 +117,7 @@ const Interior = () => {
               {/* Line 1 */}
               <span className="block overflow-hidden">
                 <span 
-                  className="block text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-heading text-ivory tracking-tight"
+                  className="block text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory tracking-tight"
                   style={{
                     opacity: isLoaded ? 1 : 0,
                     transform: isLoaded ? "translateY(0)" : "translateY(100%)",
@@ -128,9 +128,9 @@ const Interior = () => {
                 </span>
               </span>
               {/* Line 2 */}
-              <span className="block overflow-hidden mt-2">
+              <span className="block overflow-hidden mt-1 sm:mt-2">
                 <span 
-                  className="block text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-heading italic text-ivory/30 tracking-tight"
+                  className="block text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-heading italic text-ivory/30 tracking-tight"
                   style={{
                     opacity: isLoaded ? 1 : 0,
                     transform: isLoaded ? "translateY(0)" : "translateY(100%)",
@@ -145,7 +145,7 @@ const Interior = () => {
 
             {/* Sub-headline */}
             <p 
-              className="text-base md:text-lg text-ivory/50 leading-relaxed max-w-lg mt-12"
+              className="text-sm sm:text-base md:text-lg text-ivory/50 leading-relaxed max-w-lg mt-6 sm:mt-8 lg:mt-12"
             style={{
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? "translateY(0)" : "translateY(30px)",
@@ -157,7 +157,7 @@ const Interior = () => {
 
           {/* CTA Button */}
           <div 
-            className="mt-10"
+            className="mt-6 sm:mt-8 lg:mt-10"
             style={{
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
@@ -166,10 +166,10 @@ const Interior = () => {
           >
             <Link
               to="/contact"
-              className="group relative inline-flex items-center gap-4 px-10 py-5 bg-[#C6A46A] text-[#0E0E0E] text-sm tracking-[0.2em] uppercase font-medium hover:bg-ivory transition-colors duration-500"
+              className="group relative inline-flex items-center gap-3 sm:gap-4 px-6 sm:px-8 lg:px-10 py-4 sm:py-5 bg-[#C6A46A] text-[#0E0E0E] text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase font-medium hover:bg-ivory transition-colors duration-500"
             >
               <span>Begin Your Journey</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
           </div>
@@ -177,13 +177,13 @@ const Interior = () => {
 
         {/* Scroll indicator */}
         <div 
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 hidden sm:flex"
           style={{
             opacity: isLoaded ? 0.5 : 0,
             transition: 'opacity 1s ease-out 1.3s'
           }}
         >
-          <div className="w-px h-16 bg-gradient-to-b from-[#C6A46A]/50 via-[#C6A46A]/20 to-transparent relative overflow-hidden">
+          <div className="w-px h-12 sm:h-16 bg-gradient-to-b from-[#C6A46A]/50 via-[#C6A46A]/20 to-transparent relative overflow-hidden">
             <div 
               className="absolute top-0 left-0 w-full h-4 bg-[#C6A46A]"
               style={{
@@ -197,26 +197,26 @@ const Interior = () => {
       {/* ═══════════════════════════════════════════════════════════════════════
           MARQUEE STRIP
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-6 bg-ivory overflow-hidden">
+      <section className="relative py-4 sm:py-6 bg-ivory overflow-hidden">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...Array(10)].map((_, i) => (
-            <div key={i} className="flex items-center gap-8 mx-8">
-              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E] tracking-wide">
+            <div key={i} className="flex items-center gap-4 sm:gap-6 md:gap-8 mx-4 sm:mx-6 md:mx-8">
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading text-[#0E0E0E] tracking-wide">
                 INTERIOR DESIGN
               </span>
-              <span className="text-[#C6A46A] text-2xl">✦</span>
-              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E]/30 tracking-wide">
+              <span className="text-[#C6A46A] text-lg sm:text-xl md:text-2xl">✦</span>
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading text-[#0E0E0E]/30 tracking-wide">
                 LUXURY SPACES
               </span>
-              <span className="text-[#C6A46A] text-2xl">✦</span>
-              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E] tracking-wide">
+              <span className="text-[#C6A46A] text-lg sm:text-xl md:text-2xl">✦</span>
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading text-[#0E0E0E] tracking-wide">
                 BESPOKE INTERIORS
               </span>
-              <span className="text-[#C6A46A] text-2xl">✦</span>
-              <span className="text-2xl md:text-3xl font-heading text-[#0E0E0E]/30 tracking-wide">
+              <span className="text-[#C6A46A] text-lg sm:text-xl md:text-2xl">✦</span>
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading text-[#0E0E0E]/30 tracking-wide">
                 TIMELESS ELEGANCE
               </span>
-              <span className="text-[#C6A46A] text-2xl">✦</span>
+              <span className="text-[#C6A46A] text-lg sm:text-xl md:text-2xl">✦</span>
             </div>
           ))}
         </div>
@@ -225,15 +225,15 @@ const Interior = () => {
       {/* ═══════════════════════════════════════════════════════════════════════
           PHILOSOPHY: SPLIT SCREEN WITH REVEAL
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-32 md:py-40 overflow-hidden">
+      <section className="relative py-16 sm:py-24 md:py-32 lg:py-40 overflow-hidden">
         {/* Background elements */}
         <div className="absolute inset-0">
-          <div className="absolute left-0 top-0 bottom-0 w-1/2 bg-gradient-to-r from-[#151515] to-transparent" />
-          <div className="absolute right-0 top-1/4 w-px h-1/2 bg-gradient-to-b from-transparent via-[#C6A46A]/20 to-transparent" />
+          <div className="absolute left-0 top-0 bottom-0 w-1/2 bg-gradient-to-r from-[#151515] to-transparent hidden md:block" />
+          <div className="absolute right-0 top-1/4 w-px h-1/2 bg-gradient-to-b from-transparent via-[#C6A46A]/20 to-transparent hidden lg:block" />
         </div>
         
-        <div className="relative z-10 container mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-0 items-center">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-0 items-center">
             {/* Left: Large typography */}
             <div 
               className="lg:col-span-5"
@@ -243,29 +243,29 @@ const Interior = () => {
                 transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
             >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-8 h-px bg-[#C6A46A]" />
-                <span className="text-[10px] tracking-[0.4em] text-[#C6A46A] font-mono uppercase">Philosophy</span>
+              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
+                <div className="w-6 sm:w-8 h-px bg-[#C6A46A]" />
+                <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] text-[#C6A46A] font-mono uppercase">Philosophy</span>
               </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading text-ivory leading-[1.1]">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading text-ivory leading-[1.1]">
                 Design is
-                <span className="block text-ivory/30 mt-2">not what you see.</span>
+                <span className="block text-ivory/30 mt-1 sm:mt-2">not what you see.</span>
               </h2>
-              <p className="mt-8 text-lg text-ivory/40 leading-relaxed max-w-md">
+              <p className="mt-4 sm:mt-6 lg:mt-8 text-sm sm:text-base lg:text-lg text-ivory/40 leading-relaxed max-w-md">
                 It's what you feel when you walk into a room. The light that greets you. The silence that comforts you.
               </p>
             </div>
 
             {/* Center: Vertical line with stats */}
             <div 
-              className="lg:col-span-2 flex flex-col items-center py-8"
+              className="lg:col-span-2 flex flex-col items-center py-4 sm:py-6 lg:py-8"
               style={{
                 opacity: scrollY > 400 ? 1 : 0,
                 transition: 'opacity 1s ease-out 0.3s'
               }}
             >
               <div className="hidden lg:block w-px h-full bg-gradient-to-b from-transparent via-ivory/10 to-transparent absolute" />
-              <div className="flex lg:flex-col gap-8 lg:gap-12">
+              <div className="flex flex-row lg:flex-col gap-6 sm:gap-8 lg:gap-12 justify-center">
                 {[
                   { num: "200+", label: "Projects" },
                   { num: "15", label: "Awards" },
@@ -280,8 +280,8 @@ const Interior = () => {
                       transition: `all 0.6s ease-out ${i * 0.1}s`
                     }}
                   >
-                    <div className="text-3xl lg:text-4xl font-heading text-[#C6A46A]">{stat.num}</div>
-                    <div className="text-[10px] tracking-[0.2em] text-ivory/40 uppercase mt-1">{stat.label}</div>
+                    <div className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading text-[#C6A46A]">{stat.num}</div>
+                    <div className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] text-ivory/40 uppercase mt-1">{stat.label}</div>
                   </div>
                 ))}
               </div>
@@ -297,15 +297,15 @@ const Interior = () => {
               }}
             >
               <blockquote className="relative">
-                <div className="absolute -left-6 top-0 text-6xl text-[#C6A46A]/20 font-serif">"</div>
-                <p className="text-xl md:text-2xl font-heading text-ivory/70 leading-relaxed pl-4 border-l border-[#C6A46A]/30">
+                <div className="absolute -left-4 sm:-left-6 top-0 text-4xl sm:text-5xl lg:text-6xl text-[#C6A46A]/20 font-serif">"</div>
+                <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-heading text-ivory/70 leading-relaxed pl-3 sm:pl-4 border-l border-[#C6A46A]/30">
                   Interior design is the art of shaping how you 
                   <span className="text-[#C6A46A]"> live</span>,
                   <span className="text-[#C6A46A]"> breathe</span>, and
                   <span className="text-[#C6A46A]"> feel</span> within walls.
                 </p>
-                <footer className="mt-6 pl-4">
-                  <div className="text-sm text-ivory/50">— Edge Homes Design Philosophy</div>
+                <footer className="mt-4 sm:mt-6 pl-3 sm:pl-4">
+                  <div className="text-xs sm:text-sm text-ivory/50">— Edge Homes Design Philosophy</div>
                 </footer>
               </blockquote>
             </div>
@@ -316,13 +316,13 @@ const Interior = () => {
       {/* ═══════════════════════════════════════════════════════════════════════
           PORTFOLIO: STAGGERED MASONRY WITH HOVER REVEAL
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#F5F3EF] via-[#EBE8E2] to-[#F5F3EF]" />
         
-        <div className="relative z-10 container mx-auto px-6 lg:px-12">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
           {/* Section header */}
           <div 
-            className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6"
+            className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 lg:mb-16 gap-4 sm:gap-6"
             style={{
               opacity: scrollY > 800 ? 1 : 0,
               transform: scrollY > 800 ? 'translateY(0)' : 'translateY(30px)',
@@ -330,25 +330,25 @@ const Interior = () => {
             }}
           >
             <div>
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-8 h-px bg-[#C6A46A]" />
-                <span className="text-[10px] tracking-[0.4em] text-[#C6A46A] font-mono uppercase">Selected Works</span>
+              <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                <div className="w-6 sm:w-8 h-px bg-[#C6A46A]" />
+                <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] text-[#C6A46A] font-mono uppercase">Selected Works</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-heading text-[#0E0E0E]">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-[#0E0E0E]">
                 Portfolio
               </h2>
             </div>
             <Link 
               to="/portfolio"
-              className="group flex items-center gap-3 text-sm text-[#0E0E0E]/50 hover:text-[#C6A46A] transition-colors duration-500"
+              className="group flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-[#0E0E0E]/50 hover:text-[#C6A46A] transition-colors duration-500"
             >
               View All Projects
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
 
           {/* Staggered grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
             {portfolioItems.map((item, index) => (
               <div 
                 key={index}
@@ -371,30 +371,30 @@ const Interior = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0E0E0E] via-[#0E0E0E]/30 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
                   
                   {/* Category tag - top */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-[9px] tracking-[0.2em] uppercase text-[#C6A46A] border border-[#C6A46A]/30 bg-[#0E0E0E]/50 backdrop-blur-sm">
+                  <div className="absolute top-2 sm:top-4 left-2 sm:left-4">
+                    <span className="px-2 sm:px-3 py-0.5 sm:py-1 text-[7px] sm:text-[9px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#C6A46A] border border-[#C6A46A]/30 bg-[#0E0E0E]/50 backdrop-blur-sm">
                       {item.category}
                     </span>
                   </div>
                   
-                  {/* Corner accents */}
-                  <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-ivory/0 group-hover:border-[#C6A46A]/50 transition-all duration-500 origin-top-right group-hover:scale-100 scale-0" />
-                  <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-ivory/0 group-hover:border-[#C6A46A]/50 transition-all duration-500 origin-bottom-left group-hover:scale-100 scale-0" />
+                  {/* Corner accents - hidden on mobile */}
+                  <div className="absolute top-4 right-4 w-8 h-8 border-r border-t border-ivory/0 group-hover:border-[#C6A46A]/50 transition-all duration-500 origin-top-right group-hover:scale-100 scale-0 hidden sm:block" />
+                  <div className="absolute bottom-4 left-4 w-8 h-8 border-l border-b border-ivory/0 group-hover:border-[#C6A46A]/50 transition-all duration-500 origin-bottom-left group-hover:scale-100 scale-0 hidden sm:block" />
 
                   {/* Content */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+                  <div className="absolute inset-0 flex flex-col justify-end p-3 sm:p-4 md:p-6 lg:p-8">
                     <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      <span className="text-[10px] tracking-[0.3em] text-ivory/50 uppercase">
+                      <span className="text-[8px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] text-ivory/50 uppercase">
                         {item.year} · {item.location}
                       </span>
-                      <h3 className="text-2xl md:text-3xl font-heading text-ivory mt-2 group-hover:text-[#C6A46A] transition-colors duration-300">
+                      <h3 className="text-base sm:text-lg md:text-2xl lg:text-3xl font-heading text-ivory mt-1 sm:mt-2 group-hover:text-[#C6A46A] transition-colors duration-300">
                         {item.title}
                       </h3>
                       
-                      {/* View button */}
-                      <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-                        <div className="w-8 h-px bg-[#C6A46A]" />
-                        <span className="text-xs text-[#C6A46A] tracking-wider">Explore</span>
+                      {/* View button - hidden on mobile */}
+                      <div className="mt-3 sm:mt-4 items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 hidden sm:flex">
+                        <div className="w-6 sm:w-8 h-px bg-[#C6A46A]" />
+                        <span className="text-[10px] sm:text-xs text-[#C6A46A] tracking-wider">Explore</span>
                       </div>
                     </div>
                   </div>
@@ -408,39 +408,39 @@ const Interior = () => {
       {/* ═══════════════════════════════════════════════════════════════════════
           PROCESS: INTERACTIVE TIMELINE
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E0E] via-[#121212] to-[#0E0E0E]" />
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-[#1A1815]/50 to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-[#1A1815]/50 to-transparent hidden md:block" />
         
-        <div className="relative z-10 container mx-auto px-6 lg:px-12">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
           {/* Section header */}
           <div 
-            className="mb-16"
+            className="mb-8 sm:mb-12 lg:mb-16"
             style={{
               opacity: scrollY > 1400 ? 1 : 0,
               transform: scrollY > 1400 ? 'translateY(0)' : 'translateY(30px)',
               transition: 'all 0.8s ease-out'
             }}
           >
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-8 h-px bg-[#C6A46A]" />
-              <span className="text-[10px] tracking-[0.4em] text-[#C6A46A] font-mono uppercase">Our Process</span>
+            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="w-6 sm:w-8 h-px bg-[#C6A46A]" />
+              <span className="text-[9px] sm:text-[10px] tracking-[0.3em] sm:tracking-[0.4em] text-[#C6A46A] font-mono uppercase">Our Process</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-heading text-ivory">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-ivory">
               From vision to
               <span className="text-[#C6A46A] italic"> reality</span>
             </h2>
           </div>
 
           {/* Interactive process steps */}
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-start">
             {/* Left: Step navigation */}
             <div className="space-y-0">
               {processSteps.map((step, index) => (
                 <div 
                   key={index}
-                  className={`group relative cursor-pointer py-6 border-b border-ivory/5 transition-all duration-500 ${activeProcess === index ? 'border-[#C6A46A]/30' : ''}`}
+                  className={`group relative cursor-pointer py-4 sm:py-5 lg:py-6 border-b border-ivory/5 transition-all duration-500 ${activeProcess === index ? 'border-[#C6A46A]/30' : ''}`}
                   onClick={() => setActiveProcess(index)}
                   onMouseEnter={() => setActiveProcess(index)}
                   style={{
@@ -454,15 +454,15 @@ const Interior = () => {
                     className={`absolute left-0 top-0 bottom-0 w-px transition-all duration-500 ${activeProcess === index ? 'bg-[#C6A46A]' : 'bg-transparent'}`}
                   />
                   
-                  <div className="flex items-start gap-6 pl-6">
-                    <span className={`text-4xl font-heading transition-colors duration-300 ${activeProcess === index ? 'text-[#C6A46A]' : 'text-ivory/10'}`}>
+                  <div className="flex items-start gap-3 sm:gap-4 lg:gap-6 pl-3 sm:pl-4 lg:pl-6">
+                    <span className={`text-2xl sm:text-3xl lg:text-4xl font-heading transition-colors duration-300 ${activeProcess === index ? 'text-[#C6A46A]' : 'text-ivory/10'}`}>
                       {step.num}
                     </span>
-                    <div>
-                      <h3 className={`text-xl font-heading transition-colors duration-300 ${activeProcess === index ? 'text-ivory' : 'text-ivory/50'}`}>
+                    <div className="flex-1">
+                      <h3 className={`text-base sm:text-lg lg:text-xl font-heading transition-colors duration-300 ${activeProcess === index ? 'text-ivory' : 'text-ivory/50'}`}>
                         {step.title}
                       </h3>
-                      <p className={`mt-2 text-sm leading-relaxed transition-all duration-500 ${activeProcess === index ? 'text-ivory/60 max-h-20 opacity-100' : 'text-ivory/30 max-h-0 opacity-0 overflow-hidden'}`}>
+                      <p className={`mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed transition-all duration-500 ${activeProcess === index ? 'text-ivory/60 max-h-20 opacity-100' : 'text-ivory/30 max-h-0 opacity-0 overflow-hidden'}`}>
                         {step.desc}
                       </p>
                     </div>
