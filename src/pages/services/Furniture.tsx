@@ -94,7 +94,7 @@ const Furniture = () => {
       image: credenzaImg,
     },
     {
-      name: "The Bed",
+      name: "The Monarch",
       material: "Walnut Wood + Cream Leather",
       description: "Where dreams find their sanctuary",
       image: bedImg,
