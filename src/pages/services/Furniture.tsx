@@ -8,6 +8,10 @@ import pelicanChair from "@/assets/pelican-chair.png";
 import furnitureHero from "@/assets/furniture-hero-luxury.jpg";
 import livingCrazy from "@/assets/furniture-living-crazy.jpg";
 import studyCrazy from "@/assets/furniture-study-crazy.jpg";
+import consoleImg from "@/assets/furniture-console-steel-oak.jpg";
+import credenzaImg from "@/assets/furniture-credenza-walnut-brass.jpg";
+import loungeChairImg from "@/assets/furniture-lounge-leather-ash.jpg";
+import diningTableImg from "@/assets/furniture-dining-teak-stone.jpg";
 
 const Furniture = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -81,25 +85,25 @@ const Furniture = () => {
       name: "The Console",
       material: "Blackened Steel + White Oak",
       description: "Clean lines meet raw materiality",
-      image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=800&fit=crop",
+      image: consoleImg,
     },
     {
       name: "The Credenza",
       material: "Walnut + Brushed Brass",
       description: "Storage elevated to sculpture",
-      image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=600&h=800&fit=crop",
+      image: credenzaImg,
     },
     {
       name: "The Lounge Chair",
       material: "Aniline Leather + Ash Frame",
       description: "Comfort without compromise",
-      image: "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=600&h=800&fit=crop",
+      image: loungeChairImg,
     },
     {
       name: "The Dining Table",
       material: "Solid Teak + Stone Base",
       description: "The heart of every gathering",
-      image: "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=600&h=800&fit=crop",
+      image: diningTableImg,
     },
   ];
 
