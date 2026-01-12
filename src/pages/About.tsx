@@ -1170,7 +1170,7 @@ const FoundersSection = () => {
                         src={founder.image}
                         alt={`${founder.name} portrait`}
                         loading="lazy"
-                        className="w-24 h-24 rounded-full object-cover border-2 border-primary/30 shadow-lg"
+                        className="w-48 h-48 rounded-full object-cover border-2 border-primary/30 shadow-lg"
                       />
 
                       <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border transition-all duration-500 ${
