@@ -10,7 +10,7 @@ import livingCrazy from "@/assets/furniture-living-crazy.jpg";
 import studyCrazy from "@/assets/furniture-study-crazy.jpg";
 import consoleImg from "@/assets/furniture-console-steel-oak.jpg";
 import credenzaImg from "@/assets/furniture-credenza-walnut-brass.jpg";
-import loungeChairImg from "@/assets/furniture-lounge-leather-ash.jpg";
+import bedImg from "@/assets/furniture-bed-walnut-leather.jpg";
 import diningTableImg from "@/assets/furniture-dining-teak-stone.jpg";
 
 const Furniture = () => {
@@ -94,10 +94,10 @@ const Furniture = () => {
       image: credenzaImg,
     },
     {
-      name: "The Lounge Chair",
-      material: "Aniline Leather + Ash Frame",
-      description: "Comfort without compromise",
-      image: loungeChairImg,
+      name: "The Bed",
+      material: "Walnut Wood + Cream Leather",
+      description: "Where dreams find their sanctuary",
+      image: bedImg,
     },
     {
       name: "The Dining Table",
