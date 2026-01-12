@@ -8,7 +8,7 @@ import pelicanChair from "@/assets/pelican-chair.png";
 import furnitureHero from "@/assets/furniture-hero-luxury.jpg";
 import livingCrazy from "@/assets/furniture-living-crazy.jpg";
 import studyCrazy from "@/assets/furniture-study-crazy.jpg";
-import consoleImg from "@/assets/furniture-console-steel-oak.jpg";
+import vanityImg from "@/assets/furniture-vanity-marble-gold.jpg";
 import credenzaImg from "@/assets/furniture-credenza-walnut-brass.jpg";
 import bedImg from "@/assets/furniture-bed-walnut-leather.jpg";
 import diningTableImg from "@/assets/furniture-dining-teak-stone.jpg";
@@ -82,10 +82,10 @@ const Furniture = () => {
 
   const signaturePieces = [
     {
-      name: "The Console",
-      material: "Blackened Steel + White Oak",
-      description: "Clean lines meet raw materiality",
-      image: consoleImg,
+      name: "The Sanctuary",
+      material: "Nero Marquina Marble + Brushed Gold",
+      description: "Bathing elevated to ritual",
+      image: vanityImg,
     },
     {
       name: "The Credenza",
