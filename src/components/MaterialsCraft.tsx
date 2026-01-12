@@ -2,11 +2,21 @@ import { useState, useRef, useEffect } from "react";
 import { X, ArrowUpRight, Sparkles } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
+// Import matching material images
+import italianMarbleImg from "@/assets/material-italian-marble.jpg";
+import engineeredWoodImg from "@/assets/material-engineered-wood.jpg";
+import designerLightingImg from "@/assets/material-designer-lighting.jpg";
+import modularKitchenImg from "@/assets/material-modular-kitchen.jpg";
+import premiumWardrobeImg from "@/assets/material-premium-wardrobe.jpg";
+import wallTexturesImg from "@/assets/material-wall-textures.jpg";
+import smartHomeImg from "@/assets/material-smart-home.jpg";
+import bathFixturesImg from "@/assets/material-bath-fixtures.jpg";
+
 const materials = [
   {
     id: 1,
     name: "Italian Marble",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&h=1000&fit=crop",
+    image: italianMarbleImg,
     finish: "Polished / Honed",
     durability: "25+ Years",
     vibe: "Timeless elegance",
@@ -16,7 +26,7 @@ const materials = [
   {
     id: 2,
     name: "Engineered Wood",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=1000&fit=crop",
+    image: engineeredWoodImg,
     finish: "Matte / Textured",
     durability: "15+ Years",
     vibe: "Warm & natural",
@@ -26,7 +36,7 @@ const materials = [
   {
     id: 3,
     name: "Designer Lighting",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop",
+    image: designerLightingImg,
     finish: "Gold / Chrome",
     durability: "10+ Years",
     vibe: "Statement luxury",
@@ -36,7 +46,7 @@ const materials = [
   {
     id: 4,
     name: "Modular Kitchen",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop",
+    image: modularKitchenImg,
     finish: "Acrylic / Lacquer",
     durability: "20+ Years",
     vibe: "Sleek & functional",
@@ -46,7 +56,7 @@ const materials = [
   {
     id: 5,
     name: "Premium Wardrobes",
-    image: "https://images.unsplash.com/photo-1558997519-83ea9252edf8?w=800&h=1000&fit=crop",
+    image: premiumWardrobeImg,
     finish: "Veneer / Glass",
     durability: "20+ Years",
     vibe: "Organized luxury",
@@ -56,7 +66,7 @@ const materials = [
   {
     id: 6,
     name: "Wall Textures",
-    image: "https://images.unsplash.com/photo-1615529182904-14819c35db37?w=800&h=1000&fit=crop",
+    image: wallTexturesImg,
     finish: "Textured / 3D",
     durability: "15+ Years",
     vibe: "Artistic depth",
@@ -66,7 +76,7 @@ const materials = [
   {
     id: 7,
     name: "Smart Home",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=800&h=1000&fit=crop",
+    image: smartHomeImg,
     finish: "Concealed Tech",
     durability: "10+ Years",
     vibe: "Future-ready",
@@ -76,7 +86,7 @@ const materials = [
   {
     id: 8,
     name: "Bath Fixtures",
-    image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&h=1000&fit=crop",
+    image: bathFixturesImg,
     finish: "Brushed / Matte",
     durability: "20+ Years",
     vibe: "Spa-like serenity",
