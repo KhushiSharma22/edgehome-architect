@@ -175,55 +175,55 @@ const Construction = () => {
         </div>
 
         {/* Main content */}
-        <div className="container mx-auto px-6 lg:px-12 relative z-10 pt-28 lg:pt-0">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-screen">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pt-24 sm:pt-28 lg:pt-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-screen">
             {/* Left Content */}
-            <div className="relative py-20">
+            <div className="relative py-12 sm:py-16 lg:py-20">
               {/* Top accent bar */}
               <div 
-                className="absolute -top-4 left-0 h-1 bg-[#C6A46A]"
+                className="absolute -top-2 sm:-top-4 left-0 h-1 bg-[#C6A46A]"
                 style={{
-                  width: isLoaded ? '80px' : '0',
+                  width: isLoaded ? '60px' : '0',
                   transition: 'width 0.8s ease-out 0.5s',
                 }}
               />
               
               {/* Label */}
               <div 
-                className="flex items-center gap-4 mb-6"
+                className="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-6"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(20px)",
                   transition: "all 0.8s ease-out 0.6s"
                 }}
               >
-                <div className="w-2 h-2 bg-[#C6A46A] rotate-45" />
-                <span className="text-[11px] tracking-[0.5em] text-[#C6A46A] uppercase font-medium">
+                <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[#C6A46A] rotate-45" />
+                <span className="text-[10px] sm:text-[11px] tracking-[0.3em] sm:tracking-[0.5em] text-[#C6A46A] uppercase font-medium">
                   Construction Excellence
                 </span>
               </div>
 
               {/* MASSIVE Headline */}
               <h1 
-                className="relative mb-8"
+                className="relative mb-6 sm:mb-8"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(40px)",
                   transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s"
                 }}
               >
-                <span className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory tracking-tight leading-[0.9]">
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory tracking-tight leading-[0.9]">
                   We Don't
                 </span>
-                <span className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory tracking-tight leading-[0.9] mt-1">
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory tracking-tight leading-[0.9] mt-1">
                   Just Build
                 </span>
-                <span className="block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading tracking-tight leading-[0.9] mt-1">
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading tracking-tight leading-[0.9] mt-1">
                   <span className="relative inline-block">
                     <span className="text-[#C6A46A]">We Craft</span>
                     {/* Underline accent */}
                     <div 
-                      className="absolute -bottom-2 left-0 h-[3px] bg-[#C6A46A]"
+                      className="absolute -bottom-1 sm:-bottom-2 left-0 h-[2px] sm:h-[3px] bg-[#C6A46A]"
                       style={{
                         width: isLoaded ? '100%' : '0',
                         transition: 'width 0.6s ease-out 1.4s',
@@ -235,7 +235,7 @@ const Construction = () => {
 
               {/* Tagline */}
               <p 
-                className="text-lg md:text-xl text-ivory/60 max-w-md leading-relaxed mb-10"
+                className="text-base sm:text-lg md:text-xl text-ivory/60 max-w-md leading-relaxed mb-8 sm:mb-10"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(30px)",
@@ -247,7 +247,7 @@ const Construction = () => {
 
               {/* Stats - Horizontal with dramatic styling */}
               <div 
-                className="flex items-start gap-8 md:gap-12 mb-12"
+                className="flex flex-wrap items-start gap-4 sm:gap-6 md:gap-8 lg:gap-12 mb-8 sm:mb-12"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(20px)",
@@ -255,21 +255,21 @@ const Construction = () => {
                 }}
               >
                 {[
-                  { value: "200", suffix: "+", label: "Projects Delivered" },
+                  { value: "200", suffix: "+", label: "Projects" },
                   { value: "10", suffix: "YRS", label: "Experience" },
                   { value: "0", suffix: "%", label: "Delays", prefix: "Zero" },
                 ].map((stat, i) => (
                   <div key={i} className="relative group">
-                    <div className="flex items-baseline gap-1">
+                    <div className="flex items-baseline gap-0.5 sm:gap-1">
                       {stat.prefix && (
-                        <span className="text-xs text-ivory/40 tracking-wider uppercase">{stat.prefix}</span>
+                        <span className="text-[9px] sm:text-xs text-ivory/40 tracking-wider uppercase">{stat.prefix}</span>
                       )}
-                      <span className="text-4xl md:text-5xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
+                      <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-ivory group-hover:text-[#C6A46A] transition-colors duration-300">
                         {stat.value}
                       </span>
-                      <span className="text-lg text-[#C6A46A] font-medium">{stat.suffix}</span>
+                      <span className="text-sm sm:text-lg text-[#C6A46A] font-medium">{stat.suffix}</span>
                     </div>
-                    <div className="text-[10px] text-ivory/40 tracking-[0.15em] uppercase mt-1">
+                    <div className="text-[9px] sm:text-[10px] text-ivory/40 tracking-[0.1em] sm:tracking-[0.15em] uppercase mt-0.5 sm:mt-1">
                       {stat.label}
                     </div>
                     {/* Hover underline */}
@@ -280,7 +280,7 @@ const Construction = () => {
 
               {/* CTA Buttons */}
               <div 
-                className="flex items-center gap-6"
+                className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6"
                 style={{
                   opacity: isLoaded ? 1 : 0,
                   transform: isLoaded ? "translateY(0)" : "translateY(20px)",
@@ -289,24 +289,23 @@ const Construction = () => {
               >
                 <Link 
                   to="/contact" 
-                  className="group relative bg-[#C6A46A] text-[#0A0A0A] px-8 py-4 text-sm tracking-[0.2em] uppercase font-medium overflow-hidden"
+                  className="group relative bg-[#C6A46A] text-[#0A0A0A] px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase font-medium overflow-hidden"
                 >
-                  <span className="relative z-10 flex items-center gap-3">
+                  <span className="relative z-10 flex items-center gap-2 sm:gap-3">
                     Start Your Project
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-ivory transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </Link>
                 
                 <Link 
                   to="/" 
-                  className="group flex items-center gap-3 text-ivory/60 hover:text-ivory transition-colors"
+                  className="group flex items-center gap-2 sm:gap-3 text-ivory/60 hover:text-ivory transition-colors"
                 >
-                  <span className="text-sm tracking-wider">View Projects</span>
-                  <div className="w-8 h-px bg-ivory/30 group-hover:w-12 group-hover:bg-[#C6A46A] transition-all duration-300" />
+                  <span className="text-xs sm:text-sm tracking-wider">View Projects</span>
+                  <div className="w-6 sm:w-8 h-px bg-ivory/30 group-hover:w-10 sm:group-hover:w-12 group-hover:bg-[#C6A46A] transition-all duration-300" />
                 </Link>
               </div>
-
             </div>
 
             {/* Right side - decorative elements for desktop (image is in background) */}
@@ -386,10 +385,10 @@ const Construction = () => {
       </section>
 
       {/* ===== SECTION 2: THE ANATOMY ===== */}
-      <section ref={layersRef} className="relative py-20 md:py-28 overflow-hidden bg-[#0E0E0E]">
-        {/* Animated Grid with reveal effect */}
+      <section ref={layersRef} className="relative py-16 sm:py-20 md:py-28 overflow-hidden bg-[#0E0E0E]">
+        {/* Animated Grid with reveal effect - hidden on mobile */}
         <div 
-          className="absolute inset-0 opacity-[0.03] animate-grid-reveal"
+          className="absolute inset-0 opacity-[0.03] animate-grid-reveal hidden sm:block"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgba(198,164,106,0.5) 1px, transparent 1px),
@@ -399,24 +398,24 @@ const Construction = () => {
           }}
         />
 
-        {/* Floating orbs */}
-        <div className="absolute top-20 left-[10%] w-32 h-32 rounded-full bg-[#C6A46A]/5 blur-3xl animate-float-slow" />
-        <div className="absolute bottom-40 right-[15%] w-48 h-48 rounded-full bg-[#C6A46A]/3 blur-3xl animate-float-slow" style={{ animationDelay: '2s' }} />
+        {/* Floating orbs - responsive */}
+        <div className="absolute top-10 sm:top-20 left-[10%] w-20 sm:w-32 h-20 sm:h-32 rounded-full bg-[#C6A46A]/5 blur-2xl sm:blur-3xl animate-float-slow" />
+        <div className="absolute bottom-20 sm:bottom-40 right-[15%] w-32 sm:w-48 h-32 sm:h-48 rounded-full bg-[#C6A46A]/3 blur-2xl sm:blur-3xl animate-float-slow hidden sm:block" style={{ animationDelay: '2s' }} />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
           {/* Section Header with animation */}
-          <div className="mb-20 animate-fade-in-section">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-8 h-[1px] bg-[#C6A46A]/50 animate-expand-line" />
-              <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono animate-text-reveal">
+          <div className="mb-10 sm:mb-14 lg:mb-20 animate-fade-in-section">
+            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <div className="w-6 sm:w-8 h-[1px] bg-[#C6A46A]/50 animate-expand-line" />
+              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] text-[#C6A46A]/70 font-mono animate-text-reveal">
                 THE ANATOMY
               </span>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading text-ivory mb-4 animate-slide-up-text">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading text-ivory mb-3 sm:mb-4 animate-slide-up-text">
               Every layer carries
               <span className="text-ivory/50 animate-text-fade"> responsibility.</span>
             </h2>
-            <p className="text-base md:text-lg text-ivory/50 max-w-lg leading-relaxed animate-fade-in-delayed">
+            <p className="text-sm sm:text-base md:text-lg text-ivory/50 max-w-lg leading-relaxed animate-fade-in-delayed">
               Construction is not sequential steps. It's interlocking systems where each depends on every other.
             </p>
           </div>
@@ -466,7 +465,7 @@ const Construction = () => {
           {/* Construction Layers with Real Images */}
           <div className="relative">
             {/* Vertical Line */}
-            <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-ivory/10">
+            <div className="absolute left-0 sm:left-4 md:left-8 top-0 bottom-0 w-px bg-ivory/10">
               <div 
                 className="absolute top-0 left-0 w-full bg-[#C6A46A] transition-all duration-500"
                 style={{ height: `${Math.min(100, (activeLayer + 1) * 20)}%` }}
@@ -474,7 +473,7 @@ const Construction = () => {
             </div>
 
             {/* Layers with enhanced animations */}
-            <div className="space-y-16 pl-8 md:pl-20">
+            <div className="space-y-10 sm:space-y-12 lg:space-y-16 pl-6 sm:pl-12 md:pl-20">
               {constructionLayers.map((layer, index) => (
                 <div 
                   key={layer.name}
@@ -534,20 +533,20 @@ const Construction = () => {
 
                     {/* Text Content with stagger */}
                     <div className="md:col-span-8 flex flex-col justify-center">
-                      <div className="flex items-baseline gap-4 mb-3">
-                        <h3 className={`text-2xl md:text-3xl font-heading text-ivory group-hover:text-[#C6A46A] transition-all duration-500 ${
+                      <div className="flex flex-wrap items-baseline gap-2 sm:gap-4 mb-2 sm:mb-3">
+                        <h3 className={`text-xl sm:text-2xl md:text-3xl font-heading text-ivory group-hover:text-[#C6A46A] transition-all duration-500 ${
                           activeLayer >= index ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-50'
                         }`}>
                           {layer.name}
                         </h3>
-                        <span className={`text-xs tracking-[0.15em] uppercase text-[#C6A46A]/60 transition-all duration-500 ${
+                        <span className={`text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.15em] uppercase text-[#C6A46A]/60 transition-all duration-500 ${
                           activeLayer >= index ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
                         }`} style={{ transitionDelay: '100ms' }}>
                           {layer.depth}
                         </span>
                       </div>
 
-                      <p className={`text-lg text-ivory/60 leading-relaxed mb-4 transition-all duration-500 ${
+                      <p className={`text-base sm:text-lg text-ivory/60 leading-relaxed mb-3 sm:mb-4 transition-all duration-500 ${
                         activeLayer >= index ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-30'
                       }`} style={{ transitionDelay: '150ms' }}>
                         {layer.principle}
@@ -555,12 +554,12 @@ const Construction = () => {
                       
                       {/* Metric Badge with animation */}
                       <span 
-                        className={`inline-flex items-center gap-2 text-xs tracking-wide text-ivory/50 transition-all duration-500 ${
+                        className={`inline-flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs tracking-wide text-ivory/50 transition-all duration-500 ${
                           activeLayer >= index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                         }`}
                         style={{ transitionDelay: '200ms' }}
                       >
-                        <span className={`w-1.5 h-1.5 rounded-full bg-[#C6A46A] ${activeLayer >= index ? 'animate-pulse' : ''}`} />
+                        <span className={`w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#C6A46A] ${activeLayer >= index ? 'animate-pulse' : ''}`} />
                         {layer.metric}
                       </span>
                     </div>
@@ -582,7 +581,7 @@ const Construction = () => {
       </section>
 
       {/* ===== SECTION 3: THE PROMISE ===== */}
-      <section className="relative py-24 md:py-32 overflow-hidden">
+      <section className="relative py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
         {/* Animated background */}
         <div className="absolute inset-0">
           <img 
@@ -592,14 +591,14 @@ const Construction = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E0E] via-[#0E0E0E]/95 to-[#0E0E0E]" />
           
-          {/* Animated particles */}
-          <div className="absolute inset-0 pointer-events-none">
-            {[...Array(12)].map((_, i) => (
+          {/* Animated particles - hidden on mobile */}
+          <div className="absolute inset-0 pointer-events-none hidden sm:block">
+            {[...Array(8)].map((_, i) => (
               <div
                 key={i}
                 className="absolute w-1 h-1 bg-[#C6A46A]/30 rounded-full animate-float-particle"
                 style={{
-                  left: `${8 + i * 8}%`,
+                  left: `${8 + i * 12}%`,
                   top: `${20 + (i % 4) * 20}%`,
                   animationDuration: `${6 + i % 4}s`,
                   animationDelay: `${i * 0.5}s`,
@@ -609,23 +608,23 @@ const Construction = () => {
           </div>
         </div>
 
-        <div className="relative z-10 max-w-3xl mx-auto px-6 lg:px-12 text-center">
+        <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-12 text-center">
           {/* Animated decorative element */}
-          <div className="flex justify-center mb-10">
-            <div className="flex items-center gap-4">
-              <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#C6A46A]/50 animate-expand-left" />
-              <div className="w-3 h-3 rotate-45 border border-[#C6A46A]/50 animate-spin-slow" style={{ animationDuration: '8s' }} />
-              <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#C6A46A]/50 animate-expand-right" />
+          <div className="flex justify-center mb-6 sm:mb-8 lg:mb-10">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span className="h-px w-8 sm:w-12 bg-gradient-to-r from-transparent to-[#C6A46A]/50 animate-expand-left" />
+              <div className="w-2 sm:w-3 h-2 sm:h-3 rotate-45 border border-[#C6A46A]/50 animate-spin-slow" style={{ animationDuration: '8s' }} />
+              <span className="h-px w-8 sm:w-12 bg-gradient-to-l from-transparent to-[#C6A46A]/50 animate-expand-right" />
             </div>
           </div>
 
           {/* Quote with reveal */}
-          <div className="mb-12">
-            <span className="text-[10px] tracking-[0.3em] text-[#C6A46A]/70 font-mono block mb-8 animate-fade-in-up">
+          <div className="mb-8 sm:mb-10 lg:mb-12">
+            <span className="text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] text-[#C6A46A]/70 font-mono block mb-4 sm:mb-6 lg:mb-8 animate-fade-in-up">
               OUR COMMITMENT
             </span>
             
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-heading text-ivory leading-relaxed mb-8">
+            <blockquote className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading text-ivory leading-relaxed mb-6 sm:mb-8">
               <span className="inline-block animate-word-reveal" style={{ animationDelay: '0.1s' }}>"We measure twice </span>
               <span className="inline-block animate-word-reveal" style={{ animationDelay: '0.3s' }}>not because we might be wrong,</span>
               <span className="text-ivory/50 inline-block animate-word-reveal" style={{ animationDelay: '0.5s' }}> but because our clients deserve </span>
@@ -633,15 +632,15 @@ const Construction = () => {
               <span className="inline-block animate-word-reveal" style={{ animationDelay: '0.9s' }}>"</span>
             </blockquote>
 
-            <div className="flex items-center justify-center gap-4 text-ivory/40 animate-fade-in-up" style={{ animationDelay: '1s' }}>
-              <span className="h-px w-10 bg-ivory/20" />
-              <span className="text-xs tracking-[0.15em] uppercase">EdgeHomes Construction</span>
-              <span className="h-px w-10 bg-ivory/20" />
+            <div className="flex items-center justify-center gap-3 sm:gap-4 text-ivory/40 animate-fade-in-up" style={{ animationDelay: '1s' }}>
+              <span className="h-px w-6 sm:w-10 bg-ivory/20" />
+              <span className="text-[10px] sm:text-xs tracking-[0.1em] sm:tracking-[0.15em] uppercase">EdgeHomes Construction</span>
+              <span className="h-px w-6 sm:w-10 bg-ivory/20" />
             </div>
           </div>
 
           {/* Key Points with stagger animation */}
-          <div className="grid grid-cols-3 gap-8 mt-16 mb-16">
+          <div className="grid grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mt-10 sm:mt-12 lg:mt-16 mb-10 sm:mb-12 lg:mb-16">
             {[
               { stat: "Zero", desc: "Material compromise" },
               { stat: "Daily", desc: "Progress updates" },
@@ -652,14 +651,14 @@ const Construction = () => {
                 className="text-center group animate-scale-in-up"
                 style={{ animationDelay: `${1.2 + i * 0.2}s` }}
               >
-                <div className="text-2xl md:text-3xl font-heading text-[#C6A46A] mb-2 group-hover:scale-110 group-hover:text-shadow-glow transition-all duration-300">
+                <div className="text-lg sm:text-2xl md:text-3xl font-heading text-[#C6A46A] mb-1 sm:mb-2 group-hover:scale-110 group-hover:text-shadow-glow transition-all duration-300">
                   {item.stat}
                 </div>
-                <div className="text-xs text-ivory/50 tracking-wider uppercase group-hover:text-ivory/70 transition-colors duration-300">
+                <div className="text-[9px] sm:text-xs text-ivory/50 tracking-wider uppercase group-hover:text-ivory/70 transition-colors duration-300">
                   {item.desc}
                 </div>
                 {/* Underline on hover */}
-                <div className="h-px w-0 bg-[#C6A46A]/50 mx-auto mt-2 group-hover:w-12 transition-all duration-300" />
+                <div className="h-px w-0 bg-[#C6A46A]/50 mx-auto mt-1 sm:mt-2 group-hover:w-8 sm:group-hover:w-12 transition-all duration-300" />
               </div>
             ))}
           </div>
@@ -667,13 +666,13 @@ const Construction = () => {
           {/* CTA with magnetic effect */}
           <Link 
             to="/contact"
-            className="group relative inline-flex items-center gap-4 bg-[#C6A46A] text-[#0E0E0E] px-10 py-5 text-sm tracking-wider font-medium overflow-hidden animate-fade-in-up"
+            className="group relative inline-flex items-center gap-3 sm:gap-4 bg-[#C6A46A] text-[#0E0E0E] px-6 sm:px-8 lg:px-10 py-3 sm:py-4 lg:py-5 text-xs sm:text-sm tracking-wider font-medium overflow-hidden animate-fade-in-up"
             style={{ animationDelay: '1.8s' }}
           >
             {/* Shine sweep */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             <span className="relative z-10">Discuss Your Project</span>
-            <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+            <ArrowRight className="relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
           </Link>
         </div>
       </section>
