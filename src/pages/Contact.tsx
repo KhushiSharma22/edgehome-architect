@@ -429,7 +429,7 @@ const Contact = () => {
                   <ContactItem 
                     icon={MapPin}
                     label="Studio Address"
-                    value="SCO - 8, 1st Floor, OMAXE WORLD STREET, Sec-79, Faridabad, Haryana 121101"
+                    value="SCO - 8, 1st Floor, OMAXE WORLD STREET, Sec-79, Faridabad, Haryana 121002"
                   />
                   
                   <ContactItem 
@@ -452,20 +452,23 @@ const Contact = () => {
                   />
                 </div>
                 
-                {/* Property Image with Enhanced hover effect */}
-                <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-[#0E0E0E]/10 group image-zoom">
-                  <img 
-                    src={visitStudioImage} 
-                    alt="EdgeHomes studio interior" 
-                    className="w-full h-72 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-[#0A0A0A]/20 to-transparent" />
+                {/* Instagram Reel Video */}
+                <div className="relative rounded-xl overflow-hidden shadow-2xl shadow-[#0E0E0E]/10 group">
+                  <div className="w-full h-[400px] bg-[#0A0A0A]">
+                    <iframe 
+                      src="https://www.instagram.com/reel/C5au0t8xFFY/embed"
+                      className="w-full h-full border-0"
+                      allowFullScreen
+                      loading="lazy"
+                      title="EdgeHomes Studio Reel"
+                    />
+                  </div>
                   
                   {/* Studio Overlay */}
-                  <div className="absolute inset-0 flex items-end p-6">
-                    <div className="flex items-center gap-3 transform group-hover:translate-x-2 transition-transform duration-500">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#0A0A0A]/90 to-transparent pointer-events-none">
+                    <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-[#C7A56A]/20 backdrop-blur-sm border border-[#C7A56A]/40 
-                                      flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                      flex items-center justify-center">
                         <MapPin className="w-4 h-4 text-[#C7A56A]" />
                       </div>
                       <div>

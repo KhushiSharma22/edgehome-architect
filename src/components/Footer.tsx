@@ -111,7 +111,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-muted-foreground group">
                 <MapPin className="w-5 h-5 text-primary mt-0.5 flex-shrink-0 group-hover:scale-110 transition-transform" />
-                <span className="group-hover:text-foreground transition-colors">SCO - 8, 1st Floor, OMAXE WORLD STREET, Sec-79, Faridabad, Haryana 121101</span>
+                <span className="group-hover:text-foreground transition-colors">SCO - 8, 1st Floor, OMAXE WORLD STREET, Sec-79, Faridabad, Haryana 121002</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground group">
                 <Phone className="w-5 h-5 text-primary flex-shrink-0 group-hover:scale-110 transition-transform" />
