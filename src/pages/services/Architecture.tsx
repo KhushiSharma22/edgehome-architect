@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ChevronRight, ArrowRight, Compass, Lightbulb, Ruler, Eye, Wind, Layers, Move, Box } from "lucide-react";
+import { ChevronRight, ArrowRight, Compass, Lightbulb, Ruler, Eye, Wind, Layers, Move, Box, Compass as DraftingCompass, Calendar as CalendarIcon, ArrowUpRight as ArrowUpRightIcon } from "lucide-react";
 import architectureHero from "@/assets/architecture-hero-epic.jpg";
 import architectureCase1 from "@/assets/architecture-case-1.jpg";
 
@@ -642,83 +642,159 @@ const Architecture = () => {
         </div>
       </section>
 
-      {/* ===== IMPACT STATS - BOLD & SIMPLE ===== */}
-      <section className="relative py-24 sm:py-32 lg:py-40 overflow-hidden">
-        {/* Full-bleed background image */}
-        <div className="absolute inset-0">
-          <img 
-            src={architectureCase1}
-            alt="Architecture showcase"
-            className="w-full h-full object-cover"
-            style={{ filter: "brightness(0.15)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-[#0A0A0A]/80" />
+      {/* ===== ARCHITECTURAL MASTERY ===== */}
+      <section className="relative py-16 sm:py-24 lg:py-32 xl:py-40 overflow-hidden bg-gradient-to-b from-[#0A0A0A] to-[#111111]">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -right-1/4 -top-1/4 w-[80vh] h-[80vh] rounded-full bg-[#C6A46A]/5 blur-3xl animate-pulse" style={{ animationDuration: '8s' }}></div>
+          <div className="absolute -left-1/4 -bottom-1/4 w-[60vh] h-[60vh] rounded-full bg-[#C6A46A]/10 blur-3xl animate-pulse" style={{ animationDuration: '10s', animationDelay: '1s' }}></div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative z-10">
           {/* Section Header */}
           <div 
-            className="text-center mb-16 sm:mb-20 lg:mb-24"
+            className="text-center mb-12 sm:mb-16 lg:mb-20 xl:mb-24"
             style={{
               opacity: scrollY > 1800 ? 1 : 0,
               transform: scrollY > 1800 ? "translateY(0)" : "translateY(40px)",
-              transition: "all 0.8s ease-out"
+              transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
             }}
           >
-            <span className="inline-block px-4 py-1.5 border border-[#C6A46A]/40 text-[10px] sm:text-xs tracking-[0.3em] text-[#C6A46A] mb-6">
-              OUR IMPACT
+            <span className="inline-block px-4 py-1.5 mb-4 sm:mb-6 bg-[#C6A46A]/10 border border-[#C6A46A]/30 text-[10px] sm:text-xs tracking-[0.3em] text-[#C6A46A] rounded-full backdrop-blur-sm">
+              ARCHITECTURAL VISION
             </span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading text-ivory">
-              Numbers That <span className="italic text-[#C6A46A]">Speak</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading text-ivory leading-tight">
+              Redefining <span className="relative inline-block">
+                <span className="relative z-10">Spaces</span>
+                <span className="absolute bottom-2 left-0 w-full h-3 sm:h-4 bg-[#C6A46A]/30 -z-0"></span>
+              </span>
             </h2>
+            <p className="mt-4 sm:mt-6 max-w-2xl mx-auto text-ivory/70 text-sm sm:text-base md:text-lg">
+              Where innovative design meets timeless elegance in every structure we create.
+            </p>
           </div>
 
-          {/* Stats Grid - Big Bold Numbers */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12">
-            {impactStats.map((stat, index) => (
-              <div 
-                key={index}
-                className="group relative text-center p-6 sm:p-8 lg:p-10 border border-ivory/10 bg-[#0A0A0A]/40 backdrop-blur-sm hover:border-[#C6A46A]/50 hover:bg-[#C6A46A]/5 transition-all duration-500"
-                style={{
-                  opacity: scrollY > 1900 + index * 80 ? 1 : 0,
-                  transform: scrollY > 1900 + index * 80 ? "translateY(0) scale(1)" : "translateY(30px) scale(0.95)",
-                  transition: `all 0.6s ease-out ${index * 0.1}s`
-                }}
-              >
-                {/* Big Number */}
-                <div className="relative mb-4">
-                  <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading text-[#C6A46A] leading-none group-hover:scale-110 transition-transform duration-500 inline-block">
-                    {stat.number}
-                  </span>
+          {/* Feature Showcase */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-6 xl:gap-8">
+            {/* Feature 1 - Modern Aesthetics */}
+            <div className="group relative p-6 sm:p-8 rounded-xl overflow-hidden border border-ivory/5 bg-gradient-to-br from-[#0A0A0A] to-[#111111] hover:border-[#C6A46A]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#C6A46A]/5">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNDNkE0NkEiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 flex items-center justify-center bg-[#C6A46A]/10 rounded-lg border border-[#C6A46A]/20 group-hover:bg-[#C6A46A]/20 group-hover:border-[#C6A46A]/30 transition-all duration-500">
+                  <Move className="w-6 h-6 sm:w-7 sm:h-7 text-[#C6A46A]" />
                 </div>
-                
-                {/* Label */}
-                <p className="text-sm sm:text-base text-ivory/60 tracking-wide group-hover:text-ivory transition-colors duration-300">
-                  {stat.label}
+                <h3 className="text-xl sm:text-2xl font-heading text-ivory mb-3 sm:mb-4">Modern Aesthetics</h3>
+                <p className="text-ivory/70 text-sm sm:text-base leading-relaxed">
+                  Clean lines and innovative forms that create striking visual impact while maintaining functionality.
                 </p>
-
-                {/* Hover accent line */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-[#C6A46A] group-hover:w-1/2 transition-all duration-500" />
               </div>
-            ))}
+              <div className="absolute -bottom-6 -right-6 w-12 h-12 rounded-full bg-[#C6A46A] opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700"></div>
+            </div>
+
+            {/* Feature 2 - Structural Innovation */}
+            <div className="group relative p-6 sm:p-8 rounded-xl overflow-hidden border border-ivory/5 bg-gradient-to-br from-[#0A0A0A] to-[#111111] hover:border-[#C6A46A]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#C6A46A]/5">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNDNkE0NkEiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 flex items-center justify-center bg-[#C6A46A]/10 rounded-lg border border-[#C6A46A]/20 group-hover:bg-[#C6A46A]/20 group-hover:border-[#C6A46A]/30 transition-all duration-500">
+                  <Layers className="w-6 h-6 sm:w-7 sm:h-7 text-[#C6A46A]" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-heading text-ivory mb-3 sm:mb-4">Structural Innovation</h3>
+                <p className="text-ivory/70 text-sm sm:text-base leading-relaxed">
+                  Pushing boundaries with cutting-edge engineering and unique structural solutions.
+                </p>
+              </div>
+              <div className="absolute -bottom-6 -right-6 w-12 h-12 rounded-full bg-[#C6A46A] opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700"></div>
+            </div>
+
+            {/* Feature 3 - Material Excellence */}
+            <div className="group relative p-6 sm:p-8 rounded-xl overflow-hidden border border-ivory/5 bg-gradient-to-br from-[#0A0A0A] to-[#111111] hover:border-[#C6A46A]/30 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#C6A46A]/5">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNDNkE0NkEiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="relative z-10">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mb-4 sm:mb-6 flex items-center justify-center bg-[#C6A46A]/10 rounded-lg border border-[#C6A46A]/20 group-hover:bg-[#C6A46A]/20 group-hover:border-[#C6A46A]/30 transition-all duration-500">
+                  <Box className="w-6 h-6 sm:w-7 sm:h-7 text-[#C6A46A]" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-heading text-ivory mb-3 sm:mb-4">Material Excellence</h3>
+                <p className="text-ivory/70 text-sm sm:text-base leading-relaxed">
+                  Premium materials selected for durability, aesthetics, and timeless appeal in every project.
+                </p>
+              </div>
+              <div className="absolute -bottom-6 -right-6 w-12 h-12 rounded-full bg-[#C6A46A] opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700"></div>
+            </div>
           </div>
 
-          {/* CTA */}
+          {/* Architectural Showcase */}
           <div 
-            className="text-center mt-16 sm:mt-20 lg:mt-24"
+            className="mt-16 sm:mt-20 lg:mt-24 relative overflow-hidden rounded-2xl border border-ivory/10 bg-gradient-to-br from-[#0A0A0A] to-[#111111]"
             style={{
               opacity: scrollY > 2200 ? 1 : 0,
               transform: scrollY > 2200 ? "translateY(0)" : "translateY(30px)",
-              transition: "all 0.8s ease-out"
+              transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)"
             }}
           >
-            <Link 
-              to="/contact"
-              className="group inline-flex items-center gap-3 bg-[#C6A46A] text-[#0A0A0A] px-8 sm:px-10 py-4 sm:py-5 text-xs sm:text-sm tracking-widest font-semibold hover:bg-ivory transition-colors duration-300"
-            >
-              <span>START YOUR PROJECT</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            {/* Decorative architectural grid overlay */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="h-full w-full" style={{
+                backgroundImage: 'linear-gradient(to right, #C6A46A 1px, transparent 1px), linear-gradient(to bottom, #C6A46A 1px, transparent 1px)',
+                backgroundSize: '60px 60px'
+              }} />
+            </div>
+            
+            <div className="relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 sm:p-12">
+                <div className="relative">
+                  <div className="absolute -top-4 -left-4 w-16 h-16 border-t-2 border-l-2 border-[#C6A46A] opacity-50"></div>
+                  <div className="absolute -bottom-4 -right-4 w-16 h-16 border-b-2 border-r-2 border-[#C6A46A] opacity-50"></div>
+                  
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-heading text-ivory mb-4 leading-tight">
+                    Transform Your Space <span className="text-[#C6A46A]">With Purpose</span>
+                  </h3>
+                  
+                  <div className="h-1 w-20 bg-[#C6A46A] my-6"></div>
+                  
+                  <p className="text-ivory/80 text-sm sm:text-base mb-8 max-w-lg">
+                    Every line we draw is a commitment to excellence, every space we create tells a story. Let's collaborate to design spaces that inspire and endure.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Link 
+                      to="/contact"
+                      className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium text-[#0A0A0A] bg-[#C6A46A] hover:bg-ivory transition-all duration-300 rounded-lg overflow-hidden"
+                    >
+                      <span>Book a Consultation</span>
+                      <CalendarIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </div>
+                </div>
+                
+                <div className="relative h-64 sm:h-80 lg:h-full min-h-[300px] rounded-lg overflow-hidden border border-ivory/10">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center p-6">
+                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#C6A46A]/10 border border-[#C6A46A]/30 mb-6">
+                        <DraftingCompass className="w-8 h-8 text-[#C6A46A]" />
+                      </div>
+                      <h4 className="text-ivory text-lg font-medium mb-2">Architectural Excellence</h4>
+                      <p className="text-ivory/70 text-sm">Where Vision Meets Precision</p>
+                    </div>
+                  </div>
+                  {/* Decorative elements */}
+                  <div className="absolute top-0 left-0 w-full h-full">
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full border-2 border-[#C6A46A]/20"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full border-2 border-[#C6A46A]/10"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border-t border-ivory/10">
+                <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-ivory/10">
+                  {["Residential", "Commercial", "Interior", "Landscape"].map((item, index) => (
+                    <div key={index} className="p-6 text-center group cursor-pointer hover:bg-[#C6A46A]/5 transition-colors duration-300">
+                      <div className="text-[#C6A46A] text-sm font-medium mb-1">0{index + 1}</div>
+                      <div className="text-ivory/80 text-sm">{item}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
