@@ -47,7 +47,7 @@ const PortfolioSection = () => {
                     {project.title}
                   </h3>
                   <div className="flex items-center text-primary text-sm font-body">
-                    <span>View Project</span>
+                    <span>Explore</span>
                     <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>

@@ -8,7 +8,7 @@ import foundationImg from "@/assets/construction-foundation.jpg";
 import structureImg from "@/assets/construction-structure.jpg";
 import envelopeImg from "@/assets/construction-envelope.jpg";
 import servicesImg from "@/assets/construction-services.jpg";
-import finishImg from "@/assets/construction-finish.jpg";
+import finishImg from "@/assets/construction-finish-quality.jpg";
 
 const Construction = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -298,13 +298,6 @@ const Construction = () => {
                   <div className="absolute inset-0 bg-ivory transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </Link>
                 
-                <Link 
-                  to="/" 
-                  className="group flex items-center gap-2 sm:gap-3 text-ivory/60 hover:text-ivory transition-colors"
-                >
-                  <span className="text-xs sm:text-sm tracking-wider">View Projects</span>
-                  <div className="w-6 sm:w-8 h-px bg-ivory/30 group-hover:w-10 sm:group-hover:w-12 group-hover:bg-[#C6A46A] transition-all duration-300" />
-                </Link>
               </div>
             </div>
 

@@ -265,7 +265,7 @@ const Architecture = () => {
 
             {/* Right: Floating stats/features - mobile version */}
             <div 
-              className="lg:hidden grid grid-cols-3 gap-3 mt-8"
+              className="lg:hidden grid grid-cols-2 gap-3 mt-8"
               style={{
                 opacity: isLoaded ? 1 : 0,
                 transform: isLoaded ? "translateY(0)" : "translateY(40px)",
@@ -274,7 +274,6 @@ const Architecture = () => {
             >
               {[
                 { num: "150+", label: "Projects" },
-                { num: "25+", label: "Awards" },
                 { num: "100%", label: "Satisfaction" }
               ].map((stat, i) => (
                 <div 
@@ -300,8 +299,7 @@ const Architecture = () => {
               <div className="space-y-6">
                 {[
                   { num: "150+", label: "Projects Delivered", delay: 0 },
-                  { num: "25+", label: "Design Awards", delay: 0.2 },
-                  { num: "100%", label: "Client Satisfaction", delay: 0.4 }
+                  { num: "100%", label: "Client Satisfaction", delay: 0.2 }
                 ].map((stat, i) => (
                   <div 
                     key={i}
