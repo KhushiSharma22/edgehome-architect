@@ -73,7 +73,7 @@ const ConsultationCTA = () => {
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading text-foreground mb-3 sm:mb-4 leading-tight">
                 Let's Create<br />
-                <span className="text-gradient-gold italic pr-2">Something Beautiful</span>
+                <span className="text-gradient-gold italic" style={{ paddingRight: '0.15em' }}>Something Beautiful</span>
               </h2>
               <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-primary to-primary/30 mx-auto lg:mx-0 mb-4 sm:mb-6" />
               <p className="text-muted-foreground text-sm sm:text-base lg:text-lg mb-6 sm:mb-8">
