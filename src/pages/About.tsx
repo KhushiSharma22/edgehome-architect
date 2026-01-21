@@ -401,8 +401,8 @@ const HeroAbout = () => {
                   
                   {/* Floating label */}
                   <div className="absolute bottom-4 left-4 right-4">
-                    <div className="text-[10px] text-primary tracking-[0.3em] uppercase mb-1">Featured Project</div>
-                    <div className="text-sm text-foreground/80">Modern Residence • Delhi</div>
+                    <div className="text-[10px] text-primary tracking-[0.3em] uppercase mb-1">Interior Design</div>
+                    <div className="text-sm text-foreground/80">Luxury Interiors • NCR</div>
                   </div>
                 </div>
 
