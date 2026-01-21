@@ -26,7 +26,7 @@ const Footer = () => {
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-heading text-foreground mb-8 leading-[0.9]">
             Let's Create
             <br />
-            <span className="text-shimmer italic">Something Beautiful</span>
+            <span className="text-shimmer italic" style={{ paddingRight: '0.15em' }}>Something Beautiful</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-md mx-auto mb-10">
             Ready to transform your space? Get in touch for a free consultation.
