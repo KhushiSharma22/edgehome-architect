@@ -698,6 +698,10 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    /* Prevent italic glyph clipping with background-clip text */
+    display: inline-block;
+    overflow: visible;
+    padding-right: 0.12em;
   }
 
   /* Cinematic section spacing */
@@ -1183,6 +1187,10 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Prevent italic glyph clipping with background-clip text */
+  display: inline-block;
+  overflow: visible;
+  padding-right: 0.12em;
   animation: shimmer 4s linear infinite;
 }
 
