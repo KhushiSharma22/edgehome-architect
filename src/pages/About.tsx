@@ -8,7 +8,7 @@ import portfolioBedroom from "@/assets/portfolio-bedroom.jpg";
 import portfolioDining from "@/assets/portfolio-dining.jpg";
 import pelicanChair from "@/assets/pelican-chair.png";
 import eggChair from "@/assets/egg-chair.png";
-import studioSketch from "@/assets/studio-sketch.jpg";
+import studioVideo from "@/assets/studio-video.mp4";
 import founderPriya from "@/assets/founder-priya.png";
 import founderDeepak from "@/assets/founder-deepak.png";
 
@@ -1084,11 +1084,20 @@ const FoundersSection = () => {
                 <div className="absolute top-2 right-2 w-6 sm:w-8 h-6 sm:h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-lg" />
                 <div className="absolute bottom-2 left-2 w-6 sm:w-8 h-6 sm:h-8 border-b-2 border-l-2 border-primary/40 rounded-bl-lg" />
                 
-                <img 
-                  src={studioSketch} 
-                  alt="EdgeHomes Design Studio" 
-                  className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                />
+                <div className="relative w-full h-[600px] overflow-hidden rounded-2xl sm:rounded-3xl">
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute top-1/2 left-1/2 w-auto min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 transition-all duration-700 group-hover:scale-105"
+                    style={{ minWidth: '100%', minHeight: '100%', width: 'auto', height: 'auto', maxWidth: 'none' }}
+                  >
+                    <source src={studioVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                  <div className="absolute inset-0 bg-black/20" />
+                </div>
                 
                 {/* Artistic overlay */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 pointer-events-none" />

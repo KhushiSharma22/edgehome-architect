@@ -6,9 +6,9 @@ import { ChevronRight, ArrowRight } from "lucide-react";
 import constructionHero from "@/assets/construction-hero-epic.jpg";
 import foundationImg from "@/assets/construction-foundation.jpg";
 import structureImg from "@/assets/construction-structure.jpg";
-import envelopeImg from "@/assets/construction-envelope.jpg";
+import brickworkImg from "@/assets/brickwork-plastering.jpg";
 import servicesImg from "@/assets/construction-services.jpg";
-import finishImg from "@/assets/construction-finish-quality.jpg";
+import finishImg from "@/assets/interior-bedroom-gurgaon.jpg";
 
 const Construction = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -50,11 +50,11 @@ const Construction = () => {
       image: structureImg
     },
     { 
-      name: "Envelope", 
-      depth: "Brick & Plaster",
-      principle: "Walls that define space and protect from elements.",
-      metric: "AAC/Red brick masonry with cement plaster",
-      image: envelopeImg
+      name: "Brickwork & Plaster", 
+      depth: "Wall Construction",
+      principle: "Building strong, straight walls with proper thermal and sound insulation.",
+      metric: "9\" brick wall with cement plaster (1:4 ratio) & water proofing",
+      image: brickworkImg
     },
     { 
       name: "Services", 
