@@ -2,8 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ChevronRight, ArrowRight, Compass, Lightbulb, Ruler, Eye, Wind, Layers, Move, Box } from "lucide-react";
+import { ChevronRight, ArrowRight, Compass, Lightbulb, Ruler, Eye, Wind, Layers, Move, Box, Sparkles, Zap, Target } from "lucide-react";
 import architectureHero from "@/assets/architecture-hero-epic.jpg";
+import architectureCase1 from "@/assets/architecture-case-1.jpg";
+import architectureCase2 from "@/assets/architecture-case-2.jpg";
+import architectureCase3 from "@/assets/architecture-case-3.jpg";
 
 const Architecture = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -11,7 +14,8 @@ const Architecture = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [activePrinciple, setActivePrinciple] = useState<number | null>(null);
   const [activeBlueprint, setActiveBlueprint] = useState<string | null>(null);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeVision, setActiveVision] = useState(0);
+  const [visionHover, setVisionHover] = useState<number | null>(null);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -59,13 +63,37 @@ const Architecture = () => {
     { id: "ventilation", label: "Ventilation Logic", x: 65, y: 75, icon: Wind }
   ];
 
-  const faqs = [
-    { q: "What is your typical timeline?", a: "Most residential projects take 8-16 weeks for design, depending on complexity. We believe in thorough exploration over rushed decisions." },
-    { q: "Do you do turnkey?", a: "We focus on design and documentation. For construction, we partner with trusted contractors or work with your chosen builder." },
-    { q: "How do you charge?", a: "We work on a phased fee structure based on project scope. An initial consultation helps us provide a detailed proposal." },
-    { q: "Can you work with my contractor?", a: "Absolutely. We're experienced in coordinating with external teams and ensuring our design intent is executed precisely." },
-    { q: "How many concepts do you provide?", a: "We typically present 2-3 distinct directions, then refine the chosen approach through iterations." },
-    { q: "What do you need from me to start?", a: "Site survey, plot documents, a brief conversation about your vision, and trust in the process." }
+  const visionProjects = [
+    { 
+      title: "The Glass Pavilion",
+      location: "Gurgaon, Haryana",
+      year: "2024",
+      area: "8,500 sq.ft",
+      image: architectureCase1,
+      description: "Where indoor and outdoor dissolve into one continuous experience.",
+      accent: "Transparency",
+      icon: Sparkles
+    },
+    { 
+      title: "Courtyard Residence",
+      location: "South Delhi",
+      year: "2023",
+      area: "6,200 sq.ft",
+      image: architectureCase2,
+      description: "Ancient wisdom meets contemporary precision in perfect harmony.",
+      accent: "Heritage",
+      icon: Target
+    },
+    { 
+      title: "Sky Villa",
+      location: "Noida, UP",
+      year: "2024",
+      area: "4,800 sq.ft",
+      image: architectureCase3,
+      description: "Elevated living where every angle captures the horizon.",
+      accent: "Elevation",
+      icon: Zap
+    }
   ];
 
   const parallaxOffset = scrollY * 0.3;
@@ -644,93 +672,299 @@ const Architecture = () => {
         </div>
       </section>
 
-      {/* ===== FAQ SECTION - ANIMATED ===== */}
-      <section className="relative py-16 sm:py-24 lg:py-32 bg-[#F8F6F3] overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-1/3 h-full bg-gradient-to-r from-[#C6A46A]/5 to-transparent hidden sm:block" />
-        
+      {/* ===== ARCHITECTURAL VISION - IMMERSIVE 3D GALLERY ===== */}
+      <section className="relative py-20 sm:py-32 lg:py-40 bg-[#0A0A0A] overflow-hidden">
+        {/* Animated mesh gradient background */}
+        <div className="absolute inset-0">
+          <div 
+            className="absolute inset-0 opacity-30"
+            style={{
+              background: `
+                radial-gradient(ellipse 80% 50% at 20% 40%, rgba(198,164,106,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(198,164,106,0.1) 0%, transparent 50%)
+              `,
+              animation: "meshFloat 15s ease-in-out infinite"
+            }}
+          />
+          {/* Animated grid lines */}
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage: `
+                linear-gradient(90deg, #C6A46A 1px, transparent 1px),
+                linear-gradient(#C6A46A 1px, transparent 1px)
+              `,
+              backgroundSize: "80px 80px",
+              animation: "gridPulse 8s ease-in-out infinite"
+            }}
+          />
+        </div>
+
+        {/* Floating orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[#C6A46A]/5 blur-[100px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-[#C6A46A]/8 blur-[80px]" style={{ animation: "floatSlow 10s ease-in-out infinite reverse" }} />
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
-            {/* Left: Header */}
+          {/* Section Header */}
+          <div 
+            className="text-center mb-16 sm:mb-20 lg:mb-28"
+            style={{
+              opacity: scrollY > 1800 ? 1 : 0,
+              transform: scrollY > 1800 ? "translateY(0)" : "translateY(60px)",
+              transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1)"
+            }}
+          >
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#C6A46A]" />
+              <span className="text-[10px] sm:text-xs tracking-[0.4em] text-[#C6A46A] font-medium">SIGNATURE WORKS</span>
+              <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#C6A46A]" />
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading text-ivory leading-[0.9]">
+              Architectural
+              <br />
+              <span className="italic text-[#C6A46A] relative">
+                Vision
+                <svg className="absolute -bottom-2 left-0 w-full h-3 overflow-visible" viewBox="0 0 200 12">
+                  <path 
+                    d="M0,8 Q50,0 100,8 T200,8" 
+                    fill="none" 
+                    stroke="#C6A46A" 
+                    strokeWidth="1.5"
+                    strokeDasharray="200"
+                    style={{ animation: "drawUnderline 2s ease-out forwards", animationDelay: "0.5s" }}
+                  />
+                </svg>
+              </span>
+            </h2>
+          </div>
+
+          {/* 3D Perspective Gallery */}
+          <div className="relative">
+            {/* Main showcase - large featured card */}
             <div 
-              className="lg:sticky lg:top-32 lg:h-fit"
+              className="relative mb-8 lg:mb-0 lg:absolute lg:left-0 lg:top-0 lg:w-[60%] lg:h-[600px] z-20"
               style={{
-                opacity: scrollY > 1800 ? 1 : 0,
-                transform: scrollY > 1800 ? "translateY(0)" : "translateY(50px)",
-                transition: "all 1s ease-out"
+                opacity: scrollY > 1900 ? 1 : 0,
+                transform: scrollY > 1900 
+                  ? "perspective(1000px) rotateY(0deg) translateZ(0)" 
+                  : "perspective(1000px) rotateY(-15deg) translateZ(-100px)",
+                transition: "all 1.5s cubic-bezier(0.16, 1, 0.3, 1)"
               }}
             >
-              <span className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 bg-[#1A1A1A] text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.3em] text-[#C6A46A] mb-4 sm:mb-6">
-                QUESTIONS
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading text-[#1A1A1A] mb-4 sm:mb-6">
-                Common <span className="italic text-[#C6A46A]">Questions</span>
-              </h2>
-              <p className="text-[#5A544A] leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">
-                Architecture is a conversation. Here are answers to what clients ask most.
-              </p>
-              
-              <Link 
-                to="/contact"
-                className="group inline-flex items-center gap-2 sm:gap-3 text-[#1A1A1A] font-medium text-sm sm:text-base"
+              <div 
+                className="group relative h-[350px] sm:h-[450px] lg:h-full overflow-hidden cursor-pointer"
+                onMouseEnter={() => setVisionHover(activeVision)}
+                onMouseLeave={() => setVisionHover(null)}
               >
-                <span>Have another question?</span>
-                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform" />
-              </Link>
-            </div>
-
-            {/* Right: FAQ Accordion */}
-            <div className="space-y-3 sm:space-y-4">
-              {faqs.map((faq, index) => {
-                const isVisible = scrollY > 1900 + index * 50;
-                
-                return (
-                  <div 
-                    key={index}
-                    className="group"
+                {/* Image with zoom effect */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <img 
+                    src={visionProjects[activeVision].image}
+                    alt={visionProjects[activeVision].title}
+                    className="w-full h-full object-cover transition-all duration-[2s] ease-out"
                     style={{
-                      opacity: isVisible ? 1 : 0,
-                      transform: isVisible ? "translateX(0)" : "translateX(40px)",
-                      transition: `all 0.6s ease-out ${index * 0.1}s`
+                      transform: visionHover === activeVision ? "scale(1.15)" : "scale(1.05)",
+                      filter: visionHover === activeVision ? "brightness(0.7)" : "brightness(0.5)"
+                    }}
+                  />
+                </div>
+
+                {/* Animated border frame */}
+                <div className="absolute inset-4 sm:inset-6 lg:inset-8 border border-[#C6A46A]/30 pointer-events-none">
+                  <div 
+                    className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#C6A46A] transition-all duration-500"
+                    style={{ transform: visionHover === activeVision ? "translate(-4px, -4px)" : "translate(0, 0)" }}
+                  />
+                  <div 
+                    className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#C6A46A] transition-all duration-500"
+                    style={{ transform: visionHover === activeVision ? "translate(4px, -4px)" : "translate(0, 0)" }}
+                  />
+                  <div 
+                    className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#C6A46A] transition-all duration-500"
+                    style={{ transform: visionHover === activeVision ? "translate(-4px, 4px)" : "translate(0, 0)" }}
+                  />
+                  <div 
+                    className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#C6A46A] transition-all duration-500"
+                    style={{ transform: visionHover === activeVision ? "translate(4px, 4px)" : "translate(0, 0)" }}
+                  />
+                </div>
+
+                {/* Content overlay */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 lg:p-12">
+                  {/* Accent badge */}
+                  <div 
+                    className="inline-flex items-center gap-2 w-fit mb-4 px-3 py-1.5 bg-[#C6A46A] text-[#0A0A0A] text-[10px] sm:text-xs tracking-wider font-semibold"
+                    style={{
+                      opacity: visionHover === activeVision ? 1 : 0.8,
+                      transform: visionHover === activeVision ? "translateY(0)" : "translateY(10px)",
+                      transition: "all 0.5s ease-out"
                     }}
                   >
-                    <button
-                      onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                      className={`w-full text-left p-4 sm:p-5 lg:p-6 border transition-all duration-500 ${
-                        openFaq === index 
-                          ? "bg-[#1A1A1A] border-[#C6A46A]" 
-                          : "bg-white border-[#E5E0D8] hover:border-[#C6A46A]/50"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between gap-3 sm:gap-4">
-                        <span className={`font-heading text-base sm:text-lg transition-colors duration-300 ${
-                          openFaq === index ? "text-ivory" : "text-[#1A1A1A]"
-                        }`}>
-                          {faq.q}
-                        </span>
-                        <div className={`w-6 h-6 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-500 ${
-                          openFaq === index 
-                            ? "bg-[#C6A46A] rotate-180" 
-                            : "bg-[#C6A46A]/10"
-                        }`}>
-                          <ChevronRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 rotate-90 transition-colors ${
-                            openFaq === index ? "text-[#0A0A0A]" : "text-[#C6A46A]"
-                          }`} />
-                        </div>
-                      </div>
-                      
-                      <div className={`overflow-hidden transition-all duration-500 ${
-                        openFaq === index ? "max-h-40 mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-ivory/10" : "max-h-0"
-                      }`}>
-                        <p className="text-ivory/70 leading-relaxed text-sm sm:text-base">
-                          {faq.a}
-                        </p>
-                      </div>
-                    </button>
+                    {(() => { const Icon = visionProjects[activeVision].icon; return <Icon className="w-3 h-3" />; })()}
+                    {visionProjects[activeVision].accent}
                   </div>
-                );
-              })}
+
+                  {/* Title with reveal animation */}
+                  <h3 
+                    className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-heading text-ivory mb-3 leading-[0.95]"
+                    style={{
+                      transform: visionHover === activeVision ? "translateY(0)" : "translateY(20px)",
+                      transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)"
+                    }}
+                  >
+                    {visionProjects[activeVision].title}
+                  </h3>
+
+                  {/* Description */}
+                  <p 
+                    className="text-ivory/60 text-sm sm:text-base lg:text-lg max-w-md mb-6"
+                    style={{
+                      opacity: visionHover === activeVision ? 1 : 0.7,
+                      transform: visionHover === activeVision ? "translateY(0)" : "translateY(10px)",
+                      transition: "all 0.5s ease-out 0.1s"
+                    }}
+                  >
+                    {visionProjects[activeVision].description}
+                  </p>
+
+                  {/* Meta info */}
+                  <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-[10px] sm:text-xs tracking-wider text-ivory/50">
+                    <span>{visionProjects[activeVision].location}</span>
+                    <span className="w-1 h-1 bg-[#C6A46A] rounded-full" />
+                    <span>{visionProjects[activeVision].year}</span>
+                    <span className="w-1 h-1 bg-[#C6A46A] rounded-full" />
+                    <span>{visionProjects[activeVision].area}</span>
+                  </div>
+                </div>
+
+                {/* Animated scan line effect */}
+                <div 
+                  className="absolute inset-0 pointer-events-none overflow-hidden"
+                  style={{ opacity: visionHover === activeVision ? 1 : 0 }}
+                >
+                  <div 
+                    className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#C6A46A] to-transparent"
+                    style={{ animation: "scanLine 2s ease-in-out infinite" }}
+                  />
+                </div>
+              </div>
             </div>
+
+            {/* Thumbnail selector - stacked cards */}
+            <div className="lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[35%] space-y-4 lg:space-y-6">
+              {visionProjects.map((project, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveVision(index)}
+                  onMouseEnter={() => setVisionHover(index)}
+                  onMouseLeave={() => setVisionHover(null)}
+                  className={`group relative w-full overflow-hidden transition-all duration-700 ${
+                    activeVision === index 
+                      ? "h-32 sm:h-36 lg:h-40" 
+                      : "h-20 sm:h-24 lg:h-28"
+                  }`}
+                  style={{
+                    opacity: scrollY > 2000 + index * 100 ? 1 : 0,
+                    transform: scrollY > 2000 + index * 100 
+                      ? "translateX(0) perspective(1000px) rotateY(0deg)" 
+                      : "translateX(60px) perspective(1000px) rotateY(10deg)",
+                    transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s`
+                  }}
+                >
+                  {/* Background image */}
+                  <div className="absolute inset-0">
+                    <img 
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-all duration-700"
+                      style={{
+                        filter: activeVision === index ? "brightness(0.4)" : "brightness(0.25) grayscale(0.5)",
+                        transform: visionHover === index ? "scale(1.1)" : "scale(1)"
+                      }}
+                    />
+                  </div>
+
+                  {/* Gradient overlay */}
+                  <div className={`absolute inset-0 transition-opacity duration-500 ${
+                    activeVision === index 
+                      ? "bg-gradient-to-r from-[#C6A46A]/20 to-transparent" 
+                      : "bg-gradient-to-r from-[#0A0A0A]/60 to-transparent"
+                  }`} />
+
+                  {/* Active indicator line */}
+                  <div 
+                    className="absolute left-0 top-0 bottom-0 w-1 bg-[#C6A46A] transition-all duration-500"
+                    style={{
+                      transform: activeVision === index ? "scaleY(1)" : "scaleY(0)",
+                      transformOrigin: "top"
+                    }}
+                  />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 flex items-center px-4 sm:px-6 lg:px-8">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className={`text-[10px] sm:text-xs font-mono transition-colors duration-300 ${
+                          activeVision === index ? "text-[#C6A46A]" : "text-ivory/30"
+                        }`}>
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <div className={`h-[1px] w-4 sm:w-6 transition-all duration-500 ${
+                          activeVision === index ? "bg-[#C6A46A] w-8" : "bg-ivory/20"
+                        }`} />
+                      </div>
+                      <h4 className={`text-base sm:text-lg lg:text-xl font-heading transition-colors duration-300 ${
+                        activeVision === index ? "text-ivory" : "text-ivory/50"
+                      }`}>
+                        {project.title}
+                      </h4>
+                      <span className={`text-[10px] sm:text-xs tracking-wider transition-colors duration-300 ${
+                        activeVision === index ? "text-ivory/60" : "text-ivory/30"
+                      }`}>
+                        {project.location}
+                      </span>
+                    </div>
+
+                    {/* Arrow indicator */}
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-500 ${
+                      activeVision === index 
+                        ? "border-[#C6A46A] bg-[#C6A46A]/10" 
+                        : "border-ivory/10 bg-transparent"
+                    }`}>
+                      <ArrowRight className={`w-4 h-4 sm:w-5 sm:h-5 transition-all duration-300 ${
+                        activeVision === index ? "text-[#C6A46A] translate-x-0" : "text-ivory/30 -translate-x-1"
+                      }`} />
+                    </div>
+                  </div>
+
+                  {/* Hover shine effect */}
+                  <div 
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* CTA */}
+          <div 
+            className="text-center mt-16 sm:mt-20 lg:mt-28"
+            style={{
+              opacity: scrollY > 2200 ? 1 : 0,
+              transform: scrollY > 2200 ? "translateY(0)" : "translateY(40px)",
+              transition: "all 1s ease-out"
+            }}
+          >
+            <Link 
+              to="/contact"
+              className="group relative inline-flex items-center gap-4 px-8 sm:px-12 py-4 sm:py-5 border border-[#C6A46A] text-[#C6A46A] text-xs sm:text-sm tracking-[0.2em] font-medium overflow-hidden"
+            >
+              <span className="relative z-10 transition-colors duration-500 group-hover:text-[#0A0A0A]">
+                EXPLORE ALL PROJECTS
+              </span>
+              <ArrowRight className="relative z-10 w-4 h-4 sm:w-5 sm:h-5 transition-all duration-500 group-hover:translate-x-2 group-hover:text-[#0A0A0A]" />
+              <div className="absolute inset-0 bg-[#C6A46A] -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
+            </Link>
           </div>
         </div>
       </section>
@@ -748,6 +982,25 @@ const Architecture = () => {
         @keyframes expandLineVertical {
           0%, 100% { opacity: 0.05; transform: scaleY(0.5); }
           50% { opacity: 0.15; transform: scaleY(1); }
+        }
+        @keyframes meshFloat {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(30px, -20px) scale(1.05); }
+          66% { transform: translate(-20px, 30px) scale(0.95); }
+        }
+        @keyframes gridPulse {
+          0%, 100% { opacity: 0.03; }
+          50% { opacity: 0.06; }
+        }
+        @keyframes drawUnderline {
+          from { stroke-dashoffset: 200; }
+          to { stroke-dashoffset: 0; }
+        }
+        @keyframes scanLine {
+          0% { top: 0; opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { top: 100%; opacity: 0; }
         }
       `}</style>
 
