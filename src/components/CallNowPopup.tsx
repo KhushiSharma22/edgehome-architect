@@ -7,11 +7,7 @@ const CallNowPopup = () => {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    // Check if user has dismissed the popup in this session
-    const dismissed = sessionStorage.getItem("callPopupDismissed");
-    if (dismissed) return;
-
-    // Show popup after 3 seconds
+    // Show popup every time user visits/refreshes the page after 3 seconds
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 3000);
@@ -23,7 +19,6 @@ const CallNowPopup = () => {
     setIsExiting(true);
     setTimeout(() => {
       setIsVisible(false);
-      sessionStorage.setItem("callPopupDismissed", "true");
     }, 400);
   };
 
@@ -68,7 +63,7 @@ const CallNowPopup = () => {
               </div>
 
               {/* Content */}
-              <div className="relative px-8 py-10 sm:px-12 sm:py-12">
+              <div className="relative px-6 py-8 sm:px-10 sm:py-10">
                 {/* Close button */}
                 <button
                   onClick={handleClose}
@@ -84,46 +79,46 @@ const CallNowPopup = () => {
                 </div>
 
                 {/* Phone icon with ring animation */}
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-5">
                   <div className="relative">
                     {/* Pulsing rings */}
                     <div className="absolute inset-0 animate-ping rounded-full bg-primary/30" style={{ animationDuration: '2s' }} />
                     <div className="absolute inset-0 animate-ping rounded-full bg-primary/20" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
                     
                     {/* Icon container */}
-                    <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/40">
-                      <Phone className="w-9 h-9 text-primary-foreground animate-bounce" style={{ animationDuration: '2s' }} />
+                    <div className="relative w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/40">
+                      <Phone className="w-7 h-7 text-primary-foreground animate-bounce" style={{ animationDuration: '2s' }} />
                     </div>
                   </div>
                 </div>
 
                 {/* Text content */}
-                <div className="text-center mb-8">
-                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-3">
+                <div className="text-center mb-6">
+                  <h3 className="text-xl sm:text-2xl font-display font-bold text-foreground mb-2">
                     Let's Create
                     <span className="block text-gradient-gold">Something Beautiful</span>
                   </h3>
-                  <p className="text-muted-foreground text-sm sm:text-base max-w-xs mx-auto leading-relaxed">
-                    Speak directly with our design experts for a personalized consultation
+                  <p className="text-muted-foreground text-xs sm:text-sm max-w-xs mx-auto leading-relaxed">
+                    Speak directly with our design experts
                   </p>
                 </div>
 
                 {/* CTA Button */}
                 <button
                   onClick={handleCall}
-                  className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary via-primary to-primary/90 px-8 py-4 text-primary-foreground font-semibold text-lg shadow-lg shadow-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02]"
+                  className="group relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary via-primary to-primary/90 px-6 py-3 text-primary-foreground font-semibold text-base shadow-lg shadow-primary/30 transition-all duration-500 hover:shadow-xl hover:shadow-primary/40 hover:scale-[1.02]"
                 >
                   {/* Shine effect */}
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                   
-                  <span className="relative flex items-center justify-center gap-3">
-                    <Phone className="w-5 h-5" />
+                  <span className="relative flex items-center justify-center gap-2">
+                    <Phone className="w-4 h-4" />
                     Call Now
                   </span>
                 </button>
 
                 {/* Phone number display */}
-                <p className="text-center mt-4 text-sm text-muted-foreground">
+                <p className="text-center mt-3 text-xs text-muted-foreground">
                   +91 98715 22556
                 </p>
               </div>

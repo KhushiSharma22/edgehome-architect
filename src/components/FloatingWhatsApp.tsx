@@ -5,7 +5,7 @@ const FloatingWhatsApp = () => {
     <a
       href={buildWhatsAppLink(
         "919871522556",
-        "Hi, I'm interested in interior design services."
+        "Hi, I'm interested in architectural services."
       )}
       target="_self"
       rel="noopener noreferrer"
