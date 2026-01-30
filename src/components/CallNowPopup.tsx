@@ -47,18 +47,18 @@ const CallNowPopup = () => {
             onClick={handleClose}
           />
 
-          {/* Popup */}
+          {/* Popup Container - using flexbox for centering */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 50 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
             transition={{ 
               type: "spring", 
               stiffness: 300, 
               damping: 25,
               duration: 0.5 
             }}
-            className="fixed left-1/2 top-1/2 z-[101] -translate-x-1/2 -translate-y-1/2"
+            className="fixed inset-0 z-[101] flex items-center justify-center p-4"
           >
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-background via-background to-muted border border-primary/20 shadow-2xl shadow-primary/20">
               {/* Animated background glow */}
