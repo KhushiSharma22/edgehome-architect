@@ -14,7 +14,7 @@ const Header = () => {
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileProjectsOpen, setIsMobileProjectsOpen] = useState(false);
   const servicesRef = useRef<HTMLLIElement>(null);
-  const projectsRef = useRef<HTMLLIElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
   
   const location = useLocation();
   const isServicePage = location.pathname.startsWith("/services");
@@ -169,10 +169,22 @@ const Header = () => {
               </li>
 
               {/* Projects Dropdown */}
-              <li ref={projectsRef} className="relative">
+              <div className="relative group" ref={projectsRef}>
                 <button
                   onMouseEnter={() => !isMobileMenuOpen && setIsProjectsOpen(true)}
-                  onMouseLeave={() => !isMobileMenuOpen && setIsProjectsOpen(false)}
+                  onMouseLeave={(e) => {
+                    // Small delay to allow moving to dropdown
+                    const target = e.relatedTarget as HTMLElement;
+                    if (!target?.closest('.projects-dropdown')) {
+                      setTimeout(() => {
+                        const isHoveringDropdown = document.querySelector('.projects-dropdown:hover');
+                        const isHoveringButton = (e.currentTarget as HTMLElement).matches(':hover');
+                        if (!isHoveringDropdown && !isHoveringButton) {
+                          setIsProjectsOpen(false);
+                        }
+                      }, 100);
+                    }
+                  }}
                   onClick={() => {
                     if (window.innerWidth < 1024) { // Only toggle on mobile
                       setIsProjectsOpen(!isProjectsOpen);
@@ -208,14 +220,22 @@ const Header = () => {
                     y: isProjectsOpen ? 0 : -10,
                     scale: isProjectsOpen ? 1 : 0.98,
                     pointerEvents: isProjectsOpen ? 'auto' : 'none',
+                    display: isProjectsOpen ? 'block' : 'none', // Ensure it doesn't block hover when hidden
                   }}
                   transition={{
                     duration: 0.2,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="absolute top-full left-0 mt-2 min-w-[220px] bg-card/95 backdrop-blur-xl border border-border/30 rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden z-50 origin-top-left"
+                  className="projects-dropdown absolute top-full left-0 mt-2 min-w-[220px] bg-card/95 backdrop-blur-xl border border-border/30 rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden z-50 origin-top-left"
                   onMouseEnter={() => !isMobileMenuOpen && setIsProjectsOpen(true)}
-                  onMouseLeave={() => !isMobileMenuOpen && setIsProjectsOpen(false)}
+                  onMouseLeave={() => {
+                    if (!isMobileMenuOpen) {
+                      const isHoveringButton = document.querySelector('li.group > button:hover');
+                      if (!isHoveringButton) {
+                        setIsProjectsOpen(false);
+                      }
+                    }
+                  }}
                 >
                   <div className="py-1.5">
                     {projectItems.map((project, index) => (
@@ -242,7 +262,7 @@ const Header = () => {
                     ))}
                   </div>
                 </motion.div>
-              </li>
+              </div>
 
               {menuItems.slice(2).map((item) => (
                 <li key={item.label}>
