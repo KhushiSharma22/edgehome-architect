@@ -7,71 +7,56 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { useIntersectionAnimation } from "@/hooks/useIntersectionAnimation";
 
-import elevationVilla from "@/assets/elevation-modern-villa.jpg";
-import elevationContemporary from "@/assets/elevation-contemporary-residence.jpg";
-import elevationBungalow from "@/assets/elevation-luxury-bungalow.jpg";
-import elevationCommercial from "@/assets/elevation-commercial.jpg";
-import elevationDuplex from "@/assets/elevation-duplex.jpg";
-import elevationFarmhouse from "@/assets/elevation-farmhouse.jpg";
-import elevationRowhouse from "@/assets/elevation-rowhouse.jpg";
-import elevationPenthouse from "@/assets/elevation-penthouse-tower.jpg";
+// Import custom elevation images
+import customImage1 from "@/assets/elevation-custom-1.jpg";
+import customImage2 from "@/assets/elevation-custom-2.jpg";
+import customImage3 from "@/assets/elevation-custom-3.jpg";
+import customImage4 from "@/assets/elevation-custom-4.jpg";
+import customImage5 from "@/assets/elevation-custom-5.jpg";
+import customImage6 from "@/assets/elevation-custom-6.jpg";
+import customImage7 from "@/assets/elevation-custom-7.jpg";
+import customImage8 from "@/assets/elevation-custom-8.jpg";
 
 const projects = [
-  {
-    title: "Modern Villa",
-    location: "Shalimar Bagh, Delhi",
-    area: "4,200 sq.ft",
-    category: "Residential",
-    image: elevationVilla,
+  { 
+    id: 1, 
+    image: customImage1,
+    text: "Panipat Sector 15"
   },
-  {
-    title: "Contemporary Residence",
-    location: "Model Town, Delhi",
-    area: "3,800 sq.ft",
-    category: "Residential",
-    image: elevationContemporary,
+  { 
+    id: 2, 
+    image: customImage2,
+    text: "Sec 11 Faridabad"
   },
-  {
-    title: "Luxury Bungalow",
-    location: "Paschim Vihar, Delhi",
-    area: "5,500 sq.ft",
-    category: "Residential",
-    image: elevationBungalow,
+  { 
+    id: 3, 
+    image: customImage3,
+    text: "Sector 15 Faridabad"
   },
-  {
-    title: "Commercial Complex",
-    location: "Rohini, Delhi",
-    area: "12,000 sq.ft",
-    category: "Commercial",
-    image: elevationCommercial,
+  { 
+    id: 4, 
+    image: customImage4,
+    text: "Sector 17 Faridabad"
   },
-  {
-    title: "Duplex Residence",
-    location: "Pitampura, Delhi",
-    area: "3,200 sq.ft",
-    category: "Residential",
-    image: elevationDuplex,
+  { 
+    id: 5, 
+    image: customImage5,
+    text: "Sector 21A Faridabad"
   },
-  {
-    title: "Luxury Farmhouse",
-    location: "Chattarpur, Delhi",
-    area: "8,000 sq.ft",
-    category: "Farmhouse",
-    image: elevationFarmhouse,
+  { 
+    id: 6, 
+    image: customImage6,
+    text: "Sector 64 Faridabad"
   },
-  {
-    title: "Row Houses",
-    location: "Dwarka, Delhi",
-    area: "2,400 sq.ft each",
-    category: "Township",
-    image: elevationRowhouse,
+  { 
+    id: 7, 
+    image: customImage7,
+    text: "Sector 77 Faridabad"
   },
-  {
-    title: "Penthouse Tower",
-    location: "Gurugram, Haryana",
-    area: "6,500 sq.ft",
-    category: "High-Rise",
-    image: elevationPenthouse,
+  { 
+    id: 8, 
+    image: customImage8,
+    text: "Sector 85 Faridabad"
   },
 ];
 
@@ -85,66 +70,41 @@ const Elevations = () => {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.08),transparent_60%)]" />
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
+      <section className="relative pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-12 sm:pb-16 md:pb-20 lg:pb-24 xl:pb-28 bg-gradient-to-b from-background to-muted/5">
+        <div className="container mx-auto px-4 xs:px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-16 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl"
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center px-2 sm:px-4"
           >
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-primary/80 font-medium">
-              Our Portfolio
-            </span>
-            <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-[0.95] tracking-tight">
-              Elevation
-              <br />
-              <span className="text-primary">Designs</span>
+            <div className="inline-block px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] xs:text-xs sm:text-sm font-medium tracking-wider text-primary bg-primary/10 rounded-full mb-3 sm:mb-4">
+              ARCHITECTURAL ELEVATIONS
+            </div>
+            <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-foreground leading-[1.1] md:leading-[1.15] tracking-tight">
+              Transformative Elevation
+              <br className="hidden xs:block" />
+              <span className="text-primary">Design Solutions</span>
             </h1>
-            <p className="mt-6 text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Crafting striking facades that define streetscapes. Each elevation is a statement of architectural identity — bold, refined, and timeless.
+            <div className="w-16 sm:w-20 h-0.5 sm:h-1 bg-primary/80 mx-auto my-4 sm:my-5 md:my-6"></div>
+            <p className="text-sm xs:text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed sm:leading-loose">
+              Showcasing our portfolio of architectural elevations that blend innovative design with functional aesthetics. Each project reflects our commitment to excellence and attention to detail.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Projects Grid */}
-      <section className="pb-24 md:pb-32">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
+        <div className="container mx-auto px-3 xs:px-4 sm:px-5 md:px-6 lg:px-8">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-7 xl:gap-8">
             {projects.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} />
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 md:py-28 border-t border-border/20">
-        <div className="container mx-auto px-4 sm:px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold">
-              Have a <span className="text-primary">Vision</span>?
-            </h2>
-            <p className="mt-4 text-muted-foreground max-w-md mx-auto">
-              Let's design an elevation that makes your property unforgettable.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium tracking-wider uppercase text-sm hover:bg-primary/90 transition-all duration-300"
-            >
-              Start Your Project
-              <ArrowRight size={16} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
 
       <Footer />
       <FloatingWhatsApp />
@@ -152,43 +112,52 @@ const Elevations = () => {
   );
 };
 
-const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
-  const [ref, isVisible] = useIntersectionAnimation<HTMLDivElement>({ threshold: 0.15 });
+interface Project {
+  id: number;
+  image: string;
+  text: string;
+}
+
+interface ProjectCardProps {
+  project: Project;
+  index: number;
+}
+
+const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const [ref, isVisible] = useIntersectionAnimation<HTMLDivElement>({ threshold: 0.1 });
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.1 }}
-      className="group relative overflow-hidden rounded-2xl bg-card border border-border/20"
+      transition={{ 
+        duration: 0.4, 
+        delay: Math.min(0.1 * Math.floor(index / 2), 0.4),
+        ease: [0.16, 1, 0.3, 1]
+      }}
+      className="group relative overflow-hidden rounded-lg sm:rounded-xl bg-card border border-border/20 hover:shadow-md transition-all duration-300 hover:border-primary/20"
     >
-      {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
         <img
           src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          alt={`Elevation Design - ${project.text}`}
+          width={600}
+          height={450}
+          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 will-change-transform"
           loading="lazy"
+          decoding="async"
+          style={{ contentVisibility: 'auto' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
-        
-        {/* Category Badge */}
-        <span className="absolute top-4 left-4 px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-medium bg-primary/90 text-primary-foreground rounded-full">
-          {project.category}
-        </span>
-      </div>
-
-      {/* Info */}
-      <div className="p-5 sm:p-6">
-        <h3 className="text-xl sm:text-2xl font-heading font-bold tracking-tight">
-          {project.title}
-        </h3>
-        <div className="mt-3 flex items-center gap-4 text-sm text-muted-foreground">
-          <span>{project.location}</span>
-          <span className="w-1 h-1 rounded-full bg-primary/50" />
-          <span>{project.area}</span>
+        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+          <div className="text-xs xs:text-sm font-medium text-white/90">Project #{project.id}</div>
+          <div className="font-medium text-sm xs:text-base sm:text-lg leading-tight mt-0.5">{project.text}</div>
         </div>
+      </div>
+      <div className="p-3 xs:p-4 sm:p-5">
+        <h3 className="text-sm xs:text-base sm:text-lg font-medium text-foreground line-clamp-1">{project.text}</h3>
+        <div className="text-xs xs:text-sm text-muted-foreground mt-0.5">Residential Elevation</div>
       </div>
     </motion.div>
   );

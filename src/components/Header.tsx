@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown, Phone, MessageCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 
@@ -60,7 +61,6 @@ const Header = () => {
   ];
 
   const projectItems = [
-    { label: "Interior Designs", href: "/projects/interior-designs" },
     { label: "Elevations", href: "/projects/elevations" },
   ];
 
@@ -171,52 +171,77 @@ const Header = () => {
               {/* Projects Dropdown */}
               <li ref={projectsRef} className="relative">
                 <button
-                  onMouseEnter={() => setIsProjectsOpen(true)}
-                  onMouseLeave={() => setIsProjectsOpen(false)}
-                  onClick={() => setIsProjectsOpen(!isProjectsOpen)}
-                  className={`relative px-4 xl:px-5 py-2 text-sm uppercase tracking-[0.15em] xl:tracking-[0.2em] font-medium transition-all duration-500 group flex items-center gap-1 ${
-                    isProjectPage 
+                  onMouseEnter={() => !isMobileMenuOpen && setIsProjectsOpen(true)}
+                  onMouseLeave={() => !isMobileMenuOpen && setIsProjectsOpen(false)}
+                  onClick={() => {
+                    if (window.innerWidth < 1024) { // Only toggle on mobile
+                      setIsProjectsOpen(!isProjectsOpen);
+                    } else {
+                      setIsProjectsOpen(true); // Keep open on desktop when clicked
+                    }
+                  }}
+                  className={`relative px-4 xl:px-5 py-2 text-sm uppercase tracking-[0.15em] xl:tracking-[0.2em] font-medium transition-all duration-300 ease-out group flex items-center gap-1 ${
+                    isProjectPage || isProjectsOpen
                       ? 'text-primary' 
                       : 'text-foreground/70 hover:text-foreground'
                   }`}
+                  aria-expanded={isProjectsOpen}
+                  aria-haspopup="true"
                 >
                   <span className="relative z-10">Projects</span>
                   <ChevronDown 
                     size={14} 
-                    className={`transition-transform duration-300 ${isProjectsOpen ? 'rotate-180' : ''}`}
+                    className={`transition-transform duration-300 ease-out ${isProjectsOpen ? 'rotate-180' : ''}`}
+                    aria-hidden="true"
                   />
-                  <span className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
-                  {isProjectPage && (
+                  <span className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/10 transition-all duration-300 ease-out" />
+                  {(isProjectPage || isProjectsOpen) && (
                     <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full animate-pulse" />
                   )}
                 </button>
 
                 {/* Dropdown Menu */}
-                <div 
-                  onMouseEnter={() => setIsProjectsOpen(true)}
-                  onMouseLeave={() => setIsProjectsOpen(false)}
-                  className={`absolute top-full left-0 mt-2 min-w-[200px] bg-card/95 backdrop-blur-xl border border-border/30 rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden transition-all duration-300 z-50 ${
-                    isProjectsOpen 
-                      ? 'opacity-100 translate-y-0 pointer-events-auto' 
-                      : 'opacity-0 -translate-y-2 pointer-events-none'
-                  }`}
+                <motion.div 
+                  initial={false}
+                  animate={{
+                    opacity: isProjectsOpen ? 1 : 0,
+                    y: isProjectsOpen ? 0 : -10,
+                    scale: isProjectsOpen ? 1 : 0.98,
+                    pointerEvents: isProjectsOpen ? 'auto' : 'none',
+                  }}
+                  transition={{
+                    duration: 0.2,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="absolute top-full left-0 mt-2 min-w-[220px] bg-card/95 backdrop-blur-xl border border-border/30 rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden z-50 origin-top-left"
+                  onMouseEnter={() => !isMobileMenuOpen && setIsProjectsOpen(true)}
+                  onMouseLeave={() => !isMobileMenuOpen && setIsProjectsOpen(false)}
                 >
-                  {projectItems.map((project, index) => (
-                    <Link
-                      key={project.label}
-                      to={project.href}
-                      onClick={() => setIsProjectsOpen(false)}
-                      className={`block px-5 py-3 text-sm tracking-wider transition-all duration-300 ${
-                        location.pathname === project.href
-                          ? 'text-primary bg-primary/10'
-                          : 'text-foreground/70 hover:text-foreground hover:bg-primary/5'
-                      }`}
-                      style={{ transitionDelay: `${index * 30}ms` }}
-                    >
-                      {project.label}
-                    </Link>
-                  ))}
-                </div>
+                  <div className="py-1.5">
+                    {projectItems.map((project, index) => (
+                      <Link
+                        key={project.label}
+                        to={project.href}
+                        onClick={() => {
+                          setIsProjectsOpen(false);
+                          closeMobileMenu();
+                        }}
+                        className={`block px-5 py-2.5 text-sm tracking-wider transition-all duration-200 ease-out ${
+                          location.pathname === project.href
+                            ? 'text-primary bg-primary/10 font-medium'
+                            : 'text-foreground/80 hover:text-foreground hover:bg-primary/5'
+                        }`}
+                        style={{
+                          transform: isProjectsOpen ? 'translateX(0)' : 'translateX(-5px)',
+                          opacity: isProjectsOpen ? 1 : 0,
+                          transition: `all 0.2s ease-out ${index * 0.03}s`,
+                        }}
+                      >
+                        {project.label}
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
               </li>
 
               {menuItems.slice(2).map((item) => (
