@@ -9,11 +9,15 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isMobileProjectsOpen, setIsMobileProjectsOpen] = useState(false);
   const servicesRef = useRef<HTMLLIElement>(null);
+  const projectsRef = useRef<HTMLLIElement>(null);
   
   const location = useLocation();
   const isServicePage = location.pathname.startsWith("/services");
+  const isProjectPage = location.pathname.startsWith("/projects");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,6 +31,9 @@ const Header = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (servicesRef.current && !servicesRef.current.contains(event.target as Node)) {
         setIsServicesOpen(false);
+      }
+      if (projectsRef.current && !projectsRef.current.contains(event.target as Node)) {
+        setIsProjectsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -52,6 +59,11 @@ const Header = () => {
     { label: "Furniture", href: "/services/furniture" },
   ];
 
+  const projectItems = [
+    { label: "Interior Designs", href: "/projects/interior-designs" },
+    { label: "Elevations", href: "/projects/elevations" },
+  ];
+
   const menuItems = [
     { label: "Home", href: "/", isRoute: true },
     { label: "About", href: "/about", isRoute: true },
@@ -62,6 +74,7 @@ const Header = () => {
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
     setIsMobileServicesOpen(false);
+    setIsMobileProjectsOpen(false);
   };
 
   return (
@@ -150,6 +163,57 @@ const Header = () => {
                       style={{ transitionDelay: `${index * 30}ms` }}
                     >
                       {service.label}
+                    </Link>
+                  ))}
+                </div>
+              </li>
+
+              {/* Projects Dropdown */}
+              <li ref={projectsRef} className="relative">
+                <button
+                  onMouseEnter={() => setIsProjectsOpen(true)}
+                  onMouseLeave={() => setIsProjectsOpen(false)}
+                  onClick={() => setIsProjectsOpen(!isProjectsOpen)}
+                  className={`relative px-4 xl:px-5 py-2 text-sm uppercase tracking-[0.15em] xl:tracking-[0.2em] font-medium transition-all duration-500 group flex items-center gap-1 ${
+                    isProjectPage 
+                      ? 'text-primary' 
+                      : 'text-foreground/70 hover:text-foreground'
+                  }`}
+                >
+                  <span className="relative z-10">Projects</span>
+                  <ChevronDown 
+                    size={14} 
+                    className={`transition-transform duration-300 ${isProjectsOpen ? 'rotate-180' : ''}`}
+                  />
+                  <span className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/10 transition-all duration-500" />
+                  {isProjectPage && (
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full animate-pulse" />
+                  )}
+                </button>
+
+                {/* Dropdown Menu */}
+                <div 
+                  onMouseEnter={() => setIsProjectsOpen(true)}
+                  onMouseLeave={() => setIsProjectsOpen(false)}
+                  className={`absolute top-full left-0 mt-2 min-w-[200px] bg-card/95 backdrop-blur-xl border border-border/30 rounded-xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden transition-all duration-300 z-50 ${
+                    isProjectsOpen 
+                      ? 'opacity-100 translate-y-0 pointer-events-auto' 
+                      : 'opacity-0 -translate-y-2 pointer-events-none'
+                  }`}
+                >
+                  {projectItems.map((project, index) => (
+                    <Link
+                      key={project.label}
+                      to={project.href}
+                      onClick={() => setIsProjectsOpen(false)}
+                      className={`block px-5 py-3 text-sm tracking-wider transition-all duration-300 ${
+                        location.pathname === project.href
+                          ? 'text-primary bg-primary/10'
+                          : 'text-foreground/70 hover:text-foreground hover:bg-primary/5'
+                      }`}
+                      style={{ transitionDelay: `${index * 30}ms` }}
+                    >
+                      {project.label}
                     </Link>
                   ))}
                 </div>
@@ -312,6 +376,54 @@ const Header = () => {
                       onClick={closeMobileMenu}
                     >
                       {service.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </li>
+
+            {/* Mobile Projects Accordion */}
+            <li 
+              style={{ 
+                transitionDelay: isMobileMenuOpen ? '250ms' : '0ms',
+                opacity: isMobileMenuOpen ? 1 : 0,
+                transform: isMobileMenuOpen ? 'translateX(0)' : 'translateX(20px)'
+              }}
+              className="transition-all duration-300"
+            >
+              <button
+                onClick={() => setIsMobileProjectsOpen(!isMobileProjectsOpen)}
+                className={`w-full flex items-center justify-between py-3 px-4 rounded-xl font-medium tracking-wider uppercase text-sm transition-all duration-300 ${
+                  isProjectPage 
+                    ? 'text-primary bg-primary/10' 
+                    : 'text-foreground hover:text-primary hover:bg-primary/5'
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  Projects
+                  {isProjectPage && <span className="w-1.5 h-1.5 rounded-full bg-primary" />}
+                </span>
+                <ChevronDown 
+                  size={16} 
+                  className={`transition-transform duration-300 ${isMobileProjectsOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              <div className={`overflow-hidden transition-all duration-300 ${
+                isMobileProjectsOpen ? 'max-h-[200px] opacity-100 mt-1' : 'max-h-0 opacity-0'
+              }`}>
+                <div className="pl-4 border-l-2 border-primary/20 ml-4 space-y-1">
+                  {projectItems.map((project) => (
+                    <Link
+                      key={project.label}
+                      to={project.href}
+                      className={`block py-2.5 px-4 rounded-lg text-sm tracking-wide transition-all duration-300 ${
+                        location.pathname === project.href
+                          ? 'text-primary bg-primary/10'
+                          : 'text-foreground/70 hover:text-primary hover:bg-primary/5'
+                      }`}
+                      onClick={closeMobileMenu}
+                    >
+                      {project.label}
                     </Link>
                   ))}
                 </div>
